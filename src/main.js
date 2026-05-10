@@ -70,6 +70,124 @@ function renderGameState() {
   play.dataset.clues = String(gameState.clues);
 }
 
+function getEndingProfile() {
+  const total = gameState.trust + gameState.community + gameState.discernment + gameState.memory + gameState.clues;
+  const strengths = [
+    ['trust', gameState.trust],
+    ['community', gameState.community],
+    ['discernment', gameState.discernment],
+    ['memory', gameState.memory],
+    ['clues', gameState.clues]
+  ].sort((a, b) => b[1] - a[1]);
+
+  const primary = strengths[0][0];
+
+  if (gameState.fear >= 2 && gameState.trust <= 1) {
+    return {
+      title: '두려움을 건넌 자',
+      bannerLeft: '당신은 떨리는 밤을 통과했습니다',
+      bannerRight: '두려움 속에서도 길은 닫히지 않았습니다',
+      description: ['당신은 흔들림을 숨기지 않은 채 바다 사이를 걸었습니다.', '완전한 담대함은 아니었지만, 멈추지 않는 걸음이 당신의 증언이 되었습니다.'],
+      grade: '흔들린 목격자',
+      score: Math.max(1, total)
+    };
+  }
+
+  if (primary === 'community') {
+    return {
+      title: '공동체를 지킨 자',
+      bannerLeft: '당신은 가장 느린 사람의 걸음을 기억했습니다',
+      bannerRight: '함께 건너는 길을 선택했습니다',
+      description: ['당신은 빠른 탈출보다 함께 걷는 일을 먼저 보았습니다.', '그 선택은 해방을 개인의 생존이 아니라 공동체의 증언으로 남겼습니다.'],
+      grade: '동행의 목격자',
+      score: total
+    };
+  }
+
+  if (primary === 'discernment' || primary === 'clues') {
+    return {
+      title: '길을 분별한 자',
+      bannerLeft: '당신은 어둠 속에서 길의 흔들림을 살폈습니다',
+      bannerRight: '두려움이 아니라 분별로 걸었습니다',
+      description: ['당신은 무작정 달리지 않고, 하나님이 여신 길을 자세히 살폈습니다.', '그 분별은 백성이 위험을 피하고 앞으로 나아가게 하는 조용한 증언이 되었습니다.'],
+      grade: '분별의 목격자',
+      score: total
+    };
+  }
+
+  if (primary === 'memory') {
+    return {
+      title: '기억의 기록자',
+      bannerLeft: '당신은 사건의 의미를 붙잡았습니다',
+      bannerRight: '오늘의 길을 내일의 증언으로 남겼습니다',
+      description: ['당신은 바다 사이에서 일어난 일을 단순한 탈출로 보지 않았습니다.', '기억하고 기록하려는 마음은 공동체가 훗날 다시 믿음을 붙잡게 하는 씨앗이 되었습니다.'],
+      grade: '기억의 목격자',
+      score: total
+    };
+  }
+
+  return {
+    title: '해방의 목격자',
+    bannerLeft: '당신은 열린 길을 바라보았습니다',
+    bannerRight: '믿음의 발걸음이 증언이 되었습니다',
+    description: ['당신은 두려움의 소리보다 하나님이 여신 길을 바라보았습니다.', '그 걸음은 바다를 건넌 백성의 기억 속에 해방의 증언으로 남았습니다.'],
+    grade: '신뢰의 목격자',
+    score: total
+  };
+}
+
+function renderEnding() {
+  const ending = document.getElementById('ending-screen');
+  if (!ending) return;
+
+  const profile = getEndingProfile();
+
+  setText(ending.querySelector('.ending-panel h2'), profile.title);
+
+  const bannerSpans = ending.querySelectorAll('.ending-banner span');
+  setText(bannerSpans[0], profile.bannerLeft);
+  setText(bannerSpans[1], profile.bannerRight);
+
+  const desc = ending.querySelector('.ending-desc');
+  if (desc) {
+    desc.innerHTML = '';
+    profile.description.forEach((line) => {
+      const p = document.createElement('p');
+      p.textContent = line;
+      desc.appendChild(p);
+    });
+  }
+
+  const summaryCards = ending.querySelectorAll('.ending-summary article');
+  const values = [
+    ['✦', '신뢰의 걸음', String(gameState.trust)],
+    ['◇', '공동체 돌봄', String(gameState.community)],
+    ['◎', '분별의 기록', String(gameState.discernment + gameState.clues)],
+    ['♕', '최종 평가', profile.grade]
+  ];
+
+  summaryCards.forEach((card, index) => {
+    const [icon, label, value] = values[index];
+    setText(card.querySelector('i'), icon);
+    setText(card.querySelector('span'), label);
+    setText(card.querySelector('strong'), value);
+  });
+
+  const footer = ending.querySelector('.ending-scripture p');
+  setText(footer, '여호와께서 너희를 위하여 싸우시리니 너희는 가만히 있을지니라');
+
+  const reference = ending.querySelector('.ending-scripture span');
+  setText(reference, '출애굽기 14:14');
+
+  ending.dataset.trust = String(gameState.trust);
+  ending.dataset.fear = String(gameState.fear);
+  ending.dataset.community = String(gameState.community);
+  ending.dataset.discernment = String(gameState.discernment);
+  ending.dataset.memory = String(gameState.memory);
+  ending.dataset.clues = String(gameState.clues);
+  ending.dataset.result = profile.grade;
+}
+
 function resizeGame() {
   const canvas = document.getElementById('game-canvas');
   if (!canvas) return;
@@ -81,6 +199,10 @@ function resizeGame() {
 function showScreen(screenName) {
   const target = document.getElementById(`${screenName}-screen`);
   if (!target) return;
+
+  if (screenName === 'ending') {
+    renderEnding();
+  }
 
   document.querySelectorAll('.screen').forEach((screen) => {
     screen.classList.toggle('screen-active', screen === target);
