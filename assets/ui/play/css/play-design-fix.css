@@ -104,7 +104,7 @@
 #play-screen .narrative-panel,
 #play-screen .right-panel {
   top: 93px !important;
-  filter: brightness(.82) saturate(.82) !important;
+  filter: brightness(.86) saturate(.84) !important;
 }
 
 #play-screen .scene-panel {
@@ -125,16 +125,36 @@
   height: 748px !important;
 }
 
+/* Red Sea scene art: keep the new illustration readable inside the narrow panel. */
 #play-screen .scene-art {
   left: 18px !important;
   top: 38px !important;
   width: 548px !important;
   height: 700px !important;
-  filter: brightness(1.02) contrast(1.08) saturate(.96) !important;
+  background-size: cover !important;
+  background-position: center 48% !important;
+  filter: brightness(1.18) contrast(1.08) saturate(1.02) !important;
+}
+
+#play-screen .scene-art::before {
+  height: 46% !important;
+  background:
+    radial-gradient(ellipse at 48% 72%, rgba(195,123,55,.16), transparent 24%),
+    linear-gradient(180deg, transparent, rgba(0,0,0,.18)) !important;
+}
+
+#play-screen .scene-art::after {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.02) 0%, transparent 30%, rgba(0,0,0,.06) 100%),
+    radial-gradient(circle at 50% 12%, rgba(120,160,190,.10), transparent 18%) !important;
+  pointer-events: none !important;
 }
 
 #play-screen .scene-plaque {
-  filter: brightness(.82) saturate(.80) !important;
+  filter: brightness(.84) saturate(.82) !important;
 }
 
 #play-screen .scene-plaque strong {
