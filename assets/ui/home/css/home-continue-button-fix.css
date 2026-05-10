@@ -1,19 +1,24 @@
 /* Continue button final fix
-   Removes the ghost/afterimage caused by duplicated arrow layers and generic span rules. */
+   The previous PNG frame already contained faint text/arrow pixels.
+   This version removes the PNG background entirely and draws one clean button layer with HTML text. */
 
 #home-screen .continue-button {
   display: flex !important;
   align-items: center !important;
-  justify-content: flex-start !important;
+  justify-content: space-between !important;
   width: 205px !important;
   height: 48px !important;
-  padding: 0 22px !important;
-  gap: 0 !important;
-  background: url('../frames/continue-button-full.png') center / 100% 100% no-repeat !important;
-  border: 0 !important;
-  box-shadow: none !important;
+  padding: 0 18px 0 19px !important;
+  gap: 12px !important;
+  background: rgba(3, 5, 7, .54) !important;
+  border: 1px solid rgba(184, 138, 69, .54) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(43, 30, 14, .92),
+    inset 0 0 16px rgba(0, 0, 0, .72),
+    0 0 8px rgba(0, 0, 0, .34) !important;
   overflow: hidden !important;
-  filter: brightness(.68) saturate(.76) !important;
+  filter: none !important;
+  outline: 0 !important;
 }
 
 #home-screen .continue-button .continue-label {
@@ -21,28 +26,50 @@
   flex: 0 0 auto !important;
   margin: 0 !important;
   padding: 0 !important;
-  color: #d2a965 !important;
+  color: #c79a55 !important;
   font-size: 16px !important;
   line-height: 1 !important;
-  letter-spacing: .05em !important;
+  letter-spacing: .04em !important;
   white-space: nowrap !important;
   text-align: left !important;
-  text-shadow: 0 0 7px rgba(0,0,0,.92) !important;
+  text-shadow: 0 0 6px rgba(0,0,0,.94) !important;
   transform: translateY(-1px) !important;
 }
 
-#home-screen .continue-button .continue-arrow,
-#home-screen .continue-button .continue-arrow::before,
-#home-screen .continue-button .continue-arrow::after {
-  display: none !important;
-  content: none !important;
-  width: 0 !important;
-  height: 0 !important;
+#home-screen .continue-button .continue-arrow {
+  display: block !important;
+  position: relative !important;
+  flex: 0 0 30px !important;
+  width: 30px !important;
+  height: 18px !important;
   margin: 0 !important;
   padding: 0 !important;
-  background: none !important;
+  color: transparent !important;
+  opacity: .86 !important;
+  background: linear-gradient(90deg, rgba(199,154,85,.28), rgba(199,154,85,.9)) center left / 22px 2px no-repeat !important;
   box-shadow: none !important;
-  opacity: 0 !important;
+}
+
+#home-screen .continue-button .continue-arrow::before,
+#home-screen .continue-button .continue-arrow::after {
+  content: '' !important;
+  display: block !important;
+  position: absolute !important;
+  right: 1px !important;
+  top: 8px !important;
+  width: 12px !important;
+  height: 2px !important;
+  background: #c79a55 !important;
+  transform-origin: right center !important;
+  box-shadow: 0 0 4px rgba(199,154,85,.22) !important;
+}
+
+#home-screen .continue-button .continue-arrow::before {
+  transform: rotate(34deg) !important;
+}
+
+#home-screen .continue-button .continue-arrow::after {
+  transform: rotate(-34deg) !important;
 }
 
 #home-screen .continue-button::before,
@@ -52,5 +79,10 @@
 }
 
 #home-screen .continue-button:hover {
-  filter: brightness(.80) saturate(.80) !important;
+  border-color: rgba(213, 173, 104, .66) !important;
+  background: rgba(5, 7, 10, .64) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(58, 40, 18, .95),
+    inset 0 0 16px rgba(0, 0, 0, .70),
+    0 0 9px rgba(0, 0, 0, .38) !important;
 }
