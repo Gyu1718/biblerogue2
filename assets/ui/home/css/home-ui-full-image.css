@@ -1,0 +1,127 @@
+
+/* Full image replacement for the home screen. Load this after all existing CSS. */
+
+/* Decorative structural images */
+#home-screen .outer-frame {
+  left: 10px !important;
+  top: 9px !important;
+  width: 1652px !important;
+  height: 918px !important;
+  background: url('../overlays/outer-frame-full.png') center / 100% 100% no-repeat !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+#home-screen .sidebar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../overlays/sidebar-lines.png') 0 0 / 322px 941px no-repeat;
+  pointer-events: none;
+}
+#home-screen .sidebar-line { display: none !important; }
+
+/* Replace text with image assets */
+#home-screen .brand-title,
+#home-screen .brand-subtitle,
+#home-screen .progress-text,
+#home-screen .chapter-small,
+#home-screen .chapter-title,
+#home-screen .chapter-subtitle,
+#home-screen .locked-label,
+#home-screen .quote,
+#home-screen .reference {
+  color: transparent !important;
+  text-shadow: none !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+}
+
+#home-screen .brand-title {
+  background-image: url('../text/brand-title.png');
+}
+#home-screen .brand-subtitle {
+  background-image: url('../text/brand-subtitle.png');
+}
+
+#home-screen .menu-text {
+  position: relative;
+  width: 170px;
+  height: 46px;
+}
+#home-screen .menu-text strong,
+#home-screen .menu-text em {
+  opacity: 0 !important;
+}
+#home-screen .menu-text::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 170px;
+  height: 46px;
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: contain;
+}
+#home-screen .side-menu > .menu-button:nth-child(1) .menu-text::after { background-image: url('../text/menu-story.png'); }
+#home-screen .side-menu > .menu-button:nth-child(2) .menu-text::after { background-image: url('../text/menu-witness.png'); }
+#home-screen .side-menu > .menu-button:nth-child(3) .menu-text::after { background-image: url('../text/menu-record.png'); }
+#home-screen .side-menu > .menu-button:nth-child(4) .menu-text::after { background-image: url('../text/menu-achievement.png'); }
+#home-screen .side-menu > .menu-button:nth-child(5) .menu-text::after { background-image: url('../text/menu-training.png'); }
+#home-screen .side-menu > .menu-button:nth-child(6) .menu-text::after { background-image: url('../text/menu-settings.png'); }
+
+#home-screen .chapter-banner {
+  color: transparent !important;
+  text-shadow: none !important;
+}
+#home-screen .chapter-banner::before,
+#home-screen .chapter-banner::after {
+  display: none !important;
+}
+#home-screen .chapter-banner > * { opacity: 0 !important; }
+#home-screen .chapter-banner::marker { display: none !important; }
+#home-screen .chapter-banner {
+  background-image: url('../frames/chapter-banner-frame.png'), url('../text/chapter-banner-title.png') !important;
+  background-size: 100% 100%, 72% auto !important;
+  background-position: center, center !important;
+  font-size: 0 !important;
+}
+
+#home-screen .progress-text {
+  background-image: url('../text/progress-text.png');
+  font-size: 0 !important;
+}
+
+#home-screen .chapter-small { background-image: url('../text/chapter-small-1.png'); font-size:0 !important; }
+#home-screen .chapter-title { background-image: url('../text/chapter-title-1.png'); font-size:0 !important; }
+#home-screen .chapter-subtitle { background-image: url('../text/chapter-subtitle-1.png'); font-size:0 !important; }
+
+#home-screen .continue-button {
+  background: url('../frames/continue-button-full.png') center / 100% 100% no-repeat !important;
+  border: 0 !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  box-shadow: none !important;
+}
+#home-screen .continue-button span { display: none !important; }
+
+#home-screen .chapter-area article:nth-child(2) .locked-label { background-image: url('../text/locked-label-2.png'); font-size:0 !important; }
+#home-screen .chapter-area article:nth-child(3) .locked-label { background-image: url('../text/locked-label-3.png'); font-size:0 !important; }
+#home-screen .chapter-area article:nth-child(4) .locked-label { background-image: url('../text/locked-label-4.png'); font-size:0 !important; }
+#home-screen .chapter-area article:nth-child(5) .locked-label { background-image: url('../text/locked-label-5.png'); font-size:0 !important; }
+
+#home-screen .quote { background-image: url('../text/scripture-quote.png'); font-size:0 !important; }
+#home-screen .reference { background-image: url('../text/scripture-reference.png'); font-size:0 !important; }
+
+/* Ensure frame overlays don't cover images */
+#home-screen .chapter-small,
+#home-screen .chapter-title,
+#home-screen .chapter-subtitle,
+#home-screen .continue-button,
+#home-screen .locked-label,
+#home-screen .lock-mark,
+#home-screen .card-ornament,
+#home-screen .quote,
+#home-screen .reference { z-index: 12; }
