@@ -122,29 +122,29 @@
   display: none !important;
 }
 
-/* Cross ornaments use cleaned home PNG assets. */
+/* Cross ornaments use dedicated home PNG assets. */
 #home-screen .top-cross,
 #home-screen .decor-cross {
   background-repeat: no-repeat !important;
   background-position: center !important;
   background-size: contain !important;
-  filter: brightness(.55) saturate(.70) drop-shadow(0 0 3px rgba(184,138,69,.16)) !important;
-  opacity: .72 !important;
+  filter: brightness(.64) saturate(.76) drop-shadow(0 0 4px rgba(184,138,69,.18)) !important;
+  opacity: .78 !important;
 }
 
 #home-screen .top-cross {
-  left: 1150px !important;
-  top: 24px !important;
-  width: 24px !important;
-  height: 38px !important;
-  background-image: url('../icons/top-title-cross.png') !important;
+  left: 1145px !important;
+  top: 14px !important;
+  width: 38px !important;
+  height: 58px !important;
+  background-image: url('../icons/top-title-cross-hires.png') !important;
 }
 
 #home-screen .decor-cross {
-  left: 70px !important;
-  top: 874px !important;
-  width: 20px !important;
-  height: 33px !important;
+  left: 69px !important;
+  top: 866px !important;
+  width: 26px !important;
+  height: 43px !important;
   background-image: url('../icons/ornament-cross-small.png') !important;
 }
 
@@ -156,11 +156,39 @@
   content: none !important;
 }
 
-/* Top-right buttons are hidden until high-quality dedicated icons are finalized. */
+/* Top-right buttons: dedicated PNG button assets, one layer only. */
 #home-screen .top-book,
 #home-screen .top-gear,
 #home-screen .bookmark-progress {
-  display: none !important;
+  display: block !important;
+  position: absolute !important;
+  top: 29px !important;
+  width: 46px !important;
+  height: 46px !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  filter: brightness(.70) saturate(.78) drop-shadow(0 0 4px rgba(0,0,0,.36)) !important;
+  overflow: visible !important;
+  opacity: .88 !important;
+}
+
+#home-screen .top-book {
+  left: 1416px !important;
+  background-image: url('../icons/top-book-button.png') !important;
+}
+
+#home-screen .top-gear {
+  left: 1465px !important;
+  background-image: url('../icons/top-gear-button.png') !important;
+}
+
+#home-screen .bookmark-progress {
+  left: 1515px !important;
+  background-image: url('../icons/top-bookmark-button.png') !important;
 }
 
 #home-screen .top-book::before,
@@ -171,4 +199,11 @@
 #home-screen .bookmark-progress::after {
   display: none !important;
   content: none !important;
+}
+
+#home-screen .top-book:hover,
+#home-screen .top-gear:hover,
+#home-screen .bookmark-progress:hover {
+  filter: brightness(.86) saturate(.84) drop-shadow(0 0 6px rgba(184,138,69,.22)) !important;
+  opacity: .96 !important;
 }
