@@ -262,8 +262,9 @@
 
 /* Right column: companions, companion dialogue, journey log */
 #play-screen .right-panel > h3:not(.log-title) {
-  top: 12px !important;
+  top: 14px !important;
   font-size: 0 !important;
+  z-index: 5 !important;
 }
 
 #play-screen .right-panel > h3:not(.log-title)::before {
@@ -276,14 +277,14 @@
 
 #play-screen .witness-list {
   left: 18px !important;
-  top: 38px !important;
+  top: 42px !important;
   width: 455px !important;
 }
 
 #play-screen .witness {
   width: 455px !important;
-  height: 72px !important;
-  margin-bottom: 5px !important;
+  height: 68px !important;
+  margin-bottom: 6px !important;
   background: rgba(4, 8, 11, .22) !important;
   border: 1px solid rgba(196,154,85,.18) !important;
   box-shadow: inset 0 0 18px rgba(0,0,0,.34) !important;
@@ -293,17 +294,17 @@
 #play-screen .portrait {
   left: 7px !important;
   top: 7px !important;
-  width: 58px !important;
-  height: 58px !important;
+  width: 54px !important;
+  height: 54px !important;
   border-color: rgba(196,154,85,.46) !important;
   box-shadow: inset 0 0 14px rgba(0,0,0,.45), 0 0 5px rgba(0,0,0,.34) !important;
 }
 
 #play-screen .witness strong {
-  left: 78px !important;
-  top: 12px !important;
+  left: 74px !important;
+  top: 10px !important;
   color: #d6aa5d !important;
-  font-size: 18px !important;
+  font-size: 17px !important;
   text-shadow: 0 0 7px rgba(0,0,0,.88) !important;
 }
 
@@ -324,10 +325,10 @@
 
 #play-screen .witness::after {
   position: absolute !important;
-  left: 80px !important;
-  top: 40px !important;
+  left: 76px !important;
+  top: 37px !important;
   color: #9d7a3f !important;
-  font-size: 12px !important;
+  font-size: 11.5px !important;
   line-height: 1 !important;
   white-space: nowrap !important;
   text-shadow: 0 0 6px rgba(0,0,0,.86) !important;
@@ -339,9 +340,9 @@
 #play-screen .witness:nth-child(4)::after { content: '앞길을 살피고 길을 찾아냅니다.'; }
 
 #play-screen .witness .bar {
-  left: 334px !important;
-  top: 39px !important;
-  width: 72px !important;
+  left: 330px !important;
+  top: 38px !important;
+  width: 70px !important;
   height: 8px !important;
   background: repeating-linear-gradient(90deg, rgba(190,148,76,.75) 0 7px, transparent 7px 12px) !important;
   border: 0 !important;
@@ -355,7 +356,7 @@
 #play-screen .witness b {
   left: auto !important;
   right: 16px !important;
-  top: 12px !important;
+  top: 10px !important;
   width: 72px !important;
   text-align: right !important;
   color: #b9904e !important;
@@ -364,7 +365,7 @@
 }
 
 #play-screen .witness b::before {
-  font-size: 13px !important;
+  font-size: 12.5px !important;
 }
 
 #play-screen .witness:nth-child(1) b::before { content: '신뢰'; }
@@ -378,9 +379,9 @@
 
 #play-screen .witness i {
   right: 14px !important;
-  top: 34px !important;
-  width: 26px !important;
-  height: 26px !important;
+  top: 33px !important;
+  width: 24px !important;
+  height: 24px !important;
   filter: brightness(.78) saturate(.78) !important;
   opacity: .88 !important;
 }
@@ -389,15 +390,15 @@
   content: '동행자의 말\A\A미라: 이 순간을 기억해야 합니다. 하나님이 우리와 함께하십니다.\A요나단: 모두 지치지 않도록 서로를 격려합시다.\A아사르: 바람의 방향이 바뀌고 있습니다. 조심하며 나아갑시다.' !important;
   position: absolute !important;
   left: 18px !important;
-  top: 356px !important;
+  top: 340px !important;
   width: 455px !important;
-  height: 150px !important;
+  height: 142px !important;
   box-sizing: border-box !important;
   padding: 13px 18px !important;
   white-space: pre-line !important;
   color: #b9904e !important;
-  font-size: 13px !important;
-  line-height: 1.62 !important;
+  font-size: 12.5px !important;
+  line-height: 1.58 !important;
   letter-spacing: .02em !important;
   text-shadow: 0 0 7px rgba(0,0,0,.90) !important;
   background:
@@ -412,13 +413,13 @@
   content: '◌' !important;
   position: absolute !important;
   right: 29px !important;
-  top: 371px !important;
-  width: 32px !important;
-  height: 32px !important;
+  top: 355px !important;
+  width: 30px !important;
+  height: 30px !important;
   display: grid !important;
   place-items: center !important;
   color: #b9904e !important;
-  font-size: 19px !important;
+  font-size: 18px !important;
   border: 1px solid rgba(196,154,85,.28) !important;
   border-radius: 50% !important;
   opacity: .72 !important;
@@ -426,8 +427,9 @@
 }
 
 #play-screen .log-title {
-  top: 535px !important;
+  top: 505px !important;
   font-size: 0 !important;
+  z-index: 5 !important;
 }
 
 #play-screen .log-title::before {
@@ -440,9 +442,9 @@
 
 #play-screen .story-log {
   left: 18px !important;
-  top: 567px !important;
+  top: 538px !important;
   width: 455px !important;
-  height: 154px !important;
+  height: 184px !important;
   padding: 9px 10px !important;
   background:
     linear-gradient(180deg, rgba(4,8,11,.42), rgba(3,6,9,.32)),
@@ -454,11 +456,12 @@
 }
 
 #play-screen .story-log p {
+  position: relative !important;
   height: 22px !important;
   margin: 0 0 5px !important;
   padding: 3px 54px 3px 26px !important;
   color: #a98243 !important;
-  font-size: 13px !important;
+  font-size: 12.5px !important;
   line-height: 1.2 !important;
   text-shadow: 0 0 6px rgba(0,0,0,.86) !important;
   background: url('../frames/list_row_plain.png') center / 100% 100% no-repeat !important;
