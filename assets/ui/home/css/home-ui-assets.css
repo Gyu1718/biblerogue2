@@ -126,6 +126,24 @@
   background-image: url('../frames/chapter-card-small-right-frame.png');
 }
 
+#home-screen .chapter-small,
+#home-screen .chapter-title,
+#home-screen .chapter-subtitle,
+#home-screen .continue-button,
+#home-screen .locked-label,
+#home-screen .lock-mark,
+#home-screen .card-ornament {
+  z-index: 12;
+}
+
+#home-screen .card-shade {
+  z-index: 2;
+}
+
+#home-screen .chapter-art {
+  z-index: 1;
+}
+
 #home-screen .lock-mark {
   background-image: url('../icons/lock.png') !important;
   background-size: contain !important;
