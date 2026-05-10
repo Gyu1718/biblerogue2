@@ -26,9 +26,15 @@
 
 /* Logo */
 #home-screen .ornate-flame {
-  background: url('../logo/flame-emblem.png') center / contain no-repeat !important;
+  background: url('../../../play/icons/flame_emblem.png') center / contain no-repeat !important;
   clip-path: none !important;
-  filter: brightness(.86) saturate(.85) drop-shadow(0 0 5px rgba(196, 154, 85, .25));
+  filter: brightness(.82) saturate(.86) drop-shadow(0 0 4px rgba(196, 154, 85, .18));
+}
+#home-screen .brand-logo {
+  left: 42px !important;
+  top: 28px !important;
+  width: 88px !important;
+  height: 116px !important;
 }
 
 /* Shared image replacement reset */
@@ -105,7 +111,7 @@
   font-size: 20px !important;
   letter-spacing: .08em !important;
   text-shadow: 0 0 8px rgba(0,0,0,.92) !important;
-  filter: brightness(.76) saturate(.82);
+  filter: brightness(.7) saturate(.78);
 }
 #home-screen .chapter-banner::before,
 #home-screen .chapter-banner::after { display: none !important; }
@@ -292,8 +298,8 @@
   background: url('../frames/chapter-card-large-frame.png') center / 100% 100% no-repeat;
   pointer-events: none;
   z-index: 10;
-  opacity: .46;
-  filter: brightness(.74) saturate(.82);
+  opacity: .28;
+  filter: brightness(.68) saturate(.78);
 }
 #home-screen .chapter-card.small::after {
   content: '';
@@ -303,21 +309,21 @@
   background: url('../frames/chapter-card-small-left-frame.png') center / 100% 100% no-repeat;
   pointer-events: none;
   z-index: 10;
-  opacity: .5;
-  filter: brightness(.72) saturate(.82);
+  opacity: .3;
+  filter: brightness(.68) saturate(.78);
 }
 #home-screen .chapter-card.small[style*="470px"]::after {
   background-image: url('../frames/chapter-card-small-right-frame.png');
 }
 
 #home-screen .card-shade {
-  background: linear-gradient(90deg, rgba(0,0,0,.55) 0 36%, rgba(0,0,0,.10) 72%) !important;
+  background: linear-gradient(90deg, rgba(0,0,0,.36) 0 34%, rgba(0,0,0,.06) 74%) !important;
 }
 #home-screen .chapter-card.small .card-shade {
-  background: rgba(0,0,0,.18) !important;
+  background: rgba(0,0,0,.08) !important;
 }
 #home-screen .locked .chapter-art {
-  filter: grayscale(.18) brightness(.72) contrast(.98) !important;
+  filter: grayscale(.12) brightness(.86) contrast(1) !important;
 }
 
 #home-screen .lock-mark {
