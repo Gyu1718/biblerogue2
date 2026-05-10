@@ -260,7 +260,7 @@
   filter: brightness(.82) saturate(.80) !important;
 }
 
-/* Right column: companions, companion dialogue, journey log */
+/* Right column: companions, enlarged companion reaction, no journey log on this screen. */
 #play-screen .right-panel > h3:not(.log-title) {
   top: 14px !important;
   font-size: 0 !important;
@@ -392,20 +392,20 @@
   left: 18px !important;
   top: 340px !important;
   width: 455px !important;
-  height: 142px !important;
+  height: 382px !important;
   box-sizing: border-box !important;
-  padding: 13px 18px !important;
+  padding: 18px 21px !important;
   white-space: pre-line !important;
-  color: #b9904e !important;
-  font-size: 12.5px !important;
-  line-height: 1.58 !important;
+  color: #bd934d !important;
+  font-size: 14px !important;
+  line-height: 1.70 !important;
   letter-spacing: .02em !important;
   text-shadow: 0 0 7px rgba(0,0,0,.90) !important;
   background:
-    linear-gradient(180deg, rgba(4,8,11,.52), rgba(3,6,9,.38)),
-    rgba(0,0,0,.12) !important;
-  border: 1px solid rgba(196,154,85,.22) !important;
-  box-shadow: inset 0 0 18px rgba(0,0,0,.45) !important;
+    linear-gradient(180deg, rgba(4,8,11,.58), rgba(3,6,9,.44)),
+    rgba(0,0,0,.14) !important;
+  border: 1px solid rgba(196,154,85,.24) !important;
+  box-shadow: inset 0 0 24px rgba(0,0,0,.48) !important;
   z-index: 2 !important;
 }
 
@@ -414,72 +414,22 @@
   position: absolute !important;
   right: 29px !important;
   top: 355px !important;
-  width: 30px !important;
-  height: 30px !important;
+  width: 32px !important;
+  height: 32px !important;
   display: grid !important;
   place-items: center !important;
   color: #b9904e !important;
-  font-size: 18px !important;
+  font-size: 19px !important;
   border: 1px solid rgba(196,154,85,.28) !important;
   border-radius: 50% !important;
   opacity: .72 !important;
   z-index: 3 !important;
 }
 
-#play-screen .log-title {
-  top: 505px !important;
-  font-size: 0 !important;
-  z-index: 5 !important;
-}
-
-#play-screen .log-title::before {
-  content: '여정 기록' !important;
-  font-size: 17px !important;
-  color: #d0a158 !important;
-  letter-spacing: .10em !important;
-  text-shadow: 0 0 8px rgba(0,0,0,.90) !important;
-}
-
+#play-screen .log-title,
+#play-screen .log-title::before,
 #play-screen .story-log {
-  left: 18px !important;
-  top: 538px !important;
-  width: 455px !important;
-  height: 184px !important;
-  padding: 9px 10px !important;
-  background:
-    linear-gradient(180deg, rgba(4,8,11,.42), rgba(3,6,9,.32)),
-    rgba(0,0,0,.10) !important;
-  border: 1px solid rgba(196,154,85,.18) !important;
-  box-sizing: border-box !important;
-  filter: brightness(.90) saturate(.84) !important;
-  overflow: hidden !important;
-}
-
-#play-screen .story-log p {
-  position: relative !important;
-  height: 22px !important;
-  margin: 0 0 5px !important;
-  padding: 3px 54px 3px 26px !important;
-  color: #a98243 !important;
-  font-size: 12.5px !important;
-  line-height: 1.2 !important;
-  text-shadow: 0 0 6px rgba(0,0,0,.86) !important;
-  background: url('../frames/list_row_plain.png') center / 100% 100% no-repeat !important;
-  border: 0 !important;
-}
-
-#play-screen .story-log p::after {
-  content: '14:2' !important;
-  position: absolute !important;
-  right: 13px !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  color: #8f6d38 !important;
-  font-size: 12px !important;
-}
-
-#play-screen .story-log .goal {
-  color: #d4a95d !important;
+  display: none !important;
 }
 
 /* Bottom journey bar */
