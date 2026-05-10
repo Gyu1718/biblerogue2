@@ -72,13 +72,11 @@
   flex-direction: column;
   gap: 4px;
 }
-
 .play-brand-text strong {
   font-size: 20px;
   color: #d7ad65;
   letter-spacing: .05em;
 }
-
 .play-brand-text span {
   font-size: 13px;
   color: #a77e3c;
@@ -90,8 +88,16 @@
   top: 27px;
   display: flex;
   gap: 34px;
-  color: #c49a55;
-  font-size: 23px;
+  color: transparent;
+  font-size: 0;
+}
+.play-nav-icons span {
+  width: 28px;
+  height: 28px;
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 .play-progress-line {
@@ -100,7 +106,6 @@
   top: 23px;
   width: 434px;
   height: 38px;
-  border-top: 1px solid rgba(196,154,85,.38);
   transform: translateY(19px);
   display: flex;
   justify-content: space-between;
@@ -110,18 +115,13 @@
 .play-progress-line span {
   width: 12px;
   height: 12px;
-  border: 1px solid rgba(196,154,85,.65);
   border-radius: 50%;
-  background: rgba(3,5,7,.9);
   transform: translateY(-6px);
 }
-
 .play-progress-line span.active {
   width: 20px;
   height: 20px;
   transform: translateY(-10px) rotate(45deg);
-  background: rgba(196,154,85,.22);
-  border-color: #efd18a;
 }
 
 .play-stats {
@@ -139,18 +139,14 @@
   position: absolute;
   top: 22px;
   height: 39px;
-  border: 1px solid rgba(196,154,85,.48);
-  background: rgba(4,7,11,.75);
-  color: #c49a55;
-  box-shadow: inset 0 0 14px rgba(0,0,0,.75);
+  border: 0;
+  background: transparent;
 }
-
 .play-top-btn {
   width: 39px;
   border-radius: 50%;
-  font-size: 21px;
+  font-size: 0;
 }
-
 .play-top-btn.book { left: 1414px; }
 .play-top-btn.gear { left: 1459px; }
 .play-top-empty { left: 1515px; width: 100px; }
@@ -161,12 +157,8 @@
   position: absolute;
   top: 92px;
   height: 748px;
-  background: rgba(3,6,9,.58);
-  border: 1px solid rgba(196,154,85,.55);
-  box-shadow: inset 0 0 36px rgba(0,0,0,.82), 0 0 12px rgba(0,0,0,.55);
   z-index: 5;
 }
-
 .scene-panel { left: 8px; width: 585px; overflow: hidden; }
 .narrative-panel { left: 598px; width: 530px; }
 .right-panel { left: 1165px; width: 499px; }
@@ -185,7 +177,6 @@
   background-position: center;
   filter: brightness(.95) contrast(1.1) saturate(.9);
 }
-
 .scene-art::before {
   content: '';
   position: absolute;
@@ -210,11 +201,7 @@
   justify-content: center;
   gap: 4px;
   color: #d8ad62;
-  background: rgba(4,6,8,.82);
-  border: 1px solid rgba(196,154,85,.55);
-  box-shadow: inset 0 0 20px rgba(0,0,0,.8);
 }
-
 .scene-plaque strong { font-size: 22px; letter-spacing: .08em; }
 .scene-plaque span { font-size: 15px; color: #b98d4a; }
 
@@ -240,7 +227,6 @@
   font-size: 17px;
   line-height: 1.75;
 }
-
 .narrative-copy p { margin: 0 0 12px; }
 .narrative-copy hr {
   width: 360px;
@@ -261,7 +247,6 @@
   top: 362px;
   width: 481px;
 }
-
 .choice {
   position: relative;
   display: flex;
@@ -270,22 +255,17 @@
   height: 49px;
   margin-bottom: 13px;
   padding-left: 92px;
-  background: rgba(5,7,9,.75);
-  border: 1px solid rgba(196,154,85,.42);
+  border: 0;
+  background: transparent;
   color: #c7a15d;
   font-size: 17px;
   text-align: left;
   letter-spacing: .03em;
-  box-shadow: inset 0 0 18px rgba(0,0,0,.8);
 }
-
 .choice.active {
   height: 63px;
-  border-color: rgba(239,209,138,.9);
   color: #efd18a;
-  box-shadow: 0 0 15px rgba(196,154,85,.24), inset 0 0 20px rgba(196,154,85,.12);
 }
-
 .choice span {
   position: absolute;
   left: 20px;
@@ -295,16 +275,23 @@
   transform: translateY(-50%);
   display: grid;
   place-items: center;
-  border-radius: 50%;
-  border: 1px solid rgba(196,154,85,.46);
-  background: rgba(0,0,0,.3);
+  color: transparent;
+  font-size: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
-
 .choice em {
   position: absolute;
   right: 24px;
   font-style: normal;
-  font-size: 26px;
+  color: transparent;
+  font-size: 0;
+  width: 28px;
+  height: 28px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 .story-progress {
@@ -318,7 +305,6 @@
   color: #c49a55;
   font-size: 14px;
 }
-
 .story-progress div {
   width: 245px;
   display: flex;
@@ -352,17 +338,12 @@
   top: 38px;
   width: 423px;
 }
-
 .witness {
   position: relative;
   width: 423px;
   height: 91px;
   margin-bottom: 6px;
-  border: 1px solid rgba(196,154,85,.22);
-  background: rgba(3,6,9,.5);
-  box-shadow: inset 0 0 18px rgba(0,0,0,.72);
 }
-
 .portrait {
   position: absolute;
   left: 2px;
@@ -370,20 +351,8 @@
   width: 88px;
   height: 84px;
   border: 1px solid rgba(196,154,85,.42);
-  background: radial-gradient(circle at 50% 35%, rgba(203,142,69,.48), transparent 30%), linear-gradient(135deg, #2a1b12, #07090a);
 }
-.portrait::after {
-  content: '♟';
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  font-size: 42px;
-  color: rgba(232,190,114,.55);
-}
-.p2::after { content: '♙'; }
-.p3::after { content: '♜'; }
-.p4::after { content: '♞'; }
+.portrait::after { display: none; }
 
 .witness strong {
   position: absolute;
@@ -432,9 +401,13 @@
   position: absolute;
   right: 12px;
   top: 20px;
-  font-style: normal;
-  font-size: 25px;
-  color: #c49a55;
+  width: 28px;
+  height: 28px;
+  color: transparent;
+  font-size: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 .log-title { top: 462px !important; }
@@ -444,12 +417,8 @@
   top: 488px;
   width: 418px;
   height: 246px;
-  border: 1px solid rgba(196,154,85,.26);
-  background: rgba(2,5,8,.55);
   padding: 10px 12px;
-  box-shadow: inset 0 0 20px rgba(0,0,0,.8);
 }
-
 .story-log p {
   height: 30px;
   margin: 0 0 7px;
@@ -473,7 +442,6 @@
   background: rgba(2,5,8,.76);
   z-index: 7;
 }
-
 .slot {
   position: relative;
   float: left;
@@ -482,14 +450,13 @@
   width: 54px;
   height: 49px;
   margin-right: 8px;
-  border: 1px solid rgba(196,154,85,.35);
-  background: rgba(5,8,10,.55);
+  border: 0;
+  background: transparent;
   display: grid;
   place-items: center;
-  color: #c49a55;
-  font-size: 28px;
+  color: transparent;
+  font-size: 0;
 }
-.slot.active { border-color: rgba(239,209,138,.7); }
 
 .day-panel,
 .location-panel,
@@ -499,12 +466,10 @@
   position: absolute;
   height: 46px;
   top: 12px;
-  border: 1px solid rgba(196,154,85,.5);
-  background: rgba(4,7,10,.78);
+  border: 0;
+  background: transparent;
   color: #caa05a;
-  box-shadow: inset 0 0 18px rgba(0,0,0,.72);
 }
-
 .day-panel {
   left: 644px;
   width: 239px;
@@ -530,7 +495,7 @@
 .play-hourglass {
   left: 1530px;
   width: 58px;
-  font-size: 28px;
+  font-size: 0;
 }
 .back-home {
   left: 1150px;
