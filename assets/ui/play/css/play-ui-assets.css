@@ -1,0 +1,33 @@
+/* Play screen PNG asset helper stylesheet */
+/* Load after src/play.css. Asset paths assume this file stays in assets/ui/play/css/. */
+
+#play-screen .play-brand-emblem {
+  background: url('../icons/flame_emblem.png') center/contain no-repeat;
+}
+#play-screen .play-top-btn.book {
+  background: url('../frames/circle_button_frame.png') center/100% 100% no-repeat, url('../icons/book.png') center/56% 56% no-repeat;
+  color: transparent !important;
+}
+#play-screen .play-top-btn.gear {
+  background: url('../frames/circle_button_frame.png') center/100% 100% no-repeat, url('../icons/gear.png') center/56% 56% no-repeat;
+  color: transparent !important;
+}
+#play-screen .scene-panel { background: url('../frames/scene_panel_large.png') center/100% 100% no-repeat; }
+#play-screen .narrative-panel { background: url('../frames/narrative_panel.png') center/100% 100% no-repeat; }
+#play-screen .right-panel { background: url('../frames/log_panel.png') top center/100% auto no-repeat; }
+#play-screen .choice { background: url('../frames/choice_button.png') center/100% 100% no-repeat; }
+#play-screen .choice.active { background-image: url('../frames/choice_button_active.png'); }
+#play-screen .play-hourglass {
+  background: url('../frames/hourglass_square_button.png') center/100% 100% no-repeat, url('../icons/hourglass.png') center/55% 55% no-repeat;
+  color: transparent !important;
+}
+#play-screen .next-story { background: url('../frames/next_button.png') center/100% 100% no-repeat; }
+#play-screen .day-panel { background: url('../frames/day_panel.png') center/100% 100% no-repeat; }
+#play-screen .location-panel { background: url('../frames/location_panel.png') center/100% 100% no-repeat; }
+#play-screen .slot { background: url('../frames/slot_frame.png') center/100% 100% no-repeat; }
+#play-screen .slot.active { background-image: url('../frames/slot_frame_active.png'); }
+#play-screen .portrait.p1 { background-image: url('../portraits/elisabeth.png'); }
+#play-screen .portrait.p2 { background-image: url('../portraits/mira.png'); }
+#play-screen .portrait.p3 { background-image: url('../portraits/jonathan.png'); }
+#play-screen .portrait.p4 { background-image: url('../portraits/asar.png'); }
+#play-screen .portrait { background-size: cover; background-position: center; }
