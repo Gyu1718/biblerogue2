@@ -1,0 +1,110 @@
+/* Final home UI fixes: logo, menu alignment, scripture, continue button. */
+
+#home-screen .ornate-flame {
+  background-image: url('../logo/flame-emblem.png') !important;
+}
+
+#home-screen .menu-button {
+  align-items: center !important;
+  padding: 0 !important;
+}
+
+#home-screen .menu-icon {
+  width: 30px !important;
+  height: 30px !important;
+  flex: 0 0 30px !important;
+  margin-left: 24px !important;
+  margin-right: 18px !important;
+}
+
+#home-screen .menu-text {
+  width: 142px !important;
+  height: 44px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  gap: 2px !important;
+  line-height: 1.08 !important;
+  transform: translateY(-1px) !important;
+}
+
+#home-screen .menu-text strong,
+#home-screen .menu-text em {
+  margin: 0 !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+}
+
+#home-screen .continue-button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 19px 0 20px !important;
+  gap: 12px !important;
+  overflow: hidden !important;
+}
+
+#home-screen .continue-label {
+  display: block !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  white-space: nowrap !important;
+  text-align: left !important;
+}
+
+#home-screen .continue-arrow {
+  display: block !important;
+  flex: 0 0 28px !important;
+  width: 28px !important;
+  height: 18px !important;
+  margin: 0 !important;
+  color: transparent !important;
+  background: linear-gradient(90deg, rgba(210,169,101,.35), rgba(210,169,101,.9)) center left / 20px 2px no-repeat;
+  position: relative !important;
+}
+
+#home-screen .continue-arrow::before,
+#home-screen .continue-arrow::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  width: 12px;
+  height: 2px;
+  background: #d2a965;
+  transform-origin: right center;
+  box-shadow: 0 0 5px rgba(210,169,101,.28);
+}
+
+#home-screen .continue-arrow::before {
+  top: 8px;
+  transform: rotate(34deg);
+}
+
+#home-screen .continue-arrow::after {
+  top: 8px;
+  transform: rotate(-34deg);
+}
+
+#home-screen .scripture .quote {
+  width: 660px !important;
+  left: 840px !important;
+  font-size: 15px !important;
+  white-space: nowrap !important;
+}
+
+#home-screen .scripture .reference {
+  left: 1108px !important;
+}
+
+#home-screen .home-info-panel header span,
+#home-screen .home-info-panel header strong,
+#home-screen .home-info-panel b,
+#home-screen .home-info-panel em,
+#home-screen .home-info-panel p,
+#home-screen .home-record-list span,
+#home-screen .home-achievement-list span,
+#home-screen .home-settings-list span {
+  text-align: left !important;
+  word-break: keep-all !important;
+}
