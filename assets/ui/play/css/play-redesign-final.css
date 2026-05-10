@@ -1,0 +1,536 @@
+/* Play screen final redesign
+   Direction: narrative adventure, not combat-party UI.
+   Keeps the left Red Sea illustration and rebuilds the right side as companions + dialogue + journey log. */
+
+#play-screen {
+  --play-bg: #030609;
+  --play-panel: rgba(5, 9, 12, .80);
+  --play-panel-soft: rgba(7, 11, 14, .62);
+  --play-gold: #c79a55;
+  --play-gold-bright: #e2bd72;
+  --play-gold-dim: #8f6d38;
+  --play-line: rgba(196, 154, 85, .33);
+  --play-line-soft: rgba(196, 154, 85, .18);
+}
+
+#play-screen .play-bg {
+  filter: saturate(.92) brightness(.80) contrast(1.08) !important;
+}
+
+#play-screen .play-bg::after {
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.08), rgba(0,0,0,.42) 36%, rgba(0,0,0,.28)),
+    radial-gradient(circle at center, transparent 0 48%, rgba(0,0,0,.66) 100%) !important;
+}
+
+#play-screen .play-frame {
+  left: 7px !important;
+  top: 8px !important;
+  width: 1658px !important;
+  height: 915px !important;
+  border-color: rgba(196,154,85,.50) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(90,61,30,.32),
+    inset 0 0 52px rgba(0,0,0,.76) !important;
+}
+
+/* Top navigation: keep as world-navigation, not combat HUD. */
+#play-screen .play-top-hud {
+  height: 88px !important;
+  background: rgba(2,4,7,.82) !important;
+  border-bottom-color: rgba(196,154,85,.34) !important;
+  box-shadow: 0 8px 26px rgba(0,0,0,.25) !important;
+}
+
+#play-screen .play-brand-emblem {
+  left: 28px !important;
+  top: 15px !important;
+  width: 50px !important;
+  height: 60px !important;
+  filter: brightness(.84) saturate(.82) drop-shadow(0 0 5px rgba(196,154,85,.20)) !important;
+}
+
+#play-screen .play-brand-text {
+  left: 92px !important;
+  top: 19px !important;
+}
+
+#play-screen .play-brand-text strong {
+  color: #d7ad65 !important;
+  font-size: 21px !important;
+  letter-spacing: .055em !important;
+  text-shadow: 0 0 8px rgba(0,0,0,.92) !important;
+}
+
+#play-screen .play-brand-text span {
+  color: #a98243 !important;
+  font-size: 13px !important;
+  text-shadow: 0 0 7px rgba(0,0,0,.88) !important;
+}
+
+#play-screen .play-nav-icons {
+  left: 284px !important;
+  top: 25px !important;
+  gap: 30px !important;
+}
+
+#play-screen .play-nav-icons span {
+  width: 31px !important;
+  height: 31px !important;
+  filter: brightness(.73) saturate(.76) drop-shadow(0 0 3px rgba(0,0,0,.42)) !important;
+  opacity: .90 !important;
+}
+
+#play-screen .play-progress-line {
+  left: 575px !important;
+  top: 22px !important;
+  width: 430px !important;
+  filter: brightness(.74) saturate(.78) !important;
+  opacity: .90 !important;
+}
+
+#play-screen .play-stats {
+  left: 1092px !important;
+  top: 24px !important;
+  gap: 31px !important;
+  color: #c7a15d !important;
+  font-size: 17px !important;
+  text-shadow: 0 0 8px rgba(0,0,0,.85) !important;
+}
+
+#play-screen .play-top-btn,
+#play-screen .play-top-empty {
+  filter: brightness(.70) saturate(.76) drop-shadow(0 0 4px rgba(0,0,0,.35)) !important;
+  opacity: .90 !important;
+}
+
+#play-screen .play-top-btn.book { left: 1412px !important; top: 23px !important; width: 40px !important; height: 40px !important; }
+#play-screen .play-top-btn.gear { left: 1458px !important; top: 23px !important; width: 40px !important; height: 40px !important; }
+#play-screen .play-top-empty { left: 1514px !important; top: 22px !important; width: 102px !important; height: 42px !important; }
+
+/* Main three-column layout */
+#play-screen .scene-panel,
+#play-screen .narrative-panel,
+#play-screen .right-panel {
+  top: 93px !important;
+  height: 748px !important;
+  filter: brightness(.88) saturate(.84) !important;
+}
+
+#play-screen .scene-panel {
+  left: 8px !important;
+  width: 585px !important;
+}
+
+#play-screen .narrative-panel {
+  left: 600px !important;
+  width: 528px !important;
+}
+
+#play-screen .right-panel {
+  left: 1165px !important;
+  width: 499px !important;
+  background: url('../frames/log_panel.png') top center / 100% 100% no-repeat, rgba(4, 8, 11, .30) !important;
+}
+
+/* Left scene */
+#play-screen .scene-art {
+  left: 18px !important;
+  top: 38px !important;
+  width: 548px !important;
+  height: 700px !important;
+  background-size: cover !important;
+  background-position: center 48% !important;
+  filter: brightness(1.18) contrast(1.08) saturate(1.02) !important;
+}
+
+#play-screen .scene-art::before {
+  height: 46% !important;
+  background:
+    radial-gradient(ellipse at 48% 72%, rgba(195,123,55,.16), transparent 24%),
+    linear-gradient(180deg, transparent, rgba(0,0,0,.18)) !important;
+}
+
+#play-screen .scene-art::after {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.02) 0%, transparent 30%, rgba(0,0,0,.06) 100%),
+    radial-gradient(circle at 50% 12%, rgba(120,160,190,.10), transparent 18%) !important;
+  pointer-events: none !important;
+}
+
+#play-screen .scene-plaque {
+  filter: brightness(.86) saturate(.82) !important;
+}
+
+#play-screen .scene-plaque strong {
+  color: #d8ad62 !important;
+  font-size: 23px !important;
+  text-shadow: 0 0 8px rgba(0,0,0,.90) !important;
+}
+
+#play-screen .scene-plaque span {
+  color: #b98d4a !important;
+  text-shadow: 0 0 7px rgba(0,0,0,.86) !important;
+}
+
+/* Center story panel */
+#play-screen .narrative-panel h2 {
+  top: 34px !important;
+  color: var(--play-gold-bright) !important;
+  font-size: 28px !important;
+  letter-spacing: .10em !important;
+  text-shadow: 0 0 10px rgba(0,0,0,.92), 0 0 5px rgba(196,154,85,.16) !important;
+}
+
+#play-screen .narrative-copy {
+  left: 70px !important;
+  top: 88px !important;
+  width: 390px !important;
+  color: #c8a05c !important;
+  font-size: 17px !important;
+  line-height: 1.78 !important;
+  text-shadow: 0 0 8px rgba(0,0,0,.88) !important;
+}
+
+#play-screen .narrative-copy strong {
+  color: #e0ad58 !important;
+  font-size: 20px !important;
+  text-shadow: 0 0 9px rgba(0,0,0,.90) !important;
+}
+
+#play-screen .choice-list {
+  top: 358px !important;
+  counter-reset: play-choice !important;
+}
+
+#play-screen .choice {
+  counter-increment: play-choice !important;
+  width: 481px !important;
+  height: 51px !important;
+  margin-bottom: 13px !important;
+  padding-left: 106px !important;
+  color: #c7a15d !important;
+  font-size: 17px !important;
+  filter: brightness(.74) saturate(.78) !important;
+  text-shadow: 0 0 7px rgba(0,0,0,.90) !important;
+}
+
+#play-screen .choice.active {
+  height: 63px !important;
+  color: #efd18a !important;
+  filter: brightness(.88) saturate(.86) !important;
+}
+
+#play-screen .choice::before {
+  content: counter(play-choice) !important;
+  position: absolute !important;
+  left: 78px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: #d7ad65 !important;
+  font-size: 18px !important;
+  line-height: 1 !important;
+  text-shadow: 0 0 7px rgba(0,0,0,.90) !important;
+}
+
+#play-screen .choice span {
+  left: 18px !important;
+  width: 46px !important;
+  height: 46px !important;
+  filter: brightness(.80) saturate(.78) drop-shadow(0 0 3px rgba(0,0,0,.38)) !important;
+  opacity: .94 !important;
+}
+
+#play-screen .choice em {
+  right: 24px !important;
+  filter: brightness(.80) saturate(.78) drop-shadow(0 0 3px rgba(0,0,0,.38)) !important;
+  opacity: .94 !important;
+}
+
+#play-screen .story-progress {
+  top: 705px !important;
+  color: #c49a55 !important;
+  text-shadow: 0 0 7px rgba(0,0,0,.88) !important;
+}
+
+#play-screen .story-progress div {
+  filter: brightness(.82) saturate(.80) !important;
+}
+
+/* Right column: companions, companion dialogue, journey log */
+#play-screen .right-panel > h3:not(.log-title) {
+  top: 12px !important;
+  font-size: 0 !important;
+}
+
+#play-screen .right-panel > h3:not(.log-title)::before {
+  content: '동행자들' !important;
+  font-size: 17px !important;
+  color: #d0a158 !important;
+  letter-spacing: .10em !important;
+  text-shadow: 0 0 8px rgba(0,0,0,.90) !important;
+}
+
+#play-screen .witness-list {
+  left: 18px !important;
+  top: 38px !important;
+  width: 455px !important;
+}
+
+#play-screen .witness {
+  width: 455px !important;
+  height: 72px !important;
+  margin-bottom: 5px !important;
+  background: rgba(4, 8, 11, .22) !important;
+  border: 1px solid rgba(196,154,85,.18) !important;
+  box-shadow: inset 0 0 18px rgba(0,0,0,.34) !important;
+  filter: brightness(.90) saturate(.84) !important;
+}
+
+#play-screen .portrait {
+  left: 7px !important;
+  top: 7px !important;
+  width: 58px !important;
+  height: 58px !important;
+  border-color: rgba(196,154,85,.46) !important;
+  box-shadow: inset 0 0 14px rgba(0,0,0,.45), 0 0 5px rgba(0,0,0,.34) !important;
+}
+
+#play-screen .witness strong {
+  left: 78px !important;
+  top: 12px !important;
+  color: #d6aa5d !important;
+  font-size: 18px !important;
+  text-shadow: 0 0 7px rgba(0,0,0,.88) !important;
+}
+
+#play-screen .witness strong em {
+  font-size: 0 !important;
+  margin-left: 10px !important;
+}
+
+#play-screen .witness strong em::before {
+  font-size: 12px !important;
+  color: #9e7a3a !important;
+}
+
+#play-screen .witness:nth-child(1) strong em::before { content: '인도자'; }
+#play-screen .witness:nth-child(2) strong em::before { content: '기록자'; }
+#play-screen .witness:nth-child(3) strong em::before { content: '보호자'; }
+#play-screen .witness:nth-child(4) strong em::before { content: '탐색자'; }
+
+#play-screen .witness::after {
+  position: absolute !important;
+  left: 80px !important;
+  top: 40px !important;
+  color: #9d7a3f !important;
+  font-size: 12px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  text-shadow: 0 0 6px rgba(0,0,0,.86) !important;
+}
+
+#play-screen .witness:nth-child(1)::after { content: '백성을 인도하며 방향을 살핍니다.'; }
+#play-screen .witness:nth-child(2)::after { content: '하나님의 행하심을 기억하고 기록합니다.'; }
+#play-screen .witness:nth-child(3)::after { content: '약한 이들을 돌보며 안전을 지킵니다.'; }
+#play-screen .witness:nth-child(4)::after { content: '앞길을 살피고 길을 찾아냅니다.'; }
+
+#play-screen .witness .bar {
+  left: 334px !important;
+  top: 39px !important;
+  width: 72px !important;
+  height: 8px !important;
+  background: repeating-linear-gradient(90deg, rgba(190,148,76,.75) 0 7px, transparent 7px 12px) !important;
+  border: 0 !important;
+  opacity: .70 !important;
+}
+
+#play-screen .witness .bar span {
+  display: none !important;
+}
+
+#play-screen .witness b {
+  left: auto !important;
+  right: 16px !important;
+  top: 12px !important;
+  width: 72px !important;
+  text-align: right !important;
+  color: #b9904e !important;
+  font-size: 0 !important;
+  font-weight: 500 !important;
+}
+
+#play-screen .witness b::before {
+  font-size: 13px !important;
+}
+
+#play-screen .witness:nth-child(1) b::before { content: '신뢰'; }
+#play-screen .witness:nth-child(2) b::before { content: '기억'; }
+#play-screen .witness:nth-child(3) b::before { content: '돌봄'; }
+#play-screen .witness:nth-child(4) b::before { content: '분별'; }
+
+#play-screen .witness small {
+  display: none !important;
+}
+
+#play-screen .witness i {
+  right: 14px !important;
+  top: 34px !important;
+  width: 26px !important;
+  height: 26px !important;
+  filter: brightness(.78) saturate(.78) !important;
+  opacity: .88 !important;
+}
+
+#play-screen .right-panel::before {
+  content: '동행자의 말\A\A미라: 이 순간을 기억해야 합니다. 하나님이 우리와 함께하십니다.\A요나단: 모두 지치지 않도록 서로를 격려합시다.\A아사르: 바람의 방향이 바뀌고 있습니다. 조심하며 나아갑시다.' !important;
+  position: absolute !important;
+  left: 18px !important;
+  top: 356px !important;
+  width: 455px !important;
+  height: 150px !important;
+  box-sizing: border-box !important;
+  padding: 13px 18px !important;
+  white-space: pre-line !important;
+  color: #b9904e !important;
+  font-size: 13px !important;
+  line-height: 1.62 !important;
+  letter-spacing: .02em !important;
+  text-shadow: 0 0 7px rgba(0,0,0,.90) !important;
+  background:
+    linear-gradient(180deg, rgba(4,8,11,.52), rgba(3,6,9,.38)),
+    rgba(0,0,0,.12) !important;
+  border: 1px solid rgba(196,154,85,.22) !important;
+  box-shadow: inset 0 0 18px rgba(0,0,0,.45) !important;
+  z-index: 2 !important;
+}
+
+#play-screen .right-panel::after {
+  content: '◌' !important;
+  position: absolute !important;
+  right: 29px !important;
+  top: 371px !important;
+  width: 32px !important;
+  height: 32px !important;
+  display: grid !important;
+  place-items: center !important;
+  color: #b9904e !important;
+  font-size: 19px !important;
+  border: 1px solid rgba(196,154,85,.28) !important;
+  border-radius: 50% !important;
+  opacity: .72 !important;
+  z-index: 3 !important;
+}
+
+#play-screen .log-title {
+  top: 535px !important;
+  font-size: 0 !important;
+}
+
+#play-screen .log-title::before {
+  content: '여정 기록' !important;
+  font-size: 17px !important;
+  color: #d0a158 !important;
+  letter-spacing: .10em !important;
+  text-shadow: 0 0 8px rgba(0,0,0,.90) !important;
+}
+
+#play-screen .story-log {
+  left: 18px !important;
+  top: 567px !important;
+  width: 455px !important;
+  height: 154px !important;
+  padding: 9px 10px !important;
+  background:
+    linear-gradient(180deg, rgba(4,8,11,.42), rgba(3,6,9,.32)),
+    rgba(0,0,0,.10) !important;
+  border: 1px solid rgba(196,154,85,.18) !important;
+  box-sizing: border-box !important;
+  filter: brightness(.90) saturate(.84) !important;
+  overflow: hidden !important;
+}
+
+#play-screen .story-log p {
+  height: 22px !important;
+  margin: 0 0 5px !important;
+  padding: 3px 54px 3px 26px !important;
+  color: #a98243 !important;
+  font-size: 13px !important;
+  line-height: 1.2 !important;
+  text-shadow: 0 0 6px rgba(0,0,0,.86) !important;
+  background: url('../frames/list_row_plain.png') center / 100% 100% no-repeat !important;
+  border: 0 !important;
+}
+
+#play-screen .story-log p::after {
+  content: '14:2' !important;
+  position: absolute !important;
+  right: 13px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: #8f6d38 !important;
+  font-size: 12px !important;
+}
+
+#play-screen .story-log .goal {
+  color: #d4a95d !important;
+}
+
+/* Bottom journey bar */
+#play-screen .play-bottom {
+  top: 844px !important;
+  height: 76px !important;
+  background: rgba(2,5,8,.78) !important;
+  border-top-color: rgba(196,154,85,.30) !important;
+  box-shadow: 0 -8px 24px rgba(0,0,0,.28) !important;
+}
+
+#play-screen .slot {
+  filter: brightness(.72) saturate(.78) drop-shadow(0 0 4px rgba(0,0,0,.30)) !important;
+}
+
+#play-screen .slot.active {
+  filter: brightness(.86) saturate(.84) drop-shadow(0 0 5px rgba(184,138,69,.18)) !important;
+}
+
+#play-screen .day-panel,
+#play-screen .location-panel,
+#play-screen .next-story,
+#play-screen .play-hourglass {
+  filter: brightness(.76) saturate(.80) drop-shadow(0 0 4px rgba(0,0,0,.30)) !important;
+}
+
+#play-screen .day-panel {
+  left: 644px !important;
+  width: 239px !important;
+}
+
+#play-screen .location-panel {
+  left: 914px !important;
+  width: 217px !important;
+}
+
+#play-screen .next-story {
+  left: 1247px !important;
+  width: 224px !important;
+  color: #d3a75f !important;
+  font-size: 18px !important;
+  text-shadow: 0 0 7px rgba(0,0,0,.86) !important;
+}
+
+#play-screen .next-story:hover,
+#play-screen .play-hourglass:hover {
+  filter: brightness(.90) saturate(.86) drop-shadow(0 0 6px rgba(184,138,69,.20)) !important;
+}
+
+#play-screen .play-hourglass {
+  left: 1530px !important;
+  width: 58px !important;
+}
+
+#play-screen .back-home {
+  display: none !important;
+}
