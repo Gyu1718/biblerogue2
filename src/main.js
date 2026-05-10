@@ -2,124 +2,12 @@ const BASE_WIDTH = 1672;
 const BASE_HEIGHT = 941;
 
 let initialized = false;
+let currentSceneIndex = 0;
 
-const PLAY_CHOICE_REACTIONS = [
-  {
-    key: 'trust',
-    lines: [
-      {
-        name: '엘리야벳',
-        role: '인도자',
-        portrait: 'p1',
-        text: '길은 아직 열려 있습니다. 두려워 마십시오. 백성이 흔들릴수록 먼저 바라보아야 할 것은 뒤의 병거가 아니라 앞에 열린 길입니다.'
-      },
-      {
-        name: '미라',
-        role: '기록자',
-        portrait: 'p2',
-        text: '이 선택을 기록해야 합니다. 믿음은 마음속에만 머무르지 않고, 결국 발걸음으로 남습니다.'
-      },
-      {
-        name: '아사르',
-        role: '탐색자',
-        portrait: 'p4',
-        text: '앞쪽 물길은 흔들리지만 아직 닫히지 않았습니다. 지금은 멈추기보다 조심스럽게 계속 나아가야 합니다.'
-      }
-    ]
-  },
-  {
-    key: 'care',
-    lines: [
-      {
-        name: '엘리야벳',
-        role: '인도자',
-        portrait: 'p1',
-        text: '공동체는 가장 느린 사람을 버리지 않을 때 무너지지 않습니다. 속도보다 함께 건너는 것이 먼저입니다.'
-      },
-      {
-        name: '요나단',
-        role: '보호자',
-        portrait: 'p3',
-        text: '제가 뒤쪽을 살피겠습니다. 아이들과 노인들을 먼저 붙잡아 주십시오. 두려움이 퍼지기 전에 손을 내밀어야 합니다.'
-      },
-      {
-        name: '미라',
-        role: '기록자',
-        portrait: 'p2',
-        text: '오늘의 믿음은 서로를 놓지 않는 손으로 기록될 것입니다. 하나님이 여신 길은 혼자 달아나는 길이 아닙니다.'
-      }
-    ]
-  },
-  {
-    key: 'encourage',
-    lines: [
-      {
-        name: '요나단',
-        role: '보호자',
-        portrait: 'p3',
-        text: '모두 지쳐 있습니다. 그러나 아직 걸을 수 있습니다. 누군가 먼저 다시 일어서면 백성들의 걸음도 되살아날 것입니다.'
-      },
-      {
-        name: '엘리야벳',
-        role: '인도자',
-        portrait: 'p1',
-        text: '목소리를 낮추지 마십시오. 두려움보다 약속을 크게 들려주어야 합니다. 지금 백성에게 필요한 것은 명령보다 확신입니다.'
-      },
-      {
-        name: '미라',
-        role: '기록자',
-        portrait: 'p2',
-        text: '백성들이 다시 고개를 들기 시작했습니다. 말 한마디가 무너진 마음을 일으킬 때가 있습니다.'
-      }
-    ]
-  },
-  {
-    key: 'pray',
-    lines: [
-      {
-        name: '미라',
-        role: '기록자',
-        portrait: 'p2',
-        text: '멈춤이 도망은 아닙니다. 지금은 하나님께 귀를 기울일 때입니다. 다만 기도는 길을 포기하는 핑계가 아니라 다시 걷기 위한 숨입니다.'
-      },
-      {
-        name: '엘리야벳',
-        role: '인도자',
-        portrait: 'p1',
-        text: '짧게 기도하고 다시 움직입시다. 공동체가 흔들리지 않게 하겠습니다.'
-      },
-      {
-        name: '아사르',
-        role: '탐색자',
-        portrait: 'p4',
-        text: '뒤의 소리가 가까워집니다. 오래 머물 수는 없습니다. 기도한 뒤에는 열린 길을 따라 움직여야 합니다.'
-      }
-    ]
-  },
-  {
-    key: 'discern',
-    lines: [
-      {
-        name: '아사르',
-        role: '탐색자',
-        portrait: 'p4',
-        text: '바람의 방향이 바뀌고 있습니다. 왼쪽 물벽 아래는 피하는 편이 좋겠습니다. 중앙 길이 더 안정적입니다.'
-      },
-      {
-        name: '요나단',
-        role: '보호자',
-        portrait: 'p3',
-        text: '제가 사람들을 중앙 길로 모으겠습니다. 겁먹은 이들이 흩어지지 않게 해야 합니다.'
-      },
-      {
-        name: '미라',
-        role: '기록자',
-        portrait: 'p2',
-        text: '분별은 두려움이 아니라, 하나님이 여신 길을 자세히 보는 일입니다. 믿음은 눈을 감는 것이 아니라 무엇을 볼지 선택하는 것입니다.'
-      }
-    ]
-  }
-];
+function getCurrentScene() {
+  if (!Array.isArray(window.PLAY_SCENES) || window.PLAY_SCENES.length === 0) return null;
+  return window.PLAY_SCENES[currentSceneIndex] || window.PLAY_SCENES[0];
+}
 
 function resizeGame() {
   const canvas = document.getElementById('game-canvas');
@@ -255,9 +143,9 @@ function ensureCompanionDialoguePanel() {
   return dialoguePanel;
 }
 
-function renderCompanionDialogue(reaction) {
+function renderCompanionDialogue(choice) {
   const dialoguePanel = ensureCompanionDialoguePanel();
-  if (!dialoguePanel || !reaction) return;
+  if (!dialoguePanel || !choice) return;
 
   dialoguePanel.innerHTML = '';
 
@@ -265,7 +153,7 @@ function renderCompanionDialogue(reaction) {
   title.textContent = '동행자';
   dialoguePanel.appendChild(title);
 
-  reaction.lines.forEach((line) => {
+  choice.companions.forEach((line) => {
     const item = document.createElement('article');
     item.className = 'companion-line';
 
@@ -290,17 +178,85 @@ function renderCompanionDialogue(reaction) {
   });
 }
 
+function renderScene(scene) {
+  const play = document.getElementById('play-screen');
+  if (!play || !scene) return;
+
+  setText(play.querySelector('.play-brand-text span'), scene.chapter);
+  setText(play.querySelector('.scene-plaque strong'), scene.location);
+  setText(play.querySelector('.scene-plaque span'), scene.bible);
+  setText(play.querySelector('.narrative-panel h2'), scene.title);
+
+  const copy = play.querySelector('.narrative-copy');
+  if (copy) {
+    copy.innerHTML = '';
+    scene.copy.forEach((paragraph, index) => {
+      if (index === scene.copy.length - 1) {
+        const hr = document.createElement('hr');
+        copy.appendChild(hr);
+      }
+
+      const p = document.createElement('p');
+      p.innerHTML = paragraph.replace(/\n/g, '<br />');
+      copy.appendChild(p);
+    });
+
+    const prompt = document.createElement('strong');
+    prompt.textContent = scene.prompt;
+    copy.appendChild(prompt);
+  }
+
+  const choiceList = play.querySelector('.choice-list');
+  if (choiceList) {
+    choiceList.innerHTML = '';
+    scene.choices.forEach((choice, index) => {
+      const button = document.createElement('button');
+      button.className = `choice${index === 0 ? ' active' : ''}`;
+      button.type = 'button';
+      button.dataset.choiceIndex = String(index);
+
+      const icon = document.createElement('span');
+      icon.textContent = choice.icon;
+      button.appendChild(icon);
+      button.append(choice.text);
+
+      if (choice.marker) {
+        const marker = document.createElement('em');
+        marker.textContent = choice.marker;
+        button.appendChild(marker);
+      }
+
+      choiceList.appendChild(button);
+    });
+  }
+
+  const progress = play.querySelector('.story-progress strong');
+  if (progress) progress.textContent = `${scene.progress.current} / ${scene.progress.total}`;
+
+  setPlayChoice(0);
+}
+
 function setPlayChoice(choiceIndex) {
   const play = document.getElementById('play-screen');
-  if (!play) return;
+  const scene = getCurrentScene();
+  if (!play || !scene) return;
 
-  const reaction = PLAY_CHOICE_REACTIONS[choiceIndex] || PLAY_CHOICE_REACTIONS[0];
-  play.dataset.choice = reaction.key;
-  renderCompanionDialogue(reaction);
+  const choice = scene.choices[choiceIndex] || scene.choices[0];
+  play.dataset.choice = choice.key;
+  renderCompanionDialogue(choice);
 }
 
 function bindNavigation() {
   document.addEventListener('click', (event) => {
+    const choice = event.target.closest('.choice');
+    if (choice) {
+      const index = Number(choice.dataset.choiceIndex || 0);
+      document.querySelectorAll('.choice').forEach((item) => item.classList.remove('active'));
+      choice.classList.add('active');
+      setPlayChoice(index);
+      return;
+    }
+
     const panelTrigger = event.target.closest('[data-panel]');
     if (panelTrigger) {
       event.preventDefault();
@@ -333,14 +289,6 @@ function bindNavigation() {
       showScreen(trigger.dataset.go);
     }
   });
-
-  document.querySelectorAll('.choice').forEach((choice, index) => {
-    choice.addEventListener('click', () => {
-      document.querySelectorAll('.choice').forEach((item) => item.classList.remove('active'));
-      choice.classList.add('active');
-      setPlayChoice(index);
-    });
-  });
 }
 
 function initGame() {
@@ -352,7 +300,7 @@ function initGame() {
   cleanupLegacyPlayPanel();
   bindNavigation();
   showHomePanel('story');
-  setPlayChoice(0);
+  renderScene(getCurrentScene());
   showScreen('home');
 }
 
