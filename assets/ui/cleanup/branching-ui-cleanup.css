@@ -1,0 +1,59 @@
+/* Branching narrative cleanup pass
+   Removes obsolete RPG remnants after the home/play/ending simplification. */
+
+/* Home: hide obsolete quick-slot icons and give the simplified menu better breathing room. */
+#home-screen .bottom-icons {
+  display: none !important;
+}
+
+#home-screen .side-menu .menu-button[data-panel="story"] { --y: 214px !important; }
+#home-screen .side-menu .menu-button[data-panel="witnesses"] { --y: 326px !important; }
+#home-screen .side-menu .menu-button[data-panel="records"] { --y: 438px !important; }
+#home-screen .side-menu .menu-button[data-panel="endings"] { --y: 550px !important; }
+#home-screen .side-menu .menu-button[data-panel="settings"] { --y: 662px !important; }
+
+#home-screen .scripture .quote {
+  top: 814px !important;
+}
+
+#home-screen .scripture .reference {
+  top: 842px !important;
+}
+
+/* Home: the old top small controls now mean record/settings only, so keep them quiet. */
+#home-screen .top-actions .bookmark-progress,
+#home-screen .top-actions .progress-text {
+  display: none !important;
+}
+
+#home-screen .top-book { left: 1440px !important; }
+#home-screen .top-gear { left: 1494px !important; }
+
+/* Play: top state values are narrative stats, not currency/resources. */
+#play-screen .play-stats {
+  left: 1080px !important;
+  top: 29px !important;
+  width: 270px !important;
+  justify-content: flex-end !important;
+  gap: 28px !important;
+  font-size: 16px !important;
+}
+
+#play-screen .play-top-empty {
+  opacity: .38 !important;
+}
+
+#play-screen .location-panel {
+  font-size: 16px !important;
+  letter-spacing: .03em !important;
+}
+
+#play-screen .day-panel {
+  font-size: 16px !important;
+}
+
+/* Ending: reduce visual clash from the old bright symbol. */
+#ending-screen .ending-lamb {
+  opacity: .82 !important;
+  filter: brightness(.88) saturate(.80) !important;
+}
