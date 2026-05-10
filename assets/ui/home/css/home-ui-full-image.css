@@ -172,14 +172,14 @@
   background-size: 100% 100% !important;
   background-color: transparent !important;
   border: 0 !important;
-  filter: brightness(.67) saturate(.78);
+  filter: brightness(.62) saturate(.72);
 }
 #home-screen .menu-button.active {
   background-image: url('../frames/menu-button-active.png') !important;
-  filter: brightness(.78) saturate(.86);
+  filter: brightness(.7) saturate(.78);
 }
 #home-screen .menu-button:hover {
-  filter: brightness(.86) saturate(.9);
+  filter: brightness(.78) saturate(.82);
 }
 #home-screen .menu-button::before,
 #home-screen .menu-button::after { display: none !important; }
@@ -191,12 +191,12 @@
 #home-screen .icon-swords { background-image: url('../icons/menu-swords.png') !important; }
 #home-screen .icon-gear { background-image: url('../icons/menu-gear.png') !important; }
 #home-screen .menu-icon {
-  filter: brightness(.76) saturate(.82);
-  opacity: .9;
+  filter: brightness(.7) saturate(.76);
+  opacity: .86;
 }
 #home-screen .menu-button.active .menu-icon {
-  filter: brightness(.92) saturate(.9);
-  opacity: 1;
+  filter: brightness(.84) saturate(.82);
+  opacity: .95;
 }
 
 /* Bottom utility icons */
@@ -204,9 +204,9 @@
   background-size: 100% 100%, 68% 68% !important;
   background-position: center, center !important;
   border: 0 !important;
-  filter: brightness(.72) saturate(.82);
+  filter: brightness(.64) saturate(.74);
 }
-#home-screen .small-icon:hover { filter: brightness(.9) saturate(.9); }
+#home-screen .small-icon:hover { filter: brightness(.8) saturate(.82); }
 #home-screen .icon-bag { background-image: url('../frames/icon-button-square.png'), url('../icons/utility-bag.png') !important; }
 #home-screen .icon-crown { background-image: url('../frames/icon-button-square.png'), url('../icons/utility-crown.png') !important; }
 #home-screen .icon-scroll-mini { background-image: url('../frames/icon-button-square.png'), url('../icons/utility-scroll.png') !important; }
@@ -217,13 +217,13 @@
   background-image: url('../frames/icon-button-circle.png'), url('../icons/top-book.png') !important;
   background-size: 100% 100%, 70% 70% !important;
   background-position: center, center !important;
-  filter: brightness(.72) saturate(.82);
+  filter: brightness(.64) saturate(.74);
 }
 #home-screen .top-gear {
   background-image: url('../frames/icon-button-circle.png'), url('../icons/top-gear.png') !important;
   background-size: 100% 100%, 70% 70% !important;
   background-position: center, center !important;
-  filter: brightness(.72) saturate(.82);
+  filter: brightness(.64) saturate(.74);
 }
 #home-screen .bookmark-progress {
   background-image: url('../frames/bookmark-frame.png'), url('../icons/top-bookmark.png') !important;
@@ -231,19 +231,19 @@
   background-position: center, center !important;
   border: 0 !important;
   clip-path: none !important;
-  filter: brightness(.72) saturate(.82);
+  filter: brightness(.64) saturate(.74);
 }
 #home-screen .top-cross {
   background-image: url('../icons/cross-top.png') !important;
-  filter: brightness(.82) saturate(.82);
+  filter: brightness(.72) saturate(.76);
 }
 #home-screen .decor-cross {
   background-image: url('../icons/cross-bottom.png') !important;
-  filter: brightness(.72) saturate(.82);
+  filter: brightness(.64) saturate(.74);
 }
 #home-screen .card-ornament {
   background-image: url('../icons/chapter-star.png') !important;
-  filter: brightness(.76) saturate(.82);
+  filter: brightness(.68) saturate(.76);
 }
 
 #home-screen .hourglass-button {
@@ -251,7 +251,7 @@
   background-size: 100% 100%, 74% 74% !important;
   background-position: center, center !important;
   border: 0 !important;
-  filter: brightness(.72) saturate(.82);
+  filter: brightness(.64) saturate(.74);
 }
 
 /* Corners */
@@ -266,7 +266,7 @@
   background-repeat: no-repeat;
   border: 0 !important;
   opacity: .78;
-  filter: brightness(.7) saturate(.82);
+  filter: brightness(.62) saturate(.72);
 }
 #home-screen .corner::after { display: none !important; }
 
@@ -279,13 +279,13 @@
   letter-spacing: .05em !important;
   text-shadow: 0 0 8px rgba(0,0,0,.9) !important;
   box-shadow: none !important;
-  filter: brightness(.78) saturate(.82);
+  filter: brightness(.68) saturate(.76);
 }
 #home-screen .continue-button span {
   display: inline !important;
   color: #d2a965 !important;
 }
-#home-screen .continue-button:hover { filter: brightness(.92) saturate(.9); }
+#home-screen .continue-button:hover { filter: brightness(.82) saturate(.82); }
 
 /* Card frames: only ornament layer, not opaque panel */
 #home-screen .chapter-card::before,
@@ -298,8 +298,8 @@
   background: url('../frames/chapter-card-large-frame.png') center / 100% 100% no-repeat;
   pointer-events: none;
   z-index: 10;
-  opacity: .28;
-  filter: brightness(.68) saturate(.78);
+  opacity: .22;
+  filter: brightness(.56) saturate(.68);
 }
 #home-screen .chapter-card.small::after {
   content: '';
@@ -309,21 +309,21 @@
   background: url('../frames/chapter-card-small-left-frame.png') center / 100% 100% no-repeat;
   pointer-events: none;
   z-index: 10;
-  opacity: .3;
-  filter: brightness(.68) saturate(.78);
+  opacity: .24;
+  filter: brightness(.56) saturate(.68);
 }
 #home-screen .chapter-card.small[style*="470px"]::after {
   background-image: url('../frames/chapter-card-small-right-frame.png');
 }
 
 #home-screen .card-shade {
-  background: linear-gradient(90deg, rgba(0,0,0,.36) 0 34%, rgba(0,0,0,.06) 74%) !important;
+  background: linear-gradient(90deg, rgba(0,0,0,.44) 0 34%, rgba(0,0,0,.04) 74%) !important;
 }
 #home-screen .chapter-card.small .card-shade {
-  background: rgba(0,0,0,.08) !important;
+  background: rgba(0,0,0,.06) !important;
 }
 #home-screen .locked .chapter-art {
-  filter: grayscale(.12) brightness(.86) contrast(1) !important;
+  filter: grayscale(.12) brightness(.92) contrast(1.02) !important;
 }
 
 #home-screen .lock-mark {
@@ -331,7 +331,7 @@
   background-size: contain !important;
   border: 0 !important;
   transform: translate(-50%, -50%) !important;
-  filter: brightness(.72) saturate(.82);
+  filter: brightness(.64) saturate(.74);
 }
 
 /* Layering */
