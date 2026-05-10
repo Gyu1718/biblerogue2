@@ -12,6 +12,67 @@
 #home-screen .side-menu .menu-button[data-panel="endings"] { --y: 550px !important; }
 #home-screen .side-menu .menu-button[data-panel="settings"] { --y: 662px !important; }
 
+/* Chapter cards: use the new generated chapter illustration set. */
+#home-screen .chapter-art-1 {
+  background-image: url('../../../images/chapters/chapter_01_exodus_card.png') !important;
+}
+
+#home-screen .locked-art-2 {
+  background-image: url('../../../images/chapters/chapter_02_jericho_card.png') !important;
+}
+
+#home-screen .locked-art-3 {
+  background-image: url('../../../images/chapters/chapter_03_carmel_card.png') !important;
+}
+
+#home-screen .locked-art-4 {
+  background-image: url('../../../images/chapters/chapter_04_lion_den_card.png') !important;
+}
+
+#home-screen .locked-art-5 {
+  background-image: url('../../../images/chapters/chapter_05_empty_tomb_card.png') !important;
+}
+
+#home-screen .chapter-card.locked .chapter-art {
+  filter: grayscale(.08) brightness(.70) contrast(1.08) saturate(.86) !important;
+}
+
+#home-screen .chapter-card.locked .card-shade {
+  background: linear-gradient(90deg, rgba(0,0,0,.62), rgba(0,0,0,.30) 58%, rgba(0,0,0,.18)) !important;
+}
+
+#home-screen .locked-label {
+  width: 260px !important;
+  z-index: 13 !important;
+}
+
+#home-screen .locked-title,
+#home-screen .locked-subtitle {
+  position: absolute;
+  left: 25px;
+  z-index: 13;
+  margin: 0;
+  text-shadow: 0 0 8px rgba(0,0,0,.92);
+  pointer-events: none;
+}
+
+#home-screen .locked-title {
+  top: 53px;
+  width: 250px;
+  color: #d5ad68;
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: .06em;
+}
+
+#home-screen .locked-subtitle {
+  top: 88px;
+  width: 315px;
+  color: #9f7940;
+  font-size: 13px;
+  letter-spacing: .03em;
+}
+
 #home-screen .scripture .quote {
   top: 814px !important;
 }
