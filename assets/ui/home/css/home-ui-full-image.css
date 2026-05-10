@@ -1,4 +1,5 @@
-/* Full image replacement for the home screen. Load this after base CSS files. */
+/* Home screen PNG asset stylesheet. */
+/* Goal: use PNG for frames/icons/ornaments, keep text as crisp HTML. */
 
 /* Structural overlays */
 #home-screen .outer-frame {
@@ -9,6 +10,8 @@
   background: url('../overlays/outer-frame-full.png') center / 100% 100% no-repeat !important;
   border: 0 !important;
   box-shadow: none !important;
+  opacity: .72;
+  filter: brightness(.72) saturate(.82);
 }
 
 #home-screen .sidebar::after {
@@ -16,6 +19,7 @@
   position: absolute;
   inset: 0;
   background: url('../overlays/sidebar-lines.png') 0 0 / 322px 941px no-repeat;
+  opacity: .55;
   pointer-events: none;
 }
 #home-screen .sidebar-line { display: none !important; }
@@ -24,7 +28,7 @@
 #home-screen .ornate-flame {
   background: url('../logo/flame-emblem.png') center / contain no-repeat !important;
   clip-path: none !important;
-  filter: drop-shadow(0 0 10px rgba(196, 154, 85, .45));
+  filter: brightness(.86) saturate(.85) drop-shadow(0 0 5px rgba(196, 154, 85, .25));
 }
 
 /* Shared image replacement reset */
@@ -54,20 +58,125 @@
   background-size: contain !important;
 }
 
+/* Restore crisp HTML typography */
+#home-screen .brand-title {
+  color: #d7ad65 !important;
+  font-size: 34px !important;
+  font-weight: 700 !important;
+  letter-spacing: .07em !important;
+  text-shadow: 0 0 8px rgba(0,0,0,.88), 0 0 6px rgba(196,154,85,.22) !important;
+  background: none !important;
+}
+#home-screen .brand-subtitle {
+  color: #b98d4a !important;
+  font-size: 17px !important;
+  letter-spacing: .03em !important;
+  text-shadow: 0 0 7px rgba(0,0,0,.9) !important;
+  background: none !important;
+}
+#home-screen .menu-text strong {
+  opacity: 1 !important;
+  color: #c89b53 !important;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  letter-spacing: .08em !important;
+  text-shadow: 0 0 8px rgba(0,0,0,.9) !important;
+}
+#home-screen .menu-button.active .menu-text strong {
+  color: #efd18a !important;
+  text-shadow: 0 0 9px rgba(0,0,0,.9), 0 0 5px rgba(196,154,85,.26) !important;
+}
+#home-screen .menu-text em {
+  opacity: 1 !important;
+  color: rgba(203,162,90,.72) !important;
+  font-size: 14px !important;
+  letter-spacing: .05em !important;
+  text-shadow: 0 0 7px rgba(0,0,0,.9) !important;
+}
+#home-screen .menu-text::after { display: none !important; }
+
+#home-screen .chapter-banner {
+  background-image: url('../frames/chapter-banner-frame.png') !important;
+  background-size: 100% 100% !important;
+  background-position: center !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  color: #d5ad68 !important;
+  font-size: 20px !important;
+  letter-spacing: .08em !important;
+  text-shadow: 0 0 8px rgba(0,0,0,.92) !important;
+  filter: brightness(.76) saturate(.82);
+}
+#home-screen .chapter-banner::before,
+#home-screen .chapter-banner::after { display: none !important; }
+
+#home-screen .progress-text {
+  color: #b98d4a !important;
+  font-size: 13px !important;
+  line-height: 1.35 !important;
+  text-shadow: 0 0 7px rgba(0,0,0,.9) !important;
+  background: none !important;
+}
+#home-screen .chapter-small {
+  color: #d7ad65 !important;
+  font-size: 23px !important;
+  letter-spacing: .08em !important;
+  text-shadow: 0 0 9px rgba(0,0,0,.95) !important;
+  background: none !important;
+}
+#home-screen .chapter-title {
+  color: #e1bd73 !important;
+  font-size: 42px !important;
+  line-height: 1.1 !important;
+  font-weight: 800 !important;
+  letter-spacing: .03em !important;
+  text-shadow: 0 0 12px rgba(0,0,0,.96), 0 0 7px rgba(196,154,85,.25) !important;
+  background: none !important;
+}
+#home-screen .chapter-subtitle {
+  color: #c2944e !important;
+  font-size: 17px !important;
+  letter-spacing: .03em !important;
+  text-shadow: 0 0 9px rgba(0,0,0,.92) !important;
+  background: none !important;
+}
+#home-screen .locked-label {
+  color: rgba(201,157,86,.78) !important;
+  font-size: 19px !important;
+  text-shadow: 0 0 8px rgba(0,0,0,.9) !important;
+  background: none !important;
+}
+#home-screen .quote {
+  color: #c7974c !important;
+  font-size: 15px !important;
+  letter-spacing: .04em !important;
+  text-shadow: 0 0 9px rgba(0,0,0,.94) !important;
+  background: none !important;
+}
+#home-screen .reference {
+  color: #b48642 !important;
+  font-size: 14px !important;
+  text-shadow: 0 0 8px rgba(0,0,0,.92) !important;
+  background: none !important;
+}
+
 /* Menu buttons */
 #home-screen .menu-button {
   background-image: url('../frames/menu-button-normal.png') !important;
   background-size: 100% 100% !important;
   background-color: transparent !important;
   border: 0 !important;
+  filter: brightness(.67) saturate(.78);
 }
 #home-screen .menu-button.active {
   background-image: url('../frames/menu-button-active.png') !important;
+  filter: brightness(.78) saturate(.86);
+}
+#home-screen .menu-button:hover {
+  filter: brightness(.86) saturate(.9);
 }
 #home-screen .menu-button::before,
-#home-screen .menu-button::after {
-  display: none !important;
-}
+#home-screen .menu-button::after { display: none !important; }
 
 #home-screen .icon-book { background-image: url('../icons/menu-book.png') !important; }
 #home-screen .icon-people { background-image: url('../icons/menu-people.png') !important; }
@@ -75,41 +184,23 @@
 #home-screen .icon-trophy { background-image: url('../icons/menu-trophy.png') !important; }
 #home-screen .icon-swords { background-image: url('../icons/menu-swords.png') !important; }
 #home-screen .icon-gear { background-image: url('../icons/menu-gear.png') !important; }
-
-/* Menu text images */
-#home-screen .menu-text {
-  position: relative;
-  width: 170px;
-  height: 46px;
+#home-screen .menu-icon {
+  filter: brightness(.76) saturate(.82);
+  opacity: .9;
 }
-#home-screen .menu-text strong,
-#home-screen .menu-text em {
-  opacity: 0 !important;
+#home-screen .menu-button.active .menu-icon {
+  filter: brightness(.92) saturate(.9);
+  opacity: 1;
 }
-#home-screen .menu-text::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 170px;
-  height: 46px;
-  background-repeat: no-repeat;
-  background-position: left center;
-  background-size: contain;
-}
-#home-screen .side-menu > .menu-button:nth-child(1) .menu-text::after { background-image: url('../text/menu-story.png'); }
-#home-screen .side-menu > .menu-button:nth-child(2) .menu-text::after { background-image: url('../text/menu-witness.png'); }
-#home-screen .side-menu > .menu-button:nth-child(3) .menu-text::after { background-image: url('../text/menu-record.png'); }
-#home-screen .side-menu > .menu-button:nth-child(4) .menu-text::after { background-image: url('../text/menu-achievement.png'); }
-#home-screen .side-menu > .menu-button:nth-child(5) .menu-text::after { background-image: url('../text/menu-training.png'); }
-#home-screen .side-menu > .menu-button:nth-child(6) .menu-text::after { background-image: url('../text/menu-settings.png'); }
 
 /* Bottom utility icons */
 #home-screen .small-icon {
   background-size: 100% 100%, 68% 68% !important;
   background-position: center, center !important;
   border: 0 !important;
+  filter: brightness(.72) saturate(.82);
 }
+#home-screen .small-icon:hover { filter: brightness(.9) saturate(.9); }
 #home-screen .icon-bag { background-image: url('../frames/icon-button-square.png'), url('../icons/utility-bag.png') !important; }
 #home-screen .icon-crown { background-image: url('../frames/icon-button-square.png'), url('../icons/utility-crown.png') !important; }
 #home-screen .icon-scroll-mini { background-image: url('../frames/icon-button-square.png'), url('../icons/utility-scroll.png') !important; }
@@ -120,11 +211,13 @@
   background-image: url('../frames/icon-button-circle.png'), url('../icons/top-book.png') !important;
   background-size: 100% 100%, 70% 70% !important;
   background-position: center, center !important;
+  filter: brightness(.72) saturate(.82);
 }
 #home-screen .top-gear {
   background-image: url('../frames/icon-button-circle.png'), url('../icons/top-gear.png') !important;
   background-size: 100% 100%, 70% 70% !important;
   background-position: center, center !important;
+  filter: brightness(.72) saturate(.82);
 }
 #home-screen .bookmark-progress {
   background-image: url('../frames/bookmark-frame.png'), url('../icons/top-bookmark.png') !important;
@@ -132,16 +225,27 @@
   background-position: center, center !important;
   border: 0 !important;
   clip-path: none !important;
+  filter: brightness(.72) saturate(.82);
 }
-#home-screen .top-cross { background-image: url('../icons/cross-top.png') !important; }
-#home-screen .decor-cross { background-image: url('../icons/cross-bottom.png') !important; }
-#home-screen .card-ornament { background-image: url('../icons/chapter-star.png') !important; }
+#home-screen .top-cross {
+  background-image: url('../icons/cross-top.png') !important;
+  filter: brightness(.82) saturate(.82);
+}
+#home-screen .decor-cross {
+  background-image: url('../icons/cross-bottom.png') !important;
+  filter: brightness(.72) saturate(.82);
+}
+#home-screen .card-ornament {
+  background-image: url('../icons/chapter-star.png') !important;
+  filter: brightness(.76) saturate(.82);
+}
 
 #home-screen .hourglass-button {
   background-image: url('../frames/icon-button-square.png'), url('../icons/hourglass.png') !important;
   background-size: 100% 100%, 74% 74% !important;
   background-position: center, center !important;
   border: 0 !important;
+  filter: brightness(.72) saturate(.82);
 }
 
 /* Corners */
@@ -155,65 +259,29 @@
   background-size: contain;
   background-repeat: no-repeat;
   border: 0 !important;
+  opacity: .78;
+  filter: brightness(.7) saturate(.82);
 }
 #home-screen .corner::after { display: none !important; }
 
-/* Replace visible text with image assets */
-#home-screen .brand-title,
-#home-screen .brand-subtitle,
-#home-screen .progress-text,
-#home-screen .chapter-small,
-#home-screen .chapter-title,
-#home-screen .chapter-subtitle,
-#home-screen .locked-label,
-#home-screen .quote,
-#home-screen .reference {
-  color: transparent !important;
-  text-shadow: none !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  background-size: contain !important;
-}
-
-#home-screen .brand-title { background-image: url('../text/brand-title.png'); }
-#home-screen .brand-subtitle { background-image: url('../text/brand-subtitle.png'); }
-
-#home-screen .chapter-banner {
-  background-image: url('../frames/chapter-banner-frame.png'), url('../text/chapter-banner-title.png') !important;
-  background-size: 100% 100%, 72% auto !important;
-  background-position: center, center !important;
-  background-color: transparent !important;
-  border: 0 !important;
-  color: transparent !important;
-  text-shadow: none !important;
-  font-size: 0 !important;
-}
-#home-screen .chapter-banner::before,
-#home-screen .chapter-banner::after { display: none !important; }
-
-#home-screen .progress-text { background-image: url('../text/progress-text.png'); font-size: 0 !important; }
-#home-screen .chapter-small { background-image: url('../text/chapter-small-1.png'); font-size: 0 !important; }
-#home-screen .chapter-title { background-image: url('../text/chapter-title-1.png'); font-size: 0 !important; }
-#home-screen .chapter-subtitle { background-image: url('../text/chapter-subtitle-1.png'); font-size: 0 !important; }
-
+/* Continue button: keep text HTML, use image frame */
 #home-screen .continue-button {
   background: url('../frames/continue-button-full.png') center / 100% 100% no-repeat !important;
   border: 0 !important;
-  color: transparent !important;
-  font-size: 0 !important;
+  color: #d2a965 !important;
+  font-size: 16px !important;
+  letter-spacing: .05em !important;
+  text-shadow: 0 0 8px rgba(0,0,0,.9) !important;
   box-shadow: none !important;
+  filter: brightness(.78) saturate(.82);
 }
-#home-screen .continue-button span { display: none !important; }
+#home-screen .continue-button span {
+  display: inline !important;
+  color: #d2a965 !important;
+}
+#home-screen .continue-button:hover { filter: brightness(.92) saturate(.9); }
 
-#home-screen .chapter-area article:nth-child(2) .locked-label { background-image: url('../text/locked-label-2.png'); font-size: 0 !important; }
-#home-screen .chapter-area article:nth-child(3) .locked-label { background-image: url('../text/locked-label-3.png'); font-size: 0 !important; }
-#home-screen .chapter-area article:nth-child(4) .locked-label { background-image: url('../text/locked-label-4.png'); font-size: 0 !important; }
-#home-screen .chapter-area article:nth-child(5) .locked-label { background-image: url('../text/locked-label-5.png'); font-size: 0 !important; }
-
-#home-screen .quote { background-image: url('../text/scripture-quote.png'); font-size: 0 !important; }
-#home-screen .reference { background-image: url('../text/scripture-reference.png'); font-size: 0 !important; }
-
-/* Card frames */
+/* Card frames: only ornament layer, not opaque panel */
 #home-screen .chapter-card::before,
 #home-screen .chapter-card::after { display: none !important; }
 #home-screen .chapter-card.large::after {
@@ -224,6 +292,8 @@
   background: url('../frames/chapter-card-large-frame.png') center / 100% 100% no-repeat;
   pointer-events: none;
   z-index: 10;
+  opacity: .46;
+  filter: brightness(.74) saturate(.82);
 }
 #home-screen .chapter-card.small::after {
   content: '';
@@ -233,9 +303,21 @@
   background: url('../frames/chapter-card-small-left-frame.png') center / 100% 100% no-repeat;
   pointer-events: none;
   z-index: 10;
+  opacity: .5;
+  filter: brightness(.72) saturate(.82);
 }
 #home-screen .chapter-card.small[style*="470px"]::after {
   background-image: url('../frames/chapter-card-small-right-frame.png');
+}
+
+#home-screen .card-shade {
+  background: linear-gradient(90deg, rgba(0,0,0,.55) 0 36%, rgba(0,0,0,.10) 72%) !important;
+}
+#home-screen .chapter-card.small .card-shade {
+  background: rgba(0,0,0,.18) !important;
+}
+#home-screen .locked .chapter-art {
+  filter: grayscale(.18) brightness(.72) contrast(.98) !important;
 }
 
 #home-screen .lock-mark {
@@ -243,6 +325,7 @@
   background-size: contain !important;
   border: 0 !important;
   transform: translate(-50%, -50%) !important;
+  filter: brightness(.72) saturate(.82);
 }
 
 /* Layering */
