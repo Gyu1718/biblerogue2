@@ -8,113 +8,193 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="src/styles.css" />
+    <link rel="stylesheet" href="src/play.css" />
   </head>
   <body>
     <div id="viewport">
-      <main id="game-canvas" aria-label="이름 없는 증인들 홈 화면">
-        <div class="bg-layer"></div>
-        <div class="bg-vignette"></div>
-        <div class="outer-frame"></div>
-        <div class="corner corner-tl"></div>
-        <div class="corner corner-tr"></div>
-        <div class="corner corner-bl"></div>
-        <div class="corner corner-br"></div>
+      <main id="game-canvas" aria-label="이름 없는 증인들 게임 화면">
+        <section id="home-screen" class="screen screen-active" aria-label="이름 없는 증인들 홈 화면">
+          <div class="bg-layer"></div>
+          <div class="bg-vignette"></div>
+          <div class="outer-frame"></div>
+          <div class="corner corner-tl"></div>
+          <div class="corner corner-tr"></div>
+          <div class="corner corner-bl"></div>
+          <div class="corner corner-br"></div>
 
-        <aside class="sidebar">
-          <div class="sidebar-line sidebar-line-left"></div>
-          <div class="sidebar-line sidebar-line-right"></div>
+          <aside class="sidebar">
+            <div class="sidebar-line sidebar-line-left"></div>
+            <div class="sidebar-line sidebar-line-right"></div>
 
-          <div class="brand-logo ornate-flame" aria-hidden="true"></div>
-          <h1 class="brand-title">이름 없는 증인들</h1>
-          <p class="brand-subtitle">하나님의 이야기를 따라 걷는 여정</p>
+            <div class="brand-logo ornate-flame" aria-hidden="true"></div>
+            <h1 class="brand-title">이름 없는 증인들</h1>
+            <p class="brand-subtitle">하나님의 이야기를 따라 걷는 여정</p>
 
-          <nav class="side-menu" aria-label="주 메뉴">
-            <button class="menu-button active" style="--x:42px;--y:203px" type="button">
-              <span class="menu-icon icon-book"></span>
-              <span class="menu-text"><strong>이야기</strong><em>장 선택</em></span>
-            </button>
-            <button class="menu-button" style="--x:42px;--y:290px" type="button">
-              <span class="menu-icon icon-people"></span>
-              <span class="menu-text"><strong>증인들</strong><em>인물과 기록</em></span>
-            </button>
-            <button class="menu-button" style="--x:42px;--y:375px" type="button">
-              <span class="menu-icon icon-scroll"></span>
-              <span class="menu-text"><strong>기록</strong><em>문서와 유물</em></span>
-            </button>
-            <button class="menu-button" style="--x:42px;--y:461px" type="button">
-              <span class="menu-icon icon-trophy"></span>
-              <span class="menu-text"><strong>업적</strong><em>여정의 발자취</em></span>
-            </button>
-            <button class="menu-button" style="--x:42px;--y:546px" type="button">
-              <span class="menu-icon icon-swords"></span>
-              <span class="menu-text"><strong>훈련</strong><em>기술과 전투</em></span>
-            </button>
-            <button class="menu-button" style="--x:42px;--y:631px" type="button">
-              <span class="menu-icon icon-gear"></span>
-              <span class="menu-text"><strong>설정</strong><em>옵션과 지원</em></span>
-            </button>
-          </nav>
+            <nav class="side-menu" aria-label="주 메뉴">
+              <button class="menu-button active" style="--x:42px;--y:203px" type="button">
+                <span class="menu-icon icon-book"></span>
+                <span class="menu-text"><strong>이야기</strong><em>장 선택</em></span>
+              </button>
+              <button class="menu-button" style="--x:42px;--y:290px" type="button">
+                <span class="menu-icon icon-people"></span>
+                <span class="menu-text"><strong>증인들</strong><em>인물과 기록</em></span>
+              </button>
+              <button class="menu-button" style="--x:42px;--y:375px" type="button">
+                <span class="menu-icon icon-scroll"></span>
+                <span class="menu-text"><strong>기록</strong><em>문서와 유물</em></span>
+              </button>
+              <button class="menu-button" style="--x:42px;--y:461px" type="button">
+                <span class="menu-icon icon-trophy"></span>
+                <span class="menu-text"><strong>업적</strong><em>여정의 발자취</em></span>
+              </button>
+              <button class="menu-button" style="--x:42px;--y:546px" type="button">
+                <span class="menu-icon icon-swords"></span>
+                <span class="menu-text"><strong>훈련</strong><em>기술과 전투</em></span>
+              </button>
+              <button class="menu-button" style="--x:42px;--y:631px" type="button">
+                <span class="menu-icon icon-gear"></span>
+                <span class="menu-text"><strong>설정</strong><em>옵션과 지원</em></span>
+              </button>
+            </nav>
 
-          <div class="bottom-icons" aria-hidden="true">
-            <button class="small-icon icon-bag" style="--x:50px;--y:783px" type="button"></button>
-            <button class="small-icon icon-crown" style="--x:116px;--y:783px" type="button"></button>
-            <button class="small-icon icon-scroll-mini" style="--x:184px;--y:783px" type="button"></button>
-            <button class="small-icon icon-trophy-mini" style="--x:251px;--y:783px" type="button"></button>
-            <span class="decor-cross"></span>
-          </div>
-        </aside>
+            <div class="bottom-icons" aria-hidden="true">
+              <button class="small-icon icon-bag" style="--x:50px;--y:783px" type="button"></button>
+              <button class="small-icon icon-crown" style="--x:116px;--y:783px" type="button"></button>
+              <button class="small-icon icon-scroll-mini" style="--x:184px;--y:783px" type="button"></button>
+              <button class="small-icon icon-trophy-mini" style="--x:251px;--y:783px" type="button"></button>
+              <span class="decor-cross"></span>
+            </div>
+          </aside>
 
-        <section class="top-banner" aria-label="진행 정보">
-          <div class="top-cross"></div>
-          <div class="chapter-banner">제 1 막 · 시작의 증인</div>
+          <section class="top-banner" aria-label="진행 정보">
+            <div class="top-cross"></div>
+            <div class="chapter-banner">제 1 막 · 시작의 증인</div>
+          </section>
+
+          <section class="top-actions" aria-label="상단 메뉴">
+            <button class="circle-action top-book" type="button" aria-label="도감"></button>
+            <button class="circle-action top-gear" type="button" aria-label="설정"></button>
+            <div class="bookmark-progress" aria-hidden="true"></div>
+            <div class="progress-text">증인력 전<br />12%</div>
+          </section>
+
+          <section class="chapter-area" aria-label="장 선택">
+            <article class="chapter-card large available" data-go="play" style="--x:714px;--y:139px;--w:909px;--h:292px" role="button" tabindex="0" aria-label="1장 벽돌과 바다 시작">
+              <div class="chapter-art chapter-art-1"></div>
+              <div class="card-shade"></div>
+              <div class="card-ornament"></div>
+              <p class="chapter-small">1장</p>
+              <h2 class="chapter-title">벽돌과 바다</h2>
+              <p class="chapter-subtitle">믿음으로 세운 성벽</p>
+              <button class="continue-button" data-go="play" type="button">이야기 계속하기 <span>›</span></button>
+            </article>
+
+            <article class="chapter-card small locked" style="--x:714px;--y:446px;--w:426px;--h:160px">
+              <div class="chapter-art locked-art locked-art-2"></div>
+              <p class="locked-label">2장</p>
+              <div class="lock-mark"></div>
+            </article>
+            <article class="chapter-card small locked" style="--x:1153px;--y:446px;--w:470px;--h:160px">
+              <div class="chapter-art locked-art locked-art-3"></div>
+              <p class="locked-label">3장</p>
+              <div class="lock-mark"></div>
+            </article>
+            <article class="chapter-card small locked" style="--x:714px;--y:621px;--w:426px;--h:160px">
+              <div class="chapter-art locked-art locked-art-4"></div>
+              <p class="locked-label">4장</p>
+              <div class="lock-mark"></div>
+            </article>
+            <article class="chapter-card small locked" style="--x:1153px;--y:621px;--w:470px;--h:160px">
+              <div class="chapter-art locked-art locked-art-5"></div>
+              <p class="locked-label">5장</p>
+              <div class="lock-mark"></div>
+            </article>
+          </section>
+
+          <footer class="scripture">
+            <p class="quote">두려워할지 너를 위하여 싸우시리니 너희는 가만히 있을지니라</p>
+            <p class="reference">출애굽기 14:14</p>
+          </footer>
+
+          <button class="hourglass-button" type="button" aria-label="시간 기록"></button>
         </section>
 
-        <section class="top-actions" aria-label="상단 메뉴">
-          <button class="circle-action top-book" type="button" aria-label="도감"></button>
-          <button class="circle-action top-gear" type="button" aria-label="설정"></button>
-          <div class="bookmark-progress" aria-hidden="true"></div>
-          <div class="progress-text">증인력 전<br />12%</div>
+        <section id="play-screen" class="screen" aria-label="홍해 도하 플레이 화면">
+          <div class="play-bg"></div>
+          <div class="play-frame"></div>
+
+          <header class="play-top-hud">
+            <div class="play-brand-emblem ornate-flame"></div>
+            <div class="play-brand-text">
+              <strong>이름 없는 증인들</strong>
+              <span>장정 1 · 여정의 시작</span>
+            </div>
+            <div class="play-nav-icons" aria-hidden="true">
+              <span>🔥</span><span>◎</span><span>▤</span><span>♙</span>
+            </div>
+            <div class="play-progress-line" aria-hidden="true"><span></span><span></span><span class="active"></span><span></span><span></span></div>
+            <div class="play-stats"><span>◉ 2,480</span><span>◌ 320</span><span>✣ 87</span></div>
+            <button class="play-top-btn book" type="button">▥</button>
+            <button class="play-top-btn gear" type="button">⚙</button>
+            <div class="play-top-empty"></div>
+          </header>
+
+          <section class="scene-panel">
+            <div class="scene-art"></div>
+            <div class="scene-plaque">
+              <strong>홍해 도하</strong>
+              <span>출애굽기 14:21–31</span>
+            </div>
+          </section>
+
+          <section class="narrative-panel">
+            <h2>멈지 않는 발걸음</h2>
+            <div class="narrative-copy">
+              <p>홍해의 바람이 차갑게, 저 멀리 파도와 함께 숨을 몰아쉽니다.</p>
+              <p>당신은 그들과 함께 길을 걷고 있습니다.</p>
+              <p>파도는 양옆으로 우뚝 솟아 벽이 되었고,<br />바닥은 마른 땅처럼 드러났습니다.</p>
+              <hr />
+              <p>그러나 뒤돌아보니, 애굽의 병거들이<br />이미 물결로 밀려와 따라옵니다.</p>
+              <strong>당신은 어떻게 하시겠습니까?</strong>
+            </div>
+            <div class="choice-list">
+              <button class="choice active" type="button"><span>☝</span>하나님을 신뢰하며 계속 나아간다</button>
+              <button class="choice" type="button"><span>🤝</span>뒤처진 가족들을 돌아봐 돕는다</button>
+              <button class="choice" type="button"><span>⛑</span>백성들을 격려하여 속도를 높인다</button>
+              <button class="choice" type="button"><span>♟</span>잠시 멈춰 기도하며 하나님의 인도를 구한다</button>
+              <button class="choice" type="button"><span>◉</span>상황을 살피며 안전한 길을 찾는다 <em>⚂</em></button>
+            </div>
+            <div class="story-progress"><span>이야기 진행률</span><div><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div><strong>3 / 12</strong></div>
+          </section>
+
+          <aside class="right-panel">
+            <h3>증인단</h3>
+            <div class="witness-list">
+              <article class="witness"><div class="portrait p1"></div><strong>엘리야벳 <em>제도자</em></strong><div class="bar"><span style="width:82%"></span></div><b>82 / 100</b><small></small><i>✣</i></article>
+              <article class="witness"><div class="portrait p2"></div><strong>미라 <em>기록자</em></strong><div class="bar"><span style="width:68%"></span></div><b>68 / 100</b><small></small><i>▥</i></article>
+              <article class="witness"><div class="portrait p3"></div><strong>요나단 <em>전사</em></strong><div class="bar"><span style="width:91%"></span></div><b>91 / 100</b><small></small><i>✝</i></article>
+              <article class="witness"><div class="portrait p4"></div><strong>아사르 <em>탐색자</em></strong><div class="bar"><span style="width:74%"></span></div><b>74 / 100</b><small></small><i>♙</i></article>
+            </div>
+            <h3 class="log-title">이야기 기록</h3>
+            <div class="story-log">
+              <p>◇ 하나님이 바다를 가르셨습니다.</p>
+              <p>♟ 백성들이 홍해를 건너갔습니다.</p>
+              <p>♢ 애굽의 군대가 추격해 오고 있습니다.</p>
+              <p>✝ 모세가 손을 들자 바람과 물길이 멈췄습니다.</p>
+              <p>♙ 당신은 하나님을 신뢰하고, 전진합니다.</p>
+              <p class="goal">◇ 목표 : 홍해를 건너 장막의 땅을 향하라</p>
+            </div>
+          </aside>
+
+          <footer class="play-bottom">
+            <div class="slot active">✝</div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div>
+            <div class="day-panel">30일째 되는 날 <span>☾</span></div>
+            <div class="location-panel"><span>⛺</span> 광야의 캠프</div>
+            <button class="next-story" type="button">다음 이야기 <span>›</span></button>
+            <button class="play-hourglass" type="button">⌛</button>
+            <button class="back-home" data-go="home" type="button">처음으로</button>
+          </footer>
         </section>
-
-        <section class="chapter-area" aria-label="장 선택">
-          <article class="chapter-card large available" style="--x:714px;--y:139px;--w:909px;--h:292px">
-            <div class="chapter-art chapter-art-1"></div>
-            <div class="card-shade"></div>
-            <div class="card-ornament"></div>
-            <p class="chapter-small">1장</p>
-            <h2 class="chapter-title">벽돌과 바다</h2>
-            <p class="chapter-subtitle">믿음으로 세운 성벽</p>
-            <button class="continue-button" type="button">이야기 계속하기 <span>›</span></button>
-          </article>
-
-          <article class="chapter-card small locked" style="--x:714px;--y:446px;--w:426px;--h:160px">
-            <div class="chapter-art locked-art locked-art-2"></div>
-            <p class="locked-label">2장</p>
-            <div class="lock-mark"></div>
-          </article>
-          <article class="chapter-card small locked" style="--x:1153px;--y:446px;--w:470px;--h:160px">
-            <div class="chapter-art locked-art locked-art-3"></div>
-            <p class="locked-label">3장</p>
-            <div class="lock-mark"></div>
-          </article>
-          <article class="chapter-card small locked" style="--x:714px;--y:621px;--w:426px;--h:160px">
-            <div class="chapter-art locked-art locked-art-4"></div>
-            <p class="locked-label">4장</p>
-            <div class="lock-mark"></div>
-          </article>
-          <article class="chapter-card small locked" style="--x:1153px;--y:621px;--w:470px;--h:160px">
-            <div class="chapter-art locked-art locked-art-5"></div>
-            <p class="locked-label">5장</p>
-            <div class="lock-mark"></div>
-          </article>
-        </section>
-
-        <footer class="scripture">
-          <p class="quote">두려워할지 너를 위하여 싸우시리니 너희는 가만히 있을지니라</p>
-          <p class="reference">출애굽기 14:14</p>
-        </footer>
-
-        <button class="hourglass-button" type="button" aria-label="시간 기록"></button>
       </main>
     </div>
 
