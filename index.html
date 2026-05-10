@@ -102,7 +102,7 @@
               <p><b>화면</b><span>1672 × 941 기준 고정 스케일</span></p>
               <p><b>저장</b><span>현재는 데모 상태입니다. 추후 로컬 저장을 추가합니다.</span></p>
               <p><b>접근성</b><span>텍스트는 HTML로 유지하여 가독성을 확보합니다.</span></p>
-              <p><b>버전</b><span>Branching Narrative Prototype 0.3</span></p>
+              <p><b>버전</b><span>Branching Narrative Prototype 0.4</span></p>
             </div>
           </section>
 
@@ -126,7 +126,7 @@
             <div class="story-progress"><span>이야기 진행률</span><div><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div><strong></strong></div>
           </section>
           <aside class="right-panel" aria-label="동행자 대화"></aside>
-          <footer class="play-bottom"><div class="slot active">✝</div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="day-panel"></div><div class="location-panel"></div><button class="next-story" data-go="ending" type="button">다음 이야기 <span>›</span></button><button class="play-hourglass" type="button">⌛</button><button class="back-home" data-go="home" type="button">처음으로</button></footer>
+          <footer class="play-bottom"><div class="slot active">✝</div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="day-panel"></div><div class="location-panel"></div><button class="next-story" data-go="next-play-scene" type="button">다음 이야기 <span>›</span></button><button class="play-hourglass" type="button">⌛</button><button class="back-home" data-go="home" type="button">처음으로</button></footer>
         </section>
 
         <section id="ending-screen" class="screen" aria-label="결말 화면">
@@ -145,7 +145,8 @@
         </section>
       </main>
     </div>
-    <script src="src/data/playScenes.js"></script>
+    <script src="src/data/storyNodes.js"></script>
+    <script src="src/data/endings.js"></script>
     <script src="src/main.js"></script>
     <script src="src/post-cleanup.js"></script>
   </body>
