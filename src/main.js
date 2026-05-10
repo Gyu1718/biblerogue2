@@ -22,8 +22,32 @@ function showScreen(screenName) {
   document.body.dataset.screen = screenName;
 }
 
+function showHomePanel(panelName) {
+  const home = document.getElementById('home-screen');
+  if (!home) return;
+
+  const selectedPanel = panelName || 'story';
+  home.dataset.homePanel = selectedPanel;
+
+  home.querySelectorAll('[data-home-panel]').forEach((panel) => {
+    panel.classList.toggle('active', panel.dataset.homePanel === selectedPanel);
+  });
+
+  home.querySelectorAll('[data-panel]').forEach((button) => {
+    button.classList.toggle('active', button.dataset.panel === selectedPanel);
+  });
+}
+
 function bindNavigation() {
   document.addEventListener('click', (event) => {
+    const panelTrigger = event.target.closest('[data-panel]');
+    if (panelTrigger) {
+      event.preventDefault();
+      event.stopPropagation();
+      showHomePanel(panelTrigger.dataset.panel);
+      return;
+    }
+
     const trigger = event.target.closest('[data-go]');
     if (!trigger) return;
 
@@ -33,6 +57,13 @@ function bindNavigation() {
   });
 
   document.addEventListener('keydown', (event) => {
+    const panelTrigger = event.target.closest('[data-panel]');
+    if (panelTrigger && (event.key === 'Enter' || event.key === ' ')) {
+      event.preventDefault();
+      showHomePanel(panelTrigger.dataset.panel);
+      return;
+    }
+
     const trigger = event.target.closest('[data-go]');
     if (!trigger) return;
 
@@ -56,6 +87,7 @@ function initGame() {
 
   resizeGame();
   bindNavigation();
+  showHomePanel('story');
   showScreen('home');
 }
 
