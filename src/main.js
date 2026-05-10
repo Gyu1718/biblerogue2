@@ -3,6 +3,27 @@ const BASE_HEIGHT = 941;
 
 let initialized = false;
 let currentSceneIndex = 0;
+let selectedChoiceIndex = 0;
+
+const gameState = {
+  trust: 0,
+  fear: 0,
+  community: 0,
+  discernment: 0,
+  memory: 0,
+  time: 0,
+  clues: 0
+};
+
+const STATE_LABELS = {
+  trust: '신뢰',
+  fear: '두려움',
+  community: '공동체',
+  discernment: '분별',
+  memory: '기억',
+  time: '시간',
+  clues: '단서'
+};
 
 function getCurrentScene() {
   if (!Array.isArray(window.PLAY_SCENES) || window.PLAY_SCENES.length === 0) return null;
@@ -11,6 +32,42 @@ function getCurrentScene() {
 
 function hasNextScene() {
   return Array.isArray(window.PLAY_SCENES) && currentSceneIndex < window.PLAY_SCENES.length - 1;
+}
+
+function clampStateValue(value) {
+  return Math.max(0, Math.min(99, value));
+}
+
+function applyChoiceEffects(choice) {
+  if (!choice || !choice.effects) return;
+
+  Object.entries(choice.effects).forEach(([key, amount]) => {
+    if (!(key in gameState)) return;
+    gameState[key] = clampStateValue(gameState[key] + amount);
+  });
+
+  renderGameState();
+}
+
+function renderGameState() {
+  const play = document.getElementById('play-screen');
+  if (!play) return;
+
+  const trust = play.querySelector('.play-stats span:nth-child(1)');
+  const community = play.querySelector('.play-stats span:nth-child(2)');
+  const discernment = play.querySelector('.play-stats span:nth-child(3)');
+
+  setText(trust, `신뢰 ${gameState.trust}`);
+  setText(community, `공동체 ${gameState.community}`);
+  setText(discernment, `분별 ${gameState.discernment}`);
+
+  play.dataset.trust = String(gameState.trust);
+  play.dataset.fear = String(gameState.fear);
+  play.dataset.community = String(gameState.community);
+  play.dataset.discernment = String(gameState.discernment);
+  play.dataset.memory = String(gameState.memory);
+  play.dataset.time = String(gameState.time);
+  play.dataset.clues = String(gameState.clues);
 }
 
 function resizeGame() {
@@ -186,6 +243,8 @@ function renderScene(scene) {
   const play = document.getElementById('play-screen');
   if (!play || !scene) return;
 
+  selectedChoiceIndex = 0;
+
   setText(play.querySelector('.play-brand-text span'), scene.chapter);
   setText(play.querySelector('.scene-plaque strong'), scene.location);
   setText(play.querySelector('.scene-plaque span'), scene.bible);
@@ -220,6 +279,7 @@ function renderScene(scene) {
       button.className = `choice${index === 0 ? ' active' : ''}`;
       button.type = 'button';
       button.dataset.choiceIndex = String(index);
+      button.title = formatEffects(choice.effects);
 
       const icon = document.createElement('span');
       icon.textContent = choice.icon;
@@ -245,7 +305,15 @@ function renderScene(scene) {
     nextButton.innerHTML = `${hasNextScene() ? '다음 이야기' : '엔딩 보기'} <span>›</span>`;
   }
 
+  renderGameState();
   setPlayChoice(0);
+}
+
+function formatEffects(effects = {}) {
+  return Object.entries(effects)
+    .filter(([key, amount]) => key in STATE_LABELS && amount !== 0)
+    .map(([key, amount]) => `${STATE_LABELS[key]} ${amount > 0 ? '+' : ''}${amount}`)
+    .join(' / ');
 }
 
 function setPlayChoice(choiceIndex) {
@@ -254,11 +322,17 @@ function setPlayChoice(choiceIndex) {
   if (!play || !scene) return;
 
   const choice = scene.choices[choiceIndex] || scene.choices[0];
+  selectedChoiceIndex = choiceIndex;
   play.dataset.choice = choice.key;
+  play.dataset.choiceEffects = formatEffects(choice.effects);
   renderCompanionDialogue(choice);
 }
 
 function goToNextPlayScene() {
+  const scene = getCurrentScene();
+  const selectedChoice = scene?.choices[selectedChoiceIndex];
+  applyChoiceEffects(selectedChoice);
+
   if (!hasNextScene()) {
     showScreen('ending');
     return;
