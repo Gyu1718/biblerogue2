@@ -1,0 +1,157 @@
+
+/* Optional patch: use generated PNG home UI assets. Copy into src/styles.css or import after it. */
+
+.ornate-flame {
+  background: url('../assets/ui/home/logo/flame-emblem.png') center / contain no-repeat !important;
+  clip-path: none !important;
+  filter: drop-shadow(0 0 10px rgba(196, 154, 85, .45));
+}
+
+.menu-button {
+  background-image: url('../assets/ui/home/frames/menu-button-normal.png') !important;
+  background-size: 100% 100% !important;
+  background-color: transparent !important;
+  border: 0 !important;
+}
+.menu-button.active {
+  background-image: url('../assets/ui/home/frames/menu-button-active.png') !important;
+}
+.menu-button::before,
+.menu-button::after {
+  display: none !important;
+}
+
+.menu-icon::before,
+.small-icon::before,
+.circle-action::before,
+.hourglass-button::before,
+.top-cross::before,
+.decor-cross::before,
+.card-ornament::before {
+  content: '' !important;
+}
+
+.menu-icon,
+.small-icon,
+.circle-action,
+.hourglass-button,
+.top-cross,
+.decor-cross,
+.card-ornament,
+.bookmark-progress,
+.lock-mark {
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+}
+
+.icon-book { background-image: url('../assets/ui/home/icons/menu-book.png') !important; }
+.icon-people { background-image: url('../assets/ui/home/icons/menu-people.png') !important; }
+.icon-scroll { background-image: url('../assets/ui/home/icons/menu-scroll.png') !important; }
+.icon-trophy { background-image: url('../assets/ui/home/icons/menu-trophy.png') !important; }
+.icon-swords { background-image: url('../assets/ui/home/icons/menu-swords.png') !important; }
+.icon-gear { background-image: url('../assets/ui/home/icons/menu-gear.png') !important; }
+
+.icon-bag { background-image: url('../assets/ui/home/icons/utility-bag.png') !important; }
+.icon-crown { background-image: url('../assets/ui/home/icons/utility-crown.png') !important; }
+.icon-scroll-mini { background-image: url('../assets/ui/home/icons/utility-scroll.png') !important; }
+.icon-trophy-mini { background-image: url('../assets/ui/home/icons/utility-cup.png') !important; }
+
+.top-book {
+  background-image: url('../assets/ui/home/frames/icon-button-circle.png'), url('../assets/ui/home/icons/top-book.png') !important;
+  background-size: 100% 100%, 70% 70% !important;
+}
+.top-gear {
+  background-image: url('../assets/ui/home/frames/icon-button-circle.png'), url('../assets/ui/home/icons/top-gear.png') !important;
+  background-size: 100% 100%, 70% 70% !important;
+}
+
+.bookmark-progress {
+  background-image: url('../assets/ui/home/frames/bookmark-frame.png'), url('../assets/ui/home/icons/top-bookmark.png') !important;
+  background-size: 100% 100%, 70% 70% !important;
+  border: 0 !important;
+  clip-path: none !important;
+}
+
+.top-cross {
+  background-image: url('../assets/ui/home/icons/cross-top.png') !important;
+}
+
+.decor-cross {
+  background-image: url('../assets/ui/home/icons/cross-bottom.png') !important;
+}
+
+.card-ornament {
+  background-image: url('../assets/ui/home/icons/chapter-star.png') !important;
+}
+
+.hourglass-button {
+  background-image: url('../assets/ui/home/frames/icon-button-square.png'), url('../assets/ui/home/icons/hourglass.png') !important;
+  background-size: 100% 100%, 74% 74% !important;
+  border: 0 !important;
+}
+
+.small-icon {
+  background-size: 100% 100%, 68% 68% !important;
+  border: 0 !important;
+}
+.icon-bag { background-image: url('../assets/ui/home/frames/icon-button-square.png'), url('../assets/ui/home/icons/utility-bag.png') !important; }
+.icon-crown { background-image: url('../assets/ui/home/frames/icon-button-square.png'), url('../assets/ui/home/icons/utility-crown.png') !important; }
+.icon-scroll-mini { background-image: url('../assets/ui/home/frames/icon-button-square.png'), url('../assets/ui/home/icons/utility-scroll.png') !important; }
+.icon-trophy-mini { background-image: url('../assets/ui/home/frames/icon-button-square.png'), url('../assets/ui/home/icons/utility-cup.png') !important; }
+
+.chapter-card::before,
+.chapter-card::after {
+  display: none !important;
+}
+.chapter-card.large::after {
+  content: '';
+  display: block !important;
+  position: absolute;
+  inset: 0;
+  background: url('../assets/ui/home/frames/chapter-card-large-frame.png') center / 100% 100% no-repeat;
+  pointer-events: none;
+}
+.chapter-card.small::after {
+  content: '';
+  display: block !important;
+  position: absolute;
+  inset: 0;
+  background: url('../assets/ui/home/frames/chapter-card-small-left-frame.png') center / 100% 100% no-repeat;
+  pointer-events: none;
+}
+.chapter-card.small[style*="470px"]::after {
+  background-image: url('../assets/ui/home/frames/chapter-card-small-right-frame.png');
+}
+
+.lock-mark {
+  background-image: url('../assets/ui/home/icons/lock.png') !important;
+  background-size: contain !important;
+  border: 0 !important;
+  transform: translate(-50%, -50%) !important;
+}
+.lock-mark::before { display: none !important; }
+
+.chapter-banner {
+  background-image: url('../assets/ui/home/frames/chapter-banner-frame.png') !important;
+  background-size: 100% 100% !important;
+  background-color: transparent !important;
+  border: 0 !important;
+}
+.chapter-banner::before,
+.chapter-banner::after {
+  display: none !important;
+}
+
+.corner-tl { background-image: url('../assets/ui/home/frames/outer-corner-tl.png'); }
+.corner-tr { background-image: url('../assets/ui/home/frames/outer-corner-tr.png'); }
+.corner-bl { background-image: url('../assets/ui/home/frames/outer-corner-bl.png'); }
+.corner-br { background-image: url('../assets/ui/home/frames/outer-corner-br.png'); }
+.corner {
+  width: 96px !important;
+  height: 96px !important;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: 0 !important;
+}
+.corner::after { display: none !important; }
