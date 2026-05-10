@@ -9,6 +9,10 @@ function getCurrentScene() {
   return window.PLAY_SCENES[currentSceneIndex] || window.PLAY_SCENES[0];
 }
 
+function hasNextScene() {
+  return Array.isArray(window.PLAY_SCENES) && currentSceneIndex < window.PLAY_SCENES.length - 1;
+}
+
 function resizeGame() {
   const canvas = document.getElementById('game-canvas');
   if (!canvas) return;
@@ -186,6 +190,8 @@ function renderScene(scene) {
   setText(play.querySelector('.scene-plaque strong'), scene.location);
   setText(play.querySelector('.scene-plaque span'), scene.bible);
   setText(play.querySelector('.narrative-panel h2'), scene.title);
+  setText(play.querySelector('.day-panel'), scene.day || '30일째 되는 날');
+  setText(play.querySelector('.location-panel'), `⛺ ${scene.place || '광야의 캠프'}`);
 
   const copy = play.querySelector('.narrative-copy');
   if (copy) {
@@ -233,6 +239,12 @@ function renderScene(scene) {
   const progress = play.querySelector('.story-progress strong');
   if (progress) progress.textContent = `${scene.progress.current} / ${scene.progress.total}`;
 
+  const nextButton = play.querySelector('.next-story');
+  if (nextButton) {
+    nextButton.dataset.go = hasNextScene() ? 'next-play-scene' : 'ending';
+    nextButton.innerHTML = `${hasNextScene() ? '다음 이야기' : '엔딩 보기'} <span>›</span>`;
+  }
+
   setPlayChoice(0);
 }
 
@@ -244,6 +256,17 @@ function setPlayChoice(choiceIndex) {
   const choice = scene.choices[choiceIndex] || scene.choices[0];
   play.dataset.choice = choice.key;
   renderCompanionDialogue(choice);
+}
+
+function goToNextPlayScene() {
+  if (!hasNextScene()) {
+    showScreen('ending');
+    return;
+  }
+
+  currentSceneIndex += 1;
+  renderScene(getCurrentScene());
+  showScreen('play');
 }
 
 function bindNavigation() {
@@ -270,6 +293,12 @@ function bindNavigation() {
 
     event.preventDefault();
     event.stopPropagation();
+
+    if (trigger.dataset.go === 'next-play-scene') {
+      goToNextPlayScene();
+      return;
+    }
+
     showScreen(trigger.dataset.go);
   });
 
@@ -286,6 +315,10 @@ function bindNavigation() {
 
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
+      if (trigger.dataset.go === 'next-play-scene') {
+        goToNextPlayScene();
+        return;
+      }
       showScreen(trigger.dataset.go);
     }
   });
