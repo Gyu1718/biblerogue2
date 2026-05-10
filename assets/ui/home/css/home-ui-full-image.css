@@ -1,7 +1,6 @@
+/* Full image replacement for the home screen. Load this after base CSS files. */
 
-/* Full image replacement for the home screen. Load this after all existing CSS. */
-
-/* Decorative structural images */
+/* Structural overlays */
 #home-screen .outer-frame {
   left: 10px !important;
   top: 9px !important;
@@ -21,30 +20,63 @@
 }
 #home-screen .sidebar-line { display: none !important; }
 
-/* Replace text with image assets */
-#home-screen .brand-title,
-#home-screen .brand-subtitle,
-#home-screen .progress-text,
-#home-screen .chapter-small,
-#home-screen .chapter-title,
-#home-screen .chapter-subtitle,
-#home-screen .locked-label,
-#home-screen .quote,
-#home-screen .reference {
-  color: transparent !important;
-  text-shadow: none !important;
+/* Logo */
+#home-screen .ornate-flame {
+  background: url('../logo/flame-emblem.png') center / contain no-repeat !important;
+  clip-path: none !important;
+  filter: drop-shadow(0 0 10px rgba(196, 154, 85, .45));
+}
+
+/* Shared image replacement reset */
+#home-screen .menu-icon::before,
+#home-screen .small-icon::before,
+#home-screen .circle-action::before,
+#home-screen .hourglass-button::before,
+#home-screen .top-cross::before,
+#home-screen .decor-cross::before,
+#home-screen .card-ornament::before,
+#home-screen .lock-mark::before {
+  content: '' !important;
+  display: none !important;
+}
+
+#home-screen .menu-icon,
+#home-screen .small-icon,
+#home-screen .circle-action,
+#home-screen .hourglass-button,
+#home-screen .top-cross,
+#home-screen .decor-cross,
+#home-screen .card-ornament,
+#home-screen .bookmark-progress,
+#home-screen .lock-mark {
   background-repeat: no-repeat !important;
   background-position: center !important;
   background-size: contain !important;
 }
 
-#home-screen .brand-title {
-  background-image: url('../text/brand-title.png');
+/* Menu buttons */
+#home-screen .menu-button {
+  background-image: url('../frames/menu-button-normal.png') !important;
+  background-size: 100% 100% !important;
+  background-color: transparent !important;
+  border: 0 !important;
 }
-#home-screen .brand-subtitle {
-  background-image: url('../text/brand-subtitle.png');
+#home-screen .menu-button.active {
+  background-image: url('../frames/menu-button-active.png') !important;
+}
+#home-screen .menu-button::before,
+#home-screen .menu-button::after {
+  display: none !important;
 }
 
+#home-screen .icon-book { background-image: url('../icons/menu-book.png') !important; }
+#home-screen .icon-people { background-image: url('../icons/menu-people.png') !important; }
+#home-screen .icon-scroll { background-image: url('../icons/menu-scroll.png') !important; }
+#home-screen .icon-trophy { background-image: url('../icons/menu-trophy.png') !important; }
+#home-screen .icon-swords { background-image: url('../icons/menu-swords.png') !important; }
+#home-screen .icon-gear { background-image: url('../icons/menu-gear.png') !important; }
+
+/* Menu text images */
 #home-screen .menu-text {
   position: relative;
   width: 170px;
@@ -72,31 +104,97 @@
 #home-screen .side-menu > .menu-button:nth-child(5) .menu-text::after { background-image: url('../text/menu-training.png'); }
 #home-screen .side-menu > .menu-button:nth-child(6) .menu-text::after { background-image: url('../text/menu-settings.png'); }
 
-#home-screen .chapter-banner {
+/* Bottom utility icons */
+#home-screen .small-icon {
+  background-size: 100% 100%, 68% 68% !important;
+  background-position: center, center !important;
+  border: 0 !important;
+}
+#home-screen .icon-bag { background-image: url('../frames/icon-button-square.png'), url('../icons/utility-bag.png') !important; }
+#home-screen .icon-crown { background-image: url('../frames/icon-button-square.png'), url('../icons/utility-crown.png') !important; }
+#home-screen .icon-scroll-mini { background-image: url('../frames/icon-button-square.png'), url('../icons/utility-scroll.png') !important; }
+#home-screen .icon-trophy-mini { background-image: url('../frames/icon-button-square.png'), url('../icons/utility-cup.png') !important; }
+
+/* Top icons */
+#home-screen .top-book {
+  background-image: url('../frames/icon-button-circle.png'), url('../icons/top-book.png') !important;
+  background-size: 100% 100%, 70% 70% !important;
+  background-position: center, center !important;
+}
+#home-screen .top-gear {
+  background-image: url('../frames/icon-button-circle.png'), url('../icons/top-gear.png') !important;
+  background-size: 100% 100%, 70% 70% !important;
+  background-position: center, center !important;
+}
+#home-screen .bookmark-progress {
+  background-image: url('../frames/bookmark-frame.png'), url('../icons/top-bookmark.png') !important;
+  background-size: 100% 100%, 70% 70% !important;
+  background-position: center, center !important;
+  border: 0 !important;
+  clip-path: none !important;
+}
+#home-screen .top-cross { background-image: url('../icons/cross-top.png') !important; }
+#home-screen .decor-cross { background-image: url('../icons/cross-bottom.png') !important; }
+#home-screen .card-ornament { background-image: url('../icons/chapter-star.png') !important; }
+
+#home-screen .hourglass-button {
+  background-image: url('../frames/icon-button-square.png'), url('../icons/hourglass.png') !important;
+  background-size: 100% 100%, 74% 74% !important;
+  background-position: center, center !important;
+  border: 0 !important;
+}
+
+/* Corners */
+#home-screen .corner-tl { background-image: url('../frames/outer-corner-tl.png'); }
+#home-screen .corner-tr { background-image: url('../frames/outer-corner-tr.png'); }
+#home-screen .corner-bl { background-image: url('../frames/outer-corner-bl.png'); }
+#home-screen .corner-br { background-image: url('../frames/outer-corner-br.png'); }
+#home-screen .corner {
+  width: 96px !important;
+  height: 96px !important;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: 0 !important;
+}
+#home-screen .corner::after { display: none !important; }
+
+/* Replace visible text with image assets */
+#home-screen .brand-title,
+#home-screen .brand-subtitle,
+#home-screen .progress-text,
+#home-screen .chapter-small,
+#home-screen .chapter-title,
+#home-screen .chapter-subtitle,
+#home-screen .locked-label,
+#home-screen .quote,
+#home-screen .reference {
   color: transparent !important;
   text-shadow: none !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
 }
-#home-screen .chapter-banner::before,
-#home-screen .chapter-banner::after {
-  display: none !important;
-}
-#home-screen .chapter-banner > * { opacity: 0 !important; }
-#home-screen .chapter-banner::marker { display: none !important; }
+
+#home-screen .brand-title { background-image: url('../text/brand-title.png'); }
+#home-screen .brand-subtitle { background-image: url('../text/brand-subtitle.png'); }
+
 #home-screen .chapter-banner {
   background-image: url('../frames/chapter-banner-frame.png'), url('../text/chapter-banner-title.png') !important;
   background-size: 100% 100%, 72% auto !important;
   background-position: center, center !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  color: transparent !important;
+  text-shadow: none !important;
   font-size: 0 !important;
 }
+#home-screen .chapter-banner::before,
+#home-screen .chapter-banner::after { display: none !important; }
 
-#home-screen .progress-text {
-  background-image: url('../text/progress-text.png');
-  font-size: 0 !important;
-}
-
-#home-screen .chapter-small { background-image: url('../text/chapter-small-1.png'); font-size:0 !important; }
-#home-screen .chapter-title { background-image: url('../text/chapter-title-1.png'); font-size:0 !important; }
-#home-screen .chapter-subtitle { background-image: url('../text/chapter-subtitle-1.png'); font-size:0 !important; }
+#home-screen .progress-text { background-image: url('../text/progress-text.png'); font-size: 0 !important; }
+#home-screen .chapter-small { background-image: url('../text/chapter-small-1.png'); font-size: 0 !important; }
+#home-screen .chapter-title { background-image: url('../text/chapter-title-1.png'); font-size: 0 !important; }
+#home-screen .chapter-subtitle { background-image: url('../text/chapter-subtitle-1.png'); font-size: 0 !important; }
 
 #home-screen .continue-button {
   background: url('../frames/continue-button-full.png') center / 100% 100% no-repeat !important;
@@ -107,15 +205,49 @@
 }
 #home-screen .continue-button span { display: none !important; }
 
-#home-screen .chapter-area article:nth-child(2) .locked-label { background-image: url('../text/locked-label-2.png'); font-size:0 !important; }
-#home-screen .chapter-area article:nth-child(3) .locked-label { background-image: url('../text/locked-label-3.png'); font-size:0 !important; }
-#home-screen .chapter-area article:nth-child(4) .locked-label { background-image: url('../text/locked-label-4.png'); font-size:0 !important; }
-#home-screen .chapter-area article:nth-child(5) .locked-label { background-image: url('../text/locked-label-5.png'); font-size:0 !important; }
+#home-screen .chapter-area article:nth-child(2) .locked-label { background-image: url('../text/locked-label-2.png'); font-size: 0 !important; }
+#home-screen .chapter-area article:nth-child(3) .locked-label { background-image: url('../text/locked-label-3.png'); font-size: 0 !important; }
+#home-screen .chapter-area article:nth-child(4) .locked-label { background-image: url('../text/locked-label-4.png'); font-size: 0 !important; }
+#home-screen .chapter-area article:nth-child(5) .locked-label { background-image: url('../text/locked-label-5.png'); font-size: 0 !important; }
 
-#home-screen .quote { background-image: url('../text/scripture-quote.png'); font-size:0 !important; }
-#home-screen .reference { background-image: url('../text/scripture-reference.png'); font-size:0 !important; }
+#home-screen .quote { background-image: url('../text/scripture-quote.png'); font-size: 0 !important; }
+#home-screen .reference { background-image: url('../text/scripture-reference.png'); font-size: 0 !important; }
 
-/* Ensure frame overlays don't cover images */
+/* Card frames */
+#home-screen .chapter-card::before,
+#home-screen .chapter-card::after { display: none !important; }
+#home-screen .chapter-card.large::after {
+  content: '';
+  display: block !important;
+  position: absolute;
+  inset: 0;
+  background: url('../frames/chapter-card-large-frame.png') center / 100% 100% no-repeat;
+  pointer-events: none;
+  z-index: 10;
+}
+#home-screen .chapter-card.small::after {
+  content: '';
+  display: block !important;
+  position: absolute;
+  inset: 0;
+  background: url('../frames/chapter-card-small-left-frame.png') center / 100% 100% no-repeat;
+  pointer-events: none;
+  z-index: 10;
+}
+#home-screen .chapter-card.small[style*="470px"]::after {
+  background-image: url('../frames/chapter-card-small-right-frame.png');
+}
+
+#home-screen .lock-mark {
+  background-image: url('../icons/lock.png') !important;
+  background-size: contain !important;
+  border: 0 !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+/* Layering */
+#home-screen .chapter-art { z-index: 1; }
+#home-screen .card-shade { z-index: 2; }
 #home-screen .chapter-small,
 #home-screen .chapter-title,
 #home-screen .chapter-subtitle,
