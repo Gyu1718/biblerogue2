@@ -1,0 +1,125 @@
+/* Home tone match pass
+   Purpose: move current home screen closer to the reference image after layout stabilization. */
+
+/* 1. Overall scene visibility */
+#home-screen .bg-vignette {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, .30) 0 18%, rgba(0,0,0,.04) 32%, transparent 58%),
+    radial-gradient(circle at center, transparent 0 47%, rgba(0, 0, 0, .66) 100%),
+    rgba(0, 0, 0, .06) !important;
+}
+
+#home-screen .bg-layer {
+  filter: brightness(1.06) contrast(1.03) saturate(1.02) !important;
+}
+
+/* 2. Logo proportion */
+#home-screen .brand-logo {
+  left: 45px !important;
+  top: 27px !important;
+  width: 80px !important;
+  height: 110px !important;
+}
+
+/* 3. Top title cross and top-right buttons */
+#home-screen .top-cross {
+  left: 1148px !important;
+  top: 17px !important;
+  width: 30px !important;
+  height: 48px !important;
+  opacity: .84 !important;
+  filter: brightness(.66) saturate(.78) drop-shadow(0 0 4px rgba(184,138,69,.18)) !important;
+}
+
+#home-screen .top-book,
+#home-screen .top-gear,
+#home-screen .bookmark-progress {
+  top: 34px !important;
+  width: 42px !important;
+  height: 42px !important;
+  opacity: .90 !important;
+  filter: brightness(.72) saturate(.78) drop-shadow(0 0 4px rgba(0,0,0,.38)) !important;
+}
+
+#home-screen .top-book { left: 1416px !important; }
+#home-screen .top-gear { left: 1462px !important; }
+#home-screen .bookmark-progress { left: 1508px !important; }
+
+/* 4. Menu readability */
+#home-screen .menu-button {
+  filter: brightness(.66) saturate(.76) !important;
+}
+
+#home-screen .menu-button.active {
+  filter: brightness(.78) saturate(.84) !important;
+}
+
+#home-screen .menu-button:hover {
+  filter: brightness(.84) saturate(.88) !important;
+}
+
+#home-screen .menu-icon {
+  opacity: .92 !important;
+  filter: brightness(.75) saturate(.78) !important;
+}
+
+#home-screen .menu-button.active .menu-icon {
+  opacity: .98 !important;
+  filter: brightness(.88) saturate(.86) !important;
+}
+
+/* 5. Chapter cards: clearer images and slightly stronger frames */
+#home-screen .chapter-art {
+  filter: brightness(1.08) contrast(1.04) saturate(1.02) !important;
+}
+
+#home-screen .locked .chapter-art {
+  filter: grayscale(.08) brightness(1.02) contrast(1.04) saturate(1.02) !important;
+}
+
+#home-screen .chapter-card.large::after {
+  opacity: .30 !important;
+  filter: brightness(.64) saturate(.76) !important;
+}
+
+#home-screen .chapter-card.small::after {
+  opacity: .32 !important;
+  filter: brightness(.64) saturate(.76) !important;
+}
+
+#home-screen .card-shade {
+  background: linear-gradient(
+    90deg,
+    rgba(0,0,0,.58) 0 32%,
+    rgba(0,0,0,.18) 58%,
+    rgba(0,0,0,.02) 82%
+  ) !important;
+}
+
+#home-screen .chapter-card.small .card-shade {
+  background: rgba(0,0,0,.03) !important;
+}
+
+/* 6. Scripture: slightly higher and clearer */
+#home-screen .scripture .quote {
+  top: 805px !important;
+  color: #d0a158 !important;
+  text-shadow: 0 0 10px rgba(0,0,0,.96), 0 0 5px rgba(196,154,85,.18) !important;
+}
+
+#home-screen .scripture .reference {
+  top: 834px !important;
+  color: #b98d4a !important;
+  text-shadow: 0 0 9px rgba(0,0,0,.94) !important;
+}
+
+/* 7. Hourglass button */
+#home-screen .hourglass-button {
+  width: 60px !important;
+  height: 66px !important;
+  filter: brightness(.72) saturate(.78) !important;
+}
+
+#home-screen .hourglass-button:hover {
+  filter: brightness(.84) saturate(.84) !important;
+}
