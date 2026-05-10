@@ -1,7 +1,15 @@
 /* Final home UI fixes: logo, menu alignment, scripture, continue button. */
 
 #home-screen .ornate-flame {
-  background-image: url('../logo/flame-emblem.png') !important;
+  background-image: url('../../../play/icons/flame_emblem.png') !important;
+  filter: brightness(.86) saturate(.84) drop-shadow(0 0 5px rgba(196, 154, 85, .22)) !important;
+}
+
+#home-screen .brand-logo {
+  left: 45px !important;
+  top: 34px !important;
+  width: 78px !important;
+  height: 106px !important;
 }
 
 #home-screen .menu-button {
@@ -87,8 +95,8 @@
 }
 
 #home-screen .scripture .quote {
-  width: 660px !important;
-  left: 840px !important;
+  width: 690px !important;
+  left: 825px !important;
   font-size: 15px !important;
   white-space: nowrap !important;
 }
