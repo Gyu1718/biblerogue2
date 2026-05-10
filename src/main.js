@@ -1,6 +1,8 @@
 const BASE_WIDTH = 1672;
 const BASE_HEIGHT = 941;
 
+let initialized = false;
+
 function resizeGame() {
   const canvas = document.getElementById('game-canvas');
   if (!canvas) return;
@@ -10,38 +12,57 @@ function resizeGame() {
 }
 
 function showScreen(screenName) {
-  const screens = document.querySelectorAll('.screen');
-  screens.forEach((screen) => screen.classList.remove('screen-active'));
-
   const target = document.getElementById(`${screenName}-screen`);
   if (!target) return;
 
-  target.classList.add('screen-active');
+  document.querySelectorAll('.screen').forEach((screen) => {
+    screen.classList.toggle('screen-active', screen === target);
+  });
+
   document.body.dataset.screen = screenName;
 }
 
 function bindNavigation() {
-  document.querySelectorAll('[data-go]').forEach((element) => {
-    element.addEventListener('click', (event) => {
-      event.stopPropagation();
-      showScreen(element.dataset.go);
-    });
+  document.addEventListener('click', (event) => {
+    const trigger = event.target.closest('[data-go]');
+    if (!trigger) return;
 
-    element.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        showScreen(element.dataset.go);
-      }
+    event.preventDefault();
+    event.stopPropagation();
+    showScreen(trigger.dataset.go);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    const trigger = event.target.closest('[data-go]');
+    if (!trigger) return;
+
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      showScreen(trigger.dataset.go);
+    }
+  });
+
+  document.querySelectorAll('.choice').forEach((choice) => {
+    choice.addEventListener('click', () => {
+      document.querySelectorAll('.choice').forEach((item) => item.classList.remove('active'));
+      choice.classList.add('active');
     });
   });
 }
 
 function initGame() {
+  if (initialized) return;
+  initialized = true;
+
   resizeGame();
   bindNavigation();
   showScreen('home');
 }
 
 window.addEventListener('resize', resizeGame);
-window.addEventListener('load', initGame);
-initGame();
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initGame);
+} else {
+  initGame();
+}
