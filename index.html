@@ -16,7 +16,7 @@
   <body>
     <div id="viewport">
       <main id="game-canvas" aria-label="이름 없는 증인들 게임 화면">
-        <section id="home-screen" class="screen screen-active" aria-label="이름 없는 증인들 홈 화면">
+        <section id="home-screen" class="screen screen-active" aria-label="이름 없는 증인들 홈 화면" data-home-panel="story">
           <div class="bg-layer"></div>
           <div class="bg-vignette"></div>
           <div class="outer-frame"></div>
@@ -32,12 +32,12 @@
             <h1 class="brand-title">이름 없는 증인들</h1>
             <p class="brand-subtitle">하나님의 이야기를 따라 걷는 여정</p>
             <nav class="side-menu" aria-label="주 메뉴">
-              <button class="menu-button active" style="--x:42px;--y:203px" type="button"><span class="menu-icon icon-book"></span><span class="menu-text"><strong>이야기</strong><em>장 선택</em></span></button>
-              <button class="menu-button" style="--x:42px;--y:290px" type="button"><span class="menu-icon icon-people"></span><span class="menu-text"><strong>증인들</strong><em>인물과 기록</em></span></button>
-              <button class="menu-button" style="--x:42px;--y:375px" type="button"><span class="menu-icon icon-scroll"></span><span class="menu-text"><strong>기록</strong><em>문서와 유물</em></span></button>
-              <button class="menu-button" style="--x:42px;--y:461px" type="button"><span class="menu-icon icon-trophy"></span><span class="menu-text"><strong>업적</strong><em>여정의 발자취</em></span></button>
-              <button class="menu-button" style="--x:42px;--y:546px" type="button"><span class="menu-icon icon-swords"></span><span class="menu-text"><strong>훈련</strong><em>기술과 전투</em></span></button>
-              <button class="menu-button" style="--x:42px;--y:631px" type="button"><span class="menu-icon icon-gear"></span><span class="menu-text"><strong>설정</strong><em>옵션과 지원</em></span></button>
+              <button class="menu-button active" data-panel="story" style="--x:42px;--y:203px" type="button"><span class="menu-icon icon-book"></span><span class="menu-text"><strong>이야기</strong><em>장 선택</em></span></button>
+              <button class="menu-button" data-panel="witnesses" style="--x:42px;--y:290px" type="button"><span class="menu-icon icon-people"></span><span class="menu-text"><strong>증인들</strong><em>인물과 기록</em></span></button>
+              <button class="menu-button" data-panel="records" style="--x:42px;--y:375px" type="button"><span class="menu-icon icon-scroll"></span><span class="menu-text"><strong>기록</strong><em>문서와 유물</em></span></button>
+              <button class="menu-button" data-panel="achievements" style="--x:42px;--y:461px" type="button"><span class="menu-icon icon-trophy"></span><span class="menu-text"><strong>업적</strong><em>여정의 발자취</em></span></button>
+              <button class="menu-button" data-panel="training" style="--x:42px;--y:546px" type="button"><span class="menu-icon icon-swords"></span><span class="menu-text"><strong>훈련</strong><em>기술과 전투</em></span></button>
+              <button class="menu-button" data-panel="settings" style="--x:42px;--y:631px" type="button"><span class="menu-icon icon-gear"></span><span class="menu-text"><strong>설정</strong><em>옵션과 지원</em></span></button>
             </nav>
             <div class="bottom-icons" aria-hidden="true">
               <button class="small-icon icon-bag" style="--x:50px;--y:783px" type="button"></button>
@@ -51,7 +51,7 @@
           <section class="top-banner" aria-label="진행 정보"><div class="top-cross"></div><div class="chapter-banner">제 1 막 · 시작의 증인</div></section>
           <section class="top-actions" aria-label="상단 메뉴"><button class="circle-action top-book" type="button" aria-label="도감"></button><button class="circle-action top-gear" type="button" aria-label="설정"></button><div class="bookmark-progress" aria-hidden="true"></div><div class="progress-text">증인력 전<br />12%</div></section>
 
-          <section class="chapter-area" aria-label="장 선택">
+          <section class="chapter-area home-panel active" data-home-panel="story" aria-label="장 선택">
             <article class="chapter-card large available" data-go="play" style="--x:714px;--y:139px;--w:909px;--h:292px" role="button" tabindex="0" aria-label="1장 벽돌과 바다 시작">
               <div class="chapter-art chapter-art-1"></div><div class="card-shade"></div><div class="card-ornament"></div><p class="chapter-small">1장</p><h2 class="chapter-title">벽돌과 바다</h2><p class="chapter-subtitle">믿음으로 세운 성벽</p><button class="continue-button" data-go="play" type="button">이야기 계속하기 <span>›</span></button>
             </article>
@@ -60,6 +60,57 @@
             <article class="chapter-card small locked" style="--x:714px;--y:621px;--w:426px;--h:160px"><div class="chapter-art locked-art locked-art-4"></div><p class="locked-label">4장</p><div class="lock-mark"></div></article>
             <article class="chapter-card small locked" style="--x:1153px;--y:621px;--w:470px;--h:160px"><div class="chapter-art locked-art locked-art-5"></div><p class="locked-label">5장</p><div class="lock-mark"></div></article>
           </section>
+
+          <section class="home-info-panel home-panel" data-home-panel="witnesses" aria-label="증인들">
+            <header><span>증인들</span><strong>인물과 기록</strong></header>
+            <div class="home-info-grid witnesses-grid">
+              <article><b>엘리야벳</b><em>제도자</em><p>공동체를 세우고 흩어진 백성을 묶는 증인입니다.</p></article>
+              <article><b>미라</b><em>기록자</em><p>여정의 사건과 하나님의 일하심을 기록합니다.</p></article>
+              <article><b>요나단</b><em>전사</em><p>두려움 앞에서 백성을 지키는 용기의 증인입니다.</p></article>
+              <article><b>아사르</b><em>탐색자</em><p>어둠 속에서 길을 살피고 안전한 방향을 찾습니다.</p></article>
+            </div>
+          </section>
+
+          <section class="home-info-panel home-panel" data-home-panel="records" aria-label="기록">
+            <header><span>기록</span><strong>문서와 유물</strong></header>
+            <div class="home-record-list">
+              <p><b>홍해의 증언</b><span>물이 갈라진 밤에 남겨진 공동체의 기록</span></p>
+              <p><b>벽돌의 표식</b><span>억압의 땅에서 건져 올린 노동의 흔적</span></p>
+              <p><b>광야의 장막 조각</b><span>떠남 이후에도 함께하신 임재의 상징</span></p>
+              <p><b>모세의 손</b><span>두려움 속에서 방향을 가리킨 믿음의 기억</span></p>
+            </div>
+          </section>
+
+          <section class="home-info-panel home-panel" data-home-panel="achievements" aria-label="업적">
+            <header><span>업적</span><strong>여정의 발자취</strong></header>
+            <div class="home-achievement-list">
+              <p><i>◇</i><b>첫 증언</b><span>1장의 이야기를 시작했습니다.</span></p>
+              <p><i>◇</i><b>흔들리지 않는 발걸음</b><span>두려움 속에서도 앞으로 나아갔습니다.</span></p>
+              <p><i>◇</i><b>기억하는 공동체</b><span>증인단의 기록을 열람했습니다.</span></p>
+              <p><i>◇</i><b>해방의 증인</b><span>엔딩에서 최종 평가를 확인할 수 있습니다.</span></p>
+            </div>
+          </section>
+
+          <section class="home-info-panel home-panel" data-home-panel="training" aria-label="훈련">
+            <header><span>훈련</span><strong>기술과 전투</strong></header>
+            <div class="home-training-grid">
+              <article><b>믿음</b><p>공포 저항과 선택지 안정성을 높입니다.</p></article>
+              <article><b>기록</b><p>사건 해석과 유물 발견 확률을 높입니다.</p></article>
+              <article><b>돌봄</b><p>증인단의 생존과 회복을 돕습니다.</p></article>
+              <article><b>분별</b><p>위험한 길과 숨은 선택지를 감지합니다.</p></article>
+            </div>
+          </section>
+
+          <section class="home-info-panel home-panel" data-home-panel="settings" aria-label="설정">
+            <header><span>설정</span><strong>옵션과 지원</strong></header>
+            <div class="home-settings-list">
+              <p><b>화면</b><span>1672 × 941 기준 고정 스케일</span></p>
+              <p><b>저장</b><span>현재는 데모 상태입니다. 추후 로컬 저장을 추가합니다.</span></p>
+              <p><b>접근성</b><span>텍스트는 HTML로 유지하여 가독성을 확보합니다.</span></p>
+              <p><b>버전</b><span>Home UI prototype 0.2</span></p>
+            </div>
+          </section>
+
           <footer class="scripture"><p class="quote">두려워할지 너를 위하여 싸우시리니 너희는 가만히 있을지니라</p><p class="reference">출애굽기 14:14</p></footer>
           <button class="hourglass-button" type="button" aria-label="시간 기록"></button>
         </section>
