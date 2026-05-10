@@ -156,6 +156,87 @@ function showHomePanel(panelName) {
   });
 }
 
+function setText(el, text) {
+  if (el) el.textContent = text;
+}
+
+function normalizeHomeLanguage() {
+  const home = document.getElementById('home-screen');
+  if (!home) return;
+
+  const companionButton = home.querySelector('[data-panel="witnesses"] .menu-text');
+  setText(companionButton?.querySelector('strong'), '동행자');
+  setText(companionButton?.querySelector('em'), '함께 걷는 사람들');
+
+  const trainingButton = home.querySelector('[data-panel="training"] .menu-text');
+  setText(trainingButton?.querySelector('strong'), '여정 준비');
+  setText(trainingButton?.querySelector('em'), '선택과 분별');
+
+  const progressText = home.querySelector('.progress-text');
+  if (progressText) progressText.innerHTML = '동행의 빛<br />12%';
+
+  const companionsPanel = home.querySelector('[data-home-panel="witnesses"]');
+  if (companionsPanel) {
+    companionsPanel.setAttribute('aria-label', '동행자');
+    setText(companionsPanel.querySelector('header span'), '동행자');
+    setText(companionsPanel.querySelector('header strong'), '함께 걷는 사람들');
+
+    const cards = companionsPanel.querySelectorAll('article');
+    const companionDescriptions = [
+      ['인도자', '공동체의 방향을 살피고 흔들리는 백성을 세웁니다.'],
+      ['기록자', '여정의 사건과 하나님의 일하심을 기억하고 해석합니다.'],
+      ['보호자', '두려움 앞에서 약한 이들을 돌보고 안전을 지킵니다.'],
+      ['탐색자', '어둠 속에서 길과 단서를 살피며 위험을 예고합니다.']
+    ];
+
+    cards.forEach((card, index) => {
+      const [role, description] = companionDescriptions[index] || [];
+      setText(card.querySelector('em'), role);
+      setText(card.querySelector('p'), description);
+    });
+  }
+
+  const achievementsPanel = home.querySelector('[data-home-panel="achievements"]');
+  achievementsPanel?.querySelectorAll('p').forEach((item) => {
+    item.innerHTML = item.innerHTML.replace('증인단의 기록', '동행자의 기록').replace('해방의 증인', '해방의 목격자');
+  });
+
+  const trainingPanel = home.querySelector('[data-home-panel="training"]');
+  if (trainingPanel) {
+    trainingPanel.setAttribute('aria-label', '여정 준비');
+    setText(trainingPanel.querySelector('header span'), '여정 준비');
+    setText(trainingPanel.querySelector('header strong'), '선택과 분별');
+
+    const cards = trainingPanel.querySelectorAll('article');
+    const trainingDescriptions = [
+      ['신뢰', '두려움 속에서도 열린 길을 바라보는 힘입니다.'],
+      ['기억', '사건의 의미와 하나님의 일하심을 붙잡습니다.'],
+      ['돌봄', '뒤처지는 이들을 놓치지 않고 함께 걷게 합니다.'],
+      ['분별', '위험한 길과 숨은 단서를 감지합니다.']
+    ];
+
+    cards.forEach((card, index) => {
+      const [title, description] = trainingDescriptions[index] || [];
+      setText(card.querySelector('b'), title);
+      setText(card.querySelector('p'), description);
+    });
+  }
+}
+
+function cleanupLegacyPlayPanel() {
+  const play = document.getElementById('play-screen');
+  if (!play) return;
+
+  const rightPanel = play.querySelector('.right-panel');
+  if (!rightPanel) return;
+
+  rightPanel.querySelector('h3:not(.log-title)')?.remove();
+  rightPanel.querySelector('.witness-list')?.remove();
+  rightPanel.querySelector('.log-title')?.remove();
+  rightPanel.querySelector('.story-log')?.remove();
+  rightPanel.setAttribute('aria-label', '동행자 대화');
+}
+
 function ensureCompanionDialoguePanel() {
   const play = document.getElementById('play-screen');
   if (!play) return null;
@@ -267,6 +348,8 @@ function initGame() {
   initialized = true;
 
   resizeGame();
+  normalizeHomeLanguage();
+  cleanupLegacyPlayPanel();
   bindNavigation();
   showHomePanel('story');
   setPlayChoice(0);
