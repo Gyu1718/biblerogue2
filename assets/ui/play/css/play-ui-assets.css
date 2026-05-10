@@ -1,33 +1,171 @@
-/* Play screen PNG asset helper stylesheet */
+/* Play screen PNG asset stylesheet v2 */
 /* Load after src/play.css. Asset paths assume this file stays in assets/ui/play/css/. */
 
 #play-screen .play-brand-emblem {
-  background: url('../icons/flame_emblem.png') center/contain no-repeat;
+  background: url('../icons/flame_emblem.png') center / contain no-repeat;
 }
+
+/* top nav symbols */
+#play-screen .play-nav-icons span:nth-child(1) { background-image: url('../icons/campfire.png'); }
+#play-screen .play-nav-icons span:nth-child(2) { background-image: url('../icons/ring.png'); }
+#play-screen .play-nav-icons span:nth-child(3) { background-image: url('../icons/inventory_grid.png'); }
+#play-screen .play-nav-icons span:nth-child(4) { background-image: url('../icons/tent.png'); }
+
+/* progress nodes */
+#play-screen .play-progress-line {
+  background: url('../ornaments/divider_diamond_long.png') center 5px / 94% 12px no-repeat;
+}
+#play-screen .play-progress-line span {
+  border: 0 !important;
+  background: url('../ornaments/button_dot_off.png') center / contain no-repeat !important;
+}
+#play-screen .play-progress-line span.active {
+  background: url('../icons/diamond_marker.png') center / contain no-repeat !important;
+}
+
+/* top buttons */
 #play-screen .play-top-btn.book {
-  background: url('../frames/circle_button_frame.png') center/100% 100% no-repeat, url('../icons/book.png') center/56% 56% no-repeat;
+  background: url('../frames/circle_button_frame.png') center / 100% 100% no-repeat, url('../icons/book.png') center / 56% 56% no-repeat;
   color: transparent !important;
 }
 #play-screen .play-top-btn.gear {
-  background: url('../frames/circle_button_frame.png') center/100% 100% no-repeat, url('../icons/gear.png') center/56% 56% no-repeat;
+  background: url('../frames/circle_button_frame.png') center / 100% 100% no-repeat, url('../icons/gear.png') center / 56% 56% no-repeat;
   color: transparent !important;
 }
-#play-screen .scene-panel { background: url('../frames/scene_panel_large.png') center/100% 100% no-repeat; }
-#play-screen .narrative-panel { background: url('../frames/narrative_panel.png') center/100% 100% no-repeat; }
-#play-screen .right-panel { background: url('../frames/log_panel.png') top center/100% auto no-repeat; }
-#play-screen .choice { background: url('../frames/choice_button.png') center/100% 100% no-repeat; }
-#play-screen .choice.active { background-image: url('../frames/choice_button_active.png'); }
-#play-screen .play-hourglass {
-  background: url('../frames/hourglass_square_button.png') center/100% 100% no-repeat, url('../icons/hourglass.png') center/55% 55% no-repeat;
-  color: transparent !important;
+#play-screen .play-top-empty {
+  background: url('../frames/bookmark_tab_frame.png') center / 100% 100% no-repeat;
 }
-#play-screen .next-story { background: url('../frames/next_button.png') center/100% 100% no-repeat; }
-#play-screen .day-panel { background: url('../frames/day_panel.png') center/100% 100% no-repeat; }
-#play-screen .location-panel { background: url('../frames/location_panel.png') center/100% 100% no-repeat; }
-#play-screen .slot { background: url('../frames/slot_frame.png') center/100% 100% no-repeat; }
-#play-screen .slot.active { background-image: url('../frames/slot_frame_active.png'); }
+
+/* large panels */
+#play-screen .scene-panel { background: url('../frames/scene_panel_large.png') center / 100% 100% no-repeat; }
+#play-screen .narrative-panel { background: url('../frames/narrative_panel.png') center / 100% 100% no-repeat; }
+#play-screen .right-panel { background: url('../frames/log_panel.png') top center / 100% auto no-repeat; }
+#play-screen .scene-plaque {
+  background: url('../frames/top_strip_small.png') center / 100% 100% no-repeat;
+}
+
+/* choices */
+#play-screen .choice {
+  background: url('../frames/choice_button.png') center / 100% 100% no-repeat;
+}
+#play-screen .choice.active {
+  background-image: url('../frames/choice_button_active.png');
+}
+#play-screen .choice:nth-child(1) span { background-image: url('../icons/hand_signal.png'); }
+#play-screen .choice:nth-child(2) span { background-image: url('../icons/handshake.png'); }
+#play-screen .choice:nth-child(3) span { background-image: url('../icons/helmet.png'); }
+#play-screen .choice:nth-child(4) span { background-image: url('../icons/kneeling_prayer.png'); }
+#play-screen .choice:nth-child(5) span { background-image: url('../icons/watchful_eye.png'); }
+#play-screen .choice em { background-image: url('../icons/dice.png'); }
+
+/* story progress dots */
+#play-screen .story-progress i {
+  border-radius: 0 !important;
+  background: url('../ornaments/button_dot_off.png') center / contain no-repeat !important;
+}
+#play-screen .story-progress i.on {
+  background: url('../ornaments/button_dot_on.png') center / contain no-repeat !important;
+}
+
+/* witness portraits and role marks */
 #play-screen .portrait.p1 { background-image: url('../portraits/elisabeth.png'); }
 #play-screen .portrait.p2 { background-image: url('../portraits/mira.png'); }
 #play-screen .portrait.p3 { background-image: url('../portraits/jonathan.png'); }
 #play-screen .portrait.p4 { background-image: url('../portraits/asar.png'); }
 #play-screen .portrait { background-size: cover; background-position: center; }
+#play-screen .witness:nth-child(1) i { background-image: url('../icons/panel_badge_star.png'); }
+#play-screen .witness:nth-child(2) i { background-image: url('../icons/book.png'); }
+#play-screen .witness:nth-child(3) i { background-image: url('../icons/cross.png'); }
+#play-screen .witness:nth-child(4) i { background-image: url('../icons/compass_star.png'); }
+
+/* bars */
+#play-screen .witness .bar {
+  background: url('../ornaments/bar_dark.png') center / 100% 100% no-repeat, rgba(0,0,0,.15);
+  border: 0 !important;
+}
+#play-screen .witness .bar span {
+  background: url('../ornaments/bar_red.png') left center / 100% 100% no-repeat !important;
+}
+#play-screen .witness small {
+  background: url('../ornaments/bar_ticks.png') left center / 100% 100% no-repeat !important;
+}
+
+/* lower log */
+#play-screen .story-log {
+  background: url('../frames/log_panel.png') bottom center / 100% auto no-repeat, rgba(2,5,8,.10);
+}
+#play-screen .story-log p {
+  background: url('../frames/list_row_plain.png') center / 100% 100% no-repeat;
+  border: 0 !important;
+  padding-left: 26px;
+  position: relative;
+}
+#play-screen .story-log p::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background: url('../ornaments/diamond_icon.png') center / contain no-repeat;
+}
+#play-screen .story-log p.goal::before {
+  background-image: url('../icons/diamond_marker.png');
+}
+
+/* bottom strip */
+#play-screen .slot {
+  background: url('../frames/slot_frame.png') center / 100% 100% no-repeat;
+}
+#play-screen .slot.active {
+  background: url('../frames/slot_frame_active.png') center / 100% 100% no-repeat, url('../icons/cross.png') center / 50% 50% no-repeat;
+}
+#play-screen .day-panel {
+  background: url('../frames/day_panel.png') center / 100% 100% no-repeat;
+}
+#play-screen .day-panel span {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  margin-left: 16px;
+  color: transparent !important;
+  background: url('../icons/crescent.png') center / contain no-repeat;
+}
+#play-screen .location-panel {
+  background: url('../frames/location_panel.png') center / 100% 100% no-repeat;
+}
+#play-screen .location-panel span {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  color: transparent !important;
+  background: url('../icons/tent.png') center / contain no-repeat;
+  margin-right: 10px;
+}
+#play-screen .next-story {
+  background: url('../frames/next_button.png') center / 100% 100% no-repeat;
+}
+#play-screen .next-story span {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  color: transparent !important;
+  background: url('../icons/arrow_right.png') center / contain no-repeat;
+  margin-left: 12px;
+}
+#play-screen .play-hourglass {
+  background: url('../frames/hourglass_square_button.png') center / 100% 100% no-repeat, url('../icons/hourglass.png') center / 55% 55% no-repeat;
+  color: transparent !important;
+}
+
+/* small polish */
+#play-screen .play-top-btn,
+#play-screen .choice,
+#play-screen .next-story,
+#play-screen .play-hourglass,
+#play-screen .slot,
+#play-screen .day-panel,
+#play-screen .location-panel {
+  background-repeat: no-repeat;
+}
