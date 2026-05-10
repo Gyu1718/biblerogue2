@@ -387,7 +387,7 @@
 }
 
 #play-screen .right-panel::before {
-  content: '동행자의 말\A\A미라: 이 순간을 기억해야 합니다. 하나님이 우리와 함께하십니다.\A요나단: 모두 지치지 않도록 서로를 격려합시다.\A아사르: 바람의 방향이 바뀌고 있습니다. 조심하며 나아갑시다.' !important;
+  content: attr(data-dialogue) !important;
   position: absolute !important;
   left: 18px !important;
   top: 340px !important;
