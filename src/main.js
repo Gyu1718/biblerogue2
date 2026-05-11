@@ -5,6 +5,23 @@ const START_NODE_ID = window.START_NODE_ID || 'exodus_01_slave_day';
 const PLAY_ART_BASE = 'assets/images/story/exodus/play_left_520x650';
 const ENDING_ART_BASE = 'assets/images/story/exodus/original_16x9';
 
+const SCENE_ART_BY_NODE_ID = {
+  exodus_01_slave_day: `${PLAY_ART_BASE}/exodus_01_slave_labor.png`,
+  exodus_02_whisper: `${PLAY_ART_BASE}/exodus_02_moses_rumor_night.png`,
+  exodus_03_pharaoh: `${PLAY_ART_BASE}/exodus_01_slave_labor.png`,
+  exodus_04_plague_begin: `${PLAY_ART_BASE}/exodus_03_first_plague_blood_river.png`,
+  exodus_05_set_apart: `${PLAY_ART_BASE}/exodus_03_first_plague_blood_river.png`,
+  exodus_06_darkness: `${PLAY_ART_BASE}/exodus_02_moses_rumor_night.png`,
+  exodus_07_passover: `${PLAY_ART_BASE}/exodus_04_passover_marked_door.png`,
+  exodus_08_departure: `${PLAY_ART_BASE}/exodus_05_departure_from_egypt.png`,
+  exodus_09_wilderness_edge: `${PLAY_ART_BASE}/exodus_06_egyptian_pursuit.png`,
+  exodus_10_redsea: `${PLAY_ART_BASE}/exodus_07_trapped_at_the_sea.png`,
+  exodus_10b_care_branch: `${PLAY_ART_BASE}/exodus_07_trapped_at_the_sea.png`,
+  exodus_10c_discern_branch: `${PLAY_ART_BASE}/exodus_08_sea_parted_night.png`,
+  exodus_11_crossing: `${PLAY_ART_BASE}/exodus_09_crossing_the_sea.png`,
+  exodus_12_deliverance: `${PLAY_ART_BASE}/exodus_10_deliverance_dawn.png`
+};
+
 const SCENE_ART_BY_TITLE = {
   '끝나지 않는 벽돌': `${PLAY_ART_BASE}/exodus_01_slave_labor.png`,
   '돌아온 이름': `${PLAY_ART_BASE}/exodus_02_moses_rumor_night.png`,
@@ -20,6 +37,18 @@ const SCENE_ART_BY_TITLE = {
   '흔들리는 물벽': `${PLAY_ART_BASE}/exodus_08_sea_parted_night.png`,
   '바다 가운데 난 길': `${PLAY_ART_BASE}/exodus_09_crossing_the_sea.png`,
   '해방의 새벽': `${PLAY_ART_BASE}/exodus_10_deliverance_dawn.png`
+};
+
+const ENDING_ART_BY_ID = {
+  true_exodus_deliverance: `${ENDING_ART_BASE}/exodus_10_deliverance_dawn.png`,
+  faithful_exodus_witness: `${ENDING_ART_BASE}/exodus_10_deliverance_dawn.png`,
+  wounded_exodus_witness: `${ENDING_ART_BASE}/exodus_07_trapped_at_the_sea.png`,
+  bad_bricks_forever: `${ENDING_ART_BASE}/exodus_01_slave_labor.png`,
+  bad_unmarked_door: `${ENDING_ART_BASE}/exodus_04_passover_marked_door.png`,
+  bad_stayed_in_egypt: `${ENDING_ART_BASE}/exodus_05_departure_from_egypt.png`,
+  bad_return_to_egypt: `${ENDING_ART_BASE}/exodus_06_egyptian_pursuit.png`,
+  bad_scattered_people: `${ENDING_ART_BASE}/exodus_07_trapped_at_the_sea.png`,
+  bad_closed_sea: `${ENDING_ART_BASE}/exodus_08_sea_parted_night.png`
 };
 
 const ENDING_ART_BY_TITLE = {
@@ -135,9 +164,11 @@ function updateSceneArt(node) {
   const sceneArt = $('.scene-art');
   if (!sceneArt || !node) return;
 
-  const artPath = SCENE_ART_BY_TITLE[node.title] || `${PLAY_ART_BASE}/exodus_01_slave_labor.png`;
+  const explicitImage = node.image ? `${PLAY_ART_BASE}/${node.image}` : null;
+  const artPath = explicitImage || SCENE_ART_BY_NODE_ID[node.id] || SCENE_ART_BY_TITLE[node.title] || `${PLAY_ART_BASE}/exodus_01_slave_labor.png`;
   sceneArt.style.backgroundImage = `url('${artPath}')`;
-  sceneArt.dataset.sceneTitle = node.title;
+  sceneArt.dataset.sceneId = node.id || '';
+  sceneArt.dataset.sceneTitle = node.title || '';
   sceneArt.dataset.artPath = artPath;
 }
 
@@ -147,8 +178,9 @@ function updateEndingArt(profile) {
   if (!ending || !endingBg || !profile) return;
 
   const title = profile.title || '';
-  const artPath = ENDING_ART_BY_TITLE[title] || `${ENDING_ART_BASE}/exodus_10_deliverance_dawn.png`;
-  const isTrue = title === '해방의 목격자' || title === '믿음의 길을 걸은 자';
+  const explicitImage = profile.image ? `${ENDING_ART_BASE}/${profile.image}` : null;
+  const artPath = explicitImage || ENDING_ART_BY_ID[profile.id] || ENDING_ART_BY_TITLE[title] || `${ENDING_ART_BASE}/exodus_10_deliverance_dawn.png`;
+  const isTrue = profile.type === 'true' || profile.id === 'true_exodus_deliverance' || profile.id === 'faithful_exodus_witness';
   const goldOpacity = isTrue ? '.34' : '.18';
   const warmOpacity = isTrue ? '.10' : '.06';
 
