@@ -1,0 +1,109 @@
+{
+  "note": "original_16x9 images are not ideal for the current tall play-left panel. play_left_520x650 images are cropped/resized for the current play scene panel.",
+  "target_sizes": {
+    "play_left_panel": "520x650, portrait 4:5",
+    "chapter_card_large": "909x292, very wide landscape"
+  },
+  "files": [
+    {
+      "source_name": "exodus_01_slave_labor.png",
+      "original_size": [
+        1672,
+        941
+      ],
+      "original_ratio": 1.777,
+      "play_left_output": "assets/images/story/exodus/play_left_520x650/exodus_01_slave_labor.png",
+      "card_output": "assets/images/story/exodus/card_909x292/exodus_01_slave_labor.png"
+    },
+    {
+      "source_name": "exodus_02_moses_rumor_night.png",
+      "original_size": [
+        1672,
+        941
+      ],
+      "original_ratio": 1.777,
+      "play_left_output": "assets/images/story/exodus/play_left_520x650/exodus_02_moses_rumor_night.png",
+      "card_output": "assets/images/story/exodus/card_909x292/exodus_02_moses_rumor_night.png"
+    },
+    {
+      "source_name": "exodus_03_first_plague_blood_river.png",
+      "original_size": [
+        1672,
+        941
+      ],
+      "original_ratio": 1.777,
+      "play_left_output": "assets/images/story/exodus/play_left_520x650/exodus_03_first_plague_blood_river.png",
+      "card_output": "assets/images/story/exodus/card_909x292/exodus_03_first_plague_blood_river.png"
+    },
+    {
+      "source_name": "exodus_04_passover_marked_door.png",
+      "original_size": [
+        1672,
+        941
+      ],
+      "original_ratio": 1.777,
+      "play_left_output": "assets/images/story/exodus/play_left_520x650/exodus_04_passover_marked_door.png",
+      "card_output": "assets/images/story/exodus/card_909x292/exodus_04_passover_marked_door.png"
+    },
+    {
+      "source_name": "exodus_05_departure_from_egypt.png",
+      "original_size": [
+        1672,
+        941
+      ],
+      "original_ratio": 1.777,
+      "play_left_output": "assets/images/story/exodus/play_left_520x650/exodus_05_departure_from_egypt.png",
+      "card_output": "assets/images/story/exodus/card_909x292/exodus_05_departure_from_egypt.png"
+    },
+    {
+      "source_name": "exodus_06_egyptian_pursuit.png",
+      "original_size": [
+        1672,
+        941
+      ],
+      "original_ratio": 1.777,
+      "play_left_output": "assets/images/story/exodus/play_left_520x650/exodus_06_egyptian_pursuit.png",
+      "card_output": "assets/images/story/exodus/card_909x292/exodus_06_egyptian_pursuit.png"
+    },
+    {
+      "source_name": "exodus_07_trapped_at_the_sea.png",
+      "original_size": [
+        1672,
+        941
+      ],
+      "original_ratio": 1.777,
+      "play_left_output": "assets/images/story/exodus/play_left_520x650/exodus_07_trapped_at_the_sea.png",
+      "card_output": "assets/images/story/exodus/card_909x292/exodus_07_trapped_at_the_sea.png"
+    },
+    {
+      "source_name": "exodus_08_sea_parted_night.png",
+      "original_size": [
+        1672,
+        941
+      ],
+      "original_ratio": 1.777,
+      "play_left_output": "assets/images/story/exodus/play_left_520x650/exodus_08_sea_parted_night.png",
+      "card_output": "assets/images/story/exodus/card_909x292/exodus_08_sea_parted_night.png"
+    },
+    {
+      "source_name": "exodus_09_crossing_the_sea.png",
+      "original_size": [
+        1672,
+        941
+      ],
+      "original_ratio": 1.777,
+      "play_left_output": "assets/images/story/exodus/play_left_520x650/exodus_09_crossing_the_sea.png",
+      "card_output": "assets/images/story/exodus/card_909x292/exodus_09_crossing_the_sea.png"
+    },
+    {
+      "source_name": "exodus_10_deliverance_dawn.png",
+      "original_size": [
+        1672,
+        941
+      ],
+      "original_ratio": 1.777,
+      "play_left_output": "assets/images/story/exodus/play_left_520x650/exodus_10_deliverance_dawn.png",
+      "card_output": "assets/images/story/exodus/card_909x292/exodus_10_deliverance_dawn.png"
+    }
+  ]
+}
