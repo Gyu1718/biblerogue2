@@ -23,7 +23,6 @@
 #home-screen .outer-frame,
 #home-screen .corner,
 #home-screen .top-banner,
-#home-screen .top-actions,
 #home-screen .scripture,
 #home-screen .hourglass-button,
 #home-screen .card-shade,
@@ -33,6 +32,8 @@
   pointer-events: none !important;
 }
 
+#home-screen .top-actions,
+#home-screen .top-actions .circle-action,
 #home-screen .chapter-area,
 #home-screen .chapter-card.available,
 #home-screen .chapter-card.available *,
@@ -46,7 +47,8 @@
   cursor: pointer !important;
 }
 
-#home-screen .continue-button {
+#home-screen .continue-button,
+#home-screen .top-actions .circle-action {
   z-index: 60 !important;
   cursor: pointer !important;
 }
