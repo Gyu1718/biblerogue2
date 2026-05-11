@@ -90,7 +90,7 @@ const gameState = {
 let initialized = false;
 let currentNodeId = START_NODE_ID;
 let currentEndingId = null;
-let selectedChoiceIndex = 0;
+let selectedChoiceIndex = null;
 
 function $(selector, root = document) {
   return root.querySelector(selector);
@@ -122,7 +122,8 @@ function getCurrentNode() {
 
 function getSelectedChoice() {
   const node = getCurrentNode();
-  return node?.choices?.[selectedChoiceIndex] || node?.choices?.[0] || null;
+  if (!node || selectedChoiceIndex === null) return null;
+  return node?.choices?.[selectedChoiceIndex] || null;
 }
 
 function resetGame() {
@@ -131,7 +132,7 @@ function resetGame() {
   });
   currentNodeId = START_NODE_ID;
   currentEndingId = null;
-  selectedChoiceIndex = 0;
+  selectedChoiceIndex = null;
 }
 
 function applyChoiceEffects(choice) {
@@ -215,6 +216,24 @@ function showHomePanel(panelName = 'story') {
   });
 }
 
+function renderChoiceEffectSummary(choice, parent) {
+  if (!choice || !parent) return;
+
+  const effectsText = formatEffects(choice.effects || {});
+  const summary = document.createElement('div');
+  summary.className = 'choice-effect-summary';
+
+  const label = document.createElement('strong');
+  label.textContent = '선택의 흔적';
+  summary.appendChild(label);
+
+  const value = document.createElement('span');
+  value.textContent = effectsText || '기록 변화 없음';
+  summary.appendChild(value);
+
+  parent.appendChild(summary);
+}
+
 function renderCompanionDialogue(choice) {
   const rightPanel = $('.right-panel');
   if (!rightPanel) return;
@@ -229,7 +248,23 @@ function renderCompanionDialogue(choice) {
   title.textContent = '동행자';
   dialoguePanel.appendChild(title);
 
-  (choice?.companions || []).forEach((line) => {
+  if (!choice) {
+    const placeholder = document.createElement('article');
+    placeholder.className = 'companion-placeholder';
+
+    const placeholderTitle = document.createElement('strong');
+    placeholderTitle.textContent = '아직 선택하지 않았습니다';
+
+    const placeholderText = document.createElement('p');
+    placeholderText.textContent = '선택지를 고르면 동행자의 반응과 선택의 흔적이 이곳에 나타납니다.';
+
+    placeholder.append(placeholderTitle, placeholderText);
+    dialoguePanel.appendChild(placeholder);
+    rightPanel.appendChild(dialoguePanel);
+    return;
+  }
+
+  (choice.companions || []).forEach((line) => {
     const item = document.createElement('article');
     item.className = 'companion-line';
 
@@ -253,7 +288,22 @@ function renderCompanionDialogue(choice) {
     dialoguePanel.appendChild(item);
   });
 
+  renderChoiceEffectSummary(choice, dialoguePanel);
   rightPanel.appendChild(dialoguePanel);
+}
+
+function updateNextButton() {
+  const play = document.getElementById('play-screen');
+  const nextButton = $('.next-story', play || document);
+  const hasChoice = Boolean(getSelectedChoice());
+
+  if (!play || !nextButton) return;
+
+  nextButton.disabled = !hasChoice;
+  nextButton.classList.toggle('disabled', !hasChoice);
+  nextButton.setAttribute('aria-disabled', String(!hasChoice));
+  nextButton.dataset.ready = hasChoice ? 'true' : 'false';
+  nextButton.innerHTML = hasChoice ? '이 선택으로 나아가기 <span>›</span>' : '선택지를 고르세요 <span>›</span>';
 }
 
 function setPlayChoice(choiceIndex) {
@@ -261,7 +311,10 @@ function setPlayChoice(choiceIndex) {
   const play = document.getElementById('play-screen');
   if (!node || !play) return;
 
-  selectedChoiceIndex = Number(choiceIndex) || 0;
+  const requestedIndex = Number(choiceIndex);
+  if (!Number.isInteger(requestedIndex) || requestedIndex < 0 || requestedIndex >= (node.choices || []).length) return;
+
+  selectedChoiceIndex = requestedIndex;
 
   $all('.choice', play).forEach((button, index) => {
     button.classList.toggle('active', index === selectedChoiceIndex);
@@ -271,13 +324,16 @@ function setPlayChoice(choiceIndex) {
   play.dataset.choice = choice?.key || '';
   play.dataset.choiceEffects = formatEffects(choice?.effects || {});
   renderCompanionDialogue(choice);
+  updateNextButton();
 }
 
 function renderNode(node) {
   const play = document.getElementById('play-screen');
   if (!play || !node) return;
 
-  selectedChoiceIndex = 0;
+  selectedChoiceIndex = null;
+  play.dataset.choice = '';
+  play.dataset.choiceEffects = '';
 
   setText($('.play-brand-text span', play), node.chapter);
   setText($('.scene-plaque strong', play), node.location);
@@ -308,7 +364,7 @@ function renderNode(node) {
     choiceList.innerHTML = '';
     (node.choices || []).forEach((choice, index) => {
       const button = document.createElement('button');
-      button.className = `choice${index === 0 ? ' active' : ''}`;
+      button.className = 'choice';
       button.type = 'button';
       button.dataset.choiceIndex = String(index);
       button.title = formatEffects(choice.effects || {});
@@ -330,7 +386,8 @@ function renderNode(node) {
 
   updateSceneArt(node);
   renderGameState();
-  setPlayChoice(0);
+  renderCompanionDialogue(null);
+  updateNextButton();
 }
 
 function resolveExodusEnding() {
@@ -419,7 +476,10 @@ function goHome() {
 
 function goToNextPlayScene() {
   const selectedChoice = getSelectedChoice();
-  if (!selectedChoice) return;
+  if (!selectedChoice) {
+    updateNextButton();
+    return;
+  }
 
   applyChoiceEffects(selectedChoice);
 
