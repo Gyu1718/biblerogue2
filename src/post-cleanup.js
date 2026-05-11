@@ -28,6 +28,24 @@
     retry.textContent = '다시 도전';
   }
 
+  function disableUnstableSaveEntry() {
+    const home = document.getElementById('home-screen');
+    if (!home) return;
+
+    const triggers = home.querySelectorAll('.chapter-card.available[data-go], .continue-button[data-go]');
+    triggers.forEach((trigger) => {
+      trigger.dataset.go = 'new-play';
+    });
+
+    const continueLabel = home.querySelector('.continue-label');
+    if (continueLabel) continueLabel.textContent = '이야기 시작하기';
+
+    const restart = home.querySelector('.restart-button');
+    if (restart) restart.remove();
+
+    home.dataset.hasSave = 'false';
+  }
+
   function parseProgressText(value) {
     const match = String(value || '').match(/(\d+)\s*\/\s*(\d+)/);
     if (!match) return { current: 1, total: 1, ratio: 1 };
@@ -76,17 +94,18 @@
     }
   }
 
-  function observePlayProgress() {
-    const play = document.getElementById('play-screen');
-    if (!play) return;
+  function observeUiCleanup() {
+    const game = document.getElementById('game-canvas');
+    if (!game) return;
 
     const observer = new MutationObserver(() => {
       patchLocationText();
       patchStoryProgress();
       patchEndingRetryButton();
+      disableUnstableSaveEntry();
     });
 
-    observer.observe(play, {
+    observer.observe(game, {
       childList: true,
       subtree: true,
       characterData: true
@@ -98,7 +117,8 @@
     patchLocationText();
     patchStoryProgress();
     patchEndingRetryButton();
-    observePlayProgress();
+    disableUnstableSaveEntry();
+    observeUiCleanup();
   }
 
   if (document.readyState === 'loading') {
