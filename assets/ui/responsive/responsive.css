@@ -1,0 +1,151 @@
+/* Responsive shell for the fixed 1672 × 941 game canvas.
+   This file does not redesign individual screens. It keeps the current game UI centered,
+   safe-area aware, and usable in desktop resize + mobile landscape contexts. */
+
+:root {
+  --responsive-scale: 1;
+  --responsive-vw: 100vw;
+  --responsive-vh: 100vh;
+  --responsive-safe-x: 0px;
+  --responsive-safe-y: 0px;
+}
+
+html,
+body {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  min-height: 100%;
+  overscroll-behavior: none;
+  touch-action: manipulation;
+}
+
+body.responsive-ready #viewport {
+  width: var(--responsive-vw);
+  height: var(--responsive-vh);
+  padding:
+    max(env(safe-area-inset-top), var(--responsive-safe-y))
+    max(env(safe-area-inset-right), var(--responsive-safe-x))
+    max(env(safe-area-inset-bottom), var(--responsive-safe-y))
+    max(env(safe-area-inset-left), var(--responsive-safe-x));
+}
+
+body.responsive-ready #game-canvas {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform-origin: center center;
+}
+
+body.is-small-window #viewport {
+  background:
+    radial-gradient(circle at 50% 46%, rgba(52, 39, 19, .28), transparent 42%),
+    linear-gradient(180deg, #090805, #020407 68%);
+}
+
+body.is-mobile-landscape #viewport {
+  align-items: center;
+  justify-content: center;
+}
+
+body.is-mobile-landscape #game-canvas {
+  image-rendering: auto;
+}
+
+/* On mobile landscape, increase the most important text slightly before the full canvas is scaled down. */
+body.is-mobile-landscape #play-screen .narrative-panel h2 {
+  font-size: 40px !important;
+}
+
+body.is-mobile-landscape #play-screen .narrative-copy p,
+body.is-mobile-landscape #play-screen .narrative-copy strong {
+  font-size: 22px !important;
+  line-height: 1.72 !important;
+}
+
+body.is-mobile-landscape #play-screen .choice {
+  font-size: 22px !important;
+  min-height: 58px !important;
+}
+
+body.is-mobile-landscape #play-screen .companion-line-body strong {
+  font-size: 21px !important;
+}
+
+body.is-mobile-landscape #play-screen .companion-line-body em,
+body.is-mobile-landscape #play-screen .companion-line-body p {
+  font-size: 18px !important;
+  line-height: 1.55 !important;
+}
+
+body.is-mobile-landscape #play-screen .next-story,
+body.is-mobile-landscape #play-screen .back-home {
+  font-size: 18px !important;
+}
+
+body.is-mobile-landscape #home-screen .continue-button,
+body.is-mobile-landscape #home-screen .restart-button {
+  min-height: 50px !important;
+}
+
+/* Portrait mobile is intentionally not redesigned. The game is landscape-first. */
+#rotate-notice {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(196,154,85,.16), transparent 34%),
+    linear-gradient(180deg, rgba(8,8,5,.96), rgba(1,2,4,.98));
+  color: #e5bd73;
+  text-align: center;
+  font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif;
+}
+
+#rotate-notice .rotate-card {
+  width: min(420px, 92vw);
+  padding: 30px 24px 28px;
+  border: 1px solid rgba(196,154,85,.42);
+  background: rgba(4, 7, 10, .76);
+  box-shadow: 0 18px 56px rgba(0,0,0,.58), inset 0 0 24px rgba(196,154,85,.08);
+}
+
+#rotate-notice .rotate-icon {
+  display: block;
+  margin-bottom: 16px;
+  font-size: 42px;
+  line-height: 1;
+}
+
+#rotate-notice strong {
+  display: block;
+  margin-bottom: 12px;
+  color: #f0cf8c;
+  font-size: 22px;
+  letter-spacing: .04em;
+}
+
+#rotate-notice p {
+  margin: 0;
+  color: #b89455;
+  font-size: 15px;
+  line-height: 1.7;
+  word-break: keep-all;
+}
+
+body.is-mobile-portrait #rotate-notice {
+  display: flex;
+}
+
+body.is-mobile-portrait #viewport {
+  filter: blur(2px) brightness(.56);
+  pointer-events: none;
+}
+
+@media (max-width: 900px) and (orientation: landscape) {
+  body.is-mobile-landscape #viewport {
+    padding: max(env(safe-area-inset-top), 2px) max(env(safe-area-inset-right), 4px) max(env(safe-area-inset-bottom), 2px) max(env(safe-area-inset-left), 4px);
+  }
+}
