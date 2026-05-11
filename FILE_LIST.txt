@@ -1,0 +1,13 @@
+Created files for BibleRogue2 Exodus Chapter 1 additional illustrations
+
+Mandatory play scene assets:
+- assets/images/story/exodus/play_left_520x650/exodus_04b_plague_witness.png
+- assets/images/story/exodus/play_left_520x650/exodus_05b_hail_and_livestock.png
+- assets/images/story/exodus/play_left_520x650/exodus_06b_passover_instruction.png
+- assets/images/story/exodus/play_left_520x650/exodus_07b_passover_meal.png
+- assets/images/story/exodus/play_left_520x650/exodus_09b_people_panic.png
+- assets/images/story/exodus/play_left_520x650/exodus_10d_pillar_between.png
+- assets/images/story/exodus/play_left_520x650/exodus_11b_last_steps.png
+
+Optional ending asset included:
+- assets/images/story/exodus/original_16x9/bad_hardened_heart_among_us.png
