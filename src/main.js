@@ -4,6 +4,7 @@ const BASE_HEIGHT = 941;
 const START_NODE_ID = window.START_NODE_ID || 'exodus_01_slave_day';
 const PLAY_ART_BASE = 'assets/images/story/exodus/play_left_520x650';
 const ENDING_ART_BASE = 'assets/images/story/exodus/original_16x9';
+const SAVE_KEY = 'biblerogue2.save.v1';
 
 const SCENE_ART_BY_NODE_ID = {
   exodus_01_slave_day: `${PLAY_ART_BASE}/exodus_01_slave_labor.png`,
@@ -91,6 +92,8 @@ let initialized = false;
 let currentNodeId = START_NODE_ID;
 let currentEndingId = null;
 let selectedChoiceIndex = null;
+let visitedNodes = new Set();
+let unlockedEndings = new Set();
 
 function $(selector, root = document) {
   return root.querySelector(selector);
@@ -106,6 +109,107 @@ function setText(element, text) {
 
 function clampStateValue(value) {
   return Math.max(0, Math.min(99, Number(value) || 0));
+}
+
+function canUseStorage() {
+  try {
+    const testKey = `${SAVE_KEY}.test`;
+    window.localStorage.setItem(testKey, '1');
+    window.localStorage.removeItem(testKey);
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
+function readSave() {
+  if (!canUseStorage()) return null;
+
+  try {
+    const raw = window.localStorage.getItem(SAVE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || parsed.version !== 1) return null;
+    return parsed;
+  } catch (error) {
+    console.warn('Saved game could not be read.', error);
+    return null;
+  }
+}
+
+function writeSave() {
+  if (!canUseStorage()) return;
+
+  const payload = {
+    version: 1,
+    currentNodeId,
+    currentEndingId,
+    selectedChoiceIndex,
+    gameState: { ...gameState },
+    visitedNodes: Array.from(visitedNodes),
+    unlockedEndings: Array.from(unlockedEndings),
+    lastPlayedAt: new Date().toISOString()
+  };
+
+  try {
+    window.localStorage.setItem(SAVE_KEY, JSON.stringify(payload));
+    renderHomePanels();
+  } catch (error) {
+    console.warn('Saved game could not be written.', error);
+  }
+}
+
+function clearSave() {
+  if (!canUseStorage()) return;
+  window.localStorage.removeItem(SAVE_KEY);
+}
+
+function applySavedState(save) {
+  if (!save || save.version !== 1) return false;
+
+  const savedNodeExists = save.currentNodeId && window.STORY_NODES?.[save.currentNodeId];
+  const savedEndingExists = save.currentEndingId && window.STORY_ENDINGS?.[save.currentEndingId];
+
+  if (!savedNodeExists && !savedEndingExists) return false;
+
+  Object.keys(gameState).forEach((key) => {
+    gameState[key] = clampStateValue(save.gameState?.[key] || 0);
+  });
+
+  currentNodeId = savedNodeExists ? save.currentNodeId : START_NODE_ID;
+  currentEndingId = savedEndingExists ? save.currentEndingId : null;
+  selectedChoiceIndex = null;
+  visitedNodes = new Set(Array.isArray(save.visitedNodes) ? save.visitedNodes.filter((id) => window.STORY_NODES?.[id]) : []);
+  unlockedEndings = new Set(Array.isArray(save.unlockedEndings) ? save.unlockedEndings.filter((id) => window.STORY_ENDINGS?.[id]) : []);
+
+  return true;
+}
+
+function hydrateHomeFromSave() {
+  const save = readSave();
+  if (!save) {
+    visitedNodes = new Set();
+    unlockedEndings = new Set();
+    renderHomePanels();
+    return;
+  }
+
+  visitedNodes = new Set(Array.isArray(save.visitedNodes) ? save.visitedNodes.filter((id) => window.STORY_NODES?.[id]) : []);
+  unlockedEndings = new Set(Array.isArray(save.unlockedEndings) ? save.unlockedEndings.filter((id) => window.STORY_ENDINGS?.[id]) : []);
+  renderHomePanels();
+}
+
+function markVisitedNode(nodeId) {
+  if (nodeId && window.STORY_NODES?.[nodeId]) visitedNodes.add(nodeId);
+}
+
+function unlockEnding(endingId) {
+  if (endingId && window.STORY_ENDINGS?.[endingId]) unlockedEndings.add(endingId);
+}
+
+function hasSavedProgress() {
+  const save = readSave();
+  return Boolean(save && (window.STORY_NODES?.[save.currentNodeId] || window.STORY_ENDINGS?.[save.currentEndingId]));
 }
 
 function resizeGame() {
@@ -133,6 +237,7 @@ function resetGame() {
   currentNodeId = START_NODE_ID;
   currentEndingId = null;
   selectedChoiceIndex = null;
+  visitedNodes = new Set();
 }
 
 function applyChoiceEffects(choice) {
@@ -159,6 +264,90 @@ function renderGameState() {
   Object.entries(gameState).forEach(([key, value]) => {
     play.dataset[key] = String(value);
   });
+}
+
+function renderHomePersistenceState() {
+  const home = document.getElementById('home-screen');
+  if (!home) return;
+
+  const save = readSave();
+  const hasSave = Boolean(save && (window.STORY_NODES?.[save.currentNodeId] || window.STORY_ENDINGS?.[save.currentEndingId]));
+  const continueLabel = $('.continue-label', home);
+  const chapterCard = $('.chapter-card.available', home);
+  const existingRestart = $('.restart-button', home);
+
+  home.dataset.hasSave = hasSave ? 'true' : 'false';
+
+  if (continueLabel) continueLabel.textContent = hasSave ? '이야기 계속하기' : '이야기 시작하기';
+
+  if (chapterCard && hasSave && !existingRestart) {
+    const restart = document.createElement('button');
+    restart.className = 'restart-button';
+    restart.type = 'button';
+    restart.dataset.go = 'new-play';
+    restart.textContent = '처음부터';
+    chapterCard.appendChild(restart);
+  }
+
+  if (!hasSave && existingRestart) existingRestart.remove();
+}
+
+function renderHomeRecords() {
+  const list = $('#home-screen .home-record-list');
+  if (!list) return;
+
+  const nodes = Array.from(visitedNodes)
+    .map((id) => window.STORY_NODES?.[id])
+    .filter(Boolean);
+
+  list.innerHTML = '';
+
+  if (!nodes.length) {
+    const empty = document.createElement('p');
+    empty.innerHTML = '<b>아직 남은 기록이 없습니다</b><span>1장을 시작하면 본 장면들이 이곳에 기록됩니다.</span>';
+    list.appendChild(empty);
+    return;
+  }
+
+  nodes.slice(-8).forEach((node) => {
+    const item = document.createElement('p');
+    const title = document.createElement('b');
+    const detail = document.createElement('span');
+    title.textContent = node.title || node.id;
+    detail.textContent = `${node.location || '알 수 없는 장소'} · ${node.bible || '본문 미상'}`;
+    item.append(title, detail);
+    list.appendChild(item);
+  });
+}
+
+function renderHomeEndings() {
+  const list = $('#home-screen .home-achievement-list');
+  if (!list || !window.STORY_ENDINGS) return;
+
+  list.innerHTML = '';
+
+  Object.values(window.STORY_ENDINGS).forEach((ending) => {
+    const isUnlocked = unlockedEndings.has(ending.id);
+    const item = document.createElement('p');
+    const icon = document.createElement('i');
+    const title = document.createElement('b');
+    const detail = document.createElement('span');
+
+    icon.textContent = isUnlocked ? '◆' : '◇';
+    title.textContent = isUnlocked ? ending.title : '????';
+    detail.textContent = isUnlocked ? `${ending.grade || ending.type} · ${ending.reference || ''}` : '아직 목격하지 못한 결말입니다.';
+
+    item.classList.toggle('unlocked', isUnlocked);
+    item.classList.toggle('locked-ending', !isUnlocked);
+    item.append(icon, title, detail);
+    list.appendChild(item);
+  });
+}
+
+function renderHomePanels() {
+  renderHomePersistenceState();
+  renderHomeRecords();
+  renderHomeEndings();
 }
 
 function updateSceneArt(node) {
@@ -205,6 +394,7 @@ function showHomePanel(panelName = 'story') {
   const home = document.getElementById('home-screen');
   if (!home) return;
 
+  renderHomePanels();
   home.dataset.homePanel = panelName;
 
   $all('.home-panel', home).forEach((panel) => {
@@ -461,15 +651,37 @@ function renderEnding() {
   updateEndingArt(profile);
 }
 
-function startPlay() {
+function startNewGame() {
+  clearSave();
   resetGame();
   renderNode(getCurrentNode());
+  markVisitedNode(currentNodeId);
+  writeSave();
   showScreen('play');
 }
 
+function continueSavedOrStart() {
+  const save = readSave();
+
+  if (applySavedState(save)) {
+    if (currentEndingId) {
+      renderEnding();
+      showScreen('ending');
+      return;
+    }
+
+    renderNode(getCurrentNode());
+    markVisitedNode(currentNodeId);
+    writeSave();
+    showScreen('play');
+    return;
+  }
+
+  startNewGame();
+}
+
 function goHome() {
-  resetGame();
-  renderNode(getCurrentNode());
+  renderHomePanels();
   showHomePanel('story');
   showScreen('home');
 }
@@ -485,6 +697,8 @@ function goToNextPlayScene() {
 
   if (selectedChoice.endingResolver === 'exodus') {
     currentEndingId = resolveExodusEnding();
+    unlockEnding(currentEndingId);
+    writeSave();
     renderEnding();
     showScreen('ending');
     return;
@@ -492,6 +706,8 @@ function goToNextPlayScene() {
 
   if (selectedChoice.ending) {
     currentEndingId = selectedChoice.ending;
+    unlockEnding(currentEndingId);
+    writeSave();
     renderEnding();
     showScreen('ending');
     return;
@@ -499,12 +715,17 @@ function goToNextPlayScene() {
 
   if (selectedChoice.next && window.STORY_NODES?.[selectedChoice.next]) {
     currentNodeId = selectedChoice.next;
+    currentEndingId = null;
     renderNode(getCurrentNode());
+    markVisitedNode(currentNodeId);
+    writeSave();
     showScreen('play');
     return;
   }
 
   currentEndingId = resolveExodusEnding();
+  unlockEnding(currentEndingId);
+  writeSave();
   renderEnding();
   showScreen('ending');
 }
@@ -524,7 +745,12 @@ function bindNavigation() {
       const destination = trigger.dataset.go;
 
       if (destination === 'play') {
-        startPlay();
+        continueSavedOrStart();
+        return;
+      }
+
+      if (destination === 'new-play') {
+        startNewGame();
         return;
       }
 
@@ -555,7 +781,8 @@ function bindNavigation() {
     const trigger = event.target.closest('[data-go]');
     if (trigger) {
       event.preventDefault();
-      if (trigger.dataset.go === 'play') startPlay();
+      if (trigger.dataset.go === 'play') continueSavedOrStart();
+      else if (trigger.dataset.go === 'new-play') startNewGame();
       else if (trigger.dataset.go === 'next-play-scene') goToNextPlayScene();
       else if (trigger.dataset.go === 'home') goHome();
       else showScreen(trigger.dataset.go);
@@ -576,8 +803,9 @@ function initGame() {
 
   resizeGame();
   bindNavigation();
-  showHomePanel('story');
+  hydrateHomeFromSave();
   renderNode(getCurrentNode());
+  showHomePanel('story');
   showScreen('home');
 }
 
