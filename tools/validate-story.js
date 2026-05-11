@@ -16,6 +16,7 @@ const vm = require('vm');
 
 const ROOT = path.resolve(__dirname, '..');
 const STORY_PATH = path.join(ROOT, 'src', 'data', 'storyNodes.js');
+const STORY_PATCH_PATH = path.join(ROOT, 'src', 'data', 'exodusStructurePatch.js');
 const ENDINGS_PATH = path.join(ROOT, 'src', 'data', 'endings.js');
 
 const ALLOWED_EFFECTS = new Set([
@@ -62,12 +63,21 @@ const REQUIRED_ENDING_FIELDS = [
   'description'
 ];
 
-function loadBrowserDataFile(filePath) {
-  const source = fs.readFileSync(filePath, 'utf8');
+function createBrowserSandbox() {
   const sandbox = { window: {} };
   vm.createContext(sandbox);
+  return sandbox;
+}
+
+function runBrowserDataFile(filePath, sandbox) {
+  const source = fs.readFileSync(filePath, 'utf8');
   vm.runInContext(source, sandbox, { filename: filePath });
   return sandbox.window;
+}
+
+function runOptionalBrowserDataFile(filePath, sandbox) {
+  if (!fs.existsSync(filePath)) return sandbox.window;
+  return runBrowserDataFile(filePath, sandbox);
 }
 
 function isPlainObject(value) {
@@ -317,8 +327,12 @@ function validateReachability(storyNodes, endings, startNodeId, warnings) {
 }
 
 function run() {
-  const storyWindow = loadBrowserDataFile(STORY_PATH);
-  const endingWindow = loadBrowserDataFile(ENDINGS_PATH);
+  const storySandbox = createBrowserSandbox();
+  const storyWindow = runBrowserDataFile(STORY_PATH, storySandbox);
+  runOptionalBrowserDataFile(STORY_PATCH_PATH, storySandbox);
+
+  const endingSandbox = createBrowserSandbox();
+  const endingWindow = runBrowserDataFile(ENDINGS_PATH, endingSandbox);
 
   const storyNodes = storyWindow.STORY_NODES;
   const storyStartNodeId = storyWindow.START_NODE_ID;
