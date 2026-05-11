@@ -208,9 +208,69 @@
   filter: brightness(.94) saturate(.90) !important;
 }
 
+/* Narrative text and choices must never visually collide. */
+#play-screen .narrative-copy {
+  left: 58px !important;
+  top: 78px !important;
+  width: 414px !important;
+  font-size: 16px !important;
+  line-height: 1.56 !important;
+}
+
+#play-screen .narrative-copy p {
+  margin: 0 0 9px !important;
+}
+
+#play-screen .narrative-copy hr {
+  width: 360px !important;
+  margin: 10px auto 12px !important;
+}
+
+#play-screen .narrative-copy strong {
+  margin-top: 4px !important;
+  font-size: 18px !important;
+  line-height: 1.35 !important;
+  word-break: keep-all !important;
+}
+
+#play-screen .choice-list {
+  top: 448px !important;
+  max-height: 238px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding-right: 7px !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(196,154,85,.45) rgba(0,0,0,.18) !important;
+}
+
+#play-screen .choice-list::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+#play-screen .choice-list::-webkit-scrollbar-track {
+  background: rgba(0,0,0,.18) !important;
+}
+
+#play-screen .choice-list::-webkit-scrollbar-thumb {
+  background: rgba(196,154,85,.45) !important;
+  border-radius: 8px !important;
+}
+
 /* Choice confirmation UX. */
 #play-screen .choice {
+  min-height: 44px !important;
+  height: auto !important;
+  margin-bottom: 8px !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+  padding-right: 34px !important;
+  line-height: 1.34 !important;
   transition: transform .16s ease, filter .16s ease, color .16s ease, opacity .16s ease !important;
+}
+
+#play-screen .choice.active {
+  min-height: 54px !important;
+  height: auto !important;
 }
 
 #play-screen .choice:not(.active) {
