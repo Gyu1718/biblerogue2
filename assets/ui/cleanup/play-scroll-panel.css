@@ -1,11 +1,19 @@
 /* Play panel scroll separation
-   Keeps the narrative copy and choice list as independent scrollable zones. */
+   Keeps the title, narrative copy, choice list, and progress bar as separated zones. */
+
+#play-screen .narrative-panel h2 {
+  top: 28px !important;
+  line-height: 1.18 !important;
+  z-index: 3 !important;
+  pointer-events: none !important;
+}
 
 #play-screen .narrative-copy {
-  max-height: 330px !important;
+  top: 118px !important;
+  max-height: 286px !important;
   overflow-y: auto !important;
   overflow-x: hidden !important;
-  padding: 0 10px 18px 0 !important;
+  padding: 4px 10px 18px 0 !important;
   scrollbar-width: thin !important;
   scrollbar-color: rgba(196,154,85,.46) rgba(0,0,0,.20) !important;
   overscroll-behavior: contain !important;
@@ -31,8 +39,10 @@
 }
 
 #play-screen .choice-list {
-  top: 462px !important;
-  max-height: 224px !important;
+  top: 472px !important;
+  max-height: 214px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
   overscroll-behavior: contain !important;
   -webkit-overflow-scrolling: touch !important;
 }
