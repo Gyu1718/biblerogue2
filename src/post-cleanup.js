@@ -1,7 +1,17 @@
-// Lightweight visual cleanup only.
-// Branching runtime, navigation, game state, scene rendering, and ending rendering belong to src/main.js.
+// Lightweight visual cleanup and temporary no-save stabilization.
+// Save/continue stays disabled until the game content and ending flow are complete.
 
 (function () {
+  const SAVE_KEY = 'biblerogue2.save.v1';
+
+  function clearDeferredSave() {
+    try {
+      window.localStorage?.removeItem(SAVE_KEY);
+    } catch (error) {
+      // localStorage can be unavailable in some embedded/mobile contexts.
+    }
+  }
+
   function cleanHome() {
     const home = document.getElementById('home-screen');
     if (!home) return;
@@ -28,7 +38,9 @@
     retry.textContent = '다시 도전';
   }
 
-  function disableUnstableSaveEntry() {
+  function stabilizeNoSaveEntry() {
+    clearDeferredSave();
+
     const home = document.getElementById('home-screen');
     if (!home) return;
 
@@ -43,7 +55,12 @@
     const restart = home.querySelector('.restart-button');
     if (restart) restart.remove();
 
+    const settingsSaveText = Array.from(home.querySelectorAll('.home-settings-list p')).find((item) => item.textContent.includes('저장'));
+    const saveDescription = settingsSaveText?.querySelector('span');
+    if (saveDescription) saveDescription.textContent = '게임 완성 후 마지막 단계에서 추가합니다.';
+
     home.dataset.hasSave = 'false';
+    home.dataset.saveMode = 'disabled-until-release';
   }
 
   function parseProgressText(value) {
@@ -102,7 +119,7 @@
       patchLocationText();
       patchStoryProgress();
       patchEndingRetryButton();
-      disableUnstableSaveEntry();
+      stabilizeNoSaveEntry();
     });
 
     observer.observe(game, {
@@ -117,7 +134,7 @@
     patchLocationText();
     patchStoryProgress();
     patchEndingRetryButton();
-    disableUnstableSaveEntry();
+    stabilizeNoSaveEntry();
     observeUiCleanup();
   }
 
