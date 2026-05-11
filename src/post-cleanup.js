@@ -20,6 +20,14 @@
     locationPanel.textContent = locationPanel.textContent.replace(/^\s*⛺\s*/, '').trim();
   }
 
+  function patchEndingRetryButton() {
+    const retry = document.querySelector('#ending-screen .ending-retry');
+    if (!retry) return;
+
+    retry.dataset.go = 'new-play';
+    retry.textContent = '다시 도전';
+  }
+
   function parseProgressText(value) {
     const match = String(value || '').match(/(\d+)\s*\/\s*(\d+)/);
     if (!match) return { current: 1, total: 1, ratio: 1 };
@@ -75,6 +83,7 @@
     const observer = new MutationObserver(() => {
       patchLocationText();
       patchStoryProgress();
+      patchEndingRetryButton();
     });
 
     observer.observe(play, {
@@ -88,6 +97,7 @@
     cleanHome();
     patchLocationText();
     patchStoryProgress();
+    patchEndingRetryButton();
     observePlayProgress();
   }
 
