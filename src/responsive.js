@@ -1,5 +1,5 @@
 // Responsive shell for BibleRogue2.
-// This intentionally keeps the game landscape-first and does not redesign portrait mobile.
+// This keeps the game landscape-first while allowing desktop windows to be resized freely.
 
 (function () {
   const BASE_WIDTH = 1672;
@@ -41,11 +41,14 @@
     if (!canvas) return;
 
     const { width, height } = getViewportSize();
-    const mobile = isTouchDevice() || width <= 1024 || height <= 540;
+    const touchDevice = isTouchDevice();
     const portrait = height > width;
     const landscape = width >= height;
-    const safePadX = mobile ? 4 : 0;
-    const safePadY = mobile ? 2 : 0;
+    const smallWindow = width < BASE_WIDTH || height < BASE_HEIGHT;
+    const mobileLandscape = touchDevice && landscape;
+    const mobilePortrait = touchDevice && portrait;
+    const safePadX = touchDevice ? 4 : 0;
+    const safePadY = touchDevice ? 2 : 0;
     const availableWidth = Math.max(1, width - safePadX * 2);
     const availableHeight = Math.max(1, height - safePadY * 2);
     const scale = Math.min(availableWidth / BASE_WIDTH, availableHeight / BASE_HEIGHT);
@@ -58,10 +61,10 @@
     document.documentElement.style.setProperty('--responsive-scale', String(centeredScale));
 
     document.body.classList.add('responsive-ready');
-    document.body.classList.toggle('is-mobile', mobile);
-    document.body.classList.toggle('is-mobile-landscape', mobile && landscape);
-    document.body.classList.toggle('is-mobile-portrait', mobile && portrait);
-    document.body.classList.toggle('is-small-window', width < BASE_WIDTH || height < BASE_HEIGHT);
+    document.body.classList.toggle('is-mobile', touchDevice);
+    document.body.classList.toggle('is-mobile-landscape', mobileLandscape);
+    document.body.classList.toggle('is-mobile-portrait', mobilePortrait);
+    document.body.classList.toggle('is-small-window', smallWindow);
     document.body.classList.toggle('is-very-small-window', centeredScale < MIN_READABLE_SCALE);
 
     canvas.style.transform = `scale(${centeredScale})`;
