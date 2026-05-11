@@ -129,7 +129,11 @@
 
   function writeJson(key, value) {
     if (!canUseStorage()) return;
-    window.localStorage.setItem(key, JSON.stringify(value));
+    try {
+      window.localStorage.setItem(key, JSON.stringify(value));
+    } catch (error) {
+      // Keep navigation non-fatal if storage quota or privacy settings block writes.
+    }
   }
 
   function getPlayScreen() {
@@ -189,17 +193,25 @@
     window.localStorage.removeItem(HISTORY_KEY);
   }
 
+  function setTextIfChanged(element, text) {
+    if (element && element.textContent !== text) element.textContent = text;
+  }
+
+  function setAttrIfChanged(element, name, value) {
+    if (element && element.getAttribute(name) !== value) element.setAttribute(name, value);
+  }
+
   function updateBottomBackButton() {
     const play = getPlayScreen();
     const backButton = play?.querySelector('.back-home');
     if (!backButton) return;
 
     const hasHistory = readHistory().length > 0;
-    backButton.textContent = '이전 장면';
+    setTextIfChanged(backButton, '이전 장면');
     backButton.classList.toggle('disabled', !hasHistory);
     backButton.disabled = !hasHistory;
-    backButton.setAttribute('aria-disabled', String(!hasHistory));
-    backButton.dataset.go = 'previous-play-scene';
+    setAttrIfChanged(backButton, 'aria-disabled', String(!hasHistory));
+    if (backButton.dataset.go !== 'previous-play-scene') backButton.dataset.go = 'previous-play-scene';
   }
 
   function restorePreviousScene() {
@@ -246,7 +258,7 @@
 
     if (shouldRecordAdvance(trigger)) {
       pushCurrentSnapshot();
-      setTimeout(updateBottomBackButton, 0);
+      window.setTimeout(updateBottomBackButton, 0);
     }
   }
 
@@ -259,19 +271,15 @@
     document.addEventListener('click', handleCapturedClick, true);
     document.addEventListener('keydown', handleCapturedKeydown, true);
 
-    const observer = new MutationObserver(updateBottomBackButton);
-    const play = getPlayScreen();
-    if (play) {
-      observer.observe(play, { attributes: true, childList: true, subtree: true, attributeFilter: ['class', 'data-ready'] });
-    }
-
+    // Do not observe footer child mutations here. Updating the button label itself can
+    // recursively trigger MutationObserver callbacks and lock up the browser.
     window.setInterval(() => {
       if (isPlayScreenActive()) updateBottomBackButton();
-    }, 600);
+    }, 800);
 
     if (window.sessionStorage?.getItem(RETURN_FLAG) === 'true') {
       window.sessionStorage.removeItem(RETURN_FLAG);
-      setTimeout(() => {
+      window.setTimeout(() => {
         document.querySelector('[data-go="play"]')?.click();
       }, 0);
     }
