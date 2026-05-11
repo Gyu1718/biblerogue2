@@ -221,7 +221,10 @@
     }
   }
 
-  document.addEventListener('click', function (event) {
+  window.__forceStartPlay = startPlay;
+  window.__forceNextStory = next;
+
+  function handleNavigationEvent(event) {
     const choiceButton = event.target.closest('.choice');
     if (choiceButton) {
       event.preventDefault();
@@ -233,10 +236,10 @@
       return;
     }
 
-    const trigger = event.target.closest('[data-go]');
+    const trigger = event.target.closest('[data-force-start], [data-go]');
     if (!trigger) return;
 
-    if (trigger.dataset.go === 'play') {
+    if (trigger.dataset.forceStart === 'play' || trigger.dataset.go === 'play') {
       event.preventDefault();
       event.stopImmediatePropagation();
       startPlay();
@@ -256,5 +259,9 @@
       resetState();
       show('home');
     }
-  }, true);
+  }
+
+  ['pointerdown', 'mousedown', 'touchstart', 'click'].forEach((type) => {
+    document.addEventListener(type, handleNavigationEvent, true);
+  });
 })();
