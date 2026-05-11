@@ -1,6 +1,9 @@
 /* Branching narrative cleanup pass
    Removes obsolete RPG remnants after the home/play/ending simplification. */
 
+.screen { pointer-events: none !important; }
+.screen.screen-active { pointer-events: auto !important; }
+
 /* Home: hide obsolete quick-slot icons and give the simplified menu better breathing room. */
 #home-screen .bottom-icons {
   display: none !important;
@@ -11,6 +14,42 @@
 #home-screen .side-menu .menu-button[data-panel="records"] { --y: 438px !important; }
 #home-screen .side-menu .menu-button[data-panel="endings"] { --y: 550px !important; }
 #home-screen .side-menu .menu-button[data-panel="settings"] { --y: 662px !important; }
+
+/* Prevent inactive info panels or decorative layers from stealing the start click. */
+#home-screen .home-panel { pointer-events: none !important; }
+#home-screen .home-panel.active { pointer-events: auto !important; }
+#home-screen .bg-layer,
+#home-screen .bg-vignette,
+#home-screen .outer-frame,
+#home-screen .corner,
+#home-screen .top-banner,
+#home-screen .top-actions,
+#home-screen .scripture,
+#home-screen .hourglass-button,
+#home-screen .card-shade,
+#home-screen .card-ornament,
+#home-screen .chapter-art,
+#home-screen .lock-mark {
+  pointer-events: none !important;
+}
+
+#home-screen .chapter-area,
+#home-screen .chapter-card.available,
+#home-screen .chapter-card.available *,
+#home-screen .continue-button,
+#home-screen .continue-button * {
+  pointer-events: auto !important;
+}
+
+#home-screen .chapter-card.available {
+  z-index: 40 !important;
+  cursor: pointer !important;
+}
+
+#home-screen .continue-button {
+  z-index: 60 !important;
+  cursor: pointer !important;
+}
 
 /* Chapter cards: use the new generated chapter illustration set. */
 #home-screen .chapter-art-1 {
