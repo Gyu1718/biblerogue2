@@ -1,0 +1,48 @@
+/* Play panel scroll separation
+   Keeps the narrative copy and choice list as independent scrollable zones. */
+
+#play-screen .narrative-copy {
+  max-height: 330px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding: 0 10px 18px 0 !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(196,154,85,.46) rgba(0,0,0,.20) !important;
+  overscroll-behavior: contain !important;
+  -webkit-overflow-scrolling: touch !important;
+  mask-image: linear-gradient(180deg, transparent 0, #000 18px, #000 calc(100% - 22px), transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 18px, #000 calc(100% - 22px), transparent 100%);
+}
+
+#play-screen .narrative-copy::-webkit-scrollbar,
+#play-screen .choice-list::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+#play-screen .narrative-copy::-webkit-scrollbar-track,
+#play-screen .choice-list::-webkit-scrollbar-track {
+  background: rgba(0,0,0,.20) !important;
+}
+
+#play-screen .narrative-copy::-webkit-scrollbar-thumb,
+#play-screen .choice-list::-webkit-scrollbar-thumb {
+  background: rgba(196,154,85,.46) !important;
+  border-radius: 8px !important;
+}
+
+#play-screen .choice-list {
+  top: 462px !important;
+  max-height: 224px !important;
+  overscroll-behavior: contain !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+#play-screen .story-progress {
+  top: 708px !important;
+}
+
+#play-screen .narrative-copy::after {
+  content: '';
+  display: block;
+  height: 4px;
+}
