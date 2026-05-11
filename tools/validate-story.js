@@ -32,6 +32,10 @@ const ALLOWED_EFFECTS = new Set([
 
 const ALLOWED_ENDING_RESOLVERS = new Set(['exodus']);
 
+const RESOLVER_ENDING_TARGETS = {
+  exodus: ['true_exodus_deliverance', 'faithful_exodus_witness', 'wounded_exodus_witness']
+};
+
 const REQUIRED_NODE_FIELDS = [
   'id',
   'chapter',
@@ -180,8 +184,16 @@ function validateChoice(nodeKey, choice, index, allNodeIds, allEndingIds, errors
     addError(errors, location, `ending target does not exist: ${choice.ending}`);
   }
 
-  if (choice.endingResolver && !ALLOWED_ENDING_RESOLVERS.has(choice.endingResolver)) {
-    addError(errors, location, `Unknown endingResolver: ${choice.endingResolver}`);
+  if (choice.endingResolver) {
+    if (!ALLOWED_ENDING_RESOLVERS.has(choice.endingResolver)) {
+      addError(errors, location, `Unknown endingResolver: ${choice.endingResolver}`);
+    } else {
+      (RESOLVER_ENDING_TARGETS[choice.endingResolver] || []).forEach((endingId) => {
+        if (!allEndingIds.has(endingId)) {
+          addError(errors, location, `endingResolver ${choice.endingResolver} can resolve to missing ending: ${endingId}`);
+        }
+      });
+    }
   }
 
   if (!Array.isArray(choice.companions)) {
@@ -257,6 +269,53 @@ function validateProgressSequence(storyNodes, warnings) {
   }
 }
 
+function traceReachableGraph(storyNodes, startNodeId) {
+  const reachableNodes = new Set();
+  const reachableEndings = new Set();
+  const queue = [startNodeId];
+
+  while (queue.length) {
+    const nodeId = queue.shift();
+    if (!nodeId || reachableNodes.has(nodeId)) continue;
+
+    const node = storyNodes[nodeId];
+    if (!node) continue;
+
+    reachableNodes.add(nodeId);
+    (node.choices || []).forEach((choice) => {
+      if (choice.next && !reachableNodes.has(choice.next)) queue.push(choice.next);
+      if (choice.ending) reachableEndings.add(choice.ending);
+      if (choice.endingResolver) {
+        (RESOLVER_ENDING_TARGETS[choice.endingResolver] || []).forEach((endingId) => reachableEndings.add(endingId));
+      }
+    });
+  }
+
+  return { reachableNodes, reachableEndings };
+}
+
+function validateReachability(storyNodes, endings, startNodeId, warnings) {
+  if (!startNodeId || !storyNodes[startNodeId]) return;
+
+  const { reachableNodes, reachableEndings } = traceReachableGraph(storyNodes, startNodeId);
+
+  Object.keys(storyNodes).forEach((nodeId) => {
+    if (!reachableNodes.has(nodeId)) {
+      addWarning(warnings, nodeId, 'Node is not reachable from START_NODE_ID.');
+    }
+  });
+
+  Object.keys(endings).forEach((endingId) => {
+    if (!reachableEndings.has(endingId)) {
+      addWarning(warnings, endingId, 'Ending is not reachable from START_NODE_ID.');
+    }
+  });
+
+  if (reachableEndings.size === 0) {
+    addWarning(warnings, 'story graph', 'No reachable endings were found.');
+  }
+}
+
 function run() {
   const storyWindow = loadBrowserDataFile(STORY_PATH);
   const endingWindow = loadBrowserDataFile(ENDINGS_PATH);
@@ -296,6 +355,7 @@ function run() {
     });
 
     validateProgressSequence(storyNodes, warnings);
+    validateReachability(storyNodes, endings, storyStartNodeId, warnings);
   }
 
   warnings.forEach((warning) => {
