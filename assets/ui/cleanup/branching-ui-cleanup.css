@@ -53,23 +53,23 @@
 
 /* Chapter cards: use the new generated chapter illustration set. */
 #home-screen .chapter-art-1 {
-  background-image: url('../../../images/chapters/chapter_01_exodus_card.png') !important;
+  background-image: url('../../images/chapters/chapter_01_exodus_card.png') !important;
 }
 
 #home-screen .locked-art-2 {
-  background-image: url('../../../images/chapters/chapter_02_jericho_card.png') !important;
+  background-image: url('../../images/chapters/chapter_02_jericho_card.png') !important;
 }
 
 #home-screen .locked-art-3 {
-  background-image: url('../../../images/chapters/chapter_03_carmel_card.png') !important;
+  background-image: url('../../images/chapters/chapter_03_carmel_card.png') !important;
 }
 
 #home-screen .locked-art-4 {
-  background-image: url('../../../images/chapters/chapter_04_lion_den_card.png') !important;
+  background-image: url('../../images/chapters/chapter_04_lion_den_card.png') !important;
 }
 
 #home-screen .locked-art-5 {
-  background-image: url('../../../images/chapters/chapter_05_empty_tomb_card.png') !important;
+  background-image: url('../../images/chapters/chapter_05_empty_tomb_card.png') !important;
 }
 
 #home-screen .chapter-card.available .chapter-art {
