@@ -134,6 +134,83 @@
   border-radius: 8px !important;
 }
 
+/* Bottom play controls
+   Move the choice confirmation flow into the two center-bottom buttons. */
+#play-screen .play-bottom {
+  pointer-events: auto !important;
+}
+
+#play-screen .day-panel {
+  left: 40px !important;
+  width: 350px !important;
+  justify-content: start !important;
+  place-items: center start !important;
+  padding-left: 24px !important;
+  opacity: .78 !important;
+  pointer-events: none !important;
+}
+
+#play-screen .location-panel {
+  left: 1226px !important;
+  width: 350px !important;
+  justify-content: end !important;
+  place-items: center end !important;
+  padding-right: 24px !important;
+  opacity: .78 !important;
+  pointer-events: none !important;
+}
+
+#play-screen .back-home,
+#play-screen .next-story {
+  top: 12px !important;
+  height: 50px !important;
+  border: 1px solid rgba(196,154,85,.36) !important;
+  background: linear-gradient(180deg, rgba(45,31,16,.58), rgba(8,10,12,.64)) !important;
+  color: #d8ad62 !important;
+  box-shadow: inset 0 0 18px rgba(0,0,0,.42), 0 0 12px rgba(0,0,0,.24) !important;
+  opacity: 1 !important;
+  cursor: pointer !important;
+  letter-spacing: .06em !important;
+}
+
+#play-screen .back-home {
+  left: 604px !important;
+  width: 202px !important;
+  font-size: 17px !important;
+}
+
+#play-screen .next-story {
+  left: 826px !important;
+  width: 262px !important;
+  font-size: 18px !important;
+}
+
+#play-screen .next-story span {
+  margin-left: 18px !important;
+  font-size: 25px !important;
+}
+
+#play-screen .back-home.disabled,
+#play-screen .back-home:disabled,
+#play-screen .next-story.disabled,
+#play-screen .next-story:disabled {
+  cursor: not-allowed !important;
+  opacity: .52 !important;
+  color: #8f7346 !important;
+  filter: grayscale(.18) brightness(.62) saturate(.64) drop-shadow(0 0 4px rgba(0,0,0,.30)) !important;
+}
+
+#play-screen .back-home:not(.disabled):not(:disabled):hover,
+#play-screen .next-story:not(.disabled):not(:disabled):hover {
+  color: #efc573 !important;
+  filter: brightness(1.06) saturate(1.02) drop-shadow(0 0 8px rgba(184,138,69,.24)) !important;
+}
+
+#play-screen .play-hourglass,
+#play-screen .play-top-empty {
+  display: none !important;
+}
+
 body.is-mobile-landscape #play-screen .narrative-panel > h2 {
   height: 74px !important;
   font-size: 36px !important;
@@ -159,4 +236,16 @@ body.is-mobile-landscape #play-screen .narrative-panel > .choice-list {
 body.is-mobile-landscape #play-screen .narrative-panel > .choice-list .choice {
   font-size: 21px !important;
   min-height: 56px !important;
+}
+
+body.is-mobile-landscape #play-screen .back-home {
+  left: 566px !important;
+  width: 220px !important;
+  font-size: 18px !important;
+}
+
+body.is-mobile-landscape #play-screen .next-story {
+  left: 806px !important;
+  width: 306px !important;
+  font-size: 18px !important;
 }
