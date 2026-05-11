@@ -72,12 +72,25 @@
   background-image: url('../../../images/chapters/chapter_05_empty_tomb_card.png') !important;
 }
 
+#home-screen .chapter-card.available .chapter-art {
+  filter: brightness(1.18) contrast(1.22) saturate(1.12) !important;
+}
+
+#home-screen .chapter-card.available .card-shade {
+  background: linear-gradient(90deg, rgba(0,0,0,.50), rgba(0,0,0,.22) 52%, rgba(0,0,0,.10)) !important;
+}
+
 #home-screen .chapter-card.locked .chapter-art {
-  filter: grayscale(.08) brightness(.70) contrast(1.08) saturate(.86) !important;
+  filter: grayscale(.04) brightness(.92) contrast(1.20) saturate(1.05) !important;
 }
 
 #home-screen .chapter-card.locked .card-shade {
-  background: linear-gradient(90deg, rgba(0,0,0,.62), rgba(0,0,0,.30) 58%, rgba(0,0,0,.18)) !important;
+  background: linear-gradient(90deg, rgba(0,0,0,.48), rgba(0,0,0,.20) 58%, rgba(0,0,0,.10)) !important;
+}
+
+#home-screen .chapter-card.locked .lock-mark {
+  opacity: .72 !important;
+  filter: brightness(.95) contrast(1.12) !important;
 }
 
 #home-screen .locked-label {
@@ -91,14 +104,14 @@
   left: 25px;
   z-index: 13;
   margin: 0;
-  text-shadow: 0 0 8px rgba(0,0,0,.92);
+  text-shadow: 0 0 8px rgba(0,0,0,.92), 0 2px 4px rgba(0,0,0,.82);
   pointer-events: none;
 }
 
 #home-screen .locked-title {
   top: 53px;
   width: 250px;
-  color: #d5ad68;
+  color: #e0bb72;
   font-size: 23px;
   font-weight: 700;
   letter-spacing: .06em;
@@ -107,7 +120,7 @@
 #home-screen .locked-subtitle {
   top: 88px;
   width: 315px;
-  color: #9f7940;
+  color: #bd914d;
   font-size: 13px;
   letter-spacing: .03em;
 }
@@ -152,8 +165,53 @@
   font-size: 16px !important;
 }
 
-/* Ending: reduce visual clash from the old bright symbol. */
+/* 1st UX clarity pass: make illustrations read faster during actual play. */
+#play-screen .scene-panel {
+  filter: brightness(1.02) saturate(1.02) !important;
+}
+
+#play-screen .scene-art {
+  filter: brightness(1.34) contrast(1.28) saturate(1.14) !important;
+  background-position: center 46% !important;
+}
+
+#play-screen .scene-art::before {
+  background:
+    radial-gradient(ellipse at 48% 72%, rgba(226,166,88,.10), transparent 22%),
+    linear-gradient(180deg, transparent, rgba(0,0,0,.06)) !important;
+}
+
+#play-screen .scene-art::after {
+  background:
+    linear-gradient(180deg, rgba(255,230,170,.035) 0%, transparent 31%, rgba(0,0,0,.025) 100%),
+    radial-gradient(circle at 50% 12%, rgba(150,190,220,.08), transparent 18%) !important;
+}
+
+#play-screen .scene-plaque {
+  filter: brightness(1.02) contrast(1.05) saturate(1.02) !important;
+}
+
+#play-screen .play-bg {
+  filter: saturate(1.02) brightness(.92) contrast(1.10) !important;
+}
+
+#play-screen .play-bg::after {
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.04), rgba(0,0,0,.32) 36%, rgba(0,0,0,.20)),
+    radial-gradient(circle at center, transparent 0 52%, rgba(0,0,0,.48) 100%) !important;
+}
+
+#play-screen .narrative-panel,
+#play-screen .right-panel {
+  filter: brightness(.94) saturate(.90) !important;
+}
+
+/* Ending: reduce visual clash from the old bright symbol and improve image readability. */
 #ending-screen .ending-lamb {
   opacity: .82 !important;
   filter: brightness(.88) saturate(.80) !important;
+}
+
+#ending-screen .ending-bg {
+  filter: brightness(1.12) contrast(1.16) saturate(1.08) !important;
 }
