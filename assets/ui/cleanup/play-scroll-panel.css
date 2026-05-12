@@ -102,7 +102,9 @@
   margin-bottom: 8px !important;
   padding-top: 8px !important;
   padding-bottom: 8px !important;
-  line-height: 1.34 !important;
+  font-size: 16px !important;
+  line-height: 1.28 !important;
+  letter-spacing: .01em !important;
 }
 
 #play-screen .narrative-panel > .choice-list .choice.active {
@@ -234,7 +236,9 @@ body.is-mobile-landscape #play-screen .narrative-panel > .choice-list {
 }
 
 body.is-mobile-landscape #play-screen .narrative-panel > .choice-list .choice {
-  font-size: 21px !important;
+  font-size: 19px !important;
+  line-height: 1.26 !important;
+  letter-spacing: .01em !important;
   min-height: 56px !important;
 }
 
