@@ -34,67 +34,18 @@
 }
 
 .play-frame {
-  --frame-corner-w: 220px;
-  --frame-corner-h: 112px;
-  --frame-edge-w: 112px;
-  --frame-edge-h: 112px;
   position: absolute;
   left: 7px;
   top: 8px;
   width: 1658px;
   height: 915px;
-  border: 0;
-  background-image:
-    url('../assets/ui/play/frame_9slice/play_frame_top_left.png'),
-    url('../assets/ui/play/frame_9slice/play_frame_top_edge.png'),
-    url('../assets/ui/play/frame_9slice/play_frame_top_right.png'),
-    url('../assets/ui/play/frame_9slice/play_frame_left_edge.png'),
-    url('../assets/ui/play/frame_9slice/play_frame_right_edge.png'),
-    url('../assets/ui/play/frame_9slice/play_frame_bottom_left.png'),
-    url('../assets/ui/play/frame_9slice/play_frame_bottom_edge.png'),
-    url('../assets/ui/play/frame_9slice/play_frame_bottom_right.png');
-  background-position:
-    left top,
-    center top,
-    right top,
-    left center,
-    right center,
-    left bottom,
-    center bottom,
-    right bottom;
-  background-size:
-    var(--frame-corner-w) var(--frame-corner-h),
-    auto var(--frame-edge-h),
-    var(--frame-corner-w) var(--frame-corner-h),
-    var(--frame-edge-w) auto,
-    var(--frame-edge-w) auto,
-    var(--frame-corner-w) var(--frame-corner-h),
-    auto var(--frame-edge-h),
-    var(--frame-corner-w) var(--frame-corner-h);
-  background-repeat:
-    no-repeat,
-    repeat-x,
-    no-repeat,
-    repeat-y,
-    repeat-y,
-    no-repeat,
-    repeat-x,
-    no-repeat;
-  box-shadow: 0 0 0 1px rgba(13,8,4,.96), inset 0 0 18px rgba(0,0,0,.34);
+  border: 2px solid rgba(218,176,100,.74);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,219,145,.18),
+    inset 0 0 22px rgba(0,0,0,.58),
+    0 0 0 1px rgba(20,12,6,.92);
   pointer-events: none;
   z-index: 20;
-}
-
-.play-frame::before {
-  content: '';
-  position: absolute;
-  left: var(--frame-edge-w);
-  right: var(--frame-edge-w);
-  top: var(--frame-edge-h);
-  bottom: var(--frame-edge-h);
-  background: url('../assets/ui/play/frame_9slice/play_frame_center_fill.png') center / 360px 360px repeat;
-  opacity: .075;
-  pointer-events: none;
 }
 
 .play-top-hud {
@@ -558,63 +509,12 @@
   opacity: .7;
 }
 
-/* Play frame PNG 9-slice pass
-   SVG-free, JS-free outer frame replacement. */
+/* Play frame sharpness pass
+   CSS-only: keep the fix limited to the outer frame. */
 html body #play-screen .play-frame {
-  --frame-corner-w: 220px;
-  --frame-corner-h: 112px;
-  --frame-edge-w: 112px;
-  --frame-edge-h: 112px;
-  border: 0 !important;
-  background-image:
-    url('../assets/ui/play/frame_9slice/play_frame_top_left.png'),
-    url('../assets/ui/play/frame_9slice/play_frame_top_edge.png'),
-    url('../assets/ui/play/frame_9slice/play_frame_top_right.png'),
-    url('../assets/ui/play/frame_9slice/play_frame_left_edge.png'),
-    url('../assets/ui/play/frame_9slice/play_frame_right_edge.png'),
-    url('../assets/ui/play/frame_9slice/play_frame_bottom_left.png'),
-    url('../assets/ui/play/frame_9slice/play_frame_bottom_edge.png'),
-    url('../assets/ui/play/frame_9slice/play_frame_bottom_right.png') !important;
-  background-position:
-    left top,
-    center top,
-    right top,
-    left center,
-    right center,
-    left bottom,
-    center bottom,
-    right bottom !important;
-  background-size:
-    var(--frame-corner-w) var(--frame-corner-h),
-    auto var(--frame-edge-h),
-    var(--frame-corner-w) var(--frame-corner-h),
-    var(--frame-edge-w) auto,
-    var(--frame-edge-w) auto,
-    var(--frame-corner-w) var(--frame-corner-h),
-    auto var(--frame-edge-h),
-    var(--frame-corner-w) var(--frame-corner-h) !important;
-  background-repeat:
-    no-repeat,
-    repeat-x,
-    no-repeat,
-    repeat-y,
-    repeat-y,
-    no-repeat,
-    repeat-x,
-    no-repeat !important;
-  box-shadow: 0 0 0 1px rgba(13,8,4,.96), inset 0 0 18px rgba(0,0,0,.34) !important;
-  pointer-events: none !important;
-  z-index: 20 !important;
-}
-
-html body #play-screen .play-frame::before {
-  content: '';
-  position: absolute;
-  left: var(--frame-edge-w);
-  right: var(--frame-edge-w);
-  top: var(--frame-edge-h);
-  bottom: var(--frame-edge-h);
-  background: url('../assets/ui/play/frame_9slice/play_frame_center_fill.png') center / 360px 360px repeat;
-  opacity: .075;
-  pointer-events: none;
+  border: 2px solid rgba(218,176,100,.74) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,219,145,.18),
+    inset 0 0 22px rgba(0,0,0,.58),
+    0 0 0 1px rgba(20,12,6,.92) !important;
 }
