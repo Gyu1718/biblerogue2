@@ -1,6 +1,6 @@
 # 출애굽 1장 10재앙 완전 구현 루트 QA 체크리스트
 
-이 문서는 1장 「출애굽」의 10재앙 전체 구현 루트, 이미지 연결, 엔딩 도달 가능성, 즉시 배드엔딩 설계를 검수하기 위한 기준 문서이다.
+이 문서는 1장 「출애굽」의 10재앙 전체 구현 루트, 이미지 연결, 엔딩 도달 가능성, 즉시 배드엔딩 설계, 보이지 않는 위험도 시스템을 검수하기 위한 기준 문서이다.
 
 검수 대상:
 
@@ -97,7 +97,124 @@ exodus_01_slave_day
 
 ---
 
-## 4. 즉시 배드엔딩과 누적형 실패 구분
+## 4. 보이지 않는 위험도 시스템 검수
+
+`main.js`에는 이미 다음 상태값이 존재한다.
+
+```text
+trust
+fear
+community
+discernment
+memory
+delay
+scatter
+```
+
+최종 `endingResolver: 'exodus'`는 이 상태값을 기준으로 엔딩을 판정한다.
+
+```text
+trust >= 4 && community >= 3 && memory >= 3
+→ true_exodus_deliverance
+
+fear >= 4 || scatter >= 3 || delay >= 3
+→ wounded_exodus_witness
+
+그 외
+→ faithful_exodus_witness
+```
+
+검수 기준:
+
+- 좋은 선택은 `trust`, `memory`, `community`를 충분히 쌓아야 한다.
+- 흔들림 선택은 `fear`, `delay`, `scatter`를 누적해야 한다.
+- 재앙 관찰/해석 구간의 나쁜 선택은 즉시 배드엔딩이 아니라 위험도 누적으로 처리한다.
+- 유월절 표지 거부, 애굽 회귀, 공동체 붕괴, 열린 홍해 길 앞 최종 지체는 즉시 배드엔딩으로 처리한다.
+
+위험도 누적형 선택 예시:
+
+| 선택지 key | 기대 effects | 의도 |
+|---|---|---|
+| `wait_in_fear` | `fear +1`, `delay +1` | 두려움과 지체 누적 |
+| `stop_hoping` | `fear +1`, `delay +1`, 가능하면 `trust -1` | 희망 포기 누적 |
+| `boast_goshen` | `fear +1`, `delay +1`, 가능하면 `memory -1` | 구별을 교만으로 왜곡 |
+| `mock_egyptians` | `community -1`, `fear +1` | 공동체성과 기억 손상 |
+| `rumor_in_dark` | `fear +1`, `scatter +1` 또는 `delay +1` | 소문으로 공동체 분산 |
+| `soften_warning` | `fear +1`, `delay +1` | 경고의 무게 약화 |
+| `each_family_first` | `scatter +1`, `fear +1`, `community -1` | 각자도생 성향 누적 |
+| `send_each_family` | `scatter +1`, `community -1` | 공동체 결속 약화 |
+| `rush_without_looking_back` | `fear +1`, `scatter +1`, `community -1` | 해방을 개인 도망으로 축소 |
+| `only_catch_breath` | `fear +1`, `delay +1` | 기억 없는 안도감 누적 |
+
+테스트 루트 A — true 엔딩 기대:
+
+```text
+remember_and_trust 반복
+→ teach_the_children
+→ keep_households_together
+→ answer_panic_with_memory
+→ stand_and_watch
+→ name_the_pillar
+→ walk_by_word
+→ name_the_memory
+→ sing_the_lord
+→ remember_for_children
+```
+
+기대 상태:
+
+```text
+trust >= 4
+memory >= 3
+community >= 3
+```
+
+테스트 루트 B — wounded 엔딩 기대:
+
+```text
+wait_in_fear 반복
+→ rumor_in_dark
+→ soften_warning
+→ eat_in_silence_fear
+→ each_family_first
+→ send_each_family
+→ rush_without_looking_back
+→ only_catch_breath
+→ remain_in_relief
+```
+
+기대 상태 중 하나 이상:
+
+```text
+fear >= 4
+또는 delay >= 3
+또는 scatter >= 3
+```
+
+테스트 루트 C — faithful 엔딩 기대:
+
+```text
+steady_the_people 중심
+→ watch_darkness
+→ ask_and_obey
+→ keep_ready_to_move
+→ read_distance
+→ cross_in_pairs
+→ wait_for_the_last
+→ name_the_people
+→ remember_names
+```
+
+기대 상태:
+
+```text
+true 조건에는 조금 부족하지만 wounded 조건에도 걸리지 않음
+→ faithful_exodus_witness
+```
+
+---
+
+## 5. 즉시 배드엔딩과 누적형 실패 구분
 
 설계 원칙:
 
@@ -135,7 +252,7 @@ exodus_01_slave_day
 
 ---
 
-## 5. 직접 배드엔딩 루트 체크
+## 6. 직접 배드엔딩 루트 체크
 
 아래 엔딩이 실제 선택지에서 바로 도달되어야 한다.
 
@@ -157,7 +274,7 @@ exodus_07_passover.ignore_mark
 
 ---
 
-## 6. 좋은/혼합 엔딩 루트 체크
+## 7. 좋은/혼합 엔딩 루트 체크
 
 최종 노드 `exodus_12_deliverance`의 선택지는 `endingResolver: 'exodus'`를 유지한다.
 
@@ -175,7 +292,7 @@ remember_names → endingResolver: exodus
 
 ---
 
-## 7. 엔딩 이미지 체크
+## 8. 엔딩 이미지 체크
 
 `src/data/endings.js`의 각 엔딩 객체에 다음 `image` 필드가 있어야 한다.
 
@@ -193,7 +310,7 @@ bad_closed_sea.png
 
 ---
 
-## 8. 완료 판정
+## 9. 완료 판정
 
 출애굽 1장은 다음 조건을 만족할 때 “10재앙 완전 구현 1차 완료”로 판정한다.
 
