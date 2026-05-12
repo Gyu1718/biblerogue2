@@ -29,15 +29,11 @@
 }
 
 #home-screen .outer-frame,
-#home-screen .corner {
-  pointer-events: none;
-}
+#home-screen .corner { pointer-events: none; }
 
 #home-screen .top-banner,
 #home-screen .top-actions,
-#home-screen .sidebar {
-  display: none !important;
-}
+#home-screen .sidebar { display: none !important; }
 
 #home-screen .home-part-sidebar {
   position: absolute;
@@ -113,12 +109,8 @@
   color: #a98548;
   text-align: left;
   font-family: inherit;
-  cursor: default;
-  box-shadow: inset 0 0 18px rgba(0,0,0,.42);
-}
-
-#home-screen .home-part-button[data-panel='story'] {
   cursor: pointer;
+  box-shadow: inset 0 0 18px rgba(0,0,0,.42);
 }
 
 #home-screen .home-part-button strong {
@@ -136,7 +128,8 @@
   letter-spacing: .02em;
 }
 
-#home-screen .home-part-button.is-active {
+#home-screen .home-part-button.is-active,
+#home-screen .home-part-button.active {
   border-color: rgba(239,197,115,.76);
   background:
     linear-gradient(90deg, rgba(66,39,15,.72), rgba(20,15,9,.72)),
@@ -147,7 +140,8 @@
     inset 0 0 0 1px rgba(255,223,154,.22);
 }
 
-#home-screen .home-part-button.is-active::after {
+#home-screen .home-part-button.is-active::after,
+#home-screen .home-part-button.active::after {
   content: '✦';
   position: absolute;
   right: 25px;
@@ -213,9 +207,7 @@
   display: none;
 }
 
-#home-screen .chapter-area.home-part-main.active {
-  display: block !important;
-}
+#home-screen .chapter-area.home-part-main.active { display: block !important; }
 
 #home-screen .home-part-hero {
   position: absolute;
@@ -230,6 +222,12 @@
   border-bottom: 1px solid rgba(196,154,85,.16);
   box-shadow: inset 0 -40px 50px rgba(0,0,0,.35);
 }
+
+#home-screen .home-part-hero.part02 { background-image: linear-gradient(90deg, rgba(0,0,0,.48) 0 34%, rgba(0,0,0,.18) 54%, rgba(0,0,0,.28)), radial-gradient(circle at 58% 46%, rgba(196,154,85,.12), transparent 25%), url('../../images/home/chapters/part02_ch01_saul_thumb_2x.png'); }
+#home-screen .home-part-hero.part03 { background-image: linear-gradient(90deg, rgba(0,0,0,.48) 0 34%, rgba(0,0,0,.18) 54%, rgba(0,0,0,.28)), radial-gradient(circle at 58% 46%, rgba(196,154,85,.12), transparent 25%), url('../../images/home/chapters/part03_ch01_hosea_thumb_2x.png'); }
+#home-screen .home-part-hero.part04 { background-image: linear-gradient(90deg, rgba(0,0,0,.48) 0 34%, rgba(0,0,0,.18) 54%, rgba(0,0,0,.28)), radial-gradient(circle at 58% 46%, rgba(196,154,85,.12), transparent 25%), url('../../images/home/chapters/part04_ch01_fiery_furnace_thumb_2x.png'); }
+#home-screen .home-part-hero.part05 { background-image: linear-gradient(90deg, rgba(0,0,0,.48) 0 34%, rgba(0,0,0,.18) 54%, rgba(0,0,0,.28)), radial-gradient(circle at 58% 46%, rgba(196,154,85,.12), transparent 25%), url('../../images/home/chapters/part05_ch01_john_baptist_thumb_2x.png'); }
+#home-screen .home-part-hero.part06 { background-image: linear-gradient(90deg, rgba(0,0,0,.48) 0 34%, rgba(0,0,0,.18) 54%, rgba(0,0,0,.28)), radial-gradient(circle at 58% 46%, rgba(196,154,85,.12), transparent 25%), url('../../images/home/chapters/part06_ch01_pentecost_thumb_2x.png'); }
 
 #home-screen .home-part-eyebrow {
   position: absolute;
@@ -286,33 +284,22 @@
   overflow: hidden;
   border: 1px solid rgba(196,154,85,.34);
   background: rgba(0,0,0,.38);
-  box-shadow:
-    inset 0 0 0 1px rgba(255,222,150,.08),
-    inset 0 0 30px rgba(0,0,0,.34),
-    0 0 12px rgba(0,0,0,.32);
+  box-shadow: inset 0 0 0 1px rgba(255,222,150,.08), inset 0 0 30px rgba(0,0,0,.34), 0 0 12px rgba(0,0,0,.32);
   cursor: default;
 }
 
-#home-screen .chapter-card.home-chapter-card.available {
-  cursor: pointer;
-}
+#home-screen .chapter-card.home-chapter-card.available { cursor: pointer; }
 
 #home-screen .chapter-card.home-chapter-card.available:hover,
 #home-screen .chapter-card.home-chapter-card.available.active {
   border-color: rgba(239,197,115,.72);
-  box-shadow:
-    0 0 18px rgba(196,154,85,.28),
-    inset 0 0 0 1px rgba(255,222,150,.18),
-    inset 0 0 34px rgba(0,0,0,.24);
+  box-shadow: 0 0 18px rgba(196,154,85,.28), inset 0 0 0 1px rgba(255,222,150,.18), inset 0 0 34px rgba(0,0,0,.24);
   filter: brightness(1.05);
 }
 
 #home-screen .chapter-card.home-chapter-card.is-current {
   border-color: rgba(239,197,115,.82);
-  box-shadow:
-    0 0 18px rgba(196,154,85,.34),
-    inset 0 0 0 1px rgba(255,222,150,.20),
-    inset 0 0 34px rgba(0,0,0,.24);
+  box-shadow: 0 0 18px rgba(196,154,85,.34), inset 0 0 0 1px rgba(255,222,150,.20), inset 0 0 34px rgba(0,0,0,.24);
 }
 
 #home-screen .home-chapter-art {
@@ -324,53 +311,63 @@
   transform: scale(1.02);
 }
 
-#home-screen .chapter-card.is-current .home-chapter-art {
-  filter: brightness(1.02) saturate(.98) contrast(1.03);
-}
+#home-screen .chapter-card.is-current .home-chapter-art { filter: brightness(1.02) saturate(.98) contrast(1.03); }
 
-#home-screen .home-chapter-art.exodus {
-  background-image: url('../../images/home/chapters/part01_ch01_exodus_thumb_2x.png');
-}
+#home-screen .home-chapter-art.exodus { background-image: url('../../images/home/chapters/part01_ch01_exodus_thumb_2x.png'); }
+#home-screen .home-chapter-art.wilderness { background-image: url('../../images/home/chapters/part01_ch02_wilderness_thumb_2x.png'); }
+#home-screen .home-chapter-art.jericho { background-image: url('../../images/home/chapters/part01_ch03_jericho_thumb_2x.png'); }
+#home-screen .home-chapter-art.judges { background-image: url('../../images/home/chapters/part01_ch04_judges_thumb_2x.png'); }
+#home-screen .home-chapter-art.ruth { background-image: url('../../images/home/chapters/part01_ch05_ruth_thumb_2x.png'); }
+#home-screen .home-chapter-art.samuel { background-image: url('../../images/home/chapters/part01_ch06_samuel_call_thumb_2x.png'); }
 
-#home-screen .home-chapter-art.wilderness {
-  background-image: url('../../images/home/chapters/part01_ch02_wilderness_thumb_2x.png');
-}
+#home-screen .home-chapter-art.saul { background-image: url('../../images/home/chapters/part02_ch01_saul_thumb_2x.png'); }
+#home-screen .home-chapter-art.david-goliath { background-image: url('../../images/home/chapters/part02_ch02_david_goliath_thumb_2x.png'); }
+#home-screen .home-chapter-art.solomon-temple { background-image: url('../../images/home/chapters/part02_ch03_solomon_temple_thumb_2x.png'); }
+#home-screen .home-chapter-art.carmel { background-image: url('../../images/home/chapters/part02_ch04_carmel_thumb_2x.png'); }
+#home-screen .home-chapter-art.hezekiah { background-image: url('../../images/home/chapters/part02_ch05_hezekiah_thumb_2x.png'); }
+#home-screen .home-chapter-art.josiah { background-image: url('../../images/home/chapters/part02_ch06_josiah_thumb_2x.png'); }
 
-#home-screen .home-chapter-art.jericho {
-  background-image: url('../../images/home/chapters/part01_ch03_jericho_thumb_2x.png');
-}
+#home-screen .home-chapter-art.hosea { background-image: url('../../images/home/chapters/part03_ch01_hosea_thumb_2x.png'); }
+#home-screen .home-chapter-art.amos { background-image: url('../../images/home/chapters/part03_ch02_amos_thumb_2x.png'); }
+#home-screen .home-chapter-art.isaiah-call { background-image: url('../../images/home/chapters/part03_ch03_isaiah_call_thumb_2x.png'); }
+#home-screen .home-chapter-art.jeremiah { background-image: url('../../images/home/chapters/part03_ch04_jeremiah_thumb_2x.png'); }
+#home-screen .home-chapter-art.fall-jerusalem { background-image: url('../../images/home/chapters/part03_ch05_fall_of_jerusalem_thumb_2x.png'); }
+#home-screen .home-chapter-art.dry-bones { background-image: url('../../images/home/chapters/part03_ch06_dry_bones_thumb_2x.png'); }
 
-#home-screen .home-chapter-art.judges {
-  background-image: url('../../images/home/chapters/part01_ch04_judges_thumb_2x.png');
-}
+#home-screen .home-chapter-art.fiery-furnace { background-image: url('../../images/home/chapters/part04_ch01_fiery_furnace_thumb_2x.png'); }
+#home-screen .home-chapter-art.lions-den { background-image: url('../../images/home/chapters/part04_ch02_lions_den_thumb_2x.png'); }
+#home-screen .home-chapter-art.esther { background-image: url('../../images/home/chapters/part04_ch03_esther_thumb_2x.png'); }
+#home-screen .home-chapter-art.haggai { background-image: url('../../images/home/chapters/part04_ch04_haggai_thumb_2x.png'); }
+#home-screen .home-chapter-art.ezra { background-image: url('../../images/home/chapters/part04_ch05_ezra_thumb_2x.png'); }
+#home-screen .home-chapter-art.nehemiah { background-image: url('../../images/home/chapters/part04_ch06_nehemiah_thumb_2x.png'); }
 
-#home-screen .home-chapter-art.ruth {
-  background-image: url('../../images/home/chapters/part01_ch05_ruth_thumb_2x.png');
-}
+#home-screen .home-chapter-art.john-baptist { background-image: url('../../images/home/chapters/part05_ch01_john_baptist_thumb_2x.png'); }
+#home-screen .home-chapter-art.annunciation { background-image: url('../../images/home/chapters/part05_ch02_annunciation_thumb_2x.png'); }
+#home-screen .home-chapter-art.bethlehem-night { background-image: url('../../images/home/chapters/part05_ch03_bethlehem_night_thumb_2x.png'); }
+#home-screen .home-chapter-art.wilderness-temptation { background-image: url('../../images/home/chapters/part05_ch04_wilderness_temptation_thumb_2x.png'); }
+#home-screen .home-chapter-art.call-galilee { background-image: url('../../images/home/chapters/part05_ch05_call_of_galilee_thumb_2x.png'); }
+#home-screen .home-chapter-art.empty-tomb { background-image: url('../../images/home/chapters/part05_ch06_empty_tomb_thumb_2x.png'); }
 
-#home-screen .home-chapter-art.samuel {
-  background-image: url('../../images/home/chapters/part01_ch06_samuel_call_thumb_2x.png');
-}
+#home-screen .home-chapter-art.pentecost { background-image: url('../../images/home/chapters/part06_ch01_pentecost_thumb_2x.png'); }
+#home-screen .home-chapter-art.stephen { background-image: url('../../images/home/chapters/part06_ch02_stephen_thumb_2x.png'); }
+#home-screen .home-chapter-art.damascus { background-image: url('../../images/home/chapters/part06_ch03_damascus_thumb_2x.png'); }
+#home-screen .home-chapter-art.cornelius { background-image: url('../../images/home/chapters/part06_ch04_cornelius_thumb_2x.png'); }
+#home-screen .home-chapter-art.philippi-prison { background-image: url('../../images/home/chapters/part06_ch05_philippi_prison_thumb_2x.png'); }
+#home-screen .home-chapter-art.rome-voyage { background-image: url('../../images/home/chapters/part06_ch06_rome_voyage_thumb_2x.png'); }
 
 #home-screen .home-chapter-card::after {
   content: '';
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.46)),
-    linear-gradient(90deg, rgba(0,0,0,.26), transparent 56%);
+  background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.46)), linear-gradient(90deg, rgba(0,0,0,.26), transparent 56%);
   pointer-events: none;
 }
 
 #home-screen .home-chapter-card.locked .home-chapter-art,
-#home-screen .home-chapter-card.is-preparing .home-chapter-art {
-  filter: brightness(.58) saturate(.66) contrast(1.04);
-}
+#home-screen .home-chapter-card.is-preparing .home-chapter-art { filter: brightness(.58) saturate(.66) contrast(1.04); }
 
 #home-screen .home-chapter-card.available.locked .home-chapter-art,
-#home-screen .home-chapter-card.available.is-preparing .home-chapter-art {
-  filter: brightness(.68) saturate(.74) contrast(1.04);
-}
+#home-screen .home-chapter-card.available.is-preparing .home-chapter-art { filter: brightness(.68) saturate(.74) contrast(1.04); }
 
 #home-screen .home-chapter-no {
   position: absolute;
@@ -390,7 +387,7 @@
   z-index: 2;
   margin: 0;
   color: #e3bd75;
-  font-size: 29px;
+  font-size: 27px;
   font-weight: 800;
   line-height: 1.2;
   letter-spacing: .03em;
@@ -437,26 +434,8 @@
   box-shadow: 0 0 14px rgba(0,0,0,.62);
 }
 
-#home-screen .home-chapter-lock span {
-  transform: rotate(-45deg);
-}
-
-#home-screen .continue-button {
-  display: none !important;
-}
-
-#home-screen .restart-button {
-  position: absolute;
-  right: 22px;
-  bottom: 24px;
-  z-index: 3;
-  width: 86px;
-  height: 36px;
-  border: 1px solid rgba(196,154,85,.28);
-  background: rgba(10,8,6,.54);
-  color: #b98d4a;
-  font-family: inherit;
-}
+#home-screen .home-chapter-lock span { transform: rotate(-45deg); }
+#home-screen .continue-button { display: none !important; }
 
 #home-screen .home-info-panel {
   left: 462px !important;
@@ -486,10 +465,7 @@
   box-shadow: inset 0 0 14px rgba(0,0,0,.42), 0 0 10px rgba(0,0,0,.22);
 }
 
-#home-screen .home-panel-back:hover {
-  color: #efc573;
-  filter: brightness(1.06);
-}
+#home-screen .home-panel-back:hover { color: #efc573; filter: brightness(1.06); }
 
 #home-screen .scripture {
   left: 462px !important;
@@ -499,10 +475,5 @@
   text-align: left;
 }
 
-#home-screen .scripture .quote {
-  font-size: 17px;
-}
-
-#home-screen .scripture .reference {
-  font-size: 14px;
-}
+#home-screen .scripture .quote { font-size: 17px; }
+#home-screen .scripture .reference { font-size: 14px; }
