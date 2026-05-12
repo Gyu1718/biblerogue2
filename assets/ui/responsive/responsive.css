@@ -1,6 +1,5 @@
 /* Responsive shell for the fixed 1672 × 941 game canvas.
-   This file does not redesign individual screens. It keeps the current game UI centered,
-   safe-area aware, and usable in desktop resize + mobile landscape contexts. */
+   Mobile landscape is intentionally a scaled desktop canvas, not a separate layout. */
 
 :root {
   --responsive-scale: 1;
@@ -49,42 +48,6 @@ body.is-mobile-landscape #viewport {
 
 body.is-mobile-landscape #game-canvas {
   image-rendering: auto;
-}
-
-/* On mobile landscape, increase the most important text slightly before the full canvas is scaled down. */
-body.is-mobile-landscape #play-screen .narrative-panel h2 {
-  font-size: 40px !important;
-}
-
-body.is-mobile-landscape #play-screen .narrative-copy p,
-body.is-mobile-landscape #play-screen .narrative-copy strong {
-  font-size: 22px !important;
-  line-height: 1.72 !important;
-}
-
-body.is-mobile-landscape #play-screen .choice {
-  font-size: 22px !important;
-  min-height: 58px !important;
-}
-
-body.is-mobile-landscape #play-screen .companion-line-body strong {
-  font-size: 21px !important;
-}
-
-body.is-mobile-landscape #play-screen .companion-line-body em,
-body.is-mobile-landscape #play-screen .companion-line-body p {
-  font-size: 18px !important;
-  line-height: 1.55 !important;
-}
-
-body.is-mobile-landscape #play-screen .next-story,
-body.is-mobile-landscape #play-screen .back-home {
-  font-size: 18px !important;
-}
-
-body.is-mobile-landscape #home-screen .continue-button,
-body.is-mobile-landscape #home-screen .restart-button {
-  min-height: 50px !important;
 }
 
 /* Portrait mobile is intentionally not redesigned. The game is landscape-first. */
@@ -142,10 +105,4 @@ body.is-mobile-portrait #rotate-notice {
 body.is-mobile-portrait #viewport {
   filter: blur(2px) brightness(.56);
   pointer-events: none;
-}
-
-@media (max-width: 900px) and (orientation: landscape) {
-  body.is-mobile-landscape #viewport {
-    padding: max(env(safe-area-inset-top), 2px) max(env(safe-area-inset-right), 4px) max(env(safe-area-inset-bottom), 2px) max(env(safe-area-inset-left), 4px);
-  }
 }
