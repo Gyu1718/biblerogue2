@@ -183,12 +183,12 @@
   width: 548px;
   height: 700px;
   background:
-    radial-gradient(circle at 50% 18%, rgba(210,220,225,.24), transparent 7%),
-    linear-gradient(180deg, rgba(3,8,13,.15), rgba(0,0,0,.25)),
+    radial-gradient(circle at 50% 18%, rgba(210,220,225,.20), transparent 7%),
+    linear-gradient(180deg, rgba(3,8,13,.08), rgba(0,0,0,.14)),
     url('../assets/images/chapter-3-bg.png');
   background-size: auto 100%;
   background-position: center;
-  filter: brightness(.95) contrast(1.1) saturate(.9);
+  filter: brightness(1.08) contrast(1.02) saturate(.98);
 }
 .scene-art::before {
   content: '';
@@ -196,10 +196,10 @@
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 56%;
+  height: 50%;
   background:
-    radial-gradient(ellipse at 48% 72%, rgba(195,123,55,.28), transparent 22%),
-    linear-gradient(180deg, transparent, rgba(0,0,0,.35));
+    radial-gradient(ellipse at 48% 72%, rgba(195,123,55,.20), transparent 24%),
+    linear-gradient(180deg, transparent, rgba(0,0,0,.22));
 }
 
 .scene-plaque {
