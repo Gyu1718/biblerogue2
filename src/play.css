@@ -39,13 +39,23 @@
   top: 8px;
   width: 1658px;
   height: 915px;
-  border: 2px solid rgba(218,176,100,.74);
-  box-shadow:
-    inset 0 0 0 1px rgba(255,219,145,.18),
-    inset 0 0 22px rgba(0,0,0,.58),
-    0 0 0 1px rgba(20,12,6,.92);
+  border: 1px solid rgba(218,176,100,.22);
+  box-shadow: inset 0 0 12px rgba(0,0,0,.32);
   pointer-events: none;
-  z-index: 20;
+  z-index: 19;
+}
+
+.play-outer-overlay {
+  position: absolute;
+  inset: 0;
+  width: 1672px;
+  height: 941px;
+  background-image: url('../assets/ui/play/play_outer_overlay_2x.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 1672px 941px;
+  pointer-events: none;
+  z-index: 21;
 }
 
 .play-top-hud {
@@ -509,12 +519,23 @@
   opacity: .7;
 }
 
-/* Play frame sharpness pass
-   CSS-only: keep the fix limited to the outer frame. */
+/* Play outer overlay pass
+   One-piece PNG overlay. No 9-slice, no SVG, no JS. */
 html body #play-screen .play-frame {
-  border: 2px solid rgba(218,176,100,.74) !important;
-  box-shadow:
-    inset 0 0 0 1px rgba(255,219,145,.18),
-    inset 0 0 22px rgba(0,0,0,.58),
-    0 0 0 1px rgba(20,12,6,.92) !important;
+  border-color: rgba(218,176,100,.18) !important;
+  box-shadow: inset 0 0 10px rgba(0,0,0,.28) !important;
+  z-index: 19 !important;
+}
+
+html body #play-screen .play-outer-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 1672px !important;
+  height: 941px !important;
+  background-image: url('../assets/ui/play/play_outer_overlay_2x.png') !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-size: 1672px 941px !important;
+  pointer-events: none !important;
+  z-index: 21 !important;
 }
