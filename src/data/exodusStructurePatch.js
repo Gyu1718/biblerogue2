@@ -38,7 +38,7 @@
       place,
       progress: { current, total: TOTAL },
       image,
-      copy,
+      copy: Array.isArray(copy) ? copy : [copy],
       prompt,
       choices
     });
@@ -51,8 +51,8 @@
   function observeChoices(next) {
     return [
       choice('remember_and_trust', '▤', '이 일을 우연으로 넘기지 않고 기억해 두자고 말한다', { memory: 1, trust: 1 }, { next }, [
-        c('mira', '기억하겠습니다. 이 일은 애굽의 질서가 흔들린 흔적입니다.'),
-        c('eli', '표지를 기억하는 사람은 다음 두려움 앞에서도 길을 잃지 않습니다.')
+        c('mira', '기억하겠습니다. 재앙은 단순한 사건이 아니라 애굽의 질서가 흔들린 흔적입니다.'),
+        c('eli', '기억하는 사람은 다음 두려움 앞에서도 완전히 길을 잃지 않습니다.')
       ]),
       choice('steady_the_people', '🤝', '놀란 사람들을 진정시키며 함께 상황을 살핀다', { community: 1, discernment: 1 }, { next }, [
         c('yona', '공포는 재앙보다 빠르게 번집니다. 사람들을 한곳에 모으겠습니다.'),
@@ -66,25 +66,16 @@
   }
 
   [
-    ['exodus_01_slave_day', 1],
-    ['exodus_02_whisper', 2],
-    ['exodus_03_pharaoh', 3],
-    ['exodus_04_plague_begin', 5],
-    ['exodus_05_set_apart', 10],
-    ['exodus_06_darkness', 16],
-    ['exodus_07_passover', 19],
-    ['exodus_08_departure', 21],
-    ['exodus_09_wilderness_edge', 23],
-    ['exodus_10_redsea', 26],
-    ['exodus_10b_care_branch', 27],
-    ['exodus_10c_discern_branch', 27],
-    ['exodus_11_crossing', 29],
-    ['exodus_12_deliverance', 32]
+    ['exodus_01_slave_day', 1], ['exodus_02_whisper', 2], ['exodus_03_pharaoh', 3],
+    ['exodus_04_plague_begin', 5], ['exodus_05_set_apart', 10], ['exodus_06_darkness', 16],
+    ['exodus_07_passover', 19], ['exodus_08_departure', 21], ['exodus_09_wilderness_edge', 23],
+    ['exodus_10_redsea', 26], ['exodus_10b_care_branch', 27], ['exodus_10c_discern_branch', 27],
+    ['exodus_11_crossing', 29], ['exodus_12_deliverance', 32]
   ].forEach(([id, current]) => progress(id, current));
 
   setChoices('exodus_03_pharaoh', [
     choice('watch_the_burden', '◎', '분노를 삼키고 더 무거워진 노동의 의미를 지켜본다', { discernment: 1, fear: 1 }, { next: 'exodus_03b_crushed_workers' }, [
-      c('mira', '원망이 사라진 것은 아니지만 멈추어 바라보는 일도 기록될 만합니다.'),
+      c('mira', '멈추어 바라보는 일도 기록될 만합니다.'),
       c('eli', '고통이 커질수록 약속을 오해하기 쉽습니다. 그래도 이야기는 끝나지 않았습니다.')
     ]),
     choice('gather_people', '🤝', '흔들리는 사람들을 모아 서로의 사정을 살핀다', { community: 1 }, { next: 'exodus_03b_crushed_workers' }, [
@@ -147,17 +138,9 @@
   ]);
 
   setNode('exodus_06_darkness', {
-    chapter: '1장 · 출애굽',
-    title: '어둠 뒤의 경고',
-    location: '어둠의 재앙',
-    bible: '출애굽기 10:21–29',
-    day: '마지막 밤 전',
-    place: '히브리인의 거처',
-    progress: { current: 16, total: TOTAL },
-    image: 'exodus_06b_firstborn_warning.png',
+    chapter: '1장 · 출애굽', title: '어둠 뒤의 경고', location: '어둠의 재앙', bible: '출애굽기 10:21–29', day: '마지막 밤 전', place: '히브리인의 거처', progress: { current: 16, total: TOTAL }, image: 'exodus_06b_firstborn_warning.png',
     copy: ['어둠이 지나간 뒤에도 마음은 쉽게 밝아지지 않습니다.', '마지막 경고가 고센까지 흘러옵니다.', '준비해야 할 때와 흔들릴 때는 비슷한 얼굴로 찾아옵니다.'],
-    prompt: '당신은 마지막 경고가 다가오는 밤에 어떻게 준비하시겠습니까?',
-    choices: observeChoices('exodus_06b_firstborn_warning')
+    prompt: '당신은 마지막 경고가 다가오는 밤에 어떻게 준비하시겠습니까?', choices: observeChoices('exodus_06b_firstborn_warning')
   });
 
   node('exodus_06b_firstborn_warning', 17, '마지막 밤의 경고', '문 앞의 낮은 방', '출애굽기 11:1–10', '열째 재앙 전야', '히브리인의 거처', 'exodus_06b_firstborn_warning.png', ['마지막 재앙에 대한 경고가 전해집니다.', '애굽의 집마다 큰 울음이 있을 것이라는 말이 사람들의 숨을 멎게 합니다.', '이제 순종은 집의 문과 식탁 위에 남아야 합니다.'], '당신은 장자 재앙의 경고 앞에서 어떻게 반응하시겠습니까?', [
@@ -169,7 +152,7 @@
   node('exodus_06c_passover_instruction', 18, '어린 양을 준비하라', '문 안쪽의 낮은 방', '출애굽기 12:1–13', '유월절 준비의 날', '히브리인의 집', 'exodus_06c_passover_instruction.png', ['어린 양을 고르고 피를 문설주와 인방에 발라야 합니다.', '허리에 띠를 띠고 신을 신고 지팡이를 손에 잡아야 합니다.', '순종은 마음속 결심만으로 끝나지 않습니다.'], '당신은 유월절 준비를 어떻게 이끌겠습니까?', [
     choice('prepare_by_the_word', '✦', '말씀의 순서를 하나씩 확인하며 집안을 준비시킨다', { trust: 1, discernment: 1 }, { next: 'exodus_07_passover' }, [c('eli', '순종은 말씀의 순서를 따라가는 일입니다.'), c('asar', '문과 식탁과 짐을 확인하겠습니다.')]),
     choice('ask_and_obey', '◎', '이유를 묻되 준비를 늦추지 않고 따른다', { discernment: 1, trust: 1 }, { next: 'exodus_07_passover' }, [c('mira', '질문은 더 깊이 기억하기 위한 것이어야 합니다.'), c('eli', '묻는 마음과 따르는 발이 함께 있어야 합니다.')]),
-    choice('delay_the_marking', '◇', '사람들이 납득할 때까지 표지를 잠시 미루자고 한다', { delay: 2, fear: 1, trust: -1 }, { ending: 'bad_unmarked_door' }, [c('yona', '시간이 많지 않습니다. 표지를 미루면 집 전체가 위험해집니다.'), c('mira', '문도 준비되어야 합니다. 생명의 표지를 뒤로 미룰 수는 없습니다.')])
+    choice('delay_the_marking', '◇', '사람들이 납득할 때까지 표지를 잠시 미루자고 한다', { delay: 2, fear: 1, trust: -1 }, { ending: 'bad_unmarked_door' }, [c('yona', '시간이 많지 않습니다. 표지를 미루면 집 전체가 위험해집니다.'), c('mira', '문 위의 표지는 마음속 결심으로 대체될 수 없습니다.')])
   ]);
 
   setChoices('exodus_07_passover', [
@@ -193,7 +176,7 @@
   node('exodus_08b_hasty_departure', 22, '부풀지 못한 빵', '애굽의 문밖', '출애굽기 12:31–42', '떠남의 밤', '애굽의 거리', 'exodus_08b_hasty_departure.png', ['애굽의 집들에서 통곡이 번져 나오는 동안 히브리인들은 문밖으로 나섭니다.', '손에는 짐이 있고 발에는 먼지가 묻습니다.', '해방은 급한 떠남에 가깝습니다.'], '당신은 급히 떠나는 밤에 어떻게 움직이시겠습니까?', [
     choice('keep_households_together', '🤝', '가정들이 서로 떨어지지 않게 대열을 맞춘다', { community: 1, discernment: 1 }, { next: 'exodus_09_wilderness_edge' }, [c('yona', '흩어진 해방은 곧 두려움이 됩니다.'), c('asar', '길은 아직 끝나지 않았습니다.')]),
     choice('remember_the_cry', '▤', '애굽의 통곡과 표시된 문을 함께 기억한다', { memory: 1, trust: 1 }, { next: 'exodus_09_wilderness_edge' }, [c('mira', '구원과 심판이 같은 어둠 안에 있었습니다.'), c('eli', '기억은 승리감보다 깊어야 합니다.')]),
-    choice('each_family_first', '☾', '각 가정이 자기 식구부터 챙기게 하자고 한다', { scatter: 1, fear: 1 }, { next: 'exodus_09_wilderness_edge' }, [c('eli', '현실적이지만 약한 사람은 쉽게 놓입니다.'), c('yona', '대열이 길게 찢어질 수 있습니다.')])
+    choice('each_family_first', '◇', '약한 사람은 각자 따라오게 하고, 각 가정이 자기 식구부터 데리고 나가자고 한다', { scatter: 2, fear: 1, community: -1 }, { ending: 'bad_scattered_people' }, [c('yona', '흩어진 사람은 함께 건널 수 없습니다.'), c('eli', '가장 느린 사람을 버리는 순간, 해방의 길은 공동체의 길이 아니게 됩니다.')])
   ]);
 
   setChoices('exodus_09_wilderness_edge', [
@@ -217,12 +200,12 @@
   setChoices('exodus_10_redsea', [
     choice('stand_and_watch', '✦', '두려워하지 말고 여호와의 구원을 보자고 말한다', { trust: 1, memory: 1 }, { next: 'exodus_10c_discern_branch' }, [c('eli', '병거보다 크신 분을 바라보자는 고백입니다.'), c('mira', '두려움만 기록되게 하지는 맙시다.')]),
     choice('check_the_weak', '🤝', '아이들과 노인들이 흩어지지 않았는지 먼저 살핀다', { community: 1, discernment: 1 }, { next: 'exodus_10b_care_branch' }, [c('yona', '가장 약한 사람이 어디 있는지 살피는 것이 공동체의 방향을 정합니다.'), c('asar', '뒤쪽을 붙들면 함께 움직일 수 있습니다.')]),
-    choice('wait_until_certain', '◇', '물이 완전히 안정될 때까지 기다리자고 한다', { delay: 2, fear: 1 }, { ending: 'bad_closed_sea' }, [c('asar', '열린 길도 때를 놓치면 닫힐 수 있습니다.'), c('mira', '이 밤은 기다림보다 걸음이 필요한 밤입니다.')])
+    choice('wait_until_certain', '◇', '물이 완전히 안정될 때까지 기다리자고 한다', { delay: 2, fear: 1 }, { ending: 'bad_closed_sea' }, [c('asar', '열린 길도 때를 놓치면 닫힐 수 있습니다.'), c('mira', '길이 열렸을 때 걷지 않으면, 길은 오래 기다려주지 않습니다.')])
   ]);
 
   setChoices('exodus_10b_care_branch', [
     choice('hold_the_rear', '🤝', '뒤쪽 대열을 붙들며 함께 건널 준비를 시킨다', { community: 1, trust: 1 }, { next: 'exodus_10d_pillar_between' }, [c('yona', '뒤를 지키는 사람이 있어야 앞의 길도 공동체의 길이 됩니다.'), c('eli', '가장 느린 사람을 기준으로 삼아야 합니다.')]),
-    choice('send_each_family', '☾', '각 가정이 자기 식구부터 챙기게 하자고 한다', { scatter: 1, community: -1 }, { next: 'exodus_10d_pillar_between' }, [c('eli', '약한 사람은 더 쉽게 놓입니다.'), c('mira', '해방의 길이 각자의 생존 기록으로만 남지 않기를 바랍니다.')])
+    choice('send_each_family', '◇', '각 가정이 자기 식구부터 챙기고, 뒤처진 사람은 스스로 따라오게 하자고 한다', { scatter: 2, community: -1, fear: 1 }, { ending: 'bad_scattered_people' }, [c('eli', '약한 사람을 각자에게 맡기는 순간, 공동체는 이미 흩어집니다.'), c('mira', '흩어진 사람은 함께 건널 수 없습니다.')])
   ]);
 
   setChoices('exodus_10c_discern_branch', [
@@ -233,13 +216,13 @@
   node('exodus_10d_pillar_between', 28, '사이에 선 구름 기둥', '이스라엘과 애굽 사이', '출애굽기 14:19–20', '바다 앞의 밤', '진영 사이의 어둠과 빛', 'exodus_10d_pillar_between.png', ['하나님의 사자가 움직이고 구름 기둥이 뒤로 옮겨갑니다.', '기둥은 애굽과 이스라엘 사이에 섭니다.', '두려움이 사라진 것은 아니지만 두려움만이 전부는 아니게 됩니다.'], '당신은 구름 기둥이 사이에 선 밤에 무엇을 하시겠습니까?', [
     choice('name_the_pillar', '✦', '하나님이 우리와 애굽 사이에 서셨다고 말한다', { trust: 1, memory: 1 }, { next: 'exodus_10e_night_of_fear' }, [c('eli', '이 고백은 사람들을 다시 숨 쉬게 합니다.'), c('mira', '이 밤의 보호를 기록하겠습니다.')]),
     choice('reorder_the_line', '🤝', '밤이 길어질 것을 생각해 대열을 다시 정비한다', { community: 1, discernment: 1 }, { next: 'exodus_10e_night_of_fear' }, [c('yona', '서로를 다시 세워야 합니다.'), c('asar', '모두가 함께 움직여야 합니다.')]),
-    choice('hide_until_morning', '◇', '기둥이 막아주니 아침까지 숨어 기다리자고 한다', { delay: 2, fear: 1 }, { ending: 'bad_closed_sea' }, [c('asar', '보호는 멈추라는 신호가 아닐 수 있습니다.'), c('eli', '하나님은 우리를 다시 애굽 앞에 머물게 하지 않으십니다.')])
+    choice('hide_until_morning', '◇', '기둥이 막아주니 아침까지 숨어 기다리자고 한다', { delay: 2, fear: 1 }, { ending: 'bad_closed_sea' }, [c('asar', '보호는 멈추라는 신호가 아닐 수 있습니다.'), c('eli', '길이 열릴 때 숨어 있으면, 보호는 순종의 핑계가 아니라 지체의 핑계가 됩니다.')])
   ]);
 
   node('exodus_10e_night_of_fear', 29, '물벽 사이의 밤', '열린 바다 앞', '출애굽기 14:21–22', '바다가 갈라진 밤', '홍해 길목', 'exodus_10e_night_of_fear.png', ['바람이 밤새 바다를 물러가게 합니다.', '길은 열렸지만 물벽은 두렵습니다.', '해방의 길은 말씀을 따라 걷는 길처럼 보입니다.'], '당신은 열린 길 앞에서 어떻게 움직이시겠습니까?', [
     choice('walk_by_word', '✦', '두려워도 말씀을 따라 걸음을 내딛는다', { trust: 1, memory: 1 }, { next: 'exodus_11_crossing' }, [c('eli', '믿음은 두려움 속에서도 멈추지 않는 걸음입니다.'), c('mira', '바다의 길은 기억으로 붙들어야 합니다.')]),
     choice('walk_with_weak', '🤝', '약한 사람들과 보폭을 맞추며 들어간다', { community: 1, discernment: 1 }, { next: 'exodus_11_crossing' }, [c('yona', '서로의 손을 놓지 않으면 끝까지 건널 수 있습니다.'), c('asar', '보폭을 맞추는 일이 흩어짐을 막습니다.')]),
-    choice('freeze_before_walls', '◇', '물벽이 두려워 입구에서 더 기다리자고 한다', { fear: 2, delay: 1 }, { ending: 'bad_closed_sea' }, [c('yona', '멈추면 뒤따르는 사람들까지 막힙니다.'), c('mira', '너무 오래 멈추면 길을 잃을 수 있습니다.')])
+    choice('freeze_before_walls', '◇', '물벽이 두려워 입구에서 더 기다리자고 한다', { fear: 2, delay: 1 }, { ending: 'bad_closed_sea' }, [c('yona', '멈추면 뒤따르는 사람들까지 막힙니다.'), c('mira', '길이 열린 뒤의 멈춤은 오래 버틸 수 없습니다.')])
   ]);
 
   setChoices('exodus_11_crossing', [
@@ -251,7 +234,7 @@
   node('exodus_11b_last_steps', 30, '새벽 직전의 마지막 걸음', '바다 길의 끝', '출애굽기 14:24–31', '해방의 새벽 직전', '맞은편 해변', 'exodus_11b_last_steps.png', ['바다 길의 끝이 가까워집니다.', '아직 모두가 다 건넌 것은 아닙니다.', '구원은 끝까지 함께 건너야 완성됩니다.'], '당신은 마지막 걸음 앞에서 무엇을 하시겠습니까?', [
     choice('wait_for_the_last', '🤝', '마지막 사람까지 건너왔는지 확인한다', { community: 1, trust: 1 }, { next: 'exodus_12b_song_of_shore' }, [c('yona', '마지막 사람까지 건너는 일입니다.'), c('eli', '마지막 사람을 기다리는 선택이 이 길의 의미를 지킵니다.')]),
     choice('bow_in_silence', '✦', '말없이 무릎을 꿇고 하나님이 여신 길을 바라본다', { trust: 1, memory: 1 }, { next: 'exodus_12b_song_of_shore' }, [c('mira', '이 침묵은 경외에 가깝습니다.'), c('asar', '새벽이 오면 의미가 더 분명해질 것입니다.')]),
-    choice('rush_without_looking_back', '☾', '거의 다 왔다며 각자 먼저 해변으로 오르게 한다', { fear: 1, scatter: 1, community: -1 }, { next: 'exodus_12b_song_of_shore' }, [c('yona', '뒤를 보지 않는 안도는 곁의 사람을 놓치게 할 수 있습니다.'), c('mira', '구원이 개인의 도망으로만 남지 않았으면 합니다.')])
+    choice('rush_without_looking_back', '◇', '거의 다 왔다며 뒤처진 사람은 두고 각자 먼저 해변으로 오르게 한다', { fear: 1, scatter: 2, community: -1 }, { ending: 'bad_scattered_people' }, [c('yona', '뒤를 보지 않는 안도는 곁의 사람을 놓치게 합니다.'), c('eli', '마지막 사람을 버리는 순간, 함께 건넌 길은 흩어진 도망이 됩니다.')])
   ]);
 
   node('exodus_12b_song_of_shore', 31, '해변의 첫 노래', '맞은편 해변', '출애굽기 15:1–2', '해방의 새벽', '홍해 건너편', 'exodus_12b_song_of_shore.png', ['새벽빛 아래에서 바다는 다시 닫히고 백성은 맞은편 해변에 섭니다.', '처음에는 숨소리만 들리다가 곧 노래가 시작됩니다.', '증인은 무엇을 기억하고 전할지 선택해야 합니다.'], '당신은 해방의 새벽에 무엇을 남기시겠습니까?', [
