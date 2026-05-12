@@ -164,6 +164,26 @@
 .play-top-btn.gear { left: 1459px; }
 .play-top-empty { left: 1515px; width: 100px; }
 
+.play-home-button {
+  position: absolute;
+  right: 36px;
+  top: 24px;
+  width: 72px;
+  height: 36px;
+  border: 1px solid rgba(196,154,85,.36);
+  background: linear-gradient(180deg, rgba(45,31,16,.58), rgba(8,10,12,.64));
+  color: #d8ad62;
+  font-size: 14px;
+  letter-spacing: .06em;
+  cursor: pointer;
+  z-index: 30;
+}
+
+.play-home-button:hover {
+  color: #efc573;
+  filter: brightness(1.06);
+}
+
 .scene-panel,
 .narrative-panel,
 .right-panel {
