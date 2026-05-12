@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="assets/ui/home/css/home-final-fixes.css?v=ending-visibility-20260511a" />
     <link rel="stylesheet" href="assets/ui/home/css/home-continue-button-fix.css?v=ending-visibility-20260511a" />
     <link rel="stylesheet" href="assets/ui/home/css/home-tone-match-fix.css?v=ending-visibility-20260511a" />
-    <link rel="stylesheet" href="assets/ui/cleanup/home-part-layout.css?v=home-part-chapter-actions-20260512a" />
+    <link rel="stylesheet" href="assets/ui/cleanup/home-part-layout.css?v=home-part-locked-panels-20260513a" />
     <link rel="stylesheet" href="assets/ui/cleanup/branching-ui-cleanup.css?v=ending-visibility-20260511a" />
     <link rel="stylesheet" href="assets/ui/cleanup/story-progress-meter.css?v=ending-visibility-20260511a" />
     <link rel="stylesheet" href="assets/ui/responsive/responsive.css?v=ending-visibility-20260511a" />
@@ -42,12 +42,12 @@
               <p class="home-brand-subtitle">하나님의 이야기를 따라 걷는 여정</p>
             </div>
             <nav class="home-part-list" aria-label="Part 목록">
-              <button class="home-part-button is-active" data-panel="story" type="button" aria-label="Part I 해방과 정착 장 선택으로 돌아가기"><strong>I.</strong><span>해방과 정착</span></button>
-              <button class="home-part-button" type="button"><strong>II.</strong><span>왕국의 빛과 균열</span></button>
-              <button class="home-part-button" type="button"><strong>III.</strong><span>예언자의 밤</span></button>
-              <button class="home-part-button" type="button"><strong>IV.</strong><span>포로와 귀환</span></button>
-              <button class="home-part-button" type="button"><strong>V.</strong><span>메시아의 새벽</span></button>
-              <button class="home-part-button" type="button"><strong>VI.</strong><span>증언의 시대</span></button>
+              <button class="home-part-button is-active" data-panel="story" type="button" aria-label="Part I 해방과 정착 장 선택"><strong>I.</strong><span>해방과 정착</span></button>
+              <button class="home-part-button" data-panel="part-02" type="button" aria-label="Part II 왕국의 빛과 균열 장 선택"><strong>II.</strong><span>왕국의 빛과 균열</span></button>
+              <button class="home-part-button" data-panel="part-03" type="button" aria-label="Part III 예언자의 밤 장 선택"><strong>III.</strong><span>예언자의 밤</span></button>
+              <button class="home-part-button" data-panel="part-04" type="button" aria-label="Part IV 포로와 귀환 장 선택"><strong>IV.</strong><span>포로와 귀환</span></button>
+              <button class="home-part-button" data-panel="part-05" type="button" aria-label="Part V 메시아의 새벽 장 선택"><strong>V.</strong><span>메시아의 새벽</span></button>
+              <button class="home-part-button" data-panel="part-06" type="button" aria-label="Part VI 증언의 시대 장 선택"><strong>VI.</strong><span>증언의 시대</span></button>
             </nav>
           </aside>
 
@@ -66,47 +66,75 @@
             <h2 class="home-part-heading">해방과 정착</h2>
             <p class="home-part-description">하나님께서 노예의 땅에서 백성을 부르시고,<br />광야와 약속의 땅으로 이끄시는 첫 증언의 길입니다.</p>
             <div class="home-chapter-grid">
-              <article class="chapter-card home-chapter-card available is-current" data-go="new-play" role="button" tabindex="0" aria-label="1장 출애굽 시작">
-                <div class="home-chapter-art exodus"></div>
-                <p class="home-chapter-no">1장</p>
-                <h3 class="home-chapter-title">출애굽</h3>
-                <span class="home-chapter-status">진행 중</span>
-              </article>
-              <article class="chapter-card home-chapter-card available is-preparing" data-panel="chapter-coming-soon" role="button" tabindex="0" aria-label="2장 광야 준비 중 안내 보기">
-                <div class="home-chapter-art wilderness"></div>
-                <p class="home-chapter-no">2장</p>
-                <h3 class="home-chapter-title">광야</h3>
-                <span class="home-chapter-status">준비 중</span>
-                <div class="home-chapter-lock"><span>▣</span></div>
-              </article>
-              <article class="chapter-card home-chapter-card available is-preparing" data-panel="chapter-coming-soon" role="button" tabindex="0" aria-label="3장 여리고 준비 중 안내 보기">
-                <div class="home-chapter-art jericho"></div>
-                <p class="home-chapter-no">3장</p>
-                <h3 class="home-chapter-title">여리고</h3>
-                <span class="home-chapter-status">준비 중</span>
-                <div class="home-chapter-lock"><span>▣</span></div>
-              </article>
-              <article class="chapter-card home-chapter-card available locked" data-panel="chapter-coming-soon" role="button" tabindex="0" aria-label="4장 사사 시대 준비 중 안내 보기">
-                <div class="home-chapter-art judges"></div>
-                <p class="home-chapter-no">4장</p>
-                <h3 class="home-chapter-title">사사 시대</h3>
-                <span class="home-chapter-status">잠김</span>
-                <div class="home-chapter-lock"><span>▣</span></div>
-              </article>
-              <article class="chapter-card home-chapter-card available locked" data-panel="chapter-coming-soon" role="button" tabindex="0" aria-label="5장 룻 준비 중 안내 보기">
-                <div class="home-chapter-art ruth"></div>
-                <p class="home-chapter-no">5장</p>
-                <h3 class="home-chapter-title">룻</h3>
-                <span class="home-chapter-status">잠김</span>
-                <div class="home-chapter-lock"><span>▣</span></div>
-              </article>
-              <article class="chapter-card home-chapter-card locked" aria-label="사무엘의 부르심 잠김">
-                <div class="home-chapter-art samuel"></div>
-                <p class="home-chapter-no">6장</p>
-                <h3 class="home-chapter-title">사무엘의 부르심</h3>
-                <span class="home-chapter-status">잠김</span>
-                <div class="home-chapter-lock"><span>▣</span></div>
-              </article>
+              <article class="chapter-card home-chapter-card available is-current" data-go="new-play" role="button" tabindex="0" aria-label="1장 출애굽 시작"><div class="home-chapter-art exodus"></div><p class="home-chapter-no">1장</p><h3 class="home-chapter-title">출애굽</h3><span class="home-chapter-status">진행 중</span></article>
+              <article class="chapter-card home-chapter-card available is-preparing" data-panel="chapter-coming-soon" role="button" tabindex="0" aria-label="2장 광야 준비 중 안내 보기"><div class="home-chapter-art wilderness"></div><p class="home-chapter-no">2장</p><h3 class="home-chapter-title">광야</h3><span class="home-chapter-status">준비 중</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card available is-preparing" data-panel="chapter-coming-soon" role="button" tabindex="0" aria-label="3장 여리고 준비 중 안내 보기"><div class="home-chapter-art jericho"></div><p class="home-chapter-no">3장</p><h3 class="home-chapter-title">여리고</h3><span class="home-chapter-status">준비 중</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card available locked" data-panel="chapter-coming-soon" role="button" tabindex="0" aria-label="4장 사사 시대 준비 중 안내 보기"><div class="home-chapter-art judges"></div><p class="home-chapter-no">4장</p><h3 class="home-chapter-title">사사 시대</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card available locked" data-panel="chapter-coming-soon" role="button" tabindex="0" aria-label="5장 룻 준비 중 안내 보기"><div class="home-chapter-art ruth"></div><p class="home-chapter-no">5장</p><h3 class="home-chapter-title">룻</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art samuel"></div><p class="home-chapter-no">6장</p><h3 class="home-chapter-title">사무엘의 부르심</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+            </div>
+          </section>
+
+          <section class="chapter-area home-panel home-part-main" data-home-panel="part-02" aria-label="Part II 왕국의 빛과 균열 장 선택">
+            <div class="home-part-hero part02" aria-hidden="true"></div>
+            <p class="home-part-eyebrow">Part II.</p>
+            <h2 class="home-part-heading">왕국의 빛과 균열</h2>
+            <p class="home-part-description">왕이 세워지고 나라가 커지지만,<br />예배와 권력의 틈에서 균열이 시작되는 이야기입니다.</p>
+            <div class="home-chapter-grid">
+              <article class="chapter-card home-chapter-card available is-preparing" data-panel="chapter-coming-soon" role="button" tabindex="0"><div class="home-chapter-art saul"></div><p class="home-chapter-no">1장</p><h3 class="home-chapter-title">사울의 불순종</h3><span class="home-chapter-status">준비 중</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card available is-preparing" data-panel="chapter-coming-soon" role="button" tabindex="0"><div class="home-chapter-art david-goliath"></div><p class="home-chapter-no">2장</p><h3 class="home-chapter-title">다윗과 골리앗</h3><span class="home-chapter-status">준비 중</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art solomon-temple"></div><p class="home-chapter-no">3장</p><h3 class="home-chapter-title">솔로몬의 성전과 균열</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art carmel"></div><p class="home-chapter-no">4장</p><h3 class="home-chapter-title">갈멜산</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art hezekiah"></div><p class="home-chapter-no">5장</p><h3 class="home-chapter-title">히스기야와 산헤립</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art josiah"></div><p class="home-chapter-no">6장</p><h3 class="home-chapter-title">요시야의 율법책</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+            </div>
+          </section>
+
+          <section class="chapter-area home-panel home-part-main" data-home-panel="part-03" aria-label="Part III 예언자의 밤 장 선택">
+            <div class="home-part-hero part03" aria-hidden="true"></div><p class="home-part-eyebrow">Part III.</p><h2 class="home-part-heading">예언자의 밤</h2><p class="home-part-description">무너져 가는 시대 속에서,<br />예언자의 목소리는 심판과 회복을 함께 증언합니다.</p>
+            <div class="home-chapter-grid">
+              <article class="chapter-card home-chapter-card available is-preparing" data-panel="chapter-coming-soon" role="button" tabindex="0"><div class="home-chapter-art hosea"></div><p class="home-chapter-no">1장</p><h3 class="home-chapter-title">호세아</h3><span class="home-chapter-status">준비 중</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art amos"></div><p class="home-chapter-no">2장</p><h3 class="home-chapter-title">아모스</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art isaiah-call"></div><p class="home-chapter-no">3장</p><h3 class="home-chapter-title">이사야의 부르심</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art jeremiah"></div><p class="home-chapter-no">4장</p><h3 class="home-chapter-title">예레미야</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art fall-jerusalem"></div><p class="home-chapter-no">5장</p><h3 class="home-chapter-title">무너지는 예루살렘</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art dry-bones"></div><p class="home-chapter-no">6장</p><h3 class="home-chapter-title">에스겔의 마른 뼈</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+            </div>
+          </section>
+
+          <section class="chapter-area home-panel home-part-main" data-home-panel="part-04" aria-label="Part IV 포로와 귀환 장 선택">
+            <div class="home-part-hero part04" aria-hidden="true"></div><p class="home-part-eyebrow">Part IV.</p><h2 class="home-part-heading">포로와 귀환</h2><p class="home-part-description">제국의 한복판과 무너진 성벽 사이에서,<br />하나님의 백성은 다시 정체성을 배웁니다.</p>
+            <div class="home-chapter-grid">
+              <article class="chapter-card home-chapter-card available is-preparing" data-panel="chapter-coming-soon" role="button" tabindex="0"><div class="home-chapter-art fiery-furnace"></div><p class="home-chapter-no">1장</p><h3 class="home-chapter-title">풀무불</h3><span class="home-chapter-status">준비 중</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art lions-den"></div><p class="home-chapter-no">2장</p><h3 class="home-chapter-title">사자굴</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art esther"></div><p class="home-chapter-no">3장</p><h3 class="home-chapter-title">에스더</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art haggai"></div><p class="home-chapter-no">4장</p><h3 class="home-chapter-title">학개</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art ezra"></div><p class="home-chapter-no">5장</p><h3 class="home-chapter-title">에스라</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art nehemiah"></div><p class="home-chapter-no">6장</p><h3 class="home-chapter-title">느헤미야</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+            </div>
+          </section>
+
+          <section class="chapter-area home-panel home-part-main" data-home-panel="part-05" aria-label="Part V 메시아의 새벽 장 선택">
+            <div class="home-part-hero part05" aria-hidden="true"></div><p class="home-part-eyebrow">Part V.</p><h2 class="home-part-heading">메시아의 새벽</h2><p class="home-part-description">오래 기다린 약속은 낮은 자리에서 시작되고,<br />새벽의 빛은 빈 무덤까지 이어집니다.</p>
+            <div class="home-chapter-grid">
+              <article class="chapter-card home-chapter-card available is-preparing" data-panel="chapter-coming-soon" role="button" tabindex="0"><div class="home-chapter-art john-baptist"></div><p class="home-chapter-no">1장</p><h3 class="home-chapter-title">세례 요한</h3><span class="home-chapter-status">준비 중</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art annunciation"></div><p class="home-chapter-no">2장</p><h3 class="home-chapter-title">수태고지</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art bethlehem-night"></div><p class="home-chapter-no">3장</p><h3 class="home-chapter-title">베들레헴의 밤</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art wilderness-temptation"></div><p class="home-chapter-no">4장</p><h3 class="home-chapter-title">광야 시험</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art call-galilee"></div><p class="home-chapter-no">5장</p><h3 class="home-chapter-title">갈릴리의 부르심</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art empty-tomb"></div><p class="home-chapter-no">6장</p><h3 class="home-chapter-title">빈 무덤</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+            </div>
+          </section>
+
+          <section class="chapter-area home-panel home-part-main" data-home-panel="part-06" aria-label="Part VI 증언의 시대 장 선택">
+            <div class="home-part-hero part06" aria-hidden="true"></div><p class="home-part-eyebrow">Part VI.</p><h2 class="home-part-heading">증언의 시대</h2><p class="home-part-description">성령의 불은 흩어진 사람들을 증인으로 세우고,<br />복음은 감옥과 바다와 제국을 지나갑니다.</p>
+            <div class="home-chapter-grid">
+              <article class="chapter-card home-chapter-card available is-preparing" data-panel="chapter-coming-soon" role="button" tabindex="0"><div class="home-chapter-art pentecost"></div><p class="home-chapter-no">1장</p><h3 class="home-chapter-title">오순절</h3><span class="home-chapter-status">준비 중</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art stephen"></div><p class="home-chapter-no">2장</p><h3 class="home-chapter-title">스데반</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art damascus"></div><p class="home-chapter-no">3장</p><h3 class="home-chapter-title">다메섹 도상</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art cornelius"></div><p class="home-chapter-no">4장</p><h3 class="home-chapter-title">고넬료</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art philippi-prison"></div><p class="home-chapter-no">5장</p><h3 class="home-chapter-title">빌립보 감옥</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
+              <article class="chapter-card home-chapter-card locked"><div class="home-chapter-art rome-voyage"></div><p class="home-chapter-no">6장</p><h3 class="home-chapter-title">로마행</h3><span class="home-chapter-status">잠김</span><div class="home-chapter-lock"><span>▣</span></div></article>
             </div>
           </section>
 
@@ -156,12 +184,7 @@
           <section class="home-info-panel home-panel" data-home-panel="chapter-coming-soon" aria-label="준비 중인 장">
             <button class="home-panel-back" data-panel="story" type="button">장 선택으로 돌아가기</button>
             <header><span>다음 이야기</span><strong>이 장은 준비 중입니다</strong></header>
-            <div class="home-settings-list">
-              <p><b>2장 광야</b><span>출애굽 이후 광야에서 불평과 신뢰 사이를 걷는 다음 실제 구현 대상입니다.</span></p>
-              <p><b>3장 여리고</b><span>침묵의 순종과 무너지는 성벽을 다룰 예정입니다.</span></p>
-              <p><b>4장 사사 시대</b><span>각기 자기 소견에 옳은 대로 행하던 혼란의 시대를 다룰 예정입니다.</span></p>
-              <p><b>5장 룻</b><span>상실 속 충성과 조용한 회복을 다룰 예정입니다.</span></p>
-            </div>
+            <div class="home-settings-list"><p><b>준비 중</b><span>아직 플레이 가능한 장은 아니지만, 각 Part의 이야기와 썸네일은 미리 둘러볼 수 있습니다.</span></p><p><b>현재 플레이 가능</b><span>Part I의 1장 출애굽만 플레이 진입이 가능합니다.</span></p></div>
           </section>
 
           <footer class="scripture"><p class="quote">여호와께서 너희를 위하여 싸우시리니 너희는 가만히 있을지니라</p><p class="reference">출애굽기 14:14</p></footer>
@@ -169,38 +192,15 @@
 
         <section id="play-screen" class="screen" aria-label="이야기 플레이 화면">
           <div class="play-bg"></div><div class="play-frame"></div>
-          <header class="play-top-hud">
-            <div class="play-brand-emblem ornate-flame"></div><div class="play-brand-text"><strong>이름 없는 증인들</strong><span></span></div>
-            <div class="play-progress-line" aria-hidden="true"><span></span><span></span><span class="active"></span><span></span><span></span></div>
-            <div class="play-stats"><span>신뢰 0</span><span>공동체 0</span><span>분별 0</span></div>
-            <button class="play-top-btn book" type="button">▥</button><button class="play-top-btn gear" type="button">⚙</button><div class="play-top-empty"></div>
-          </header>
+          <header class="play-top-hud"><div class="play-brand-emblem ornate-flame"></div><div class="play-brand-text"><strong>이름 없는 증인들</strong><span></span></div><div class="play-progress-line" aria-hidden="true"><span></span><span></span><span class="active"></span><span></span><span></span></div><div class="play-stats"><span>신뢰 0</span><span>공동체 0</span><span>분별 0</span></div><button class="play-top-btn book" type="button">▥</button><button class="play-top-btn gear" type="button">⚙</button><div class="play-top-empty"></div></header>
           <button class="play-home-button" type="button" data-go="home" aria-label="홈으로 돌아가기">홈</button>
           <section class="scene-panel"><div class="scene-art"></div><div class="scene-plaque"><strong></strong><span></span></div></section>
-          <section class="narrative-panel">
-            <h2></h2>
-            <div class="narrative-copy"></div>
-            <div class="choice-list"></div>
-            <div class="story-progress"><span>이야기 진행률</span><div><i></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></div><strong></strong></div>
-          </section>
+          <section class="narrative-panel"><h2></h2><div class="narrative-copy"></div><div class="choice-list"></div><div class="story-progress"><span>이야기 진행률</span><div><i></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></div><strong></strong></div></section>
           <aside class="right-panel" aria-label="동행자 대화"></aside>
           <footer class="play-bottom"><div class="day-panel"></div><div class="location-panel"></div><button class="next-story" data-go="next-play-scene" type="button">다음 이야기 <span>›</span></button><button class="back-home" data-go="home" type="button">처음으로</button></footer>
         </section>
 
-        <section id="ending-screen" class="screen" aria-label="결말 화면">
-          <div class="ending-bg"></div><div class="ending-light"></div>
-          <div class="ending-panel">
-            <div class="ending-lamb">✥</div>
-            <p class="ending-series">이름 없는 증인들</p>
-            <h2>해방의 목격자</h2>
-            <div class="ending-banner"><span></span><i>✦</i><span></span></div>
-            <div class="ending-desc"></div>
-            <h3>결과 요약</h3>
-            <div class="ending-summary"><article><i>✦</i><span>신뢰의 걸음</span><strong>0</strong></article><article><i>◇</i><span>공동체 돌봄</span><strong>0</strong></article><article><i>◎</i><span>분별의 기록</span><strong>0</strong></article><article><i>♕</i><span>최종 평가</span><strong></strong></article></div>
-            <button class="ending-retry" data-go="new-play" type="button">다시 도전</button><button class="ending-home" data-go="home" type="button">처음으로</button>
-          </div>
-          <footer class="ending-scripture"><p></p><span></span></footer>
-        </section>
+        <section id="ending-screen" class="screen" aria-label="결말 화면"><div class="ending-bg"></div><div class="ending-light"></div><div class="ending-panel"><div class="ending-lamb">✥</div><p class="ending-series">이름 없는 증인들</p><h2>해방의 목격자</h2><div class="ending-banner"><span></span><i>✦</i><span></span></div><div class="ending-desc"></div><h3>결과 요약</h3><div class="ending-summary"><article><i>✦</i><span>신뢰의 걸음</span><strong>0</strong></article><article><i>◇</i><span>공동체 돌봄</span><strong>0</strong></article><article><i>◎</i><span>분별의 기록</span><strong>0</strong></article><article><i>♕</i><span>최종 평가</span><strong></strong></article></div><button class="ending-retry" data-go="new-play" type="button">다시 도전</button><button class="ending-home" data-go="home" type="button">처음으로</button></div><footer class="ending-scripture"><p></p><span></span></footer></section>
       </main>
     </div>
     <script src="src/data/storyNodes.js?v=ending-visibility-20260511a"></script>
