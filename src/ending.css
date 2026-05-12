@@ -279,3 +279,224 @@
   font-size: 16px;
   color: #c99b4e;
 }
+
+/* Ending illustration visibility pass
+   Goal: make ending art the visual focus while keeping text readable. */
+
+.ending-bg {
+  filter: saturate(1.05) brightness(.96) contrast(1.04);
+  background-size: 1672px 941px, 1672px 941px, cover;
+  background-position: center center;
+}
+
+.ending-bg::before {
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.30), transparent 18%, transparent 70%, rgba(0,0,0,.46)),
+    radial-gradient(ellipse at 42% 52%, transparent 0 50%, rgba(0,0,0,.42) 88%);
+}
+
+.ending-bg::after {
+  height: 300px;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,.42));
+}
+
+.ending-light {
+  left: 420px;
+  top: -34px;
+  width: 680px;
+  height: 320px;
+  opacity: .42;
+  filter: blur(9px);
+}
+
+/* Move the result panel away from the center so the background art can breathe. */
+.ending-panel {
+  left: 1016px;
+  top: 116px;
+  width: 548px;
+  height: 704px;
+  background:
+    linear-gradient(180deg, rgba(8,15,20,.68), rgba(4,8,11,.76)),
+    radial-gradient(circle at 50% 10%, rgba(196,154,85,.13), transparent 34%);
+  border: 1px solid rgba(196,154,85,.46);
+  box-shadow:
+    0 0 30px rgba(0,0,0,.58),
+    inset 0 0 34px rgba(0,0,0,.46),
+    inset 0 0 0 1px rgba(255,223,154,.12);
+  backdrop-filter: blur(5px);
+}
+
+.ending-panel::before,
+.ending-panel::after {
+  top: 17px;
+  font-size: 22px;
+  opacity: .72;
+}
+
+.ending-panel::before {
+  left: 22px;
+}
+
+.ending-panel::after {
+  right: 22px;
+}
+
+.ending-lamb {
+  left: 222px;
+  top: -78px;
+  width: 104px;
+  height: 96px;
+  font-size: 60px;
+  opacity: .92;
+}
+
+.ending-series {
+  left: 156px;
+  top: 34px;
+  width: 236px;
+  font-size: 16px;
+  letter-spacing: .12em;
+}
+
+.ending-panel h2 {
+  left: 54px;
+  top: 74px;
+  width: 440px;
+  height: auto;
+  font-size: 34px;
+  line-height: 1.2;
+  letter-spacing: .06em;
+}
+
+.ending-panel h2::before,
+.ending-panel h2::after {
+  top: 8px;
+  font-size: 16px;
+}
+
+.ending-panel h2::before {
+  left: -10px;
+}
+
+.ending-panel h2::after {
+  right: -10px;
+}
+
+.ending-banner {
+  left: 38px;
+  top: 148px;
+  width: 472px;
+  height: 88px;
+  grid-template-columns: 1fr 64px 1fr;
+  background: linear-gradient(180deg, rgba(5,12,18,.72), rgba(2,7,10,.76));
+  border: 1px solid rgba(196,154,85,.34);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.ending-banner span {
+  width: 170px;
+}
+
+.ending-banner i {
+  width: 54px;
+  height: 54px;
+  font-size: 25px;
+  background: rgba(16,31,43,.74);
+}
+
+.ending-desc {
+  left: 44px;
+  top: 270px;
+  width: 460px;
+  color: #d0a765;
+  font-size: 16px;
+  line-height: 1.7;
+  text-align: left;
+}
+
+.ending-desc p {
+  margin: 0 0 8px;
+}
+
+.ending-panel h3 {
+  left: 44px;
+  top: 448px;
+  font-size: 17px;
+}
+
+.ending-summary {
+  left: 38px;
+  top: 482px;
+  width: 472px;
+  height: 96px;
+  grid-template-columns: repeat(2, 1fr);
+  background: rgba(0,0,0,.14);
+  border: 1px solid rgba(196,154,85,.22);
+}
+
+.ending-summary article {
+  padding-top: 14px;
+  border-right: 1px solid rgba(196,154,85,.15);
+  border-bottom: 1px solid rgba(196,154,85,.12);
+}
+
+.ending-summary article:nth-child(2n) {
+  border-right: 0;
+}
+
+.ending-summary article:nth-child(n+3) {
+  border-bottom: 0;
+}
+
+.ending-summary i {
+  margin-right: 5px;
+  font-size: 18px;
+}
+
+.ending-summary span {
+  font-size: 12px;
+}
+
+.ending-summary strong {
+  margin-top: 4px;
+  font-size: 13px;
+}
+
+.ending-retry,
+.ending-home {
+  top: 618px;
+  height: 46px;
+  font-size: 17px;
+  letter-spacing: .07em;
+}
+
+.ending-retry {
+  left: 42px;
+  width: 216px;
+  background: rgba(6,20,32,.72);
+}
+
+.ending-home {
+  left: 290px;
+  width: 216px;
+  background: rgba(10,18,24,.58);
+}
+
+.ending-scripture {
+  left: 92px;
+  top: 846px;
+  width: 900px;
+  text-align: left;
+  color: #efca82;
+  z-index: 5;
+}
+
+.ending-scripture p {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.ending-scripture span {
+  font-size: 15px;
+}
