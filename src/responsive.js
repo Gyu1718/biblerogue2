@@ -96,3 +96,76 @@
     initResponsiveLayout();
   }
 })();
+
+// Temporary chapter routing bridge.
+// Keeps existing main.js intact while allowing chapter cards with data-start-node
+// to start their own story node instead of always falling back to START_NODE_ID.
+(function () {
+  function nodeExists(nodeId) {
+    return Boolean(nodeId && window.STORY_NODES && window.STORY_NODES[nodeId]);
+  }
+
+  function getFallbackStartNodeId() {
+    if (typeof START_NODE_ID !== 'undefined') return START_NODE_ID;
+    return window.START_NODE_ID || 'exodus_01_slave_day';
+  }
+
+  function resolveStartNodeId(trigger) {
+    const explicitStartNode = trigger?.dataset?.startNode;
+    if (nodeExists(explicitStartNode)) return explicitStartNode;
+
+    const chapter = trigger?.dataset?.chapter;
+    if (chapter === 'wilderness') {
+      const wildernessStart = window.WILDERNESS_START_NODE_ID || 'wilderness_01_marah_thirst';
+      if (nodeExists(wildernessStart)) return wildernessStart;
+    }
+
+    if (chapter === 'exodus') return getFallbackStartNodeId();
+    return getFallbackStartNodeId();
+  }
+
+  function startAtNode(startNodeId) {
+    const resolvedStartNodeId = nodeExists(startNodeId) ? startNodeId : getFallbackStartNodeId();
+
+    if (typeof clearSave === 'function') clearSave();
+    if (typeof resetGame === 'function') resetGame();
+
+    currentNodeId = resolvedStartNodeId;
+    currentEndingId = null;
+    selectedChoiceIndex = null;
+
+    if (typeof renderNode === 'function') renderNode(getCurrentNode());
+    if (typeof markVisitedNode === 'function') markVisitedNode(currentNodeId);
+    if (typeof writeSave === 'function') writeSave();
+    if (typeof showScreen === 'function') showScreen('play');
+  }
+
+  if (typeof startNewGame === 'function') {
+    const originalStartNewGame = startNewGame;
+    startNewGame = function patchedStartNewGame(startNodeId) {
+      if (nodeExists(startNodeId)) {
+        startAtNode(startNodeId);
+        return;
+      }
+      originalStartNewGame();
+    };
+  }
+
+  function interceptNewPlay(event) {
+    const trigger = event.target?.closest?.('[data-go="new-play"]');
+    if (!trigger) return;
+
+    const hasChapterStart = trigger.dataset.startNode || trigger.dataset.chapter;
+    if (!hasChapterStart) return;
+
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    startAtNode(resolveStartNodeId(trigger));
+  }
+
+  document.addEventListener('click', interceptNewPlay, true);
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    interceptNewPlay(event);
+  }, true);
+})();
