@@ -98,69 +98,84 @@
 })();
 
 // Temporary chapter routing bridge.
-// Keeps existing main.js intact while allowing chapter cards with data-start-node
-// to start their own story node instead of always falling back to START_NODE_ID.
+// main.js currently starts every new playthrough from its internal START_NODE_ID.
+// This bridge only handles cards that declare data-start-node and starts them
+// through the existing save/continue path without touching main.js internals.
 (function () {
+  const SAVE_KEY = 'biblerogue2.save.v1';
+
   function nodeExists(nodeId) {
     return Boolean(nodeId && window.STORY_NODES && window.STORY_NODES[nodeId]);
-  }
-
-  function getFallbackStartNodeId() {
-    if (typeof START_NODE_ID !== 'undefined') return START_NODE_ID;
-    return window.START_NODE_ID || 'exodus_01_slave_day';
   }
 
   function resolveStartNodeId(trigger) {
     const explicitStartNode = trigger?.dataset?.startNode;
     if (nodeExists(explicitStartNode)) return explicitStartNode;
 
-    const chapter = trigger?.dataset?.chapter;
-    if (chapter === 'wilderness') {
+    if (trigger?.dataset?.chapter === 'wilderness') {
       const wildernessStart = window.WILDERNESS_START_NODE_ID || 'wilderness_01_marah_thirst';
       if (nodeExists(wildernessStart)) return wildernessStart;
     }
 
-    if (chapter === 'exodus') return getFallbackStartNodeId();
-    return getFallbackStartNodeId();
+    return null;
   }
 
-  function startAtNode(startNodeId) {
-    const resolvedStartNodeId = nodeExists(startNodeId) ? startNodeId : getFallbackStartNodeId();
+  function writeChapterStartSave(startNodeId) {
+    if (!nodeExists(startNodeId)) return false;
 
-    if (typeof clearSave === 'function') clearSave();
-    if (typeof resetGame === 'function') resetGame();
-
-    currentNodeId = resolvedStartNodeId;
-    currentEndingId = null;
-    selectedChoiceIndex = null;
-
-    if (typeof renderNode === 'function') renderNode(getCurrentNode());
-    if (typeof markVisitedNode === 'function') markVisitedNode(currentNodeId);
-    if (typeof writeSave === 'function') writeSave();
-    if (typeof showScreen === 'function') showScreen('play');
-  }
-
-  if (typeof startNewGame === 'function') {
-    const originalStartNewGame = startNewGame;
-    startNewGame = function patchedStartNewGame(startNodeId) {
-      if (nodeExists(startNodeId)) {
-        startAtNode(startNodeId);
-        return;
-      }
-      originalStartNewGame();
+    const payload = {
+      version: 1,
+      currentNodeId: startNodeId,
+      currentEndingId: null,
+      selectedChoiceIndex: null,
+      gameState: {
+        trust: 0,
+        fear: 0,
+        community: 0,
+        discernment: 0,
+        memory: 0,
+        time: 0,
+        clues: 0,
+        delay: 0,
+        scatter: 0
+      },
+      visitedNodes: [],
+      unlockedEndings: [],
+      lastPlayedAt: new Date().toISOString()
     };
+
+    try {
+      window.localStorage.setItem(SAVE_KEY, JSON.stringify(payload));
+      return true;
+    } catch (error) {
+      console.warn('Chapter start save could not be written.', error);
+      return false;
+    }
+  }
+
+  function startChapterFromCard(trigger) {
+    const startNodeId = resolveStartNodeId(trigger);
+    if (!startNodeId) return false;
+    if (!writeChapterStartSave(startNodeId)) return false;
+
+    if (typeof continueSavedOrStart === 'function') {
+      continueSavedOrStart();
+      return true;
+    }
+
+    return false;
   }
 
   function interceptNewPlay(event) {
     const trigger = event.target?.closest?.('[data-go="new-play"]');
     if (!trigger) return;
 
-    const hasChapterStart = trigger.dataset.startNode || trigger.dataset.chapter;
-    if (!hasChapterStart) return;
+    const startNodeId = resolveStartNodeId(trigger);
+    if (!startNodeId) return;
 
     event.preventDefault();
     event.stopImmediatePropagation();
-    startAtNode(resolveStartNodeId(trigger));
+    startChapterFromCard(trigger);
   }
 
   document.addEventListener('click', interceptNewPlay, true);
