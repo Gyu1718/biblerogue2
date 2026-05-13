@@ -4,6 +4,10 @@
 
 (function () {
   const SAVE_KEY = 'biblerogue2.save.v1';
+  const JERICHO_PATCH_SCRIPTS = [
+    'src/data/jerichoStructurePatch.js?v=jericho-20260513a',
+    'src/data/jerichoEndingsPatch.js?v=jericho-20260513a'
+  ];
 
   const CHAPTERS = {
     exodus: {
@@ -196,6 +200,28 @@
     };
   }
 
+  function makeJerichoCardPlayable() {
+    const art = document.querySelector('.home-chapter-art.jericho');
+    const card = art?.closest?.('.home-chapter-card');
+    if (!card) return;
+
+    card.dataset.go = 'new-play';
+    card.dataset.startNode = CHAPTERS.jericho.startNodeId;
+    card.dataset.chapter = 'jericho';
+    delete card.dataset.panel;
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', '3장 여리고 시작');
+    card.classList.remove('is-preparing', 'locked');
+    card.classList.add('available', 'is-current');
+
+    const status = card.querySelector('.home-chapter-status');
+    if (status) status.textContent = '플레이 가능';
+
+    const lock = card.querySelector('.home-chapter-lock');
+    if (lock) lock.remove();
+  }
+
   function bindChapterStartCards() {
     document.addEventListener('click', (event) => {
       const trigger = event.target?.closest?.('[data-go="new-play"][data-start-node], [data-go="new-play"][data-chapter]');
@@ -224,11 +250,39 @@
     }, true);
   }
 
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      const baseSrc = src.split('?')[0];
+      if ([...document.scripts].some((script) => script.getAttribute('src')?.split('?')[0] === baseSrc)) {
+        resolve();
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src = src;
+      script.onload = resolve;
+      script.onerror = () => reject(new Error(`Failed to load ${src}`));
+      document.body.appendChild(script);
+    });
+  }
+
+  function ensureJerichoPatches() {
+    if (getNode(CHAPTERS.jericho.startNodeId) && window.STORY_ENDINGS?.true_jericho_faithful_witness) {
+      return Promise.resolve();
+    }
+    return JERICHO_PATCH_SCRIPTS.reduce((promise, src) => promise.then(() => loadScript(src)), Promise.resolve());
+  }
+
   function initChapterRuntime() {
-    patchSceneArt();
-    patchEndingArt();
-    bindChapterStartCards();
-    window.BIBLE_ROGUE_CHAPTERS = CHAPTERS;
+    ensureJerichoPatches()
+      .catch((error) => console.warn('Jericho chapter patches could not be loaded.', error))
+      .finally(() => {
+        patchSceneArt();
+        patchEndingArt();
+        makeJerichoCardPlayable();
+        bindChapterStartCards();
+        window.BIBLE_ROGUE_CHAPTERS = CHAPTERS;
+      });
   }
 
   if (document.readyState === 'loading') {
