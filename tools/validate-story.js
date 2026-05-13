@@ -18,9 +18,13 @@ const ROOT = path.resolve(__dirname, '..');
 const STORY_PATH = path.join(ROOT, 'src', 'data', 'storyNodes.js');
 const STORY_PATCH_PATHS = [
   path.join(ROOT, 'src', 'data', 'exodusStructurePatch.js'),
-  path.join(ROOT, 'src', 'data', 'wildernessStructurePatch.js')
+  path.join(ROOT, 'src', 'data', 'wildernessStructurePatch.js'),
+  path.join(ROOT, 'src', 'data', 'jerichoStructurePatch.js')
 ];
 const ENDINGS_PATH = path.join(ROOT, 'src', 'data', 'endings.js');
+const ENDING_PATCH_PATHS = [
+  path.join(ROOT, 'src', 'data', 'jerichoEndingsPatch.js')
+];
 
 const ALLOWED_EFFECTS = new Set([
   'trust',
@@ -41,7 +45,7 @@ const RESOLVER_ENDING_TARGETS = {
   wilderness: ['true_wilderness_daily_trust', 'faithful_wilderness_witness', 'wounded_wilderness_witness']
 };
 
-const EXTRA_START_NODE_IDS = ['wilderness_01_marah_thirst'];
+const EXTRA_START_NODE_IDS = ['wilderness_01_marah_thirst', 'jericho_01_jordan_edge'];
 
 const REQUIRED_NODE_FIELDS = [
   'id',
@@ -297,11 +301,12 @@ function run() {
 
   const endingSandbox = createBrowserSandbox();
   const endingWindow = runBrowserDataFile(ENDINGS_PATH, endingSandbox);
+  ENDING_PATCH_PATHS.forEach((patchPath) => runOptionalBrowserDataFile(patchPath, endingSandbox));
 
   const storyNodes = storyWindow.STORY_NODES;
   const storyStartNodeId = storyWindow.START_NODE_ID;
   const endings = endingWindow.STORY_ENDINGS;
-  const registeredStartIds = [storyStartNodeId, storyWindow.WILDERNESS_START_NODE_ID, ...EXTRA_START_NODE_IDS].filter(Boolean);
+  const registeredStartIds = [storyStartNodeId, storyWindow.WILDERNESS_START_NODE_ID, storyWindow.JERICHO_START_NODE_ID, ...EXTRA_START_NODE_IDS].filter(Boolean);
 
   const errors = [];
   const warnings = [];
