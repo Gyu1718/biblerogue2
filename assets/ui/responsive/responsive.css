@@ -42,6 +42,9 @@ body.is-small-window #viewport {
 }
 
 body.is-mobile-landscape #viewport {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
   align-items: center;
   justify-content: center;
 }
