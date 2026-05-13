@@ -101,10 +101,16 @@
   height: auto !important;
   margin-bottom: 8px !important;
   padding-top: 8px !important;
+  padding-right: 58px !important;
   padding-bottom: 8px !important;
+  box-sizing: border-box !important;
   font-size: 16px !important;
   line-height: 1.28 !important;
   letter-spacing: .01em !important;
+  white-space: normal !important;
+  word-break: keep-all !important;
+  overflow-wrap: anywhere !important;
+  overflow: hidden !important;
 }
 
 #play-screen .narrative-panel > .choice-list .choice.active {
@@ -236,10 +242,34 @@ body.is-mobile-landscape #play-screen .narrative-panel > .choice-list {
 }
 
 body.is-mobile-landscape #play-screen .narrative-panel > .choice-list .choice {
-  font-size: 19px !important;
-  line-height: 1.26 !important;
-  letter-spacing: .01em !important;
-  min-height: 56px !important;
+  min-height: 58px !important;
+  max-height: 86px !important;
+  padding-left: 86px !important;
+  padding-right: 62px !important;
+  padding-top: 7px !important;
+  padding-bottom: 7px !important;
+  box-sizing: border-box !important;
+  align-items: center !important;
+  font-size: 17px !important;
+  line-height: 1.22 !important;
+  letter-spacing: 0 !important;
+  white-space: normal !important;
+  word-break: keep-all !important;
+  overflow-wrap: anywhere !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
+}
+
+body.is-mobile-landscape #play-screen .narrative-panel > .choice-list .choice span {
+  left: 18px !important;
+  width: 38px !important;
+  height: 38px !important;
+}
+
+body.is-mobile-landscape #play-screen .narrative-panel > .choice-list .choice em {
+  right: 22px !important;
+  width: 24px !important;
+  height: 24px !important;
 }
 
 body.is-mobile-landscape #play-screen .back-home {
