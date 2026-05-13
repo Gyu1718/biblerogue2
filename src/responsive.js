@@ -67,9 +67,23 @@
     document.body.classList.toggle('is-small-window', smallWindow);
     document.body.classList.toggle('is-very-small-window', centeredScale < MIN_READABLE_SCALE);
 
-    canvas.style.transform = `scale(${centeredScale})`;
-    canvas.style.left = 'auto';
-    canvas.style.top = 'auto';
+    if (mobileLandscape) {
+      canvas.style.position = 'absolute';
+      canvas.style.left = '50%';
+      canvas.style.top = '50%';
+      canvas.style.right = 'auto';
+      canvas.style.bottom = 'auto';
+      canvas.style.transformOrigin = 'center center';
+      canvas.style.transform = `translate(-50%, -50%) scale(${centeredScale})`;
+    } else {
+      canvas.style.position = 'relative';
+      canvas.style.left = 'auto';
+      canvas.style.top = 'auto';
+      canvas.style.right = 'auto';
+      canvas.style.bottom = 'auto';
+      canvas.style.transformOrigin = 'center center';
+      canvas.style.transform = `scale(${centeredScale})`;
+    }
 
     ensureRotateNotice();
   }
