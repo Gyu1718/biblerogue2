@@ -41,7 +41,7 @@ body.is-small-window #viewport {
     linear-gradient(180deg, #090805, #020407 68%);
 }
 
-body.is-mobile-landscape #viewport {
+body.is-fit-canvas #viewport {
   position: fixed;
   inset: 0;
   overflow: hidden;
