@@ -1,0 +1,14 @@
+BibleRogue2 Part I Chapter 2 Wilderness Extended Assets - Batch 05
+
+This package includes the Sinai/Golden Calf extension ending illustrations.
+Target path: assets/images/story/wilderness/original_16x9/
+
+- bad_golden_calf_leader.png
+- bad_idol_feast.png
+- bad_covenant_broken.png
+- bad_return_to_idols.png
+- true_wilderness_covenant_witness.png
+- faithful_wilderness_covenant_memory.png
+- wounded_wilderness_covenant_witness.png
+
+All files are PNG, cropped/resized to 1600x900 (16:9).

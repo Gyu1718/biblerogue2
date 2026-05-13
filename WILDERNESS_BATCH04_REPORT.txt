@@ -1,0 +1,17 @@
+BibleRogue2 Part I Chapter 2 Wilderness Extended Assets - Batch 04
+
+This package includes the Sinai/Golden Calf extension play illustrations (17-26).
+Target path: assets/images/story/wilderness/play_left_520x650/
+
+- wilderness_17_sinai_arrival.png
+- wilderness_18_covenant_offer.png
+- wilderness_19_thunder_and_fear.png
+- wilderness_20_waiting_for_moses.png
+- wilderness_21_pressure_for_visible_god.png
+- wilderness_22_golden_calf_made.png
+- wilderness_23_feast_before_calf.png
+- wilderness_24_broken_tablets.png
+- wilderness_25_intercession_after_judgment.png
+- wilderness_26_covenant_remembered.png
+
+All files are PNG, cropped/resized to 520x650.
