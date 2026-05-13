@@ -55,6 +55,7 @@
     const availableHeight = Math.max(1, height - safePadY * 2);
     const scale = Math.min(availableWidth / BASE_WIDTH, availableHeight / BASE_HEIGHT);
     const centeredScale = Math.max(0.1, Math.min(scale, 1));
+    const fitCanvas = smallWindow || mobileLandscape;
 
     document.documentElement.style.setProperty('--responsive-vw', `${width}px`);
     document.documentElement.style.setProperty('--responsive-vh', `${height}px`);
@@ -67,9 +68,10 @@
     document.body.classList.toggle('is-mobile-landscape', mobileLandscape);
     document.body.classList.toggle('is-mobile-portrait', mobilePortrait);
     document.body.classList.toggle('is-small-window', smallWindow);
+    document.body.classList.toggle('is-fit-canvas', fitCanvas);
     document.body.classList.toggle('is-very-small-window', centeredScale < MIN_READABLE_SCALE);
 
-    if (mobileLandscape) {
+    if (fitCanvas) {
       const scaledWidth = BASE_WIDTH * centeredScale;
       const scaledHeight = BASE_HEIGHT * centeredScale;
       const left = offsetLeft + Math.max(safePadX, (width - scaledWidth) / 2);
@@ -89,7 +91,7 @@
       canvas.style.right = 'auto';
       canvas.style.bottom = 'auto';
       canvas.style.transformOrigin = 'center center';
-      canvas.style.transform = `scale(${centeredScale})`;
+      canvas.style.transform = 'none';
     }
 
     ensureRotateNotice();
