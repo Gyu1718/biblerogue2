@@ -16,7 +16,10 @@ const vm = require('vm');
 
 const ROOT = path.resolve(__dirname, '..');
 const STORY_PATH = path.join(ROOT, 'src', 'data', 'storyNodes.js');
-const STORY_PATCH_PATH = path.join(ROOT, 'src', 'data', 'exodusStructurePatch.js');
+const STORY_PATCH_PATHS = [
+  path.join(ROOT, 'src', 'data', 'exodusStructurePatch.js'),
+  path.join(ROOT, 'src', 'data', 'wildernessStructurePatch.js')
+];
 const ENDINGS_PATH = path.join(ROOT, 'src', 'data', 'endings.js');
 
 const ALLOWED_EFFECTS = new Set([
@@ -31,11 +34,14 @@ const ALLOWED_EFFECTS = new Set([
   'scatter'
 ]);
 
-const ALLOWED_ENDING_RESOLVERS = new Set(['exodus']);
+const ALLOWED_ENDING_RESOLVERS = new Set(['exodus', 'wilderness']);
 
 const RESOLVER_ENDING_TARGETS = {
-  exodus: ['true_exodus_deliverance', 'faithful_exodus_witness', 'wounded_exodus_witness']
+  exodus: ['true_exodus_deliverance', 'faithful_exodus_witness', 'wounded_exodus_witness'],
+  wilderness: ['true_wilderness_daily_trust', 'faithful_wilderness_witness', 'wounded_wilderness_witness']
 };
+
+const EXTRA_START_NODE_IDS = ['wilderness_01_marah_thirst'];
 
 const REQUIRED_NODE_FIELDS = [
   'id',
@@ -131,15 +137,9 @@ function validateNodeShape(nodeKey, node, errors, warnings) {
   } else {
     const current = Number(node.progress.current);
     const total = Number(node.progress.total);
-    if (!Number.isInteger(current) || current < 1) {
-      addError(errors, nodeKey, 'progress.current must be a positive integer.');
-    }
-    if (!Number.isInteger(total) || total < 1) {
-      addError(errors, nodeKey, 'progress.total must be a positive integer.');
-    }
-    if (Number.isInteger(current) && Number.isInteger(total) && current > total) {
-      addError(errors, nodeKey, 'progress.current cannot be greater than progress.total.');
-    }
+    if (!Number.isInteger(current) || current < 1) addError(errors, nodeKey, 'progress.current must be a positive integer.');
+    if (!Number.isInteger(total) || total < 1) addError(errors, nodeKey, 'progress.total must be a positive integer.');
+    if (Number.isInteger(current) && Number.isInteger(total) && current > total) addError(errors, nodeKey, 'progress.current cannot be greater than progress.total.');
   }
 
   if (!Array.isArray(node.choices) || node.choices.length === 0) {
@@ -157,51 +157,31 @@ function validateChoice(nodeKey, choice, index, allNodeIds, allEndingIds, errors
     return;
   }
 
-  if (typeof choice.key !== 'string' || choice.key.trim() === '') {
-    addError(errors, location, 'Choice key must be a non-empty string.');
-  }
-
-  if (typeof choice.text !== 'string' || choice.text.trim() === '') {
-    addError(errors, location, 'Choice text must be a non-empty string.');
-  }
+  if (typeof choice.key !== 'string' || choice.key.trim() === '') addError(errors, location, 'Choice key must be a non-empty string.');
+  if (typeof choice.text !== 'string' || choice.text.trim() === '') addError(errors, location, 'Choice text must be a non-empty string.');
 
   if (!isPlainObject(choice.effects)) {
     addWarning(warnings, location, 'effects is missing or not an object. Use effects: {} when no effect is intended.');
   } else {
     Object.entries(choice.effects).forEach(([effectKey, effectValue]) => {
-      if (!ALLOWED_EFFECTS.has(effectKey)) {
-        addError(errors, location, `Unknown effect key: ${effectKey}`);
-      }
-      if (typeof effectValue !== 'number' || !Number.isFinite(effectValue)) {
-        addError(errors, location, `Effect value for ${effectKey} must be a finite number.`);
-      }
+      if (!ALLOWED_EFFECTS.has(effectKey)) addError(errors, location, `Unknown effect key: ${effectKey}`);
+      if (typeof effectValue !== 'number' || !Number.isFinite(effectValue)) addError(errors, location, `Effect value for ${effectKey} must be a finite number.`);
     });
   }
 
   const routeCount = ['next', 'ending', 'endingResolver'].filter((field) => choice[field]).length;
-  if (routeCount === 0) {
-    addError(errors, location, 'Choice must have one route: next, ending, or endingResolver.');
-  }
-  if (routeCount > 1) {
-    addWarning(warnings, location, 'Choice has multiple route fields. Confirm this is intentional.');
-  }
+  if (routeCount === 0) addError(errors, location, 'Choice must have one route: next, ending, or endingResolver.');
+  if (routeCount > 1) addWarning(warnings, location, 'Choice has multiple route fields. Confirm this is intentional.');
 
-  if (choice.next && !allNodeIds.has(choice.next)) {
-    addError(errors, location, `next target does not exist: ${choice.next}`);
-  }
-
-  if (choice.ending && !allEndingIds.has(choice.ending)) {
-    addError(errors, location, `ending target does not exist: ${choice.ending}`);
-  }
+  if (choice.next && !allNodeIds.has(choice.next)) addError(errors, location, `next target does not exist: ${choice.next}`);
+  if (choice.ending && !allEndingIds.has(choice.ending)) addError(errors, location, `ending target does not exist: ${choice.ending}`);
 
   if (choice.endingResolver) {
     if (!ALLOWED_ENDING_RESOLVERS.has(choice.endingResolver)) {
       addError(errors, location, `Unknown endingResolver: ${choice.endingResolver}`);
     } else {
       (RESOLVER_ENDING_TARGETS[choice.endingResolver] || []).forEach((endingId) => {
-        if (!allEndingIds.has(endingId)) {
-          addError(errors, location, `endingResolver ${choice.endingResolver} can resolve to missing ending: ${endingId}`);
-        }
+        if (!allEndingIds.has(endingId)) addError(errors, location, `endingResolver ${choice.endingResolver} can resolve to missing ending: ${endingId}`);
       });
     }
   }
@@ -218,9 +198,7 @@ function validateChoice(nodeKey, choice, index, allNodeIds, allEndingIds, errors
         return;
       }
       ['name', 'role', 'portrait', 'text'].forEach((field) => {
-        if (typeof line[field] !== 'string' || line[field].trim() === '') {
-          addError(errors, companionLocation, `${field} must be a non-empty string.`);
-        }
+        if (typeof line[field] !== 'string' || line[field].trim() === '') addError(errors, companionLocation, `${field} must be a non-empty string.`);
       });
     });
   }
@@ -228,13 +206,10 @@ function validateChoice(nodeKey, choice, index, allNodeIds, allEndingIds, errors
 
 function validateChoiceKeys(nodeKey, choices, errors) {
   if (!Array.isArray(choices)) return;
-
   const seen = new Set();
   choices.forEach((choice, index) => {
     if (!choice || typeof choice.key !== 'string') return;
-    if (seen.has(choice.key)) {
-      addError(errors, `${nodeKey}.choices[${index}]`, `Duplicate choice key in this node: ${choice.key}`);
-    }
+    if (seen.has(choice.key)) addError(errors, `${nodeKey}.choices[${index}]`, `Duplicate choice key in this node: ${choice.key}`);
     seen.add(choice.key);
   });
 }
@@ -249,34 +224,28 @@ function validateEndingShape(endingKey, ending, errors, warnings) {
     if (!(field in ending)) addError(errors, endingKey, `Missing required field: ${field}`);
   });
 
-  if (ending.id !== endingKey) {
-    addError(errors, endingKey, `Ending id must match object key. Found id: ${ending.id}`);
-  }
+  if (ending.id !== endingKey) addError(errors, endingKey, `Ending id must match object key. Found id: ${ending.id}`);
 
   ['id', 'type', 'title', 'bannerLeft', 'bannerRight', 'grade', 'scripture', 'reference'].forEach((field) => {
-    if (typeof ending[field] !== 'string' || ending[field].trim() === '') {
-      addError(errors, endingKey, `${field} must be a non-empty string.`);
-    }
+    if (typeof ending[field] !== 'string' || ending[field].trim() === '') addError(errors, endingKey, `${field} must be a non-empty string.`);
   });
 
-  if (!Array.isArray(ending.description) || ending.description.length === 0) {
-    addError(errors, endingKey, 'description must be a non-empty array.');
-  }
-
-  if (!['true', 'good', 'mixed', 'bad'].includes(ending.type)) {
-    addWarning(warnings, endingKey, `Unexpected ending type: ${ending.type}`);
-  }
+  if (!Array.isArray(ending.description) || ending.description.length === 0) addError(errors, endingKey, 'description must be a non-empty array.');
+  if (!['true', 'good', 'mixed', 'bad'].includes(ending.type)) addWarning(warnings, endingKey, `Unexpected ending type: ${ending.type}`);
 }
 
 function validateProgressSequence(storyNodes, warnings) {
-  const nodes = Object.values(storyNodes)
-    .filter((node) => node && node.progress)
-    .sort((a, b) => Number(a.progress.current) - Number(b.progress.current));
-
-  const totals = new Set(nodes.map((node) => Number(node.progress.total)).filter(Number.isFinite));
-  if (totals.size > 1) {
-    addWarning(warnings, 'progress', `Multiple progress totals found: ${Array.from(totals).join(', ')}`);
-  }
+  const nodes = Object.values(storyNodes).filter((node) => node && node.progress);
+  const totalsByChapter = new Map();
+  nodes.forEach((node) => {
+    const chapter = node.chapter || 'unknown';
+    const total = Number(node.progress.total);
+    if (!totalsByChapter.has(chapter)) totalsByChapter.set(chapter, new Set());
+    if (Number.isFinite(total)) totalsByChapter.get(chapter).add(total);
+  });
+  totalsByChapter.forEach((totals, chapter) => {
+    if (totals.size > 1) addWarning(warnings, `progress:${chapter}`, `Multiple progress totals found: ${Array.from(totals).join(', ')}`);
+  });
 }
 
 function traceReachableGraph(storyNodes, startNodeId) {
@@ -287,49 +256,44 @@ function traceReachableGraph(storyNodes, startNodeId) {
   while (queue.length) {
     const nodeId = queue.shift();
     if (!nodeId || reachableNodes.has(nodeId)) continue;
-
     const node = storyNodes[nodeId];
     if (!node) continue;
-
     reachableNodes.add(nodeId);
     (node.choices || []).forEach((choice) => {
       if (choice.next && !reachableNodes.has(choice.next)) queue.push(choice.next);
       if (choice.ending) reachableEndings.add(choice.ending);
-      if (choice.endingResolver) {
-        (RESOLVER_ENDING_TARGETS[choice.endingResolver] || []).forEach((endingId) => reachableEndings.add(endingId));
-      }
+      if (choice.endingResolver) (RESOLVER_ENDING_TARGETS[choice.endingResolver] || []).forEach((endingId) => reachableEndings.add(endingId));
     });
   }
 
   return { reachableNodes, reachableEndings };
 }
 
-function validateReachability(storyNodes, endings, startNodeId, warnings) {
-  if (!startNodeId || !storyNodes[startNodeId]) return;
+function validateReachability(storyNodes, endings, startNodeIds, warnings) {
+  const allReachableNodes = new Set();
+  const allReachableEndings = new Set();
 
-  const { reachableNodes, reachableEndings } = traceReachableGraph(storyNodes, startNodeId);
+  startNodeIds.filter((id) => id && storyNodes[id]).forEach((startNodeId) => {
+    const { reachableNodes, reachableEndings } = traceReachableGraph(storyNodes, startNodeId);
+    reachableNodes.forEach((id) => allReachableNodes.add(id));
+    reachableEndings.forEach((id) => allReachableEndings.add(id));
+  });
 
   Object.keys(storyNodes).forEach((nodeId) => {
-    if (!reachableNodes.has(nodeId)) {
-      addWarning(warnings, nodeId, 'Node is not reachable from START_NODE_ID.');
-    }
+    if (!allReachableNodes.has(nodeId)) addWarning(warnings, nodeId, 'Node is not reachable from registered start nodes.');
   });
 
   Object.keys(endings).forEach((endingId) => {
-    if (!reachableEndings.has(endingId)) {
-      addWarning(warnings, endingId, 'Ending is not reachable from START_NODE_ID.');
-    }
+    if (!allReachableEndings.has(endingId)) addWarning(warnings, endingId, 'Ending is not reachable from registered start nodes.');
   });
 
-  if (reachableEndings.size === 0) {
-    addWarning(warnings, 'story graph', 'No reachable endings were found.');
-  }
+  if (allReachableEndings.size === 0) addWarning(warnings, 'story graph', 'No reachable endings were found.');
 }
 
 function run() {
   const storySandbox = createBrowserSandbox();
   const storyWindow = runBrowserDataFile(STORY_PATH, storySandbox);
-  runOptionalBrowserDataFile(STORY_PATCH_PATH, storySandbox);
+  STORY_PATCH_PATHS.forEach((patchPath) => runOptionalBrowserDataFile(patchPath, storySandbox));
 
   const endingSandbox = createBrowserSandbox();
   const endingWindow = runBrowserDataFile(ENDINGS_PATH, endingSandbox);
@@ -337,6 +301,7 @@ function run() {
   const storyNodes = storyWindow.STORY_NODES;
   const storyStartNodeId = storyWindow.START_NODE_ID;
   const endings = endingWindow.STORY_ENDINGS;
+  const registeredStartIds = [storyStartNodeId, storyWindow.WILDERNESS_START_NODE_ID, ...EXTRA_START_NODE_IDS].filter(Boolean);
 
   const errors = [];
   const warnings = [];
@@ -348,37 +313,27 @@ function run() {
     const allNodeIds = new Set(Object.keys(storyNodes));
     const allEndingIds = new Set(Object.keys(endings));
 
-    if (!storyStartNodeId) {
-      addError(errors, 'START_NODE_ID', 'START_NODE_ID is missing.');
-    } else if (!allNodeIds.has(storyStartNodeId)) {
-      addError(errors, 'START_NODE_ID', `START_NODE_ID target does not exist: ${storyStartNodeId}`);
-    }
+    if (!storyStartNodeId) addError(errors, 'START_NODE_ID', 'START_NODE_ID is missing.');
+    else if (!allNodeIds.has(storyStartNodeId)) addError(errors, 'START_NODE_ID', `START_NODE_ID target does not exist: ${storyStartNodeId}`);
 
-    Object.entries(endings).forEach(([endingKey, ending]) => {
-      validateEndingShape(endingKey, ending, errors, warnings);
+    registeredStartIds.forEach((startId) => {
+      if (!allNodeIds.has(startId)) addError(errors, 'registered start node', `Registered start node does not exist: ${startId}`);
     });
+
+    Object.entries(endings).forEach(([endingKey, ending]) => validateEndingShape(endingKey, ending, errors, warnings));
 
     Object.entries(storyNodes).forEach(([nodeKey, node]) => {
       validateNodeShape(nodeKey, node, errors, warnings);
       validateChoiceKeys(nodeKey, node.choices, errors);
-      if (Array.isArray(node.choices)) {
-        node.choices.forEach((choice, index) => {
-          validateChoice(nodeKey, choice, index, allNodeIds, allEndingIds, errors, warnings);
-        });
-      }
+      if (Array.isArray(node.choices)) node.choices.forEach((choice, index) => validateChoice(nodeKey, choice, index, allNodeIds, allEndingIds, errors, warnings));
     });
 
     validateProgressSequence(storyNodes, warnings);
-    validateReachability(storyNodes, endings, storyStartNodeId, warnings);
+    validateReachability(storyNodes, endings, registeredStartIds, warnings);
   }
 
-  warnings.forEach((warning) => {
-    console.warn(`WARNING ${warning.location}: ${warning.message}`);
-  });
-
-  errors.forEach((error) => {
-    console.error(`ERROR ${error.location}: ${error.message}`);
-  });
+  warnings.forEach((warning) => console.warn(`WARNING ${warning.location}: ${warning.message}`));
+  errors.forEach((error) => console.error(`ERROR ${error.location}: ${error.message}`));
 
   const nodeCount = storyNodes ? Object.keys(storyNodes).length : 0;
   const endingCount = endings ? Object.keys(endings).length : 0;
