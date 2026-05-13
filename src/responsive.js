@@ -103,6 +103,17 @@
 // through the existing save/continue path without touching main.js internals.
 (function () {
   const SAVE_KEY = 'biblerogue2.save.v1';
+  const WILDERNESS_PLAY_ART_BASE = 'assets/images/story/wilderness/play_left_520x650';
+  const WILDERNESS_ENDING_ART_BASE = 'assets/images/story/wilderness/original_16x9';
+  const WILDERNESS_ENDING_IDS = new Set([
+    'true_wilderness_daily_trust',
+    'faithful_wilderness_witness',
+    'wounded_wilderness_witness',
+    'bad_wilderness_bitter_murmur',
+    'bad_rotten_manna',
+    'bad_sabbath_rebellion',
+    'bad_massah_meribah'
+  ]);
 
   function nodeExists(nodeId) {
     return Boolean(nodeId && window.STORY_NODES && window.STORY_NODES[nodeId]);
@@ -153,6 +164,43 @@
     }
   }
 
+  function updateWildernessSceneArt() {
+    const sceneArt = document.querySelector('.scene-art');
+    const sceneId = sceneArt?.dataset?.sceneId || '';
+    if (!sceneArt || !sceneId.startsWith('wilderness_')) return;
+
+    const artPath = `${WILDERNESS_PLAY_ART_BASE}/${sceneId}.png`;
+    sceneArt.style.backgroundImage = `url('${artPath}')`;
+    sceneArt.dataset.artPath = artPath;
+  }
+
+  function updateWildernessEndingArt() {
+    const ending = document.getElementById('ending-screen');
+    const endingBg = ending?.querySelector?.('.ending-bg');
+    const endingId = ending?.dataset?.endingId || '';
+    if (!ending || !endingBg || !WILDERNESS_ENDING_IDS.has(endingId)) return;
+
+    const artPath = `${WILDERNESS_ENDING_ART_BASE}/${endingId}.png`;
+    const isTrue = endingId === 'true_wilderness_daily_trust' || endingId === 'faithful_wilderness_witness';
+    const goldOpacity = isTrue ? '.34' : '.18';
+    const warmOpacity = isTrue ? '.10' : '.06';
+
+    endingBg.style.backgroundImage = `linear-gradient(180deg, rgba(255,225,150,.04), rgba(0,0,0,.38)), radial-gradient(circle at 50% 2%, rgba(255,229,151,${goldOpacity}) 0 8%, rgba(255,198,83,${warmOpacity}) 23%, transparent 43%), url('${artPath}')`;
+    ending.dataset.artPath = artPath;
+  }
+
+  function refreshWildernessArt() {
+    updateWildernessSceneArt();
+    updateWildernessEndingArt();
+  }
+
+  function scheduleWildernessArtRefresh() {
+    window.requestAnimationFrame(() => {
+      refreshWildernessArt();
+      window.requestAnimationFrame(refreshWildernessArt);
+    });
+  }
+
   function startChapterFromCard(trigger) {
     const startNodeId = resolveStartNodeId(trigger);
     if (!startNodeId) return false;
@@ -160,6 +208,7 @@
 
     if (typeof continueSavedOrStart === 'function') {
       continueSavedOrStart();
+      scheduleWildernessArtRefresh();
       return true;
     }
 
@@ -178,9 +227,27 @@
     startChapterFromCard(trigger);
   }
 
+  function scheduleAfterNavigation(event) {
+    const target = event.target;
+    if (!target?.closest?.('[data-go], .choice')) return;
+    scheduleWildernessArtRefresh();
+  }
+
   document.addEventListener('click', interceptNewPlay, true);
   document.addEventListener('keydown', (event) => {
     if (event.key !== 'Enter' && event.key !== ' ') return;
     interceptNewPlay(event);
   }, true);
+
+  document.addEventListener('click', scheduleAfterNavigation, false);
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    scheduleAfterNavigation(event);
+  }, false);
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', scheduleWildernessArtRefresh);
+  } else {
+    scheduleWildernessArtRefresh();
+  }
 })();
