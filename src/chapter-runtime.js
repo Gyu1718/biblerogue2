@@ -17,17 +17,41 @@
       nodePrefix: 'wilderness_',
       playArtBase: 'assets/images/story/wilderness/play_left_520x650',
       endingArtBase: 'assets/images/story/wilderness/original_16x9'
+    },
+    jericho: {
+      startNodeId: window.JERICHO_START_NODE_ID || 'jericho_01_jordan_edge',
+      nodePrefix: 'jericho_',
+      playArtBase: 'assets/images/story/jericho/play_left_520x650',
+      endingArtBase: 'assets/images/story/jericho/original_16x9'
     }
   };
 
-  const WILDERNESS_ENDING_IDS = new Set([
-    'true_wilderness_daily_trust',
-    'faithful_wilderness_witness',
-    'wounded_wilderness_witness',
-    'bad_wilderness_bitter_murmur',
-    'bad_rotten_manna',
-    'bad_sabbath_rebellion',
-    'bad_massah_meribah'
+  const CHAPTER_ENDING_IDS = new Map([
+    ['wilderness', new Set([
+      'true_wilderness_daily_trust',
+      'faithful_wilderness_witness',
+      'wounded_wilderness_witness',
+      'bad_wilderness_bitter_murmur',
+      'bad_rotten_manna',
+      'bad_sabbath_rebellion',
+      'bad_massah_meribah',
+      'true_wilderness_covenant_witness',
+      'faithful_wilderness_covenant_memory',
+      'wounded_wilderness_covenant_witness',
+      'bad_golden_calf_leader',
+      'bad_idol_feast',
+      'bad_covenant_broken',
+      'bad_return_to_idols'
+    ])],
+    ['jericho', new Set([
+      'true_jericho_faithful_witness',
+      'faithful_jericho_memory_keeper',
+      'wounded_jericho_trembling_witness',
+      'bad_jericho_forgot_red_cord',
+      'bad_jericho_broken_silence',
+      'bad_jericho_silent_retreat',
+      'bad_jericho_devoted_things'
+    ])]
   ]);
 
   function getNode(nodeId) {
@@ -37,6 +61,14 @@
   function getChapterByNodeId(nodeId) {
     if (!nodeId) return null;
     return Object.values(CHAPTERS).find((chapter) => nodeId.startsWith(chapter.nodePrefix)) || null;
+  }
+
+  function getChapterByEndingId(endingId) {
+    if (!endingId) return null;
+    for (const [chapterKey, endingIds] of CHAPTER_ENDING_IDS.entries()) {
+      if (endingIds.has(endingId)) return CHAPTERS[chapterKey] || null;
+    }
+    return null;
   }
 
   function getChapterByTrigger(trigger) {
@@ -107,16 +139,16 @@
     return false;
   }
 
-  function getWildernessNodeImage(node) {
-    if (!node?.id?.startsWith('wilderness_')) return null;
-    const chapter = CHAPTERS.wilderness;
+  function getChapterNodeImage(node) {
+    const chapter = getChapterByNodeId(node?.id);
+    if (!chapter) return null;
     const filename = node.image || `${node.id}.png`;
     return `${chapter.playArtBase}/${filename}`;
   }
 
-  function getWildernessEndingImage(profile) {
-    if (!profile?.id || !WILDERNESS_ENDING_IDS.has(profile.id)) return null;
-    const chapter = CHAPTERS.wilderness;
+  function getChapterEndingImage(profile) {
+    const chapter = getChapterByEndingId(profile?.id);
+    if (!chapter) return null;
     const filename = profile.image || `${profile.id}.png`;
     return `${chapter.endingArtBase}/${filename}`;
   }
@@ -128,7 +160,7 @@
     window.updateSceneArt = function patchedUpdateSceneArt(node) {
       originalUpdateSceneArt(node);
 
-      const artPath = getWildernessNodeImage(node);
+      const artPath = getChapterNodeImage(node);
       if (!artPath) return;
 
       const sceneArt = document.querySelector('.scene-art');
@@ -148,14 +180,14 @@
     window.updateEndingArt = function patchedUpdateEndingArt(profile) {
       originalUpdateEndingArt(profile);
 
-      const artPath = getWildernessEndingImage(profile);
+      const artPath = getChapterEndingImage(profile);
       if (!artPath) return;
 
       const ending = document.getElementById('ending-screen');
       const endingBg = ending?.querySelector?.('.ending-bg');
       if (!ending || !endingBg) return;
 
-      const isTrue = profile.type === 'true' || profile.id === 'true_wilderness_daily_trust' || profile.id === 'faithful_wilderness_witness';
+      const isTrue = profile.type === 'true' || profile.type === 'good';
       const goldOpacity = isTrue ? '.34' : '.18';
       const warmOpacity = isTrue ? '.10' : '.06';
 
