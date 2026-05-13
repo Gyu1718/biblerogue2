@@ -10,7 +10,9 @@
     const vv = window.visualViewport;
     return {
       width: Math.max(1, vv?.width || window.innerWidth || document.documentElement.clientWidth || BASE_WIDTH),
-      height: Math.max(1, vv?.height || window.innerHeight || document.documentElement.clientHeight || BASE_HEIGHT)
+      height: Math.max(1, vv?.height || window.innerHeight || document.documentElement.clientHeight || BASE_HEIGHT),
+      offsetLeft: vv?.offsetLeft || 0,
+      offsetTop: vv?.offsetTop || 0
     };
   }
 
@@ -40,7 +42,7 @@
     const canvas = document.getElementById('game-canvas');
     if (!canvas) return;
 
-    const { width, height } = getViewportSize();
+    const { width, height, offsetLeft, offsetTop } = getViewportSize();
     const touchDevice = isTouchDevice();
     const portrait = height > width;
     const landscape = width >= height;
@@ -68,13 +70,18 @@
     document.body.classList.toggle('is-very-small-window', centeredScale < MIN_READABLE_SCALE);
 
     if (mobileLandscape) {
+      const scaledWidth = BASE_WIDTH * centeredScale;
+      const scaledHeight = BASE_HEIGHT * centeredScale;
+      const left = offsetLeft + Math.max(safePadX, (width - scaledWidth) / 2);
+      const top = offsetTop + Math.max(safePadY, (height - scaledHeight) / 2);
+
       canvas.style.position = 'absolute';
-      canvas.style.left = '50%';
-      canvas.style.top = '50%';
+      canvas.style.left = `${left}px`;
+      canvas.style.top = `${top}px`;
       canvas.style.right = 'auto';
       canvas.style.bottom = 'auto';
-      canvas.style.transformOrigin = 'center center';
-      canvas.style.transform = `translate(-50%, -50%) scale(${centeredScale})`;
+      canvas.style.transformOrigin = '0 0';
+      canvas.style.transform = `scale(${centeredScale})`;
     } else {
       canvas.style.position = 'relative';
       canvas.style.left = 'auto';
