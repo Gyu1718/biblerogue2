@@ -332,6 +332,7 @@
         });
 
         bindChapterStartCards();
+        loadScript('src/audio-runtime.js?v=audio-20260514a').catch((error) => console.warn('Audio runtime could not be loaded.', error));
         window.BIBLE_ROGUE_CHAPTERS = CHAPTERS;
       });
   }
