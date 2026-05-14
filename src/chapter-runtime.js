@@ -12,6 +12,10 @@
     judges: [
       'src/data/judgesStructurePatch.js?v=judges-20260514a',
       'src/data/judgesEndingsPatch.js?v=judges-20260514a'
+    ],
+    ruth: [
+      'src/data/ruthStructurePatch.js?v=ruth-20260514a',
+      'src/data/ruthEndingsPatch.js?v=ruth-20260514a'
     ]
   };
 
@@ -43,6 +47,14 @@
       endingArtBase: 'assets/images/story/judges/original_16x9',
       cardArtClass: 'judges',
       cardLabel: '4장 사사 시대 시작'
+    },
+    ruth: {
+      startNodeId: window.RUTH_START_NODE_ID || 'ruth_01_famine_in_bethlehem',
+      nodePrefix: 'ruth_',
+      playArtBase: 'assets/images/story/ruth/play_left_520x650',
+      endingArtBase: 'assets/images/story/ruth/original_16x9',
+      cardArtClass: 'ruth',
+      cardLabel: '5장 룻 시작'
     }
   };
 
@@ -81,6 +93,15 @@
       'bad_judges_fear_scattered',
       'bad_judges_spoils_idol',
       'bad_judges_cycle_hardened'
+    ])],
+    ['ruth', new Set([
+      'true_ruth_hesed_witness',
+      'faithful_ruth_bethlehem_witness',
+      'wounded_ruth_empty_to_full',
+      'bad_ruth_left_widows',
+      'bad_ruth_field_exploitation',
+      'bad_ruth_redeemer_refused',
+      'bad_ruth_closed_gate'
     ])]
   ]);
 
@@ -317,13 +338,13 @@
   }
 
   function initChapterRuntime() {
-    Promise.all(['jericho', 'judges'].map((chapterKey) => ensureChapterPatches(chapterKey)))
+    Promise.all(['jericho', 'judges', 'ruth'].map((chapterKey) => ensureChapterPatches(chapterKey)))
       .catch((error) => console.warn('Optional chapter patches could not be loaded.', error))
       .finally(() => {
         patchSceneArt();
         patchEndingArt();
 
-        ['jericho', 'judges'].forEach((chapterKey) => {
+        ['jericho', 'judges', 'ruth'].forEach((chapterKey) => {
           if (isChapterReady(chapterKey)) {
             makeChapterCardPlayable(chapterKey);
           } else {
