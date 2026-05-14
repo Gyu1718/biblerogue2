@@ -182,6 +182,11 @@
   function getChapterNodeImage(node) {
     const chapter = getChapterByNodeId(node?.id);
     if (!chapter) return null;
+
+    // Exodus uses the legacy explicit image map in main.js because its image
+    // filenames do not match node IDs. Do not override that working mapping.
+    if (chapter.nodePrefix === 'exodus_') return null;
+
     const filename = node.image || `${node.id}.png`;
     return `${chapter.playArtBase}/${filename}`;
   }
