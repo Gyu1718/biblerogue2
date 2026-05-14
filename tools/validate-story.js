@@ -21,13 +21,15 @@ const STORY_PATCH_PATHS = [
   path.join(ROOT, 'src', 'data', 'wildernessStructurePatch.js'),
   path.join(ROOT, 'src', 'data', 'jerichoStructurePatch.js'),
   path.join(ROOT, 'src', 'data', 'judgesStructurePatch.js'),
-  path.join(ROOT, 'src', 'data', 'ruthStructurePatch.js')
+  path.join(ROOT, 'src', 'data', 'ruthStructurePatch.js'),
+  path.join(ROOT, 'src', 'data', 'samuelStructurePatch.js')
 ];
 const ENDINGS_PATH = path.join(ROOT, 'src', 'data', 'endings.js');
 const ENDING_PATCH_PATHS = [
   path.join(ROOT, 'src', 'data', 'jerichoEndingsPatch.js'),
   path.join(ROOT, 'src', 'data', 'judgesEndingsPatch.js'),
-  path.join(ROOT, 'src', 'data', 'ruthEndingsPatch.js')
+  path.join(ROOT, 'src', 'data', 'ruthEndingsPatch.js'),
+  path.join(ROOT, 'src', 'data', 'samuelEndingsPatch.js')
 ];
 
 const ALLOWED_EFFECTS = new Set([
@@ -49,7 +51,7 @@ const RESOLVER_ENDING_TARGETS = {
   wilderness: ['true_wilderness_daily_trust', 'faithful_wilderness_witness', 'wounded_wilderness_witness']
 };
 
-const EXTRA_START_NODE_IDS = ['wilderness_01_marah_thirst', 'jericho_01_jordan_edge', 'judges_01_after_joshua', 'ruth_01_famine_in_bethlehem'];
+const EXTRA_START_NODE_IDS = ['wilderness_01_marah_thirst', 'jericho_01_jordan_edge', 'judges_01_after_joshua', 'ruth_01_famine_in_bethlehem', 'samuel_01_siloh_dim_lamp'];
 
 const REQUIRED_NODE_FIELDS = [
   'id',
@@ -310,7 +312,7 @@ function run() {
   const storyNodes = storyWindow.STORY_NODES;
   const storyStartNodeId = storyWindow.START_NODE_ID;
   const endings = endingWindow.STORY_ENDINGS;
-  const registeredStartIds = [storyStartNodeId, storyWindow.WILDERNESS_START_NODE_ID, storyWindow.JERICHO_START_NODE_ID, storyWindow.JUDGES_START_NODE_ID, storyWindow.RUTH_START_NODE_ID, ...EXTRA_START_NODE_IDS].filter(Boolean);
+  const registeredStartIds = [storyStartNodeId, storyWindow.WILDERNESS_START_NODE_ID, storyWindow.JERICHO_START_NODE_ID, storyWindow.JUDGES_START_NODE_ID, storyWindow.RUTH_START_NODE_ID, storyWindow.SAMUEL_START_NODE_ID, ...EXTRA_START_NODE_IDS].filter(Boolean);
 
   const errors = [];
   const warnings = [];
