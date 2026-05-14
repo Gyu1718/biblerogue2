@@ -75,6 +75,16 @@
     return null;
   }
 
+  function isChapterReady(chapterKey) {
+    const chapter = CHAPTERS[chapterKey];
+    if (!chapter || !getNode(chapter.startNodeId)) return false;
+
+    const requiredEndings = CHAPTER_ENDING_IDS.get(chapterKey);
+    if (!requiredEndings) return true;
+
+    return Array.from(requiredEndings).every((endingId) => window.STORY_ENDINGS?.[endingId]);
+  }
+
   function getChapterByTrigger(trigger) {
     const explicitStartNode = trigger?.dataset?.startNode;
     const chapterName = trigger?.dataset?.chapter;
@@ -201,6 +211,8 @@
   }
 
   function makeJerichoCardPlayable() {
+    if (!isChapterReady('jericho')) return;
+
     const art = document.querySelector('.home-chapter-art.jericho');
     const card = art?.closest?.('.home-chapter-card');
     if (!card) return;
@@ -267,9 +279,7 @@
   }
 
   function ensureJerichoPatches() {
-    if (getNode(CHAPTERS.jericho.startNodeId) && window.STORY_ENDINGS?.true_jericho_faithful_witness) {
-      return Promise.resolve();
-    }
+    if (isChapterReady('jericho')) return Promise.resolve();
     return JERICHO_PATCH_SCRIPTS.reduce((promise, src) => promise.then(() => loadScript(src)), Promise.resolve());
   }
 
@@ -279,7 +289,13 @@
       .finally(() => {
         patchSceneArt();
         patchEndingArt();
-        makeJerichoCardPlayable();
+
+        if (isChapterReady('jericho')) {
+          makeJerichoCardPlayable();
+        } else {
+          console.warn('Jericho chapter was not activated because required data is missing.');
+        }
+
         bindChapterStartCards();
         window.BIBLE_ROGUE_CHAPTERS = CHAPTERS;
       });
