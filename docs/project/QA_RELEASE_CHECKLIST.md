@@ -35,7 +35,10 @@ warning이 있을 경우 반드시 기록한다.
 - 엔딩 패널 열림.
 - 설정 패널 열림.
 - 각 패널에서 장 선택 화면으로 복귀 가능.
-- Part II–VI 카드가 플레이로 진입하지 않음.
+- Part I. 1장 출애굽 카드가 플레이로 진입함.
+- Part I. 2장 광야 카드가 플레이로 진입함.
+- Part I. 3장 여리고 카드가 플레이로 진입함.
+- Part I. 4–6장 및 Part II–VI 카드가 플레이로 진입하지 않음.
 - 준비 중 패널이 정상 표시됨.
 
 ---
@@ -47,7 +50,7 @@ warning이 있을 경우 반드시 기록한다.
 - 홈 → Part I → 1장 출애굽 클릭.
 - 첫 노드가 출애굽 첫 장면으로 시작.
 - 출애굽 이미지가 표시.
-- 광야 이미지가 나오지 않음.
+- 광야/여리고 이미지가 나오지 않음.
 
 ### 플레이 진행
 
@@ -91,7 +94,7 @@ warning이 있을 경우 반드시 기록한다.
 - 홈 → Part I → 2장 광야 클릭.
 - 첫 노드가 `wilderness_01_marah_thirst`로 시작.
 - 광야 이미지가 표시.
-- 출애굽 이미지가 나오지 않음.
+- 출애굽/여리고 이미지가 나오지 않음.
 
 ### 전체 진행 확인
 
@@ -155,7 +158,7 @@ warning이 있을 경우 반드시 기록한다.
 ### 이미지 확인
 
 - 1–26번 모든 노드에서 빈 이미지가 나오지 않음.
-- 1–26번 모든 노드에서 출애굽 이미지가 나오지 않음.
+- 1–26번 모든 노드에서 출애굽/여리고 이미지가 나오지 않음.
 - 11/12/13/14/16번 노드의 파일명 불일치 보정이 작동.
 - 17–26번 후반부 이미지 표시.
 - 확장 엔딩 7개 이미지 표시.
@@ -163,7 +166,64 @@ warning이 있을 경우 반드시 기록한다.
 
 ---
 
-## 5. 플레이 화면 공통 QA
+## 5. Part I. 3장 여리고 QA
+
+### 진입
+
+- 홈 → Part I → 3장 여리고 클릭.
+- 홈 카드 상태가 준비 중이 아니라 플레이 가능 상태로 전환되어 있음.
+- 첫 노드가 `jericho_01_jordan_edge`로 시작.
+- 여리고 이미지가 표시.
+- 출애굽/광야 이미지가 나오지 않음.
+
+### 전체 진행 확인
+
+아래 노드가 정상적으로 진행되는지 확인한다.
+
+1. `jericho_01_jordan_edge`
+2. `jericho_02_spies_sent`
+3. `jericho_03_waiting_news`
+4. `jericho_04_rahab_report`
+5. `jericho_05_red_cord_promise`
+6. `jericho_06_report_to_joshua`
+7. `jericho_07_before_wall`
+8. `jericho_08_commander_presence`
+9. `jericho_09_strange_command`
+10. `jericho_10_first_march`
+11. `jericho_11_second_to_fifth_days`
+12. `jericho_12_sixth_day_weariness`
+13. `jericho_13_seventh_day_dawn`
+14. `jericho_14_seven_rounds`
+15. `jericho_15_shout_command`
+16. `jericho_16_wall_falls`
+17. `jericho_17_red_cord_saved`
+18. `jericho_18_memory_after_fall`
+
+### 여리고 배드엔딩 확인
+
+- `bad_jericho_forgot_red_cord`
+- `bad_jericho_broken_silence`
+- `bad_jericho_silent_retreat`
+- `bad_jericho_devoted_things`
+
+### 여리고 최종 엔딩 확인
+
+- `true_jericho_faithful_witness`
+- `faithful_jericho_memory_keeper`
+- `wounded_jericho_trembling_witness`
+
+### 이미지 확인
+
+- 1–18번 모든 노드에서 빈 이미지가 나오지 않음.
+- 1–18번 모든 노드에서 출애굽/광야 이미지가 나오지 않음.
+- 플레이 이미지는 `assets/images/story/jericho/play_left_520x650/` 경로에서 표시됨.
+- 엔딩 이미지는 `assets/images/story/jericho/original_16x9/` 경로에서 표시됨.
+- 여리고 엔딩 7개 이미지 표시.
+- 콘솔 404 오류 없음.
+
+---
+
+## 6. 플레이 화면 공통 QA
 
 - 제목과 본문이 겹치지 않음.
 - 본문이 패널 밖으로 넘치지 않음.
@@ -177,7 +237,7 @@ warning이 있을 경우 반드시 기록한다.
 
 ---
 
-## 6. 엔딩 화면 공통 QA
+## 7. 엔딩 화면 공통 QA
 
 - 엔딩 배경 이미지 표시.
 - 엔딩 패널이 배경을 과도하게 가리지 않음.
@@ -188,7 +248,7 @@ warning이 있을 경우 반드시 기록한다.
 
 ---
 
-## 7. 콘솔 오류 QA
+## 8. 콘솔 오류 QA
 
 브라우저 개발자도구에서 다음을 확인한다.
 
@@ -200,12 +260,12 @@ warning이 있을 경우 반드시 기록한다.
 
 ---
 
-## 8. 완료 판정 문구
+## 9. 완료 판정 문구
 
 모든 항목을 통과하면 다음 문구로 보고한다.
 
 ```text
-Part I. 1장 출애굽 및 Part I. 2장 광야 최종 QA 통과.
+Part I. 1장 출애굽, Part I. 2장 광야, Part I. 3장 여리고 최종 QA 통과.
 validator error 0개.
 주요 루트, 배드엔딩, 최종 엔딩, 이미지 표시, 홈 기능, 콘솔 오류 검수 완료.
 다음 챕터 제작 착수 가능.
