@@ -16,6 +16,10 @@
     ruth: [
       'src/data/ruthStructurePatch.js?v=ruth-20260514a',
       'src/data/ruthEndingsPatch.js?v=ruth-20260514a'
+    ],
+    samuel: [
+      'src/data/samuelStructurePatch.js?v=samuel-20260515a',
+      'src/data/samuelEndingsPatch.js?v=samuel-20260515a'
     ]
   };
 
@@ -55,6 +59,14 @@
       endingArtBase: 'assets/images/story/ruth/original_16x9',
       cardArtClass: 'ruth',
       cardLabel: '5장 룻 시작'
+    },
+    samuel: {
+      startNodeId: window.SAMUEL_START_NODE_ID || 'samuel_01_siloh_dim_lamp',
+      nodePrefix: 'samuel_',
+      playArtBase: 'assets/images/story/samuel/play_left_520x650',
+      endingArtBase: 'assets/images/story/samuel/original_16x9',
+      cardArtClass: 'samuel',
+      cardLabel: '6장 사무엘의 부르심 시작'
     }
   };
 
@@ -102,6 +114,15 @@
       'bad_ruth_field_exploitation',
       'bad_ruth_redeemer_refused',
       'bad_ruth_closed_gate'
+    ])],
+    ['samuel', new Set([
+      'true_samuel_listening_witness',
+      'faithful_samuel_lamp_keeper',
+      'wounded_samuel_trembling_word',
+      'bad_samuel_mocked_prayer',
+      'bad_samuel_stolen_offering',
+      'bad_samuel_silenced_call',
+      'bad_samuel_hidden_word'
     ])]
   ]);
 
@@ -338,13 +359,13 @@
   }
 
   function initChapterRuntime() {
-    Promise.all(['jericho', 'judges', 'ruth'].map((chapterKey) => ensureChapterPatches(chapterKey)))
+    Promise.all(['jericho', 'judges', 'ruth', 'samuel'].map((chapterKey) => ensureChapterPatches(chapterKey)))
       .catch((error) => console.warn('Optional chapter patches could not be loaded.', error))
       .finally(() => {
         patchSceneArt();
         patchEndingArt();
 
-        ['jericho', 'judges', 'ruth'].forEach((chapterKey) => {
+        ['jericho', 'judges', 'ruth', 'samuel'].forEach((chapterKey) => {
           if (isChapterReady(chapterKey)) {
             makeChapterCardPlayable(chapterKey);
           } else {
