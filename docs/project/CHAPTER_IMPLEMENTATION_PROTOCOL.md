@@ -48,7 +48,60 @@
 
 ---
 
-## 3. Node ID 규칙
+## 3. Story Data 구조 원칙
+
+기존 런타임 안정성을 위해 `window.STORY_NODES` 전역 진입점은 유지한다.
+
+다만 장기적으로 챕터 수와 노드 수가 증가하므로, 모든 스토리 노드를 `src/data/storyNodes.js` 한 파일에 계속 누적하지 않는다.
+
+권장 구조는 다음과 같다.
+
+```text
+src/data/stories/
+  exodus.js
+  wilderness.js
+  jericho.js
+  judges.js
+  ruth.js
+  samuelCall.js
+
+src/data/storyNodes.js
+```
+
+각 챕터 파일은 해당 챕터의 노드만 정의한다.
+
+예시:
+
+```js
+window.EXODUS_STORY_NODES = {
+  // exodus nodes
+};
+```
+
+`storyNodes.js`는 실제 스토리 본문을 길게 담는 파일이 아니라, 챕터별 노드를 병합하는 통합 진입점으로 사용한다.
+
+예시:
+
+```js
+window.STORY_NODES = {
+  ...window.EXODUS_STORY_NODES,
+  ...window.WILDERNESS_STORY_NODES,
+  ...window.JERICHO_STORY_NODES,
+};
+```
+
+작업 원칙:
+
+1. 새 챕터는 가능하면 챕터별 파일로 분리한다.
+2. 기존 챕터는 무리하게 한 번에 리팩터링하지 않는다.
+3. 기존 `main.js`, 플레이 UI, 엔딩 UI가 `window.STORY_NODES`를 참조하는 구조는 유지한다.
+4. 분리 작업 시 `index.html`의 데이터 파일 로드 순서를 반드시 확인한다.
+5. 통합 후 기존 챕터가 깨지지 않았는지 브라우저 QA 또는 실제 구동 확인을 해야 한다.
+6. 검증하지 못했다면 완료로 보고하지 않는다.
+
+---
+
+## 4. Node ID 규칙
 
 새 챕터는 고유 prefix를 사용한다.
 
@@ -70,7 +123,7 @@ jericho_01_jordan_edge
 
 ---
 
-## 4. Progress 규칙
+## 5. Progress 규칙
 
 각 챕터 patch 파일에는 총 진행 수를 명시한다.
 
@@ -88,7 +141,7 @@ progress: { current, total: TOTAL_PROGRESS }
 
 ---
 
-## 5. Choice 구조
+## 6. Choice 구조
 
 각 노드는 보통 2–3개 선택지를 가진다. 현재 권장값은 3개이다.
 
@@ -108,7 +161,7 @@ progress: { current, total: TOTAL_PROGRESS }
 
 ---
 
-## 6. Hidden Risk Effects 규칙
+## 7. Hidden Risk Effects 규칙
 
 현재 기본 effects key는 다음을 우선 사용한다.
 
@@ -136,7 +189,7 @@ scatter
 
 ---
 
-## 7. 즉시 배드엔딩 기준
+## 8. 즉시 배드엔딩 기준
 
 즉시 배드엔딩은 남발하지 않는다. 아래 경우에만 사용한다.
 
@@ -150,7 +203,7 @@ scatter
 
 ---
 
-## 8. 엔딩 작성 규칙
+## 9. 엔딩 작성 규칙
 
 각 챕터는 보통 다음 엔딩 구조를 가진다.
 
@@ -184,7 +237,7 @@ image 선택 가능
 
 ---
 
-## 9. 이미지 제작 규칙
+## 10. 이미지 제작 규칙
 
 플레이 이미지 경로:
 
@@ -209,7 +262,7 @@ assets/images/story/{chapterKey}/original_16x9/
 
 ---
 
-## 10. chapter-runtime 등록 규칙
+## 11. chapter-runtime 등록 규칙
 
 새 챕터가 실제 플레이 가능해질 때 `src/chapter-runtime.js`의 `CHAPTERS`에 등록한다.
 
@@ -230,7 +283,7 @@ jericho: {
 
 ---
 
-## 11. 홈 카드 연결 규칙
+## 12. 홈 카드 연결 규칙
 
 플레이 가능한 챕터 카드에는 다음을 넣는다.
 
@@ -250,7 +303,7 @@ data-panel="chapter-coming-soon"
 
 ---
 
-## 12. 검증 규칙
+## 13. 검증 규칙
 
 작업 완료 전 반드시 실행한다.
 
@@ -276,7 +329,7 @@ error 0개
 
 ---
 
-## 13. 새 챕터 착수 전 체크리스트
+## 14. 새 챕터 착수 전 체크리스트
 
 새 챕터를 시작하기 전 총괄은 다음을 확인한다.
 
