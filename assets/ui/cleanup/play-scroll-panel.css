@@ -305,3 +305,14 @@ body.is-mobile-landscape #play-screen .next-story {
 #home-screen .home-part-button.is-active:not(.active)::after {
   content: none !important;
 }
+
+/* Choice number duplication fix
+   main.js already injects the visible choice number into the button text.
+   Earlier play redesign CSS also added a CSS counter through .choice::before,
+   which made the UI show two numbers. Keep the runtime number and suppress the
+   decorative counter in the final loaded play override. */
+#play-screen .narrative-panel > .choice-list .choice::before,
+#play-screen .choice::before {
+  content: none !important;
+  display: none !important;
+}
