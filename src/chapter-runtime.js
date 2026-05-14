@@ -71,6 +71,17 @@
   };
 
   const CHAPTER_ENDING_IDS = new Map([
+    ['exodus', new Set([
+      'true_exodus_deliverance',
+      'faithful_exodus_witness',
+      'wounded_exodus_witness',
+      'bad_bricks_forever',
+      'bad_unmarked_door',
+      'bad_stayed_in_egypt',
+      'bad_return_to_egypt',
+      'bad_scattered_people',
+      'bad_closed_sea'
+    ])],
     ['wilderness', new Set([
       'true_wilderness_daily_trust',
       'faithful_wilderness_witness',
@@ -130,17 +141,28 @@
     return nodeId && window.STORY_NODES ? window.STORY_NODES[nodeId] : null;
   }
 
-  function getChapterByNodeId(nodeId) {
+  function getChapterKeyByNodeId(nodeId) {
     if (!nodeId) return null;
-    return Object.values(CHAPTERS).find((chapter) => nodeId.startsWith(chapter.nodePrefix)) || null;
+    const entry = Object.entries(CHAPTERS).find(([, chapter]) => nodeId.startsWith(chapter.nodePrefix));
+    return entry?.[0] || null;
+  }
+
+  function getChapterByNodeId(nodeId) {
+    const chapterKey = getChapterKeyByNodeId(nodeId);
+    return chapterKey ? CHAPTERS[chapterKey] : null;
+  }
+
+  function getChapterKeyByEndingId(endingId) {
+    if (!endingId) return null;
+    for (const [chapterKey, endingIds] of CHAPTER_ENDING_IDS.entries()) {
+      if (endingIds.has(endingId)) return chapterKey;
+    }
+    return null;
   }
 
   function getChapterByEndingId(endingId) {
-    if (!endingId) return null;
-    for (const [chapterKey, endingIds] of CHAPTER_ENDING_IDS.entries()) {
-      if (endingIds.has(endingId)) return CHAPTERS[chapterKey] || null;
-    }
-    return null;
+    const chapterKey = getChapterKeyByEndingId(endingId);
+    return chapterKey ? CHAPTERS[chapterKey] : null;
   }
 
   function isChapterReady(chapterKey) {
@@ -171,6 +193,28 @@
 
     const chapter = getChapterByTrigger(trigger);
     if (chapter && getNode(chapter.startNodeId)) return chapter.startNodeId;
+
+    return null;
+  }
+
+  function readSave() {
+    try {
+      const raw = window.localStorage.getItem(SAVE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function getRetryStartNodeId() {
+    const ending = document.getElementById('ending-screen');
+    const endingId = ending?.dataset?.endingId || readSave()?.currentEndingId;
+    const chapterFromEnding = getChapterByEndingId(endingId);
+    if (chapterFromEnding?.startNodeId && getNode(chapterFromEnding.startNodeId)) return chapterFromEnding.startNodeId;
+
+    const savedNodeId = readSave()?.currentNodeId;
+    const chapterFromNode = getChapterByNodeId(savedNodeId);
+    if (chapterFromNode?.startNodeId && getNode(chapterFromNode.startNodeId)) return chapterFromNode.startNodeId;
 
     return null;
   }
@@ -208,8 +252,7 @@
     }
   }
 
-  function startChapterFromTrigger(trigger) {
-    const startNodeId = getStartNodeId(trigger);
+  function startChapterFromNode(startNodeId) {
     if (!startNodeId) return false;
     if (!writeStartSave(startNodeId)) return false;
 
@@ -219,6 +262,14 @@
     }
 
     return false;
+  }
+
+  function startChapterFromTrigger(trigger) {
+    return startChapterFromNode(getStartNodeId(trigger));
+  }
+
+  function restartCurrentChapter() {
+    return startChapterFromNode(getRetryStartNodeId());
   }
 
   function getChapterNodeImage(node) {
@@ -236,6 +287,11 @@
   function getChapterEndingImage(profile) {
     const chapter = getChapterByEndingId(profile?.id);
     if (!chapter) return null;
+
+    // Exodus uses the legacy explicit image map in main.js because its image
+    // filenames do not match ending IDs. Do not override that working mapping.
+    if (chapter.nodePrefix === 'exodus_') return null;
+
     const filename = profile.image || `${profile.id}.png`;
     return `${chapter.endingArtBase}/${filename}`;
   }
@@ -308,31 +364,31 @@
     if (lock) lock.remove();
   }
 
-  function bindChapterStartCards() {
-    document.addEventListener('click', (event) => {
-      const trigger = event.target?.closest?.('[data-go="new-play"][data-start-node], [data-go="new-play"][data-chapter]');
-      if (!trigger) return;
-
-      const startNodeId = getStartNodeId(trigger);
-      if (!startNodeId) return;
-
+  function handleChapterStartEvent(event) {
+    const retryTrigger = event.target?.closest?.('#ending-screen [data-go="new-play"]');
+    if (retryTrigger && restartCurrentChapter()) {
       event.preventDefault();
       event.stopImmediatePropagation();
-      startChapterFromTrigger(trigger);
-    }, true);
+      return;
+    }
+
+    const trigger = event.target?.closest?.('[data-go="new-play"][data-start-node], [data-go="new-play"][data-chapter]');
+    if (!trigger) return;
+
+    const startNodeId = getStartNodeId(trigger);
+    if (!startNodeId) return;
+
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    startChapterFromTrigger(trigger);
+  }
+
+  function bindChapterStartCards() {
+    document.addEventListener('click', handleChapterStartEvent, true);
 
     document.addEventListener('keydown', (event) => {
       if (event.key !== 'Enter' && event.key !== ' ') return;
-
-      const trigger = event.target?.closest?.('[data-go="new-play"][data-start-node], [data-go="new-play"][data-chapter]');
-      if (!trigger) return;
-
-      const startNodeId = getStartNodeId(trigger);
-      if (!startNodeId) return;
-
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      startChapterFromTrigger(trigger);
+      handleChapterStartEvent(event);
     }, true);
   }
 
