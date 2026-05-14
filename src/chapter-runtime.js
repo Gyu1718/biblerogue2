@@ -4,10 +4,16 @@
 
 (function () {
   const SAVE_KEY = 'biblerogue2.save.v1';
-  const JERICHO_PATCH_SCRIPTS = [
-    'src/data/jerichoStructurePatch.js?v=jericho-20260513a',
-    'src/data/jerichoEndingsPatch.js?v=jericho-20260513a'
-  ];
+  const CHAPTER_PATCH_SCRIPTS = {
+    jericho: [
+      'src/data/jerichoStructurePatch.js?v=jericho-20260513a',
+      'src/data/jerichoEndingsPatch.js?v=jericho-20260513a'
+    ],
+    judges: [
+      'src/data/judgesStructurePatch.js?v=judges-20260514a',
+      'src/data/judgesEndingsPatch.js?v=judges-20260514a'
+    ]
+  };
 
   const CHAPTERS = {
     exodus: {
@@ -26,7 +32,17 @@
       startNodeId: window.JERICHO_START_NODE_ID || 'jericho_01_jordan_edge',
       nodePrefix: 'jericho_',
       playArtBase: 'assets/images/story/jericho/play_left_520x650',
-      endingArtBase: 'assets/images/story/jericho/original_16x9'
+      endingArtBase: 'assets/images/story/jericho/original_16x9',
+      cardArtClass: 'jericho',
+      cardLabel: '3장 여리고 시작'
+    },
+    judges: {
+      startNodeId: window.JUDGES_START_NODE_ID || 'judges_01_after_joshua',
+      nodePrefix: 'judges_',
+      playArtBase: 'assets/images/story/judges/play_left_520x650',
+      endingArtBase: 'assets/images/story/judges/original_16x9',
+      cardArtClass: 'judges',
+      cardLabel: '4장 사사 시대 시작'
     }
   };
 
@@ -55,6 +71,16 @@
       'bad_jericho_broken_silence',
       'bad_jericho_silent_retreat',
       'bad_jericho_devoted_things'
+    ])],
+    ['judges', new Set([
+      'true_judges_memory_kept',
+      'faithful_judges_cry_and_return',
+      'wounded_judges_trembling_generation',
+      'bad_judges_baal_altar',
+      'bad_judges_silenced_cry',
+      'bad_judges_fear_scattered',
+      'bad_judges_spoils_idol',
+      'bad_judges_cycle_hardened'
     ])]
   ]);
 
@@ -210,20 +236,21 @@
     };
   }
 
-  function makeJerichoCardPlayable() {
-    if (!isChapterReady('jericho')) return;
+  function makeChapterCardPlayable(chapterKey) {
+    if (!isChapterReady(chapterKey)) return;
 
-    const art = document.querySelector('.home-chapter-art.jericho');
+    const chapter = CHAPTERS[chapterKey];
+    const art = document.querySelector(`.home-chapter-art.${chapter.cardArtClass || chapterKey}`);
     const card = art?.closest?.('.home-chapter-card');
     if (!card) return;
 
     card.dataset.go = 'new-play';
-    card.dataset.startNode = CHAPTERS.jericho.startNodeId;
-    card.dataset.chapter = 'jericho';
+    card.dataset.startNode = chapter.startNodeId;
+    card.dataset.chapter = chapterKey;
     delete card.dataset.panel;
     card.setAttribute('role', 'button');
     card.setAttribute('tabindex', '0');
-    card.setAttribute('aria-label', '3장 여리고 시작');
+    card.setAttribute('aria-label', chapter.cardLabel || `${chapterKey} 시작`);
     card.classList.remove('is-preparing', 'locked');
     card.classList.add('available', 'is-current');
 
@@ -278,23 +305,26 @@
     });
   }
 
-  function ensureJerichoPatches() {
-    if (isChapterReady('jericho')) return Promise.resolve();
-    return JERICHO_PATCH_SCRIPTS.reduce((promise, src) => promise.then(() => loadScript(src)), Promise.resolve());
+  function ensureChapterPatches(chapterKey) {
+    if (isChapterReady(chapterKey)) return Promise.resolve();
+    const scripts = CHAPTER_PATCH_SCRIPTS[chapterKey] || [];
+    return scripts.reduce((promise, src) => promise.then(() => loadScript(src)), Promise.resolve());
   }
 
   function initChapterRuntime() {
-    ensureJerichoPatches()
-      .catch((error) => console.warn('Jericho chapter patches could not be loaded.', error))
+    Promise.all(['jericho', 'judges'].map((chapterKey) => ensureChapterPatches(chapterKey)))
+      .catch((error) => console.warn('Optional chapter patches could not be loaded.', error))
       .finally(() => {
         patchSceneArt();
         patchEndingArt();
 
-        if (isChapterReady('jericho')) {
-          makeJerichoCardPlayable();
-        } else {
-          console.warn('Jericho chapter was not activated because required data is missing.');
-        }
+        ['jericho', 'judges'].forEach((chapterKey) => {
+          if (isChapterReady(chapterKey)) {
+            makeChapterCardPlayable(chapterKey);
+          } else {
+            console.warn(`${chapterKey} chapter was not activated because required data is missing.`);
+          }
+        });
 
         bindChapterStartCards();
         window.BIBLE_ROGUE_CHAPTERS = CHAPTERS;
