@@ -1,0 +1,35 @@
+BibleRogue2 Part I Chapter 3 Jericho Play Assets - Complete 18 PNG Set
+
+Scope:
+- Individual play-left PNG scene images only
+- No code, CSS, story data, JS, or document files modified
+
+Target path:
+assets/images/story/jericho/play_left_520x650/
+
+Included files:
+- assets/images/story/jericho/play_left_520x650/jericho_01_jordan_edge.png
+- assets/images/story/jericho/play_left_520x650/jericho_02_spies_sent.png
+- assets/images/story/jericho/play_left_520x650/jericho_03_waiting_news.png
+- assets/images/story/jericho/play_left_520x650/jericho_04_rahab_report.png
+- assets/images/story/jericho/play_left_520x650/jericho_05_red_cord_promise.png
+- assets/images/story/jericho/play_left_520x650/jericho_06_report_to_joshua.png
+- assets/images/story/jericho/play_left_520x650/jericho_07_before_wall.png
+- assets/images/story/jericho/play_left_520x650/jericho_08_commander_presence.png
+- assets/images/story/jericho/play_left_520x650/jericho_09_strange_command.png
+- assets/images/story/jericho/play_left_520x650/jericho_10_first_march.png
+- assets/images/story/jericho/play_left_520x650/jericho_11_second_to_fifth_days.png
+- assets/images/story/jericho/play_left_520x650/jericho_12_sixth_day_weariness.png
+- assets/images/story/jericho/play_left_520x650/jericho_13_seventh_day_dawn.png
+- assets/images/story/jericho/play_left_520x650/jericho_14_seven_rounds.png
+- assets/images/story/jericho/play_left_520x650/jericho_15_shout_command.png
+- assets/images/story/jericho/play_left_520x650/jericho_16_wall_falls.png
+- assets/images/story/jericho/play_left_520x650/jericho_17_red_cord_remembered.png
+- assets/images/story/jericho/play_left_520x650/jericho_18_after_jericho.png
+
+Validation summary:
+- Expected PNG count: 18
+- Actual PNG count: 18
+- Missing expected files: 0
+- Size errors: 0
+- Target size: 520x650 PNG
