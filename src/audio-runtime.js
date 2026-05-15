@@ -294,18 +294,18 @@
   function applyHomeScriptureLayout(scripture) {
     setImportantStyle(scripture, 'position', 'absolute');
     setImportantStyle(scripture, 'left', 'auto');
-    setImportantStyle(scripture, 'right', '86px');
+    setImportantStyle(scripture, 'right', '150px');
     setImportantStyle(scripture, 'top', '138px');
     setImportantStyle(scripture, 'bottom', 'auto');
     setImportantStyle(scripture, 'width', '430px');
     setImportantStyle(scripture, 'min-height', '0');
     setImportantStyle(scripture, 'z-index', '8');
-    setImportantStyle(scripture, 'padding', '14px 18px 13px');
+    setImportantStyle(scripture, 'padding', '0');
     setImportantStyle(scripture, 'text-align', 'left');
     setImportantStyle(scripture, 'pointer-events', 'none');
-    setImportantStyle(scripture, 'border', '1px solid rgba(196,154,85,.22)');
-    setImportantStyle(scripture, 'background', 'linear-gradient(180deg, rgba(13, 12, 9, .58), rgba(4, 5, 6, .44))');
-    setImportantStyle(scripture, 'box-shadow', '0 12px 28px rgba(0,0,0,.22), inset 0 0 18px rgba(0,0,0,.26)');
+    setImportantStyle(scripture, 'border', '0');
+    setImportantStyle(scripture, 'background', 'transparent');
+    setImportantStyle(scripture, 'box-shadow', 'none');
 
     const quote = scripture.querySelector('.quote');
     const reference = scripture.querySelector('.reference');
