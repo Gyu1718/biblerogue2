@@ -67,6 +67,14 @@
       endingArtBase: 'assets/images/story/samuel/original_16x9',
       cardArtClass: 'samuel',
       cardLabel: '6장 사무엘의 부르심 시작'
+    },
+    saul: {
+      startNodeId: window.SAUL_START_NODE_ID || 'saul_01_gilgal_waiting',
+      nodePrefix: 'saul_',
+      playArtBase: 'assets/images/story/saul/play_left_520x650',
+      endingArtBase: 'assets/images/story/saul/original_16x9',
+      cardArtClass: 'saul',
+      cardLabel: '1장 사울의 불순종 시작'
     }
   };
 
@@ -134,8 +142,18 @@
       'bad_samuel_stolen_offering',
       'bad_samuel_silenced_call',
       'bad_samuel_hidden_word'
+    ])],
+    ['saul', new Set([
+      'true_saul_obedient_witness',
+      'faithful_saul_waiting_remnant',
+      'wounded_saul_silent_witness',
+      'bad_saul_religious_excuse',
+      'bad_saul_kingdom_pride',
+      'bad_saul_fearful_compromise'
     ])]
   ]);
+
+  const AUTO_ACTIVATED_CHAPTERS = ['jericho', 'judges', 'ruth', 'samuel', 'saul'];
 
   function getNode(nodeId) {
     return nodeId && window.STORY_NODES ? window.STORY_NODES[nodeId] : null;
@@ -415,13 +433,13 @@
   }
 
   function initChapterRuntime() {
-    Promise.all(['jericho', 'judges', 'ruth', 'samuel'].map((chapterKey) => ensureChapterPatches(chapterKey)))
+    Promise.all(AUTO_ACTIVATED_CHAPTERS.map((chapterKey) => ensureChapterPatches(chapterKey)))
       .catch((error) => console.warn('Optional chapter patches could not be loaded.', error))
       .finally(() => {
         patchSceneArt();
         patchEndingArt();
 
-        ['jericho', 'judges', 'ruth', 'samuel'].forEach((chapterKey) => {
+        AUTO_ACTIVATED_CHAPTERS.forEach((chapterKey) => {
           if (isChapterReady(chapterKey)) {
             makeChapterCardPlayable(chapterKey);
           } else {
