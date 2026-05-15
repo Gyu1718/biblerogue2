@@ -9,9 +9,37 @@
     volume: 0.4
   };
 
+  const HOME_PART_SCRIPTURES = {
+    story: {
+      quote: '여호와께서 너희를 위하여 싸우시리니 너희는 가만히 있을지니라',
+      reference: '출애굽기 14:14'
+    },
+    'part-02': {
+      quote: '순종이 제사보다 낫고 듣는 것이 숫양의 기름보다 나으니',
+      reference: '사무엘상 15:22'
+    },
+    'part-03': {
+      quote: '오직 정의를 물 같이, 공의를 마르지 않는 강 같이 흐르게 할지어다',
+      reference: '아모스 5:24'
+    },
+    'part-04': {
+      quote: '그렇게 하지 아니하실지라도 왕이여 우리가 왕의 신들을 섬기지도 아니하고',
+      reference: '다니엘 3:18'
+    },
+    'part-05': {
+      quote: '이는 우리 하나님의 긍휼로 인함이라 이로써 돋는 해가 위로부터 우리에게 임하여',
+      reference: '누가복음 1:78'
+    },
+    'part-06': {
+      quote: '땅 끝까지 이르러 내 증인이 되리라 하시니라',
+      reference: '사도행전 1:8'
+    }
+  };
+
   let bgm = null;
   let settings = { ...DEFAULT_SETTINGS };
   let initialized = false;
+  let currentHomeScripturePanel = 'story';
 
   function canUseStorage() {
     try {
@@ -259,6 +287,104 @@
     });
   }
 
+  function setImportantStyle(element, property, value) {
+    if (element) element.style.setProperty(property, value, 'important');
+  }
+
+  function applyHomeScriptureLayout(scripture) {
+    setImportantStyle(scripture, 'position', 'absolute');
+    setImportantStyle(scripture, 'left', 'auto');
+    setImportantStyle(scripture, 'right', '86px');
+    setImportantStyle(scripture, 'top', '138px');
+    setImportantStyle(scripture, 'bottom', 'auto');
+    setImportantStyle(scripture, 'width', '430px');
+    setImportantStyle(scripture, 'min-height', '0');
+    setImportantStyle(scripture, 'z-index', '8');
+    setImportantStyle(scripture, 'padding', '14px 18px 13px');
+    setImportantStyle(scripture, 'text-align', 'left');
+    setImportantStyle(scripture, 'pointer-events', 'none');
+    setImportantStyle(scripture, 'border', '1px solid rgba(196,154,85,.22)');
+    setImportantStyle(scripture, 'background', 'linear-gradient(180deg, rgba(13, 12, 9, .58), rgba(4, 5, 6, .44))');
+    setImportantStyle(scripture, 'box-shadow', '0 12px 28px rgba(0,0,0,.22), inset 0 0 18px rgba(0,0,0,.26)');
+
+    const quote = scripture.querySelector('.quote');
+    const reference = scripture.querySelector('.reference');
+
+    [quote, reference].forEach((element) => {
+      if (!element) return;
+      setImportantStyle(element, 'position', 'static');
+      setImportantStyle(element, 'left', 'auto');
+      setImportantStyle(element, 'top', 'auto');
+      setImportantStyle(element, 'width', 'auto');
+      setImportantStyle(element, 'height', 'auto');
+      setImportantStyle(element, 'margin', '0');
+      setImportantStyle(element, 'text-align', 'left');
+    });
+
+    if (quote) {
+      setImportantStyle(quote, 'font-size', '15px');
+      setImportantStyle(quote, 'line-height', '1.55');
+      setImportantStyle(quote, 'word-break', 'keep-all');
+      setImportantStyle(quote, 'text-shadow', '0 2px 8px rgba(0,0,0,.88)');
+    }
+
+    if (reference) {
+      setImportantStyle(reference, 'margin-top', '7px');
+      setImportantStyle(reference, 'font-size', '13px');
+      setImportantStyle(reference, 'letter-spacing', '.06em');
+      setImportantStyle(reference, 'color', '#a98143');
+    }
+  }
+
+  function updateHomeScripture(panelName = currentHomeScripturePanel) {
+    const home = document.getElementById('home-screen');
+    const scripture = home?.querySelector?.('.scripture');
+    if (!home || !scripture) return;
+
+    const partPanelName = HOME_PART_SCRIPTURES[panelName] ? panelName : currentHomeScripturePanel;
+    const scriptureData = HOME_PART_SCRIPTURES[partPanelName] || HOME_PART_SCRIPTURES.story;
+
+    currentHomeScripturePanel = partPanelName;
+    home.dataset.scripturePanel = partPanelName;
+
+    const quote = scripture.querySelector('.quote');
+    const reference = scripture.querySelector('.reference');
+    if (quote) quote.textContent = scriptureData.quote;
+    if (reference) reference.textContent = scriptureData.reference;
+
+    applyHomeScriptureLayout(scripture);
+  }
+
+  function bindHomeScriptureRuntime() {
+    updateHomeScripture('story');
+
+    document.addEventListener('click', (event) => {
+      const panelTrigger = event.target?.closest?.('[data-panel]');
+      if (panelTrigger) {
+        window.setTimeout(() => updateHomeScripture(panelTrigger.dataset.panel), 0);
+        return;
+      }
+
+      const homeTrigger = event.target?.closest?.('[data-go="home"]');
+      if (homeTrigger) window.setTimeout(() => updateHomeScripture('story'), 0);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+
+      const panelTrigger = event.target?.closest?.('[data-panel]');
+      if (panelTrigger) {
+        window.setTimeout(() => updateHomeScripture(panelTrigger.dataset.panel), 0);
+        return;
+      }
+
+      const homeTrigger = event.target?.closest?.('[data-go="home"]');
+      if (homeTrigger) window.setTimeout(() => updateHomeScripture('story'), 0);
+    });
+
+    window.BIBLE_ROGUE_HOME_SCRIPTURES = HOME_PART_SCRIPTURES;
+  }
+
   function initAudioRuntime() {
     if (initialized) return;
     initialized = true;
@@ -269,6 +395,7 @@
 
     injectAudioStyles();
     injectAudioControls();
+    bindHomeScriptureRuntime();
     updateAudioUi(settings.enabled ? '켜짐: 버튼을 다시 눌러 재생합니다.' : undefined);
 
     window.BIBLE_ROGUE_AUDIO = {
