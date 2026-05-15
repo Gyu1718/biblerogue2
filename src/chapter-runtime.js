@@ -78,6 +78,35 @@
     }
   };
 
+  const HOME_PART_SCRIPTURES = {
+    story: {
+      quote: '여호와께서 너희를 위하여 싸우시리니 너희는 가만히 있을지니라',
+      reference: '출애굽기 14:14'
+    },
+    'part-02': {
+      quote: '순종이 제사보다 낫고 듣는 것이 숫양의 기름보다 나으니',
+      reference: '사무엘상 15:22'
+    },
+    'part-03': {
+      quote: '오직 정의를 물 같이, 공의를 마르지 않는 강 같이 흐르게 할지어다',
+      reference: '아모스 5:24'
+    },
+    'part-04': {
+      quote: '그렇게 하지 아니하실지라도 왕이여 우리가 왕의 신들을 섬기지도 아니하고',
+      reference: '다니엘 3:18'
+    },
+    'part-05': {
+      quote: '이는 우리 하나님의 긍휼로 인함이라 이로써 돋는 해가 위로부터 우리에게 임하여',
+      reference: '누가복음 1:78'
+    },
+    'part-06': {
+      quote: '땅 끝까지 이르러 내 증인이 되리라 하시니라',
+      reference: '사도행전 1:8'
+    }
+  };
+
+  let currentHomeScripturePanel = 'story';
+
   const CHAPTER_ENDING_IDS = new Map([
     ['exodus', new Set([
       'true_exodus_deliverance',
@@ -314,6 +343,100 @@
     return `${chapter.endingArtBase}/${filename}`;
   }
 
+  function applyHomeScriptureLayout(scripture) {
+    scripture.style.position = 'absolute';
+    scripture.style.left = 'auto';
+    scripture.style.right = '86px';
+    scripture.style.top = '138px';
+    scripture.style.bottom = 'auto';
+    scripture.style.width = '430px';
+    scripture.style.minHeight = '0';
+    scripture.style.padding = '14px 18px 13px';
+    scripture.style.zIndex = '8';
+    scripture.style.textAlign = 'left';
+    scripture.style.pointerEvents = 'none';
+    scripture.style.border = '1px solid rgba(196,154,85,.22)';
+    scripture.style.background = 'linear-gradient(180deg, rgba(13, 12, 9, .58), rgba(4, 5, 6, .44))';
+    scripture.style.boxShadow = '0 12px 28px rgba(0,0,0,.22), inset 0 0 18px rgba(0,0,0,.26)';
+
+    const quote = scripture.querySelector('.quote');
+    const reference = scripture.querySelector('.reference');
+
+    [quote, reference].forEach((element) => {
+      if (!element) return;
+      element.style.position = 'static';
+      element.style.left = 'auto';
+      element.style.top = 'auto';
+      element.style.width = 'auto';
+      element.style.height = 'auto';
+      element.style.margin = '0';
+      element.style.textAlign = 'left';
+    });
+
+    if (quote) {
+      quote.style.fontSize = '15px';
+      quote.style.lineHeight = '1.55';
+      quote.style.wordBreak = 'keep-all';
+      quote.style.textShadow = '0 2px 8px rgba(0,0,0,.88)';
+    }
+
+    if (reference) {
+      reference.style.marginTop = '7px';
+      reference.style.fontSize = '13px';
+      reference.style.letterSpacing = '.06em';
+      reference.style.color = '#a98143';
+    }
+  }
+
+  function updateHomeScripture(panelName = currentHomeScripturePanel) {
+    const home = document.getElementById('home-screen');
+    const scripture = home?.querySelector?.('.scripture');
+    if (!home || !scripture) return;
+
+    const partPanelName = HOME_PART_SCRIPTURES[panelName] ? panelName : currentHomeScripturePanel;
+    const scriptureData = HOME_PART_SCRIPTURES[partPanelName] || HOME_PART_SCRIPTURES.story;
+
+    currentHomeScripturePanel = partPanelName;
+    home.dataset.scripturePanel = partPanelName;
+
+    const quote = scripture.querySelector('.quote');
+    const reference = scripture.querySelector('.reference');
+    if (quote) quote.textContent = scriptureData.quote;
+    if (reference) reference.textContent = scriptureData.reference;
+
+    applyHomeScriptureLayout(scripture);
+  }
+
+  function bindHomeScriptureRuntime() {
+    updateHomeScripture('story');
+
+    document.addEventListener('click', (event) => {
+      const panelTrigger = event.target?.closest?.('[data-panel]');
+      if (panelTrigger) {
+        window.setTimeout(() => updateHomeScripture(panelTrigger.dataset.panel), 0);
+        return;
+      }
+
+      const homeTrigger = event.target?.closest?.('[data-go="home"]');
+      if (homeTrigger) window.setTimeout(() => updateHomeScripture('story'), 0);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+
+      const panelTrigger = event.target?.closest?.('[data-panel]');
+      if (panelTrigger) {
+        window.setTimeout(() => updateHomeScripture(panelTrigger.dataset.panel), 0);
+        return;
+      }
+
+      const homeTrigger = event.target?.closest?.('[data-go="home"]');
+      if (homeTrigger) window.setTimeout(() => updateHomeScripture('story'), 0);
+    });
+
+    window.BIBLE_ROGUE_HOME_SCRIPTURES = HOME_PART_SCRIPTURES;
+  }
+
   function patchSceneArt() {
     if (typeof window.updateSceneArt !== 'function') return;
     const originalUpdateSceneArt = window.updateSceneArt;
@@ -448,6 +571,7 @@
         });
 
         bindChapterStartCards();
+        bindHomeScriptureRuntime();
         loadScript('src/audio-runtime.js?v=audio-20260514a').catch((error) => console.warn('Audio runtime could not be loaded.', error));
         window.BIBLE_ROGUE_CHAPTERS = CHAPTERS;
       });
