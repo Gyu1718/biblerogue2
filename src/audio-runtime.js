@@ -291,6 +291,33 @@
     if (element) element.style.setProperty(property, value, 'important');
   }
 
+  function applyHomeBrandLayout() {
+    const home = document.getElementById('home-screen');
+    if (!home) return;
+
+    const title = home.querySelector('.home-brand-title');
+    const subtitle = home.querySelector('.home-brand-subtitle');
+
+    if (title) {
+      title.textContent = 'BibleRogue';
+      setImportantStyle(title, 'width', '260px');
+      setImportantStyle(title, 'white-space', 'nowrap');
+      setImportantStyle(title, 'font-size', '33px');
+      setImportantStyle(title, 'letter-spacing', '.01em');
+    }
+
+    if (subtitle) {
+      setImportantStyle(subtitle, 'left', '104px');
+      setImportantStyle(subtitle, 'width', '300px');
+      setImportantStyle(subtitle, 'white-space', 'nowrap');
+      setImportantStyle(subtitle, 'font-size', '13px');
+      setImportantStyle(subtitle, 'letter-spacing', '.01em');
+      setImportantStyle(subtitle, 'line-height', '1.2');
+      setImportantStyle(subtitle, 'word-break', 'keep-all');
+      setImportantStyle(subtitle, 'overflow', 'visible');
+    }
+  }
+
   function applyHomeScriptureLayout(scripture) {
     setImportantStyle(scripture, 'position', 'absolute');
     setImportantStyle(scripture, 'left', 'auto');
@@ -395,6 +422,7 @@
 
     injectAudioStyles();
     injectAudioControls();
+    applyHomeBrandLayout();
     bindHomeScriptureRuntime();
     updateAudioUi(settings.enabled ? '켜짐: 버튼을 다시 눌러 재생합니다.' : undefined);
 
