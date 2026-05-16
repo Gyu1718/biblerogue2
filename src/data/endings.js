@@ -2,6 +2,7 @@ window.STORY_ENDINGS = {
   true_exodus_deliverance: {
     id: 'true_exodus_deliverance',
     type: 'true',
+    image: 'true_exodus_deliverance.png',
     title: '해방의 목격자',
     bannerLeft: '당신은 벽돌의 땅을 떠났습니다',
     bannerRight: '바다 가운데 열린 길을 증언합니다',
@@ -17,6 +18,7 @@ window.STORY_ENDINGS = {
   faithful_exodus_witness: {
     id: 'faithful_exodus_witness',
     type: 'good',
+    image: 'faithful_exodus_witness.png',
     title: '믿음의 길을 걸은 자',
     bannerLeft: '완전하지 않아도 길을 떠났습니다',
     bannerRight: '두려움 속에서도 약속을 붙들었습니다',
@@ -32,6 +34,7 @@ window.STORY_ENDINGS = {
   wounded_exodus_witness: {
     id: 'wounded_exodus_witness',
     type: 'mixed',
+    image: 'wounded_exodus_witness.png',
     title: '흔들린 목격자',
     bannerLeft: '당신은 떨리는 마음으로 건넜습니다',
     bannerRight: '상처와 두려움도 기록에 남았습니다',
@@ -47,6 +50,7 @@ window.STORY_ENDINGS = {
   bad_bricks_forever: {
     id: 'bad_bricks_forever',
     type: 'bad',
+    image: 'bad_bricks_forever.png',
     title: '끝나지 않는 벽돌',
     bannerLeft: '해방의 약속은 들렸습니다',
     bannerRight: '그러나 발걸음은 벽돌 곁에 머물렀습니다',
@@ -62,6 +66,7 @@ window.STORY_ENDINGS = {
   bad_unmarked_door: {
     id: 'bad_unmarked_door',
     type: 'bad',
+    image: 'bad_unmarked_door.png',
     title: '표시 없는 문',
     bannerLeft: '말씀은 문설주 앞에 이르렀습니다',
     bannerRight: '그러나 문에는 표지가 남지 않았습니다',
@@ -77,6 +82,7 @@ window.STORY_ENDINGS = {
   bad_stayed_in_egypt: {
     id: 'bad_stayed_in_egypt',
     type: 'bad',
+    image: 'bad_stayed_in_egypt.png',
     title: '남겨진 밤',
     bannerLeft: '떠남의 문은 열렸습니다',
     bannerRight: '그러나 당신은 애굽에 머물렀습니다',
@@ -92,6 +98,7 @@ window.STORY_ENDINGS = {
   bad_return_to_egypt: {
     id: 'bad_return_to_egypt',
     type: 'bad',
+    image: 'bad_return_to_egypt.png',
     title: '돌아선 발걸음',
     bannerLeft: '바다는 앞에 있었습니다',
     bannerRight: '그러나 마음은 다시 애굽을 향했습니다',
@@ -107,6 +114,7 @@ window.STORY_ENDINGS = {
   bad_scattered_people: {
     id: 'bad_scattered_people',
     type: 'bad',
+    image: 'bad_scattered_people.png',
     title: '흩어진 공동체',
     bannerLeft: '길은 함께 건너야 했습니다',
     bannerRight: '그러나 두려움이 백성을 찢었습니다',
@@ -122,6 +130,7 @@ window.STORY_ENDINGS = {
   bad_closed_sea: {
     id: 'bad_closed_sea',
     type: 'bad',
+    image: 'bad_closed_sea.png',
     title: '닫혀버린 길',
     bannerLeft: '길은 잠시 열렸습니다',
     bannerRight: '망설임은 때를 놓치게 했습니다',
