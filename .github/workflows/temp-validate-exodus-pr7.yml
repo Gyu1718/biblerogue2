@@ -1,0 +1,70 @@
+name: Temporary validate Exodus PR 7
+
+on:
+  push:
+    branches:
+      - story/exodus-ten-plagues-full
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run story validator
+        run: node tools/validate-story.js
+
+      - name: Check Exodus play images
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='assets/images/story/exodus/play_left_520x650'
+          for f in \
+            exodus_03b_crushed_workers.png \
+            exodus_04a_water_to_blood.png \
+            exodus_04b_frogs.png \
+            exodus_04c_gnats.png \
+            exodus_04d_flies.png \
+            exodus_05a_livestock_death.png \
+            exodus_05b_boils.png \
+            exodus_05c_hail.png \
+            exodus_05d_locusts.png \
+            exodus_06a_darkness.png \
+            exodus_06b_firstborn_warning.png \
+            exodus_06c_passover_instruction.png \
+            exodus_07b_passover_meal.png \
+            exodus_08b_hasty_departure.png \
+            exodus_09b_people_panic.png \
+            exodus_09c_chariots_approach.png \
+            exodus_10d_pillar_between.png \
+            exodus_10e_night_of_fear.png \
+            exodus_11b_last_steps.png \
+            exodus_12b_song_of_shore.png
+          do
+            test -f "$base/$f" || { echo "Missing play image: $base/$f"; exit 1; }
+          done
+
+      - name: Check Exodus ending images
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='assets/images/story/exodus/original_16x9'
+          for f in \
+            true_exodus_deliverance.png \
+            faithful_exodus_witness.png \
+            wounded_exodus_witness.png \
+            bad_bricks_forever.png \
+            bad_unmarked_door.png \
+            bad_stayed_in_egypt.png \
+            bad_return_to_egypt.png \
+            bad_scattered_people.png \
+            bad_closed_sea.png
+          do
+            test -f "$base/$f" || { echo "Missing ending image: $base/$f"; exit 1; }
+          done
