@@ -1,6 +1,9 @@
 name: Temporary validate Exodus PR 7
 
 on:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
       - story/exodus-ten-plagues-full
