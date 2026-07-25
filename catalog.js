@@ -66,9 +66,9 @@ window.SITE_CATALOG = {
           title: "에스더 심층 연구",
           original: "אֶסְתֵּר",
           script: "heb",
-          meta: "종합 개관 1편 · 장별 심층연구 10편 준비 중 · Macchi·Grossman·Llewellyn-Jones·Carruthers·Bechtel 직접 확인 · 개역개정 대조",
-          desc: "하나님의 이름 없이 하나님의 일을 이야기하는 책. 세 본문(MT·LXX·AT)과 편집 과정, 페르시아 궁정 배경, 열 잔치와 교차구조, 수용사까지 조망하는 개관을 먼저 세우고, 열 장의 심층연구를 그 지도 위에 채운다.",
-          volumes: 1
+          meta: "종합 개관 1편 · 장별 심층연구 9편(2–10장) · 1장 준비 중 · Macchi·Grossman·Llewellyn-Jones·Carruthers·Bechtel 직접 확인 · 개역개정 대조",
+          desc: "하나님의 이름 없이 하나님의 일을 이야기하는 책. 세 본문(MT·LXX·AT)과 편집 과정, 페르시아 궁정 배경, 열 잔치와 교차구조, 수용사까지 조망하는 개관 위에, 하닷사의 등극에서 부림의 제정까지 아홉 장을 절 단위로 주해했다.",
+          volumes: 10
         },
         {
           id: "psalms",
