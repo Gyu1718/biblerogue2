@@ -1,10 +1,51 @@
-/* 로마서 연구 세트 공통 보정 */
-nav.toc .site-nav{flex-wrap:wrap;row-gap:.35rem}
-nav.toc .chapter-jump{grid-template-columns:repeat(4,minmax(0,1fr))}
-nav.toc .chapter-jump a{min-width:0}
-@media(max-width:520px){
-  nav.toc .chapter-jump{grid-template-columns:repeat(4,minmax(0,1fr))}
+/* 로마서 연구 세트 공통 보정 v2.1 */
+
+/* 왼쪽 사이드바의 1–16장 이동 버튼을 모든 장에서 고정적으로 표시한다. */
+nav.toc .site-nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.35rem .75rem;
+  margin-bottom:1.15rem;
 }
+nav.toc .site-nav a{
+  flex:0 0 auto;
+}
+nav.toc .chapter-jump,
+nav.toc .romans-chapter-jump{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  grid-auto-rows:minmax(38px,auto);
+  gap:.34rem!important;
+  width:100%;
+  max-height:none!important;
+  overflow:visible!important;
+  margin:0 0 1.4rem!important;
+}
+nav.toc .chapter-jump a,
+nav.toc .romans-chapter-jump a{
+  display:flex!important;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  min-height:38px;
+  padding:.35rem .1rem!important;
+  white-space:nowrap;
+  opacity:1!important;
+  visibility:visible!important;
+}
+nav.toc .chapter-jump a[aria-current="page"],
+nav.toc .romans-chapter-jump a[aria-current="page"]{
+  font-weight:900;
+}
+nav.toc .chapter-nav-note{
+  margin:-.85rem 0 1.35rem;
+  color:#9db6cc;
+  font-family:var(--sans);
+  font-size:.64rem;
+  line-height:1.45;
+}
+
+/* 다크 모드 가독성 */
 html[data-theme="dark"] .krv,
 html[data-theme="dark"] tr:nth-child(even) td,
 html[data-theme="dark"] td.head,
@@ -33,6 +74,18 @@ html[data-theme="dark"] .shelf-zone{
   }
   html:not([data-theme="light"]) .shelf-zone{
     background:color-mix(in srgb,var(--card,var(--panel)) 75%,var(--band) 25%);
+  }
+}
+@media(max-width:960px){
+  nav.toc .chapter-jump,
+  nav.toc .romans-chapter-jump{
+    grid-template-columns:repeat(8,minmax(0,1fr))!important;
+  }
+}
+@media(max-width:560px){
+  nav.toc .chapter-jump,
+  nav.toc .romans-chapter-jump{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
   }
 }
 @media print{
