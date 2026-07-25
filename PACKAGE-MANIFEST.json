@@ -1,0 +1,257 @@
+{
+  "package": "biblestudygyu-romans-complete-git-package-v2",
+  "created": "2026-07-25",
+  "source_upload": "files (6).zip",
+  "notes": [
+    "User-completed Romans deep studies overlaid on the prior full Romans package.",
+    "Chapter 2 preserved from the existing complete repository package because it was absent from the upload.",
+    "All 16 deep-study chapters and all 16 verse-study hubs are included.",
+    "Verse-to-deep-study mapping rebuilt for all 433 verses."
+  ],
+  "validation": {
+    "deep_study_chapters": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "verse_study_chapters": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "total_verses": 433,
+    "mapped_verses": 433,
+    "missing_verse_links": {},
+    "duplicate_ids": {},
+    "broken_internal_anchors": {},
+    "chapter_jump_errors": {},
+    "common_asset_errors": {},
+    "mapping_anchor_errors": [],
+    "local_file_link_errors": [],
+    "catalog_js_syntax": true,
+    "index_study_path": true
+  },
+  "files": [
+    {
+      "path": "ROMANS-PACKAGE.md",
+      "bytes": 2089,
+      "sha256": "0a3ea65768a3df2dbe9936cf4be7055aa30dbfe49b6794a00d45756eba9ed058"
+    },
+    {
+      "path": "catalog.js",
+      "bytes": 7955,
+      "sha256": "600d9ada5d2e9e5bd4f6abe5d3c1c00e26bd8b4aff37437e46829ecee2ea2e90"
+    },
+    {
+      "path": "data/krv_rom.json",
+      "bytes": 66037,
+      "sha256": "2329f32d152caf5b1b5c2aa9cab6f59a323037e54a48e1ad44a35ce302cc52a8"
+    },
+    {
+      "path": "data/links/rom.json",
+      "bytes": 24019,
+      "sha256": "8fdbf6c024e5e1b8b389023450a5a645317efd2cee550639f5b71d304963a8a9"
+    },
+    {
+      "path": "nt/romans/ch01.html",
+      "bytes": 76932,
+      "sha256": "af23bd0e3c9e98ad2e4bcadd4d0f5f13aec5e63233edeca2f5c864f7759d83a0"
+    },
+    {
+      "path": "nt/romans/ch02.html",
+      "bytes": 52547,
+      "sha256": "f95b5d610ed62f469f88bc85e85daa2f40b7e4477dd656a25b885b7f6a7f7ee8"
+    },
+    {
+      "path": "nt/romans/ch03.html",
+      "bytes": 64750,
+      "sha256": "cf6634551d720bcb552cfc098dba50c46e6aab38e00dc6467109936f145af086"
+    },
+    {
+      "path": "nt/romans/ch04.html",
+      "bytes": 49779,
+      "sha256": "33886199383e8441e1bfb6fcc1e24fed34ae7337c78d0900a130609808b156c9"
+    },
+    {
+      "path": "nt/romans/ch05.html",
+      "bytes": 53791,
+      "sha256": "73f1a206c7e1bbf7721ae476fb18f803e79ee6021027dbaaf5b5e6711d875239"
+    },
+    {
+      "path": "nt/romans/ch06.html",
+      "bytes": 42852,
+      "sha256": "7e73c7b0dfc0b39f8b403fc3684f1636c2058dcd4127a0398548a6f11c98cf09"
+    },
+    {
+      "path": "nt/romans/ch07.html",
+      "bytes": 47684,
+      "sha256": "1e969cd1e8eda5fb8d0c8b47be81266b503c02841f6823626b3d07348400a51f"
+    },
+    {
+      "path": "nt/romans/ch08.html",
+      "bytes": 62127,
+      "sha256": "0cadb72940e4f7c19177bcac712773c94ed9e8f9ed71eef6057606484da26ecd"
+    },
+    {
+      "path": "nt/romans/ch09.html",
+      "bytes": 50538,
+      "sha256": "895a19822eb973fa2c470584f5e20bc9c57e7c72f0e452d3f000f1a24278b58e"
+    },
+    {
+      "path": "nt/romans/ch10.html",
+      "bytes": 35863,
+      "sha256": "c98c6110f7912e77b944075b8a8a2624023b9a7699fb21053b4fbade54a92b2f"
+    },
+    {
+      "path": "nt/romans/ch11.html",
+      "bytes": 47095,
+      "sha256": "888b4419b1fa4759ba6c1cb091cd1d2e3c0c68fc724c9e2974afa5e3925d9e02"
+    },
+    {
+      "path": "nt/romans/ch12.html",
+      "bytes": 31661,
+      "sha256": "f4035f389ee2157b55489bed746c78d194e25a90fc3da16a4bb225fd2c597347"
+    },
+    {
+      "path": "nt/romans/ch13.html",
+      "bytes": 31369,
+      "sha256": "e52aa133adf16e3283ea40d8a06f2f4a0a9c373b16b0f0a91239262f090ff1aa"
+    },
+    {
+      "path": "nt/romans/ch14.html",
+      "bytes": 32672,
+      "sha256": "ac4e3d65882834860bcf6c8b23c93eaff3028eccb341c6c9a969d06a7df4aa35"
+    },
+    {
+      "path": "nt/romans/ch15.html",
+      "bytes": 36676,
+      "sha256": "1ed505f437dd7c648ad7418558107eba74a2c100c6ccbf9c4fa63b243d2c303a"
+    },
+    {
+      "path": "nt/romans/ch16.html",
+      "bytes": 36394,
+      "sha256": "e46ce9bdb2c6f61cc2a0e45e0709a79853874c5fa53ec1252b90e42a46e3f1f7"
+    },
+    {
+      "path": "nt/romans/index.html",
+      "bytes": 19147,
+      "sha256": "282b2933235ab20b5cb42fe6f1131db84d507d34e8334a41f7fb6d9a4b085cca"
+    },
+    {
+      "path": "nt/romans/overview.html",
+      "bytes": 45688,
+      "sha256": "0315112278e64596163095c346a0243c10e38f8ba2e87bad3280ff0ead624bba"
+    },
+    {
+      "path": "nt/romans/romans-suite.css",
+      "bytes": 1583,
+      "sha256": "1d601ea20d66fa4a606e720037a7bc2e66aba3f95b33d33021945572c0c0ef6d"
+    },
+    {
+      "path": "nt/romans/study/ch01.html",
+      "bytes": 18694,
+      "sha256": "62d8d2903f23334314bc673855df2c96bc551f80b47b53ca1ac5f361e11dabac"
+    },
+    {
+      "path": "nt/romans/study/ch02.html",
+      "bytes": 16850,
+      "sha256": "c8fe973b6cbe425f24096c44e3b535f38059045628601bd21513956e35234688"
+    },
+    {
+      "path": "nt/romans/study/ch03.html",
+      "bytes": 17421,
+      "sha256": "b5cc74f4e1a7956cf660caedbfb26a5d3342556d968981d7282c694dbc44a381"
+    },
+    {
+      "path": "nt/romans/study/ch04.html",
+      "bytes": 15462,
+      "sha256": "a75bec1c181bfec454251c3029710ffd80c2fb10385c42a11203494b8d87ee61"
+    },
+    {
+      "path": "nt/romans/study/ch05.html",
+      "bytes": 14499,
+      "sha256": "255d40f86e1f92ded79bf47a79bbf779e6e36243812437c365d3f2497ac3545e"
+    },
+    {
+      "path": "nt/romans/study/ch06.html",
+      "bytes": 14918,
+      "sha256": "fb76b6b4702a3772eb9ac28d803663bbf2b424ca9b0559f860054172186f847d"
+    },
+    {
+      "path": "nt/romans/study/ch07.html",
+      "bytes": 15738,
+      "sha256": "8da62481d0d1091b09fd4c7be1ab3adc60bb5580ed1481d6471ddc1b076ec794"
+    },
+    {
+      "path": "nt/romans/study/ch08.html",
+      "bytes": 21047,
+      "sha256": "100bd4167929ec04f5f271a67b6c20ed6cf74354180459a50da992d9d5db07f2"
+    },
+    {
+      "path": "nt/romans/study/ch09.html",
+      "bytes": 18673,
+      "sha256": "3b60ba4c3f1ca39e0756533843f927e0fa3c22904d515ee59a5ca08719244234"
+    },
+    {
+      "path": "nt/romans/study/ch10.html",
+      "bytes": 14114,
+      "sha256": "2b0c5963c12ac417d32f2b482146e816f221e4901382b4f696039a2982cf9ebb"
+    },
+    {
+      "path": "nt/romans/study/ch11.html",
+      "bytes": 20200,
+      "sha256": "b19af859f540a40ee44fb474a53f37cf9e44ab7902699e97218b90e6517c715a"
+    },
+    {
+      "path": "nt/romans/study/ch12.html",
+      "bytes": 13593,
+      "sha256": "6ab892dcf41f068c17a375c0c4185dce9e75ef172240a0f5e32f72b407577fc4"
+    },
+    {
+      "path": "nt/romans/study/ch13.html",
+      "bytes": 11567,
+      "sha256": "431577c75fd30e2d8d7a2702bb7f53821ae22c0987051e1d2ab3d7f27556c8c6"
+    },
+    {
+      "path": "nt/romans/study/ch14.html",
+      "bytes": 14923,
+      "sha256": "01e4e3319498193a7354ac9c570d286a91bdc90d89a1a53db3c1fd4794d54f5a"
+    },
+    {
+      "path": "nt/romans/study/ch15.html",
+      "bytes": 19049,
+      "sha256": "cc017f3b4353132d201739ec5c897d543c07ad2f8ea01ab193bbdf2b62d75e0a"
+    },
+    {
+      "path": "nt/romans/study/ch16.html",
+      "bytes": 16323,
+      "sha256": "d87f763c06da3136350e2c1670d29f742c28028e3ac3a5c2e7a81b4b40fd8c64"
+    }
+  ]
+}

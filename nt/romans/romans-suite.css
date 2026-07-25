@@ -1,0 +1,40 @@
+/* 로마서 연구 세트 공통 보정 */
+nav.toc .site-nav{flex-wrap:wrap;row-gap:.35rem}
+nav.toc .chapter-jump{grid-template-columns:repeat(4,minmax(0,1fr))}
+nav.toc .chapter-jump a{min-width:0}
+@media(max-width:520px){
+  nav.toc .chapter-jump{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+html[data-theme="dark"] .krv,
+html[data-theme="dark"] tr:nth-child(even) td,
+html[data-theme="dark"] td.head,
+html[data-theme="dark"] .row:hover{
+  background:color-mix(in srgb,var(--card,var(--panel)) 82%,var(--band) 18%)!important;
+  color:var(--ink)!important;
+}
+html[data-theme="dark"] .caveat{
+  background:color-mix(in srgb,var(--card,var(--panel)) 86%,var(--ochre) 14%);
+  border-color:color-mix(in srgb,var(--ochre) 45%,var(--line));
+}
+html[data-theme="dark"] .shelf-zone{
+  background:color-mix(in srgb,var(--card,var(--panel)) 75%,var(--band) 25%);
+}
+@media(prefers-color-scheme:dark){
+  html:not([data-theme="light"]) .krv,
+  html:not([data-theme="light"]) tr:nth-child(even) td,
+  html:not([data-theme="light"]) td.head,
+  html:not([data-theme="light"]) .row:hover{
+    background:color-mix(in srgb,var(--card,var(--panel)) 82%,var(--band) 18%)!important;
+    color:var(--ink)!important;
+  }
+  html:not([data-theme="light"]) .caveat{
+    background:color-mix(in srgb,var(--card,var(--panel)) 86%,var(--ochre) 14%);
+    border-color:color-mix(in srgb,var(--ochre) 45%,var(--line));
+  }
+  html:not([data-theme="light"]) .shelf-zone{
+    background:color-mix(in srgb,var(--card,var(--panel)) 75%,var(--band) 25%);
+  }
+}
+@media print{
+  .research-dock{display:none!important}
+}
