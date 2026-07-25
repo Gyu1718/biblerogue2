@@ -1,4 +1,4 @@
-# 이전 v2를 이미 저장소에 반영했다면 아래 파일을 삭제합니다.
+# 이전 로마서 v2를 적용했다면 아래 파일을 삭제합니다.
 
 nt/romans/study/ch01.html
 nt/romans/study/ch02.html

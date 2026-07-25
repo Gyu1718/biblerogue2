@@ -1,198 +1,209 @@
 {
-  "package": "biblestudygyu-romans-complete-git-package-v2.1",
+  "package": "biblestudygyu-romans-nehemiah-structure-v3",
   "created": "2026-07-25",
   "structure": {
-    "overview": "complete",
-    "chapter_deep_studies": "1-16 complete",
-    "original_interlinear": "not implemented; blank placeholder only",
-    "verse_study": "removed"
+    "study_home": "nt/romans/index.html",
+    "overview": "nt/romans/overview.html",
+    "chapter_studies": "nt/romans/ch01.html-ch16.html",
+    "interlinear": "empty placeholder directory"
   },
   "validation": {
     "chapter_pages": 16,
-    "chapter_navigation_buttons_per_page": 16,
-    "all_sidebar_chapter_links_complete": true,
-    "current_chapter_highlight_complete": true,
-    "verse_study_directory_removed": true,
-    "generated_verse_link_data_removed": true,
+    "chapter_buttons_per_page": 16,
+    "chapter_buttons_embedded_in_html": true,
+    "shelf_volumes": 17,
+    "interlinear_implemented": false,
     "interlinear_placeholder_present": true,
+    "removed_original_bible_button": true,
+    "removed_verse_study_links": true,
     "errors": []
   },
   "chapter_navigation": {
     "ch01.html": {
-      "button_count": 16,
-      "current": "1장"
+      "buttons": 16,
+      "current": "1"
     },
     "ch02.html": {
-      "button_count": 16,
-      "current": "2장"
+      "buttons": 16,
+      "current": "2"
     },
     "ch03.html": {
-      "button_count": 16,
-      "current": "3장"
+      "buttons": 16,
+      "current": "3"
     },
     "ch04.html": {
-      "button_count": 16,
-      "current": "4장"
+      "buttons": 16,
+      "current": "4"
     },
     "ch05.html": {
-      "button_count": 16,
-      "current": "5장"
+      "buttons": 16,
+      "current": "5"
     },
     "ch06.html": {
-      "button_count": 16,
-      "current": "6장"
+      "buttons": 16,
+      "current": "6"
     },
     "ch07.html": {
-      "button_count": 16,
-      "current": "7장"
+      "buttons": 16,
+      "current": "7"
     },
     "ch08.html": {
-      "button_count": 16,
-      "current": "8장"
+      "buttons": 16,
+      "current": "8"
     },
     "ch09.html": {
-      "button_count": 16,
-      "current": "9장"
+      "buttons": 16,
+      "current": "9"
     },
     "ch10.html": {
-      "button_count": 16,
-      "current": "10장"
+      "buttons": 16,
+      "current": "10"
     },
     "ch11.html": {
-      "button_count": 16,
-      "current": "11장"
+      "buttons": 16,
+      "current": "11"
     },
     "ch12.html": {
-      "button_count": 16,
-      "current": "12장"
+      "buttons": 16,
+      "current": "12"
     },
     "ch13.html": {
-      "button_count": 16,
-      "current": "13장"
+      "buttons": 16,
+      "current": "13"
     },
     "ch14.html": {
-      "button_count": 16,
-      "current": "14장"
+      "buttons": 16,
+      "current": "14"
     },
     "ch15.html": {
-      "button_count": 16,
-      "current": "15장"
+      "buttons": 16,
+      "current": "15"
     },
     "ch16.html": {
-      "button_count": 16,
-      "current": "16장"
+      "buttons": 16,
+      "current": "16"
     }
   },
   "files": [
     {
       "path": "DELETE-FILES.txt",
-      "bytes": 540,
-      "sha256": "a95067d012ec89f4bc427961faaf750124ad8a7fafba6692202fd0bdccf9312f"
+      "bytes": 530,
+      "sha256": "e6154cd907ea83ba3433f78f0f4dbc5f8852eaa39a537290de2d9261bc25145d"
     },
     {
       "path": "ROMANS-PACKAGE.md",
-      "bytes": 1007,
-      "sha256": "825cc5e72fc7b1dc07ca45b6c36e6f933867f6ced6e62d5576c821c709facb2b"
+      "bytes": 1097,
+      "sha256": "bfb52eeded0a9c18fef38722cd0c0578566502c40c43a7fe6ea2136eb63adc38"
     },
     {
       "path": "catalog.js",
-      "bytes": 7954,
-      "sha256": "690dec93116e4b555360aeb5cfe405f5cd82a2e05003783d5d7e472b4382cbd6"
+      "bytes": 7947,
+      "sha256": "4b543da38fd8ac224cea1ac8f4e9219bdf6b8b2c1670e74640a6a8cf183cd1d0"
     },
     {
       "path": "nt/romans/ch01.html",
-      "bytes": 77717,
-      "sha256": "aa442380315fde77cb06b4d935e98189a6f130b0969ffd8e91e5c908b82be332"
+      "bytes": 77593,
+      "sha256": "29f099edba131e2b5c88eb533f5f8bc6b66c7b5c8767e9c5b08e20f35e2c02a0"
     },
     {
       "path": "nt/romans/ch02.html",
-      "bytes": 53332,
-      "sha256": "fe7a445d88e48c6b228e4184f95ea42f66bd2b686b7e8831229739cc07bff441"
+      "bytes": 53205,
+      "sha256": "08e3da769f0feb80c1b74c92d167574dc884b898938d8048d41398de8449d0dd"
     },
     {
       "path": "nt/romans/ch03.html",
-      "bytes": 65535,
-      "sha256": "b464471ff39b05faec06928a3c1efe006a1a6b72c20d934015f8cb3f81fc7e4c"
+      "bytes": 65382,
+      "sha256": "c2659a13fe56c3dc7c8344b5aac22a9c0449fa9d93671b6f78208e2d35ea98b9"
     },
     {
       "path": "nt/romans/ch04.html",
-      "bytes": 50564,
-      "sha256": "7964662b526c864193c133979c7091ae666d97fe8adb33b6062ab2158e4672dc"
+      "bytes": 50434,
+      "sha256": "95d7bbd8c43a72e64f8512cfd5b9d5042abce559e19a01b0badc651181bc957d"
     },
     {
       "path": "nt/romans/ch05.html",
-      "bytes": 54576,
-      "sha256": "45f9a650dc7e1cb23bac5c9e0c8aedcddba6c86016606dac73a0d630f8f8bdf5"
+      "bytes": 54448,
+      "sha256": "c3c22dbf2658ef957764714a6795db0482e61eeeab490d29bde2d292cb01c04f"
     },
     {
       "path": "nt/romans/ch06.html",
-      "bytes": 43637,
-      "sha256": "79226da662ec6895695ea05b08b9f47271f6dae7b19b56298c85965ef13fde8c"
+      "bytes": 43502,
+      "sha256": "42bb7b0a995c1d6795523aeba0c0b148f214d7ff10c6b38db7990c01a998faf6"
     },
     {
       "path": "nt/romans/ch07.html",
-      "bytes": 48469,
-      "sha256": "df17686ab2c0b797854692e9569062e678bde0bfeb3f6a43960dce2c028b820b"
+      "bytes": 48348,
+      "sha256": "b667d3f97558285daf7cb44c6b45e2fd1237ba7d8a1744ea51d9ff4bface2af9"
     },
     {
       "path": "nt/romans/ch08.html",
-      "bytes": 62912,
-      "sha256": "15d4944e0b30238db7ae1beec3fcc9a8bcb2c448dfd5910ed7075db6e1a73a7b"
+      "bytes": 62784,
+      "sha256": "7ce92d5929d51cc704991153daa0b6375ba5969e52363203161c79f3afd73f93"
     },
     {
       "path": "nt/romans/ch09.html",
-      "bytes": 51323,
-      "sha256": "cf79e1ee17b91fb65bead16fb5b5bcd2559a425ff2ecf71efc8c809b3aa1d046"
+      "bytes": 51190,
+      "sha256": "c1488a1daa4e1aa04c18ed8eb920346f0362d544a7a0d8e6ab6de31cf8774cf5"
     },
     {
       "path": "nt/romans/ch10.html",
-      "bytes": 36647,
-      "sha256": "3faa036f0d3414d50cff48a018ffee19581a7c136eee962c0e79f4995ea166a8"
+      "bytes": 36523,
+      "sha256": "5ba593bdc2cc749d410dbc6eb73a4394c070e5f9a6722ed29f078406fb4829af"
     },
     {
       "path": "nt/romans/ch11.html",
-      "bytes": 47879,
-      "sha256": "50cf6ebe4a0bf9538e4929461a534645f76fa0dd76ca457708af8c9c9e386993"
+      "bytes": 47745,
+      "sha256": "b6cc3ab7d10ce2f4de93c30cbf994e8c321c75dca57681aebb41c569e4945b4a"
     },
     {
       "path": "nt/romans/ch12.html",
-      "bytes": 32445,
-      "sha256": "38d81399b613c6748945d546338cf1b0e649755ff2e233354f631d063bce640f"
+      "bytes": 32327,
+      "sha256": "3dc70fd1b5601c69abcd36332138eb57480b1cdfef72f463e7b5505feea88f24"
     },
     {
       "path": "nt/romans/ch13.html",
-      "bytes": 32153,
-      "sha256": "73ae3689778500e6cfccbab4ff2a83907a72e1b4360199087761d3f9caed11f9"
+      "bytes": 32029,
+      "sha256": "6759f6fb68035a0bb8effcc5428f764f8ab22605601720987ded91d89fba56d0"
     },
     {
       "path": "nt/romans/ch14.html",
-      "bytes": 33456,
-      "sha256": "dd80360d4f851d2b864319a8fb08f5077d32886ffee174a2435eca14739004b4"
+      "bytes": 33324,
+      "sha256": "c227705df557c6970d40c057a1d41dd4fc0edd7bed0e2b660f3595955912371f"
     },
     {
       "path": "nt/romans/ch15.html",
-      "bytes": 37460,
-      "sha256": "43998081631f1de5b8516f107380a02ae4d4c010cc3ad68519de3ba9bb14bd26"
+      "bytes": 37336,
+      "sha256": "cbcefc505692a8c969fedc726fa409027ea820394a395f2a9d96f487252ffd42"
     },
     {
       "path": "nt/romans/ch16.html",
-      "bytes": 37178,
-      "sha256": "a57e48b10eb6b0784db4d996996edc5d260035fafedd1d7f54baccdfb77ca248"
+      "bytes": 37054,
+      "sha256": "e18beecda465fa597ca612a5f481b02a01616128051b4175f3f9ca5cbdbd87e1"
     },
     {
       "path": "nt/romans/index.html",
-      "bytes": 18657,
-      "sha256": "806160d27144569542a48533783bfc28b473a87b21ccbe1641c6d3beafb183da"
+      "bytes": 18464,
+      "sha256": "81895aadbe045b7b4711dd5ec055ac97ed0009f57388e6c3acca218b4375ce05"
+    },
+    {
+      "path": "nt/romans/interlinear/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "nt/romans/interlinear/README.md",
+      "bytes": 233,
+      "sha256": "7a1e287898ae1664a5e4c9752d56c0a6f88d50ea0df2dbb40c7316fd27ff288f"
     },
     {
       "path": "nt/romans/overview.html",
-      "bytes": 45659,
-      "sha256": "75a22041df2807a6025c8456908231045dabdaf14510d51d017977be86b174ca"
+      "bytes": 45696,
+      "sha256": "607e82ad8c453a407d128a0e308888c174a8abbf05b842b3e6441c6e5c9e3527"
     },
     {
       "path": "nt/romans/romans-suite.css",
-      "bytes": 2752,
-      "sha256": "e535c34f9c337956f8c25c8eb39a313d1608b3c53dd71d6bae4705f4a55456e6"
+      "bytes": 3380,
+      "sha256": "d4c58ca6eaf655569051a158532f6f1684b291040c087351a7372e0db9b47b8d"
     }
   ]
 }
